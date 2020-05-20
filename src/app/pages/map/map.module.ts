@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { MapPage } from './map';
+import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
 import { MapPageRoutingModule } from './map-routing.module';
 
 @NgModule({
@@ -15,6 +16,10 @@ import { MapPageRoutingModule } from './map-routing.module';
   ],
   declarations: [
     MapPage,
+    FavoritesFilterPage
+  ],
+  entryComponents: [
+    FavoritesFilterPage
   ]
 })
 export class MapModule { }
