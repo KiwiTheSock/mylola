@@ -7,12 +7,16 @@ import { AboutPage } from './about';
 import { PopoverPage } from '../about-popover/about-popover';
 import { AboutPageRoutingModule } from './about-routing.module';
 
+// Calendar UI Module
+import { CalendarModule } from 'ion2-calendar';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AboutPageRoutingModule
+    AboutPageRoutingModule,
+    CalendarModule
   ],
   declarations: [AboutPage, PopoverPage],
   entryComponents: [PopoverPage],

@@ -10,6 +10,11 @@ import { PopoverPage } from '../about-popover/about-popover';
   styleUrls: ['./about.scss'],
 })
 export class AboutPage {
+
+  //Calendar
+  date: string;
+  type: 'string';
+
   location = 'madison';
   conferenceDate = '2047-05-17';
 
@@ -25,5 +30,9 @@ export class AboutPage {
       event
     });
     await popover.present();
+  }
+
+  onChange($event) {
+    console.log($event);
   }
 }
