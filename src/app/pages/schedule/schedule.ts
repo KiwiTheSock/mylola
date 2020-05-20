@@ -43,6 +43,11 @@ export class SchedulePage implements OnInit {
     this.ios = this.config.get('mode') === 'ios';
   }
 
+  ngDoCheck(){
+    console.log("Home");
+    this.updateSchedule();
+  }
+
   updateSchedule() {
     // Close any open sliding items when the schedule updates
     if (this.scheduleList) {

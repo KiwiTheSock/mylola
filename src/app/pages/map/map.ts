@@ -1,107 +1,128 @@
-import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
-import { Platform } from '@ionic/angular';
-import { DOCUMENT} from '@angular/common';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 
-import { darkStyle } from './map-dark-style';
+import { ConferenceData } from '../../providers/conference-data';
+import { UserData } from '../../providers/user-data';
 
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html',
   styleUrls: ['./map.scss']
 })
-export class MapPage implements AfterViewInit {
-  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
+export class MapPage implements OnInit{
+  // Gets a reference to the list element
+  @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
+
+  ios: boolean;
+  dayIndex = 0;
+  queryText = '';
+  segment = 'favorites';
+  excludeTracks: any = [];
+  shownSessions: any = [];
+  groups: any = [];
+  confDate: string;
+  showSearchbar: boolean;
 
   constructor(
-    @Inject(DOCUMENT) private doc: Document,
+    public alertCtrl: AlertController,
     public confData: ConferenceData,
-    public platform: Platform) {}
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
+    public router: Router,
+    public routerOutlet: IonRouterOutlet,
+    public toastCtrl: ToastController,
+    public user: UserData,
+    public config: Config
+    ) {}
 
-  async ngAfterViewInit() {
-    const appEl = this.doc.querySelector('ion-app');
-    let isDark = false;
-    let style = [];
-    if (appEl.classList.contains('dark-theme')) {
-      style = darkStyle;
+    ngOnInit() {
+      this.updateSchedule();
+  
+      this.ios = this.config.get('mode') === 'ios';
     }
 
-    const googleMaps = await getGoogleMaps(
-      'AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw'
-    );
-
-    let map;
-
-    this.confData.getMap().subscribe((mapData: any) => {
-      const mapEle = this.mapElement.nativeElement;
-
-      map = new googleMaps.Map(mapEle, {
-        center: mapData.find((d: any) => d.center),
-        zoom: 16,
-        styles: style
-      });
-
-      mapData.forEach((markerData: any) => {
-        const infoWindow = new googleMaps.InfoWindow({
-          content: `<h5>${markerData.name}</h5>`
-        });
-
-        const marker = new googleMaps.Marker({
-          position: markerData,
-          map,
-          title: markerData.name
-        });
-
-        marker.addListener('click', () => {
-          infoWindow.open(map, marker);
-        });
-      });
-
-      googleMaps.event.addListenerOnce(map, 'idle', () => {
-        mapEle.classList.add('show-map');
-      });
-    });
-
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const el = mutation.target as HTMLElement;
-          isDark = el.classList.contains('dark-theme');
-          if (map && isDark) {
-            map.setOptions({styles: darkStyle});
-          } else if (map) {
-            map.setOptions({styles: []});
-          }
-        }
-      });
-    });
-    observer.observe(appEl, {
-      attributes: true
-    });
-  }
-}
-
-function getGoogleMaps(apiKey: string): Promise<any> {
-  const win = window as any;
-  const googleModule = win.google;
-  if (googleModule && googleModule.maps) {
-    return Promise.resolve(googleModule.maps);
-  }
-
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.31`;
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-    script.onload = () => {
-      const googleModule2 = win.google;
-      if (googleModule2 && googleModule2.maps) {
-        resolve(googleModule2.maps);
-      } else {
-        reject('google maps not available');
+    ngDoCheck(){
+      console.log("Favoriten");
+      this.updateSchedule();
+    }
+    
+    updateSchedule() {
+      // Close any open sliding items when the schedule updates
+      if (this.scheduleList) {
+        this.scheduleList.closeSlidingItems();
       }
-    };
-  });
-}
+  
+      this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
+        this.shownSessions = data.shownSessions;
+        this.groups = data.groups;
+      });
+    }
 
+    async addFavorite(slidingItem: HTMLIonItemSlidingElement, sessionData: any) {
+      if (this.user.hasFavorite(sessionData.name)) {
+        // Prompt to remove favorite
+        this.removeFavorite(slidingItem, sessionData, 'Favorite already added');
+      } else {
+        // Add as a favorite
+        this.user.addFavorite(sessionData.name);
+  
+        // Close the open item
+        slidingItem.close();
+  
+        // Create a toast
+        const toast = await this.toastCtrl.create({
+          header: `${sessionData.name} was successfully added as a favorite.`,
+          duration: 3000,
+          buttons: [{
+            text: 'Close',
+            role: 'cancel'
+          }]
+        });
+  
+        // Present the toast at the bottom of the page
+        await toast.present();
+      }
+  
+    }
+  
+    async removeFavorite(slidingItem: HTMLIonItemSlidingElement, sessionData: any, title: string) {
+      const alert = await this.alertCtrl.create({
+        header: title,
+        message: 'Would you like to remove this session from your favorites?',
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: () => {
+              // they clicked the cancel button, do not remove the session
+              // close the sliding item and hide the option buttons
+              slidingItem.close();
+            }
+          },
+          {
+            text: 'Remove',
+            handler: () => {
+              // they want to remove this session from their favorites
+              this.user.removeFavorite(sessionData.name);
+              this.updateSchedule();
+  
+              // close the sliding item and hide the option buttons
+              slidingItem.close();
+            }
+          }
+        ]
+      });
+      // now present the alert on top of all other content
+      await alert.present();
+    }
+  
+    async openSocial(network: string, fab: HTMLIonFabElement) {
+      const loading = await this.loadingCtrl.create({
+        message: `Posting to ${network}`,
+        duration: (Math.random() * 1000) + 500
+      });
+      await loading.present();
+      await loading.onWillDismiss();
+      fab.close();
+    }
+}
