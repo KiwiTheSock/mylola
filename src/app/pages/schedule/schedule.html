@@ -1,21 +1,19 @@
+<!-- Header -->
 <ion-header translucent="true">
   <ion-toolbar>
     
-    <!-- BurgerMenuIcon -->
+    <!-- Sidemenu -->
     <ion-buttons *ngIf="!showSearchbar" slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    
-
     <!-- Title -->
     <ion-title *ngIf="!ios && !showSearchbar" class="ion-text-center">mylola</ion-title>
 
-    <!-- Function Search Icon -->
+    <!-- Search Function -->
     <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionChange)="updateSchedule()" (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
-    <!---->
 
-    <!-- Search Icon -->
+    <!-- Search and Filter Icons -->
     <ion-buttons slot="end">
       <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
         <ion-icon slot="icon-only" name="search"></ion-icon>
@@ -27,90 +25,44 @@
         </span>
       </ion-button>
     </ion-buttons>
-    <!---->
 
   </ion-toolbar>
-
 </ion-header>
 
+<!-- Body -->
 <ion-content fullscreen="true">
-  <!-- Kein Plan -->
-  <ion-header collapse="condense">
-    
-    <ion-toolbar>
-      <ion-title size="large">was das?</ion-title>
-    </ion-toolbar>
-    <ion-toolbar>
-      <ion-searchbar [(ngModel)]="queryText" (ionChange)="updateSchedule()" placeholder="Search"></ion-searchbar>
-    </ion-toolbar>
 
-  </ion-header>
-  <!---->
-
+  <!-- List -->
   <ion-list #scheduleList [hidden]="shownSessions === 0">
     <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
-      <!-- Könnte interessant sein -->
+
+      <!-- Post Time Divider -->
       <ion-item-divider sticky>
         <ion-label>
           {{group.time}}
         </ion-label>
       </ion-item-divider>
-      <!---->
 
+       <!-- Item -->
+      <ion-item *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
+        [hidden]="session.hide" routerLink="/app/tabs/schedule/session/{{session.id}}">
       
-      <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
-        [hidden]="session.hide">
-        <ion-item routerLink="/app/tabs/schedule/session/{{session.id}}">
+          <!-- Content -->
           <ion-label>
             <h3>{{session.name}}</h3>
             <p>
               {{session.timeStart}} &mdash; {{session.timeEnd}}: {{session.location}}
             </p>
           </ion-label>
-        </ion-item>
-
-        <!-- 
-        <ion-item-options>
-          <ion-item-option color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
-            Favorite
-          </ion-item-option>
-          <ion-item-option color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')"
-            *ngIf="segment === 'favorites'">
-            Remove
-          </ion-item-option>
-        </ion-item-options>
-        -->
-      </ion-item-sliding>
-      
-
+        
+      </ion-item>
+    
     </ion-item-group>
   </ion-list>
 
-  <!-- Wird angezeigt, wenn keine Favoriten gespeichert sind oder im Filter nichts ausgewählt ist -->
+  <!-- Placeholder -->
   <ion-list-header [hidden]="shownSessions > 0">
     Keine Einträge gefunden
   </ion-list-header>
-  <!-- -->
 
-  <!-- Button zum teilen oder Post erstellen, wird nicht benötigt
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
-    <ion-fab-button>
-      <ion-icon name="share-social"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
-        <ion-icon name="logo-vimeo"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="instagram" (click)="openSocial('Instagram', fab)">
-        <ion-icon name="logo-instagram"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
-        <ion-icon name="logo-twitter"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
-        <ion-icon name="logo-facebook"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
-  -->
 </ion-content>
