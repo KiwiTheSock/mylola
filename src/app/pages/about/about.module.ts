@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AboutPage } from './about';
-import { PopoverPage } from '../about-popover/about-popover';
 import { AboutPageRoutingModule } from './about-routing.module';
 
 // Calendar UI Module
@@ -18,8 +17,7 @@ import { CalendarModule } from 'ion2-calendar';
     AboutPageRoutingModule,
     CalendarModule
   ],
-  declarations: [AboutPage, PopoverPage],
-  entryComponents: [PopoverPage],
+  declarations: [AboutPage],
   bootstrap: [AboutPage],
 })
 export class AboutModule {}

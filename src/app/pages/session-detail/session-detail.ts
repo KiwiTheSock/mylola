@@ -37,6 +37,9 @@ export class SessionDetailPage implements AfterViewInit{
           if (group && group.sessions) {
             for (const session of group.sessions) {
               if (session && session.id === sessionId) {
+                
+                
+                
                 this.session = session;
 
                 this.isFavorite = this.userProvider.hasFavorite(

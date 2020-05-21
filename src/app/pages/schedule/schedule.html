@@ -29,7 +29,7 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Body -->
+<!-- Content -->
 <ion-content fullscreen="true">
 
   <!-- List -->
@@ -45,16 +45,41 @@
 
        <!-- Item -->
       <ion-item *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
-        [hidden]="session.hide" routerLink="/app/tabs/schedule/session/{{session.id}}">
+        [hidden]="session.hide">
       
-          <!-- Content -->
+          <!-- Profile Picture -->
+          <ion-avatar>
+            <ion-img style="width: 40px; height: 40px;" src="..\assets\img\speaker-background.png"></ion-img>
+          </ion-avatar>
+
+          <!-- Label -->
           <ion-label>
             <h3>{{session.name}}</h3>
             <p>
               {{session.timeStart}} &mdash; {{session.timeEnd}}: {{session.location}}
             </p>
           </ion-label>
+
+          <!-- Ellipsis Icon -->
+          <ion-buttons slot="end">
+            <ion-button (click)="presentPopover($event)">
+              <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+            </ion-button>
+          </ion-buttons>
         
+          <!-- Pricture-->
+          <ion-img style="width: 200px; height: 200px;" src="..\assets\img\speaker-background.png" routerLink="/app/tabs/schedule/session/{{session.id}}"></ion-img>
+          
+          <ion-buttons slot="end">
+            <ion-button (click)="toggleFavorite()">
+              <ion-icon *ngIf="!isFavorite" slot="icon-only" name="star-outline"></ion-icon>
+              <ion-icon *ngIf="isFavorite" slot="icon-only" name="star"></ion-icon>
+            </ion-button>
+            <ion-button (click)="shareSession()">
+              <ion-icon slot="icon-only" name="share-social"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
       </ion-item>
     
     </ion-item-group>

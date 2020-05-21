@@ -32,4 +32,8 @@ $categories: (
     border-left: 2px solid $value;
     padding-left: 10px;
   }
+  ion-item[track='#{$track}'] ion-avatar {
+    margin-right: 10px;
+  }
+
 }

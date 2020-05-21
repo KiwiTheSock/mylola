@@ -2,23 +2,29 @@ import { Component } from '@angular/core';
 
 import { PopoverController } from '@ionic/angular';
 
+/*
+<ion-item button (click)="close('https://github.com/ionic-team/ionic')">
+  <ion-label>GitHub Repo</ion-label>
+</ion-item>
+*/
+
 @Component({
   template: `
     <ion-list>
-      <ion-item button (click)="close('https://ionicframework.com/getting-started')">
-        <ion-label>Learn Ionic</ion-label>
-      </ion-item>
-      <ion-item button (click)="close('https://ionicframework.com/docs/')">
-        <ion-label>Documentation</ion-label>
-      </ion-item>
-      <ion-item button (click)="close('https://showcase.ionicframework.com')">
-        <ion-label>Showcase</ion-label>
-      </ion-item>
-      <ion-item button (click)="close('https://github.com/ionic-team/ionic')">
-        <ion-label>GitHub Repo</ion-label>
+      <ion-item button (click)="support()">
+        <ion-label>Melden</ion-label>
       </ion-item>
       <ion-item button (click)="support()">
-        <ion-label>Support</ion-label>
+        <ion-label>Zu Favoriten hinzufügen</ion-label>
+      </ion-item>
+      <ion-item button (click)="support()">
+        <ion-label>Beitrag verbergen</ion-label>
+      </ion-item>
+      <ion-item button (click)="support()">
+        <ion-label>Alle Beiträge verbergen</ion-label>
+      </ion-item>
+      <ion-item button (click)="support()">
+        <ion-label>Teilen</ion-label>
       </ion-item>
     </ion-list>
   `
