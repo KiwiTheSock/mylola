@@ -3,23 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { MapPage } from './map';
+import { FavoritesPage } from './favorites';
 import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
-import { MapPageRoutingModule } from './map-routing.module';
+import { FavoritesPageRoutingModule } from './favorites-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MapPageRoutingModule
+    FavoritesPageRoutingModule
   ],
   declarations: [
-    MapPage,
+    FavoritesPage,
     FavoritesFilterPage
   ],
   entryComponents: [
     FavoritesFilterPage
   ]
 })
-export class MapModule { }
+export class FavoritesModule { }

@@ -1,25 +1,25 @@
 import { Component } from '@angular/core';
 
-
-
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html',
-  styleUrls: ['./about.scss'],
+  selector: 'page-events',
+  templateUrl: 'events.html',
+  styleUrls: ['./events.scss'],
 })
-export class AboutPage {
+export class EventsPage {
 
   //Calendar
   date: string;
   type: 'string';
 
+  /*
   location = 'madison';
   conferenceDate = '2047-05-17';
 
   selectOptions = {
     header: 'Select a Location'
   };
-
+  */
+ 
   constructor() { }
 
   onChange($event) {

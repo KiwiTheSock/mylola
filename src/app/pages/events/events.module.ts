@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { AboutPage } from './about';
-import { AboutPageRoutingModule } from './about-routing.module';
+import { EventsPage } from './events';
+import { EventsPageRoutingModule } from './events-routing.module';
 
 // Calendar UI Module
 import { CalendarModule } from 'ion2-calendar';
@@ -14,10 +14,10 @@ import { CalendarModule } from 'ion2-calendar';
     CommonModule,
     FormsModule,
     IonicModule,
-    AboutPageRoutingModule,
+    EventsPageRoutingModule,
     CalendarModule
   ],
-  declarations: [AboutPage],
-  bootstrap: [AboutPage],
+  declarations: [EventsPage],
+  bootstrap: [EventsPage],
 })
-export class AboutModule {}
+export class EventsModule {}

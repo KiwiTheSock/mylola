@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs-page';
-import { SchedulePage } from '../schedule/schedule';
-import { MapPage } from '../map/map';
+import { HomePage } from '../home/home';
+import { FavoritesPage } from '../favorites/favorites';
 
 
 const routes: Routes = [
@@ -15,11 +15,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: SchedulePage,
+            component: HomePage,
           },
           {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+            path: 'detail/:sessionId',
+            loadChildren: () => import('../detail/detail.module').then(m => m.DetailModule)
           }
         ]
       },
@@ -32,7 +32,7 @@ const routes: Routes = [
           },
           {
             path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+            loadChildren: () => import('../detail/detail.module').then(m => m.DetailModule)
           },
           {
             path: 'speaker-details/:speakerId',
@@ -41,30 +41,30 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'map',
+        path: 'favorites',
         children: [
           {
             path: '',
-            component: MapPage,
+            component: FavoritesPage,
           },
           {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+            path: 'detail/:sessionId',
+            loadChildren: () => import('../detail/detail.module').then(m => m.DetailModule)
           }
         ]
       },
       {
-        path: 'about',
+        path: 'events',
         children: [
           {
             path: '',
-            loadChildren: () => import('../about/about.module').then(m => m.AboutModule)
+            loadChildren: () => import('../events/events.module').then(m => m.EventsModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/app/tabs/schedule',
+        redirectTo: '/app/tabs/home',
         pathMatch: 'full'
       }
     ]

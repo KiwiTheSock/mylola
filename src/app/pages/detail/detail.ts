@@ -11,11 +11,11 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { darkStyle } from './dark-style';
 
 @Component({
-  selector: 'page-session-detail',
-  styleUrls: ['./session-detail.scss'],
-  templateUrl: 'session-detail.html'
+  selector: 'page-detail',
+  styleUrls: ['./detail.scss'],
+  templateUrl: 'detail.html'
 })
-export class SessionDetailPage implements AfterViewInit{
+export class DetailPage implements AfterViewInit{
 
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef; //Map
 
@@ -76,7 +76,7 @@ export class SessionDetailPage implements AfterViewInit{
   }
 
   ionViewDidEnter() {
-    this.defaultHref = `/app/tabs/schedule`;
+    this.defaultHref = `/app/tabs/home`;
   }
 
   sessionClick(item: string) {

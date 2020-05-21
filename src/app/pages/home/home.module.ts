@@ -3,26 +3,26 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { SchedulePage } from './schedule';
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import { HomePage } from './home';
+import { HomeFilterPage } from '../home-filter/home-filter';
 import { PopoverPage } from '../popover/popover';
-import { SchedulePageRoutingModule } from './schedule-routing.module';
+import { HomePageRoutingModule } from './home-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SchedulePageRoutingModule
+    HomePageRoutingModule
   ],
   declarations: [
-    SchedulePage,
-    ScheduleFilterPage,
+    HomePage,
+    HomeFilterPage,
     PopoverPage
   ],
   entryComponents: [
-    ScheduleFilterPage,
+    HomeFilterPage,
     PopoverPage
   ]
 })
-export class ScheduleModule { }
+export class HomeModule { }

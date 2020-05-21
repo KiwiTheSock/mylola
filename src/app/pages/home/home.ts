@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import { HomeFilterPage } from '../home-filter/home-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 
@@ -10,11 +10,11 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover';
 
 @Component({
-  selector: 'page-schedule',
-  templateUrl: 'schedule.html',
-  styleUrls: ['./schedule.scss'],
+  selector: 'page-home',
+  templateUrl: 'home.html',
+  styleUrls: ['./home.scss'],
 })
-export class SchedulePage implements OnInit {
+export class HomePage implements OnInit {
   // Gets a reference to the list element
   @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
 
@@ -66,7 +66,7 @@ export class SchedulePage implements OnInit {
 
   async presentFilter() {
     const modal = await this.modalCtrl.create({
-      component: ScheduleFilterPage,
+      component: HomeFilterPage,
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
       componentProps: { excludedTracks: this.excludeTracks }

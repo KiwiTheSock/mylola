@@ -26,12 +26,12 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Favoriten',
-      url: '/app/tabs/map',
+      url: '/app/tabs/favorites',
       icon: 'bookmark'
     },
     {
       title: 'Veranstaltungen',
-      url: '/app/tabs/about',
+      url: '/app/tabs/events',
       icon: 'calendar'
     }
   ];
@@ -112,7 +112,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
+      return this.router.navigateByUrl('/app/tabs/home');
     });
   }
 

@@ -2,16 +2,16 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 
 @Component({
-  selector: 'page-map',
-  templateUrl: 'map.html',
-  styleUrls: ['./map.scss']
+  selector: 'page-favorites',
+  templateUrl: 'favorites.html',
+  styleUrls: ['./favorites.scss']
 })
-export class MapPage implements OnInit{
+export class FavoritesPage implements OnInit{
   // Gets a reference to the list element
   @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
 
@@ -62,7 +62,7 @@ export class MapPage implements OnInit{
 
     async presentFilter() {
       const modal = await this.modalCtrl.create({
-        component: ScheduleFilterPage,
+        component: FavoritesFilterPage,
         swipeToClose: true,
         presentingElement: this.routerOutlet.nativeEl,
         componentProps: { excludedTracks: this.excludeTracks }
