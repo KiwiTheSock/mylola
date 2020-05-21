@@ -11,7 +11,7 @@
               "timeStart": "8:00 am",
               "timeEnd": "9:00 am",
               "location": "Dining Hall",
-              "tracks": ["Food"],
+              "tracks": ["GastroundNightlife"],
               "id": "1"
             }
           ]
@@ -26,7 +26,7 @@
               "speakerNames": ["Ted Turtle"],
               "timeStart": "9:30 am",
               "timeEnd": "9:45 am",
-              "tracks": ["Ionic"],
+              "tracks": ["FreizeitundErleben"],
               "id": "2"
             },
             {
@@ -36,7 +36,7 @@
               "speakerNames": ["Rachel Rabbit"],
               "timeStart": "9:45 am",
               "timeEnd": "10:00 am",
-              "tracks": ["Tooling"],
+              "tracks": ["Shopping"],
               "id": "3"
             },
             {
@@ -46,7 +46,7 @@
               "speakerNames": ["Ellie Elephant"],
               "timeStart": "9:15 am",
               "timeEnd": "9:30 am",
-              "tracks": ["Ionic"],
+              "tracks": ["FreizeitundErleben"],
               "id": "4"
             }
           ]
@@ -61,7 +61,7 @@
               "speakerNames": ["Eva Eagle", "Lionel Lion"],
               "timeStart": "10:00 am",
               "timeEnd": "10:15 am",
-              "tracks": ["Ionic"],
+              "tracks": ["FreizeitundErleben"],
               "id": "5"
             },
             {
@@ -71,7 +71,7 @@
               "speakerNames": ["Rachel Rabbit"],
               "timeStart": "10:15 am",
               "timeEnd": "10:30 am",
-              "tracks": ["Angular"],
+              "tracks": ["FreizeitundErleben"],
               "id": "6"
             },
             {
@@ -81,7 +81,7 @@
               "speakerNames": ["Isabella Iguana", "Eva Eagle"],
               "timeStart": "10:15 am",
               "timeEnd": "10:30 am",
-              "tracks": ["Design"],
+              "tracks": ["Shopping"],
               "id": "7"
             },
             {
@@ -91,7 +91,7 @@
               "speakerNames": ["Charlie Cheetah"],
               "timeStart": "10:45 am",
               "timeEnd": "11:00 am",
-              "tracks": ["Services"],
+              "tracks": ["Dienstleistungen"],
               "id": "8"
             }
           ]
@@ -106,7 +106,7 @@
               "speakerNames": ["Karl Kitten", "Lionel Lion"],
               "timeStart": "11:00 am",
               "timeEnd": "11:45 am",
-              "tracks": ["Workshop"],
+              "tracks": ["Dienstleistungen"],
               "id": "9"
             },
             {
@@ -116,7 +116,7 @@
               "speakerNames": ["Lionel Lion", "Gino Giraffe"],
               "timeStart": "11:30 am",
               "timeEnd": "11:50 am",
-              "tracks": ["Communication"],
+              "tracks": ["Shopping"],
               "id": "10"
             },
             {
@@ -126,7 +126,7 @@
               "speakerNames": ["Rachel Rabbit", "Eva Eagle"],
               "timeStart": "11:30 am",
               "timeEnd": "12:00 pm",
-              "tracks": ["Navigation"],
+              "tracks": ["Shopping"],
               "id": "11"
             }
           ]
@@ -140,7 +140,7 @@
               "description": "Come grab lunch with all the Ionic fanatics and talk all things Ionic",
               "timeStart": "12:00 pm",
               "timeEnd": "1:00 pm",
-              "tracks": ["Food"],
+              "tracks": ["GastroundNightlife"],
               "id": "12"
             }
           ]
@@ -155,7 +155,7 @@
               "speakerNames": ["Paul Puppy"],
               "timeStart": "1:00 pm",
               "timeEnd": "1:15 pm",
-              "tracks": ["Communication"],
+              "tracks": ["Shopping"],
               "id": "13"
             },
             {
@@ -165,7 +165,7 @@
               "speakerNames": ["Gino Giraffe"],
               "timeStart": "1:15 pm",
               "timeEnd": "1:30 pm",
-              "tracks": ["Communication"],
+              "tracks": ["Shopping"],
               "id": "14"
             },
             {
@@ -175,7 +175,7 @@
               "speakerNames": ["Molly Mouse", "Burt Bear"],
               "timeStart": "1:30 pm",
               "timeEnd": "2:00 pm",
-              "tracks": ["Services"],
+              "tracks": ["Dienstleistungen"],
               "id": "15"
             }
           ]
@@ -190,7 +190,7 @@
               "speakerNames": ["Burt Bear", "Charlie Cheetah"],
               "timeStart": "2:00 pm",
               "timeEnd": "2:30 pm",
-              "tracks": ["Services"],
+              "tracks": ["Dienstleistungen"],
               "id": "16"
             },
             {
@@ -200,7 +200,7 @@
               "speakerNames": ["Donald Duck"],
               "timeStart": "2:30 pm",
               "timeEnd": "2:45 pm",
-              "tracks": ["Documentation"],
+              "tracks": ["Shopping"],
               "id": "17"
             },
             {
@@ -210,7 +210,7 @@
               "speakerNames": ["Isabella Iguana", "Ellie Elephant"],
               "timeStart": "2:45 pm",
               "timeEnd": "3:00 pm",
-              "tracks": ["Design"],
+              "tracks": ["Shopping"],
               "id": "18"
             }
           ]
@@ -225,7 +225,7 @@
               "speakerNames": ["Ted Turtle"],
               "timeStart": "3:00 pm",
               "timeEnd": "3:30 pm",
-              "tracks": ["Angular"],
+              "tracks": ["FreizeitundErleben"],
               "id": "19"
             },
             {
@@ -235,7 +235,7 @@
               "speakerNames": ["Rachel Rabbit"],
               "timeStart": "3:30 pm",
               "timeEnd": "3:45 pm",
-              "tracks": ["Navigation"],
+              "tracks": ["Shopping"],
               "id": "20"
             }
           ]
@@ -424,44 +424,20 @@
 
   "tracks": [
     {
-      "name": "Angular",
-      "icon": "logo-angular"
+      "name": "GastroundNightlife",
+      "icon": ""
     },
     {
-      "name": "Documentation",
-      "icon": "document"
+      "name": "Shopping",
+      "icon": ""
     },
     {
-      "name": "Food",
-      "icon": "restaurant"
+      "name": "FreizeitundErleben",
+      "icon": ""
     },
     {
-      "name": "Ionic",
-      "icon": "logo-ionic"
-    },
-    {
-      "name": "Tooling",
-      "icon": "hammer"
-    },
-    {
-      "name": "Design",
-      "icon": "color-palette"
-    },
-    {
-      "name": "Services",
-      "icon": "cog"
-    },
-    {
-      "name": "Workshop",
-      "icon": "construct"
-    },
-    {
-      "name": "Communication",
-      "icon": "call"
-    },
-    {
-      "name": "Navigation",
-      "icon": "compass"
+      "name": "Dienstleistungen",
+      "icon": ""
     }
   ]
 }

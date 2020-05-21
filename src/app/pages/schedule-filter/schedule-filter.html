@@ -8,8 +8,8 @@
       <ion-button *ngIf="!ios" (click)="selectAll(false)">Reset</ion-button>
     </ion-buttons>
 
-    <ion-title>
-      Filter Sessions
+    <ion-title class="ion-text-center">
+      Filter
     </ion-title>
 
     <ion-buttons slot="end">
@@ -20,7 +20,6 @@
 
 <ion-content>
   <ion-list [lines]="ios ? 'inset' : 'full'">
-    <ion-list-header>Tracks</ion-list-header>
 
     <ion-item *ngFor="let track of tracks" [attr.track]="track.name | lowercase">
       <ion-icon *ngIf="ios" slot="start" [name]="track.icon" color="medium"></ion-icon>

@@ -1,3 +1,4 @@
+/*
 ion-toolbar {
   position: absolute;
 
@@ -51,7 +52,6 @@ ion-toolbar ion-menu-button {
 .about-header .seattle {
   background-image: url(/assets/img/about/seattle.jpg);
 }
-
 .about-info {
   position: absolute;
   margin-top: -10px;
@@ -77,9 +77,11 @@ ion-toolbar ion-menu-button {
   margin-inline-end: 32px;
 }
 
+*/
+
 /*
  * iOS Only
- */
+ 
 
 .ios .about-info {
   --ion-padding: 19px;
@@ -87,4 +89,14 @@ ion-toolbar ion-menu-button {
 
 .ios .about-info h3 {
   font-weight: 700;
+}
+
+*/
+
+/*
+* Calendar
+*/
+
+.ion-calendar {
+  padding-top: 100px;
 }

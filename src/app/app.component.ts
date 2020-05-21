@@ -25,17 +25,12 @@ export class AppComponent implements OnInit {
       icon: 'home'
     },
     {
-      title: 'Speakers',
-      url: '/app/tabs/speakers',
-      icon: 'search'
-    },
-    {
       title: 'Favoriten',
       url: '/app/tabs/map',
       icon: 'bookmark'
     },
     {
-      title: 'About',
+      title: 'Veranstaltungen',
       url: '/app/tabs/about',
       icon: 'calendar'
     }

@@ -4,7 +4,9 @@
     
     <!-- Sidemenu -->
     <ion-buttons *ngIf="!showSearchbar" slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button>
+        <ion-icon name="person-circle"></ion-icon>
+      </ion-menu-button> 
     </ion-buttons>
 
     <!-- Title -->
@@ -44,11 +46,12 @@
       </ion-item-divider>
 
        <!-- Item -->
-      <ion-item *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
+      <ion-card *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
         [hidden]="session.hide">
-      
+        
+        <ion-card-header>
           <!-- Profile Picture -->
-          <ion-avatar>
+          <ion-avatar >
             <ion-img style="width: 40px; height: 40px;" src="..\assets\img\speaker-background.png"></ion-img>
           </ion-avatar>
 
@@ -58,18 +61,25 @@
             <p>
               {{session.timeStart}} &mdash; {{session.timeEnd}}: {{session.location}}
             </p>
+            <p>
+              Vor {{session.timeStart}}
+            </p>
           </ion-label>
 
           <!-- Ellipsis Icon -->
-          <ion-buttons slot="end">
+          <ion-buttons>
             <ion-button (click)="presentPopover($event)">
               <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
             </ion-button>
           </ion-buttons>
+
+        </ion-card-header>
         
+        <ion-card-content>
           <!-- Pricture-->
           <ion-img style="width: 200px; height: 200px;" src="..\assets\img\speaker-background.png" routerLink="/app/tabs/schedule/session/{{session.id}}"></ion-img>
           
+          <!-- Favorite And Share Icons -->
           <ion-buttons slot="end">
             <ion-button (click)="toggleFavorite()">
               <ion-icon *ngIf="!isFavorite" slot="icon-only" name="star-outline"></ion-icon>
@@ -79,8 +89,9 @@
               <ion-icon slot="icon-only" name="share-social"></ion-icon>
             </ion-button>
           </ion-buttons>
+        </ion-card-content>
 
-      </ion-item>
+      </ion-card>
     
     </ion-item-group>
   </ion-list>
