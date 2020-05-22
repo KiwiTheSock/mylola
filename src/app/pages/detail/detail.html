@@ -1,89 +1,97 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
+
+    <!-- Back Button -->
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="toggleFavorite()">
-        <ion-icon *ngIf="!isFavorite" slot="icon-only" name="star-outline"></ion-icon>
-        <ion-icon *ngIf="isFavorite" slot="icon-only" name="star"></ion-icon>
-      </ion-button>
-      <ion-button (click)="shareSession()">
-        <ion-icon slot="icon-only" name="share-social"></ion-icon>
-      </ion-button>
-      <ion-button  (click)="openContact(speaker)"> <!-- *ngIf="speaker" -->
-        <ion-icon slot="icon-only" ios="call-outline" md="call-sharp"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+
+    <!-- Title -->
+    <ion-title>{{session?.name}}</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!-- Content -->
+<ion-content >
 
-  <div class="speaker-background">
+  <!-- Profile and Background Pictures -->
+  <div class="profile-background">
     <ion-avatar>
       <ion-img src="..\assets\img\speakers\bear.jpg"></ion-img>
     </ion-avatar>
-    <h2>{{session?.name}}</h2>
   </div>
 
-
-  <div *ngIf="session" class="ion-padding">
-    <h1>{{session.name}}</h1>
-    <span *ngFor="let track of session?.tracks" [class]="'session-track-'+track.toLowerCase()">{{track}}</span>
-    <p>{{session.description}}</p>
-    <ion-text color="medium">
-      {{session.timeStart}} &ndash; {{session.timeEnd}}
-      <br /> {{session.location}}
-    </ion-text>
-  </div>
-
-  <ion-list>
-    <ion-item (click)="sessionClick('watch')" button>
-      <ion-label color="primary">Watch</ion-label>
-    </ion-item>
-    <ion-item (click)="sessionClick('add to calendar')" button>
-      <ion-label color="primary">Add to Calendar</ion-label>
-    </ion-item>
-    <ion-item (click)="sessionClick('mark as unwatched')" button>
-      <ion-label color="primary">Mark as Unwatched</ion-label>
-    </ion-item>
-    <ion-item (click)="sessionClick('download video')" button>
-      <ion-label color="primary">Download Video</ion-label>
-      <ion-icon slot="end" color="primary" size="small" name="cloud-download"></ion-icon>
-    </ion-item>
-    <ion-item (click)="sessionClick('leave feedback')" button>
-      <ion-label color="primary">Leave Feedback</ion-label>
-    </ion-item>
-  </ion-list>
+  <!-- Icons --> 
   
+  <div class="icons">
+    
+    <ion-button (click)="toggleFavorite()">
+      <ion-icon *ngIf="!isFavorite" name="bookmark-outline"></ion-icon>
+      <ion-icon *ngIf="isFavorite" name="bookmark"></ion-icon>
+    </ion-button>
+    <ion-button (click)="shareSession()">
+      <ion-icon slot="icon-only" name="share-social"></ion-icon>
+    </ion-button>
+  
+  
+    <p>Vor 5 Minuten</p>
+  
+  </div>
+  
+  <!-- Text -->
+  <div *ngIf="session" class="ion-padding" >
+    <h5>{{session.title}}</h5>
+    <p>{{session.text}}</p>
+  </div>
+
+  <!-- Button -->
+  <div *ngIf="session" class="ion-text-center">
+    <ion-button>{{session.button}}</ion-button>
+  </div>
+
+  <!-- Pictures -->
   <div>
+    <ion-img src="..\assets\img\about\austin.jpg"></ion-img>
+  </div>
 
-    <ion-chip color="twitter" button (click)="openExternalUrl('https://twitter.com/' + speaker.twitter)">
-      <ion-icon name="logo-twitter"></ion-icon>
-      <ion-label>Twitter</ion-label>
-    </ion-chip>
+  <!-- Location -->
+  <div *ngIf="session" class="ion-text-center">
+    <p>Angebotsort</p>
+    <p>{{session.name}}</p>
+    <p>{{session.address}}</p>
+    <br />
+    <P>{{session.website}}</P>
+    <P>{{session.mail}}</P>
+    <P>{{session.phone}}</P>
+  </div>
 
-    <ion-chip color="dark" button (click)="openExternalUrl('https://github.com/ionic-team/ionic')">
-      <ion-icon name="logo-github"></ion-icon>
-      <ion-label>GitHub</ion-label>
-    </ion-chip>
-
-    <ion-chip color="instagram" button (click)="openExternalUrl('https://instagram.com/ionicframework')">
-      <ion-icon name="logo-instagram"></ion-icon>
-      <ion-label>Instagram</ion-label>
-    </ion-chip>
-
-    <ion-chip color="facebook" button (click)="openExternalUrl('https://www.facebook.com/ionicframework')">
+  <!-- Social Media -->
+  <div class="ion-text-center">
+    <ion-chip color="facebook" button (click)="openExternalUrl('https://www.facebook.com/halloffamekinodeluxe')">
       <ion-icon name="logo-facebook"></ion-icon>
       <ion-label>Facebook</ion-label>
     </ion-chip>
   </div>
 
+  <!-- Map -->
   <div #mapCanvas class="map-canvas"></div>
 
- 
+  <!-- Opening Hours-->
+  <div *ngIf="session" class="ion-text-center">
+    <p>Öffnungszeiten</p>
+    <p>{{session.opening[0]}}</p>
+    <p>{{session.opening[1]}}</p>
+    <p>{{session.opening[2]}}</p>
+    <p>{{session.opening[3]}}</p>
+    <p>{{session.opening[4]}}</p>
+    <p>{{session.opening[5]}}</p>
+    <p>{{session.opening[6]}}</p>
+  </div>
 
 </ion-content>
+
+
 
 

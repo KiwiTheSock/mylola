@@ -246,7 +246,6 @@ export class DetailPage implements AfterViewInit{
   
     await actionSheet.present();
   }
-
 }
 
 function getGoogleMaps(apiKey: string): Promise<any> {
