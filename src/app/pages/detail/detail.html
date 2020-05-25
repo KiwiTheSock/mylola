@@ -8,92 +8,115 @@
     </ion-buttons>
 
     <!-- Title -->
-    <ion-title>{{session?.name}}</ion-title>
+    <ion-title class="title">{{session?.name}}</ion-title>
 
   </ion-toolbar>
 </ion-header>
 
 <!-- Content -->
-<ion-content >
-
-
-  <!-- Profile and Background Pictures -->
-  <div class="profile-background" *ngIf="session">
-    <div *ngIf="session">
-      <ion-img src="..\assets\img\banner\{{session.banner}}"></ion-img>
-    </div>
-    <ion-avatar>
-      <ion-img src="..\assets\img\logo\{{session.logo}}"></ion-img>
-    </ion-avatar>
-  </div>
-
-  <!-- Icons --> 
+<ion-content fullscreen="true">
+  <ion-grid>  
   
-  <div class="icons">
+    <!-- Banner and Logo -->
+    <ion-row>
+      <ion-col col-12 class="profile-background" *ngIf="session">
+          <div>
+            <ion-img src="..\assets\img\banner\{{session.banner}}"></ion-img>
+          </div>
+          <ion-avatar>
+            <ion-img src="..\assets\img\logo\{{session.logo}}"></ion-img>
+          </ion-avatar>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <!-- Icons -->
+      <ion-col col-6 class="icons">
+        <ion-button (click)="toggleFavorite()">
+          <ion-icon *ngIf="!isFavorite" name="bookmark-outline"></ion-icon>
+          <ion-icon *ngIf="isFavorite" name="bookmark"></ion-icon>
+        </ion-button>
+        
+        <ion-button (click)="shareSession()">
+          <ion-icon slot="icon-only" name="share-social"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <!-- Time -->
+      <ion-col col-6 >
+        <p class="time">TODO</p>
+      </ion-col>
+    </ion-row>
+  
+    <!-- Text -->
+    <ion-row>
+      <ion-col col-12 >
+        <div *ngIf="session" class="ion-padding" >
+          <h5>{{session.title}}</h5>
+          <p>{{session.text}}</p>
+        </div>
+      </ion-col>
+    </ion-row>  
+     
+    <!-- Button -->
+    <ion-row>
+      <ion-col col-12 *ngIf="session" class="buttons"> 
+        <ion-button>{{session.button}}</ion-button>
+      </ion-col>
+    </ion-row>  
+
+     <!-- Pictures -->
+    <ion-row>
+      <ion-col col-12 *ngIf="session">
+          <ion-img src="..\assets\img\add\{{session.add}}"></ion-img>
+      </ion-col>
+    </ion-row> 
+
+    <!-- Location -->
+    <ion-row>
+      <ion-col col-12 *ngIf="session" class="location">
+          <h4>Angebotsort</h4>
+          <p style="font-weight: bold;">{{session.name}}</p>
+          <p>{{session.street}}</p>
+          <p>{{session.place}}</p>
+          <br />
+          <p style="color: #DB001B;">{{session.website}}</p>
+          <p>{{session.mail}}</p>
+          <p style="color: #DB001B;">{{session.phone}}</p>
+      </ion-col>
+    </ion-row> 
+
+    <!-- Social Media -->
+    <ion-row>
+      <ion-col col-12 class="social-media">
+          <ion-chip color="facebook" button (click)="openExternalUrl('https://www.facebook.com/halloffamekinodeluxe')">
+            <ion-icon name="logo-facebook"></ion-icon>
+            <ion-label >Facebook</ion-label>
+          </ion-chip>
+      </ion-col>
+    </ion-row> 
     
-    <ion-button (click)="toggleFavorite()">
-      <ion-icon *ngIf="!isFavorite" name="bookmark-outline"></ion-icon>
-      <ion-icon *ngIf="isFavorite" name="bookmark"></ion-icon>
-    </ion-button>
-    <ion-button (click)="shareSession()">
-      <ion-icon slot="icon-only" name="share-social"></ion-icon>
-    </ion-button>
-  
-  
-    <p>Vor 5 Minuten</p>
-  
-  </div>
-  
-  <!-- Text -->
-  <div *ngIf="session" class="ion-padding" >
-    <h5>{{session.title}}</h5>
-    <p>{{session.text}}</p>
-  </div>
-
-  <!-- Button -->
-  <div *ngIf="session" class="ion-text-center">
-    <ion-button>{{session.button}}</ion-button>
-  </div>
-
-  <!-- Pictures -->
-  <div *ngIf="session">
-    <ion-img src="..\assets\img\add\{{session.add}}"></ion-img>
-  </div>
-
-  <!-- Location -->
-  <div *ngIf="session" class="ion-text-center">
-    <p>Angebotsort</p>
-    <p>{{session.name}}</p>
-    <p>{{session.address}}</p>
-    <br />
-    <P>{{session.website}}</P>
-    <P>{{session.mail}}</P>
-    <P>{{session.phone}}</P>
-  </div>
-
-  <!-- Social Media -->
-  <div class="ion-text-center">
-    <ion-chip color="facebook" button (click)="openExternalUrl('https://www.facebook.com/halloffamekinodeluxe')">
-      <ion-icon name="logo-facebook"></ion-icon>
-      <ion-label>Facebook</ion-label>
-    </ion-chip>
-  </div>
+  </ion-grid>
 
   <!-- Map -->
   <div #mapCanvas class="map-canvas"></div>
 
-  <!-- Opening Hours-->
-  <div *ngIf="session" class="ion-text-center">
-    <p>Öffnungszeiten</p>
-    <p>{{session.opening[0]}}</p>
-    <p>{{session.opening[1]}}</p>
-    <p>{{session.opening[2]}}</p>
-    <p>{{session.opening[3]}}</p>
-    <p>{{session.opening[4]}}</p>
-    <p>{{session.opening[5]}}</p>
-    <p>{{session.opening[6]}}</p>
-  </div>
-
+   <!-- Opening Hours-->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 *ngIf="session" class="opening">
+        <h4>Öffnungszeiten</h4>
+        <p>{{session.opening[0]}}</p>
+        <p>{{session.opening[1]}}</p>
+        <p>{{session.opening[2]}}</p>
+        <p>{{session.opening[3]}}</p>
+        <p>{{session.opening[4]}}</p>
+        <p>{{session.opening[5]}}</p>
+        <p>{{session.opening[6]}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+      
 </ion-content>
 
 

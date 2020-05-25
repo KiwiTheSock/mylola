@@ -38,66 +38,78 @@
   <ion-list #scheduleList [hidden]="shownSessions === 0">
     <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
 
+      <!-- Item -->
       <div *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
-        [hidden]="session.hide" class="test">
-    
+        [hidden]="session.hide" class="item">
         <ion-grid>
-        
-          <ion-row>
 
-            <ion-col col-4>
+          <!-- First Row -->
+          <ion-row class="first-row">
+
+            <!-- Logo -->
+            <ion-col col-4 class="logo"> 
               <ion-avatar *ngIf="session">
                 <ion-img style="width: 40px; height: 40px;" src="..\assets\img\logo\{{session.logo}}"></ion-img>
               </ion-avatar>
             </ion-col>
 
-            <ion-col col-4>
+            <!-- Name -->
+            <ion-col col-4 class="name">
               <ion-label>
                 <h2>{{session.name}}</h2>
               </ion-label>
             </ion-col>
 
-            <ion-col col-4>
+            <!-- Ellipsis -->
+            <ion-col col-4 class="ellipsis">
               <ion-buttons>
                 <ion-button (click)="presentPopover($event)">
                   <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
                 </ion-button>
               </ion-buttons>
-           
             </ion-col>
 
           </ion-row>
         
+          <!-- Second Row -->
           <ion-row>
 
+            <!-- Picture -->
             <ion-col col-12 *ngIf="session">
               <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
             </ion-col>
 
           </ion-row>     
           
+          <!-- Third Row -->
           <ion-row>
 
-            <ion-col col-6>
+            <!-- Icons -->
+            <ion-col col-2 class="icons">
               <ion-buttons >
-                <ion-button (click)="toggleFavorite()">
+                <ion-button id="button1" (click)="toggleFavorite()">
                   <ion-icon *ngIf="!isFavorite" slot="icon-only" name="bookmark-outline"></ion-icon>
                   <ion-icon *ngIf="isFavorite" slot="icon-only" name="bookmark"></ion-icon>
                 </ion-button>
-                <ion-button (click)="shareSession()">
+                <ion-button id="button2" (click)="shareSession()">
                   <ion-icon slot="icon-only" name="share-social"></ion-icon>
                 </ion-button>
               </ion-buttons>
             </ion-col>
 
-            <ion-col col-6>
+            <!-- Title -->
+            <ion-col class="title">
               <ion-label>
-                <p>{{session.title}} </p>
+                <p>{{session.title}}</p>
               </ion-label>
             </ion-col>
 
+            <!-- Time -->
+            <ion-col col-2 class="time">
+              <p>TODO</p>
+            </ion-col>
+
           </ion-row>
-              
         </ion-grid>  
       </div>
     </ion-item-group>

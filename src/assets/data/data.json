@@ -9,12 +9,13 @@
             {
               "name": "Hall of Fame",
               "title": "Vino & Kino, Dienstag 11.02 19:30 Uhr",
-              "text": "Gute Weine – besondere Filme – gemütliches Ambiente /n Es gibt schöne Dinge im Leben - gute Filme und guter Wein gehören für uns von der Hall of Fame - Kino de Luxe dazu und wenn man sie kombiniert, kommen oft unvergleichliche Abende dabei heraus! Und genau diese wollen wir Ihnen mit unserer neuen Veranstaltungsreihe VINO & KINO bieten - in  wohltuend entschleunigter Atmosphäre und persönlichem Ambiente! In einem unserer gemütlichen Kinosäle laden wir dienstags um 19:30 Uhr zum Empfang mit guten Weinen zur Einstimmung auf einen besonderen Film, speziell ausgewählt für diese Reihe! Exklusiv für mylola-Nutzer: Zeigen Sie folgenden Gutschein, für eine kleine Portion Popcorn gratis, an der Kasse vor.",
+              "text": "Gute Weine – besondere Filme – gemütliches Ambiente Es gibt schöne Dinge im Leben - gute Filme und guter Wein gehören für uns von der Hall of Fame - Kino de Luxe dazu und wenn man sie kombiniert, kommen oft unvergleichliche Abende dabei heraus! Und genau diese wollen wir Ihnen mit unserer neuen Veranstaltungsreihe VINO & KINO bieten - in  wohltuend entschleunigter Atmosphäre und persönlichem Ambiente! In einem unserer gemütlichen Kinosäle laden wir dienstags um 19:30 Uhr zum Empfang mit guten Weinen zur Einstimmung auf einen besonderen Film, speziell ausgewählt für diese Reihe! Exklusiv für mylola-Nutzer: Zeigen Sie folgenden Gutschein, für eine kleine Portion Popcorn gratis, an der Kasse vor.",
               "logo": "halloffame_logo.png",
               "add": "halloffame_vinokino.png",
               "banner": "banner_halloffame.png",
               "button": "Gratis Popcorn jetzt einlösen",
-              "address": "Theodor-Heuss-Platz 6-9 49074 Osnabrück",
+              "street": "Theodor-Heuss-Platz 6-9",
+              "place": "49074 Osnabrück",
               "website": "http://hall-of-fame.online",
               "mail": "info@hall-of-fame.online",
               "phone": "03871-2114040",
@@ -28,7 +29,7 @@
                 "Samstag: 10:00 - 24:00", 
                 "Sonntag: 10:00 - 23:00"
               ],
-              "tracks": ["GastroundNightlife"],
+              "tracks": ["Gastro & Nightlife"],
               "id": "1"
             }
           ]
@@ -44,7 +45,8 @@
               "add": "theghostwolves.png",
               "banner": "banner_whiskys.png",
               "button": "2 für 1",
-              "address": "Vitihof 22 49074 Osnabrück",
+              "street": "Vitihof 22",
+              "place": "49074 Osnabrück",
               "website": "",
               "mail": "whiskys-os@web.de",
               "phone": "",
@@ -58,7 +60,7 @@
                 "Samstag: 19:00 - 04:00",
                 "Sonntag: GESCHLOSSEN"
               ],
-              "tracks": ["GastroundNightlife"],
+              "tracks": ["Gastro & Nightlife"],
               "id": "2"
             },
             {
@@ -69,7 +71,8 @@
               "add": "cafe_rubbenbruchsee.png",
               "banner": "banner_cafe_rubbenbruchsee.png",
               "button": "10€ auf Gesamtrechnung ab 25€",
-              "address": "Barenteich 2 49076 Osnabrück",
+              "street": "Barenteich 2",
+              "place": "49076 Osnabrück",
               "website": "http://www.rubbenbruchsee.eu",
               "mail": "info@rubbenbruchsee.eu",
               "phone": "0541-127433",
@@ -83,7 +86,7 @@
                 "Samstag: 09:00 - 21:00",
                 "Sonntag: 09:00 - 21:00"
               ],
-              "tracks": ["GastroundNightlife"],
+              "tracks": ["Gastro & Nightlife"],
               "id": "3"
             },
             {
@@ -94,7 +97,8 @@
               "add": "buecher_wenner.png",
               "banner": "banner_wenner.png",
               "button": "20% auf Gesamteinkauf",
-              "address": "Große Straße 69 49074 Osnabrück",
+              "street": "Große Straße 69",
+              "place": "49074 Osnabrück",
               "website": "http://www.buecher-wenner.de",
               "mail": "info@buecher-wenner.de",
               "phone": "0541-331030",
@@ -124,7 +128,8 @@
               "add": "zero.png",
               "banner": "banner_zero.png",
               "button": "3x 20€ auf Gesamteinkauf",
-              "address": "Große Straße 44 49074 Osnabrück",
+              "street": "Große Straße 44",
+              "place": "49074 Osnabrück",
               "website": "http://www.zero.de",
               "mail": "",
               "phone": "",
@@ -327,7 +332,7 @@
 
   "tracks": [
     {
-      "name": "GastroundNightlife",
+      "name": "Gastro & Nightlife",
       "icon": ""
     },
     {
@@ -335,7 +340,7 @@
       "icon": ""
     },
     {
-      "name": "FreizeitundErleben",
+      "name": "Freizeit & Erleben",
       "icon": ""
     },
     {
