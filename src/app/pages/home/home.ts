@@ -1,11 +1,9 @@
-import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
-
 import { HomeFilterPage } from '../home-filter/home-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
-
 import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover';
 
@@ -18,6 +16,7 @@ export class HomePage implements OnInit {
   // Gets a reference to the list element
   @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
 
+  //Timeline
   ios: boolean;
   dayIndex = 0;
   queryText = '';
@@ -27,10 +26,6 @@ export class HomePage implements OnInit {
   groups: any = [];
   confDate: string;
   showSearchbar: boolean;
-
-  session: any;
-  isFavorite = false;
-  defaultHref = '';
 
   constructor(
     public alertCtrl: AlertController,
@@ -57,6 +52,7 @@ export class HomePage implements OnInit {
     this.updateSchedule();
   }
 
+  //Update timeline
   updateSchedule() {
     this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
       this.shownSessions = data.shownSessions;
@@ -64,6 +60,7 @@ export class HomePage implements OnInit {
     });
   }
 
+  //Filter
   async presentFilter() {
     const modal = await this.modalCtrl.create({
       component: HomeFilterPage,
@@ -80,6 +77,7 @@ export class HomePage implements OnInit {
     }
   }
 
+  //Popover
   async presentPopover(event: Event) {
     const popover = await this.popoverCtrl.create({
       component: PopoverPage,
@@ -88,23 +86,18 @@ export class HomePage implements OnInit {
     await popover.present();
   }
 
+  /*
   sessionClick(item: string) {
     console.log('Clicked', item);
   }
+  */
 
+  //Favorites
   toggleFavorite() {
-    console.log('Clicked favorite')
-    /*
-    if (this.user.hasFavorite(this.session.name)) {
-      this.user.removeFavorite(this.session.name);
-      this.isFavorite = false;
-    } else {
-      this.user.addFavorite(this.session.name);
-      this.isFavorite = true;
-    }
-    */
+    console.log('Clicked favorite');
   }
 
+  //Share
   shareSession() {
     console.log('Clicked share session');
   }

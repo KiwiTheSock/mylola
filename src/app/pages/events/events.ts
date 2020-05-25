@@ -11,15 +11,6 @@ export class EventsPage {
   date: string;
   type: 'string';
 
-  /*
-  location = 'madison';
-  conferenceDate = '2047-05-17';
-
-  selectOptions = {
-    header: 'Select a Location'
-  };
-  */
- 
   constructor() { }
 
   onChange($event) {

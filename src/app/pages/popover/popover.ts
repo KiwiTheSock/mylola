@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-
 import { PopoverController } from '@ionic/angular';
-
-/*
-<ion-item button (click)="close('https://github.com/ionic-team/ionic')">
-  <ion-label>GitHub Repo</ion-label>
-</ion-item>
-*/
 
 @Component({
   template: `

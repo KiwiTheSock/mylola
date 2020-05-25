@@ -1,13 +1,10 @@
 import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angular/core';
-
 import { ConferenceData } from '../../providers/conference-data';
 import { ActivatedRoute } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { Platform, ActionSheetController } from '@ionic/angular';
 import { DOCUMENT} from '@angular/common';
-
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-
 import { darkStyle } from './dark-style';
 
 @Component({
@@ -17,25 +14,29 @@ import { darkStyle } from './dark-style';
 })
 export class DetailPage implements AfterViewInit{
 
-  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef; //Map
+  //Map
+  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
+  //Favorites
   session: any;
   isFavorite = false;
   defaultHref = '';
 
+  //Speaker?
   speaker: any;
 
   constructor(
-    @Inject(DOCUMENT) private doc: Document, //Map
+    @Inject(DOCUMENT) private doc: Document,
     private dataProvider: ConferenceData, 
     private userProvider: UserData,
     private route: ActivatedRoute,
-    public platform: Platform, //Map
+    public platform: Platform,
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
   ) { }
 
   ionViewWillEnter() {
+    //Favorites
     this.dataProvider.load().subscribe((data: any) => {
       if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
         const sessionId = this.route.snapshot.paramMap.get('sessionId');
@@ -43,15 +44,10 @@ export class DetailPage implements AfterViewInit{
           if (group && group.sessions) {
             for (const session of group.sessions) {
               if (session && session.id === sessionId) {
-                
-                
-                
                 this.session = session;
-
                 this.isFavorite = this.userProvider.hasFavorite(
                   this.session.name
                 );
-
                 break;
               }
             }
@@ -59,30 +55,19 @@ export class DetailPage implements AfterViewInit{
         }
       }
     });
-
-    this.dataProvider.load().subscribe((data: any) => {
-      const speakerId = this.route.snapshot.paramMap.get('speakerId');
-      if (data && data.speakers) {
-        for (const speaker of data.speakers) {
-          if (speaker && speaker.id === speakerId) {
-            this.speaker = speaker;
-            break;
-          }
-        }
-      }
-    });
-
-
   }
 
   ionViewDidEnter() {
     this.defaultHref = `/app/tabs/home`;
   }
 
+  /*
   sessionClick(item: string) {
     console.log('Clicked', item);
   }
+  */
 
+  //Favorites
   toggleFavorite() {
     if (this.userProvider.hasFavorite(this.session.name)) {
       this.userProvider.removeFavorite(this.session.name);
@@ -93,6 +78,7 @@ export class DetailPage implements AfterViewInit{
     }
   }
 
+  //Share
   shareSession() {
     console.log('Clicked share session');
   }
@@ -162,92 +148,9 @@ export class DetailPage implements AfterViewInit{
       attributes: true
     });
   }
-/*
-  ionViewWillEnter() {
-    this.dataProvider.load().subscribe((data: any) => {
-      const speakerId = this.route.snapshot.paramMap.get('speakerId');
-      if (data && data.speakers) {
-        for (const speaker of data.speakers) {
-          if (speaker && speaker.id === speakerId) {
-            this.speaker = speaker;
-            break;
-          }
-        }
-      }
-    });
-  }
-  */
-  openExternalUrl(url: string) {
-    this.inAppBrowser.create(
-      url,
-      '_blank'
-    );
-  }
-  
-  async openSpeakerShare(speaker: any) {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Share ' + speaker.name,
-      buttons: [
-        {
-          text: 'Copy Link',
-          handler: () => {
-            console.log(
-              'Copy link clicked on https://twitter.com/' + speaker.twitter
-            );
-            if (
-              (window as any).cordova &&
-              (window as any).cordova.plugins.clipboard
-            ) {
-              (window as any).cordova.plugins.clipboard.copy(
-                'https://twitter.com/' + speaker.twitter
-              );
-            }
-          }
-        },
-        {
-          text: 'Share via ...'
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    });
-  
-    await actionSheet.present();
-  }
-  
-  async openContact(speaker: any) {
-    const mode = 'ios'; // this.config.get('mode');
-  
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Contact ' + speaker.name,
-      buttons: [
-        {
-          text: `Email ( ${speaker.email} )`,
-          icon: mode !== 'ios' ? 'mail' : null,
-          handler: () => {
-            window.open('mailto:' + speaker.email);
-          }
-        },
-        {
-          text: `Call ( ${speaker.phone} )`,
-          icon: mode !== 'ios' ? 'call' : null,
-          handler: () => {
-            window.open('tel:' + speaker.phone);
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    });
-  
-    await actionSheet.present();
-  }
 }
 
+//Map
 function getGoogleMaps(apiKey: string): Promise<any> {
   const win = window as any;
   const googleModule = win.google;

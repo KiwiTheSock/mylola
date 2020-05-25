@@ -1,30 +1,112 @@
-ion-fab-button {
-  --background: var(--ion-color-step-150, #fff);
-  --background-hover: var(--ion-color-step-200, #f2f2f2);
-  --background-focused: var(--ion-color-step-250, #d9d9d9);
-
-  --color: var(--ion-color-primary, #3880ff);
-}
-
 /*
  * Material Design uses the ripple for activated
  * so only style the iOS activated background
  */
-.ios ion-fab-button {
+ .ios ion-fab-button {
   --background-activated: var(--ion-color-step-250, #d9d9d9);
 }
 
-$categories: (
-  ionic: var(--ion-color-primary),
-  shopping: #ac282b,
-  gastroundnightlife: #fed035,
-  dienstleistungen: #69bb7b,
-  freizeitunderleben: #3bc7c4,
-);
+ion-grid{
+  padding: 0;
+}
 
-@each $track, $value in map-remove($categories) {
-  ion-item-sliding[track='#{$track}'] ion-label {
-    border-left: 2px solid $value;
-    padding-left: 10px;
-  }
+ion-row{
+  padding: 0;
+}
+
+ion-col{
+  padding: 0;
+}
+
+/* Item
+ * --------------------------------------------------------
+ */
+.item{
+  margin-top: 0px;
+}
+
+/* first-row
+ * --------------------------------------------------------
+ */
+.first-row{
+  margin-bottom: -20px;
+}
+
+/* Logo
+ * --------------------------------------------------------
+ */
+.logo{
+  margin-left: 10px;
+  max-width: 40px; 
+}
+
+.logo ion-img{
+  border: 2px solid #DB001B;
+}
+
+ /* Name
+ * --------------------------------------------------------
+ */
+ .name{
+   margin-left: 10px;
+   margin-top: 10px;
+   max-width: 270px;
+  
+ }
+
+ /* Ellipsis
+ * --------------------------------------------------------
+ */
+.ellipsis{
+  max-width: 40px;
+}
+
+/* Icons
+ * --------------------------------------------------------
+ */
+.icons #button2{
+  margin-left: -20px;
+}
+
+/* Tear-off
+ * --------------------------------------------------------
+ */
+.tear-off{
+  position: absolute;
+  opacity: 0.7;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 70%;
+  margin-left: 42%;
+  margin-top: 20%;
+}
+
+/* Add-Text
+ * --------------------------------------------------------
+ */
+.add-text{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 70%;
+  margin-top: 50%;
+  transform: rotate(-45deg);
+  color: black;
+}
+
+/* Title
+ * --------------------------------------------------------
+ */
+.title{
+  margin-top: 12.5px;
+  margin-left: -10px;
+}
+
+/* Time
+ * --------------------------------------------------------
+ */
+.time{
+  font-size: smaller;
+  text-align: center;
 }

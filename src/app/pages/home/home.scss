@@ -68,6 +68,33 @@ ion-col{
   margin-left: -20px;
 }
 
+/* Tear-off
+ * --------------------------------------------------------
+ */
+.tear-off{
+  position: absolute;
+  opacity: 0.7;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 70%;
+  margin-left: 42%;
+  margin-top: 20%;
+}
+
+/* Add-Text
+ * --------------------------------------------------------
+ */
+.add-text{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 70%;
+  margin-top: 50%;
+  transform: rotate(-45deg);
+  color: black;
+}
+
 /* Title
  * --------------------------------------------------------
  */
