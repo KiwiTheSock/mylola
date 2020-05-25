@@ -16,10 +16,14 @@
 <!-- Content -->
 <ion-content >
 
+
   <!-- Profile and Background Pictures -->
-  <div class="profile-background">
+  <div class="profile-background" *ngIf="session">
+    <div *ngIf="session">
+      <ion-img src="..\assets\img\banner\{{session.banner}}"></ion-img>
+    </div>
     <ion-avatar>
-      <ion-img src="..\assets\img\speakers\bear.jpg"></ion-img>
+      <ion-img src="..\assets\img\logo\{{session.logo}}"></ion-img>
     </ion-avatar>
   </div>
 
@@ -52,8 +56,8 @@
   </div>
 
   <!-- Pictures -->
-  <div>
-    <ion-img src="..\assets\img\about\austin.jpg"></ion-img>
+  <div *ngIf="session">
+    <ion-img src="..\assets\img\add\{{session.add}}"></ion-img>
   </div>
 
   <!-- Location -->

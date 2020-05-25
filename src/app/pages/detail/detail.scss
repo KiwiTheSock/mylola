@@ -3,24 +3,24 @@
  */
 
 .profile-background {
-  position: relative;
+  //position: relative;
 
   display: flex;
 
-  padding-top: var(--ion-safe-area-top);
+  //padding-top: var(--ion-safe-area-top);
 
   align-items: center;
   justify-content: center;
 
   flex-direction: column;
 
-  height: calc(150px + var(--ion-safe-area-top));
+  //height: calc(300px + var(--ion-safe-area-top));
 
-  background: center / cover url(/assets/img/speaker-background.png) no-repeat;
+  background: center cover no-repeat;
 }
 
 .profile-background ion-avatar {
-  margin-top: calc(150px + var(--ion-safe-area-top));
+  margin-top: calc(-35px + var(--ion-safe-area-top));
 }
 
 .profile-background ion-avatar ion-img {

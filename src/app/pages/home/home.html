@@ -46,8 +46,8 @@
           <ion-row>
 
             <ion-col col-4>
-              <ion-avatar >
-                <ion-img style="width: 40px; height: 40px;" src="..\assets\img\speaker-background.png"></ion-img>
+              <ion-avatar *ngIf="session">
+                <ion-img style="width: 40px; height: 40px;" src="..\assets\img\logo\{{session.logo}}"></ion-img>
               </ion-avatar>
             </ion-col>
 
@@ -70,8 +70,8 @@
         
           <ion-row>
 
-            <ion-col col-12>
-              <ion-img src="..\assets\img\speaker-background.png" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
+            <ion-col col-12 *ngIf="session">
+              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
             </ion-col>
 
           </ion-row>     
