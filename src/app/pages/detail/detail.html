@@ -53,14 +53,14 @@
       <ion-col col-12 >
         <div *ngIf="session" class="ion-padding" >
           <h5>{{session.title}}</h5>
-          <p>{{session.text}}</p>
+          <p class="text">{{session.text}}</p>
         </div>
       </ion-col>
     </ion-row>  
      
     <!-- Button -->
     <ion-row>
-      <ion-col col-12 *ngIf="session" class="buttons"> 
+      <ion-col col-12 *ngIf="session" class="buttons" (click) ="presentAlert()"> 
         <ion-button>{{session.button}}</ion-button>
       </ion-col>
     </ion-row>  

@@ -9,7 +9,7 @@
             {
               "name": "Hall of Fame",
               "title": "Vino & Kino, Dienstag 11.02 19:30 Uhr",
-              "text": "Gute Weine – besondere Filme – gemütliches Ambiente Es gibt schöne Dinge im Leben - gute Filme und guter Wein gehören für uns von der Hall of Fame - Kino de Luxe dazu und wenn man sie kombiniert, kommen oft unvergleichliche Abende dabei heraus! Und genau diese wollen wir Ihnen mit unserer neuen Veranstaltungsreihe VINO & KINO bieten - in  wohltuend entschleunigter Atmosphäre und persönlichem Ambiente! In einem unserer gemütlichen Kinosäle laden wir dienstags um 19:30 Uhr zum Empfang mit guten Weinen zur Einstimmung auf einen besonderen Film, speziell ausgewählt für diese Reihe! Exklusiv für mylola-Nutzer: Zeigen Sie folgenden Gutschein, für eine kleine Portion Popcorn gratis, an der Kasse vor.",
+              "text": "Gute Weine – besondere Filme – gemütliches Ambiente\n\n Es gibt schöne Dinge im Leben - gute Filme und guter Wein\ngehören für uns von der Hall of Fame - Kino de Luxe dazu\nund wenn man sie kombiniert, kommen oft unvergleichliche\nAbende dabei heraus! Und genau diese wollen wir Ihnen mit\nunserer neuen Veranstaltungsreihe VINO & KINO bieten - in\nwohltuend entschleunigter Atmosphäre und persönlichem\nAmbiente! In einem unserer gemütlichen Kinosäle laden wir\ndienstags um 19:30 Uhr zum Empfang mit guten Weinen zur\nEinstimmung auf einen besonderen Film, speziell ausgewählt\nfür diese Reihe!\n\n\nExklusiv für mylola-Nutzer: Zeigen Sie folgenden Gutschein,\nfür eine kleine Portion Popcorn gratis, an der Kasse vor.",
               "addtext": "Gratis Popcorn",
               "logo": "halloffame_logo.png",
               "add": "halloffame_vinokino.png",
@@ -41,7 +41,7 @@
             {
               "name": "Whisky's",
               "title": "The Ghost Wolves, Dienstag 11.02 20:00 Uhr",
-              "text": "Garage Punk. Als Swamp Blues Garage Punk bezeichnen The Ghost Wolves aus Austin (USA) ihren Sound. Das Duo serviert mit minimalistischem Set eine Achterbahnfahrt durch vertonte Voodoo-Zauberei. Etwas für Freunde von Kapellen wie THE WHITE STRIPES, JON SPENCER BLUES EXPLOSION oder THE CRAMPS. #ALTSTADT Restkarten verfügbar: mylola-Nutzer erhalten an der Abendkasse zwei Karten zum Preis von einer.",
+              "text": "Garage Punk\n\nAls Swamp Blues Garage Punk bezeichnen The Ghost Wolves\naus Austin (USA) ihren Sound. Das Duo serviert mit\nminimalistischem Set eine Achterbahnfahrt durch vertonte\nVoodoo-Zauberei. Etwas für Freunde von Kapellen wie\nTHE WHITE STRIPES, JON SPENCER BLUES EXPLOSION oder\nTHE CRAMPS. #ALTSTADT\n\nRestkarten verfügbar: mylola-Nutzer erhalten an der\nAbendkasse zwei Karten zum Preis von einer.",
               "addtext": "2 für 1",
               "logo": "whiskys_logo.jpg",
               "add": "theghostwolves.png",
@@ -68,7 +68,7 @@
             {
               "name": "Café-Restaurant am Rubbenbruchsee",
               "title": "Mittwochs Schnitzeltag",
-              "text": "Jedes Schnitzel 11,50€ Dienstag bis Sonntag ab 12:00 Uhr durchgehend warme Küche Samstag und Sonntag von 9:00-12:00 Uhr Frühstücksbüffet",
+              "text": "Jedes Schnitzel 11,50€",
               "addtext": "10€ Rabatt",
               "logo": "rubbenbruch_logo.png",
               "add": "cafe_rubbenbruchsee.png",
@@ -95,7 +95,7 @@
             {
               "name": "Bücher Wenner",
               "title": "20% Auf Ihren Einkauf",
-              "text": "Lesen mit Leidenschaft Osnabrücks große, inhabergeführte Buchhandlung bietet eine einzigartige Buchauswahl und freundlich kompetente Beratung seit über 75 Jahren. Unsere Fahrradkuriere liefern im Stadtgebiet kostenlos zu Ihnen nach Hause. Bestellen können Sie auch bequem per WhatsApp: +49 541 33 103 0",
+              "text": "Lesen mit Leidenschaft Osnabrücks große, inhabergeführte\nBuchhandlung bietet eine einzigartige Buchauswahl und\nfreundlich kompetente Beratung seit über 75 Jahren. Unsere\nFahrradkuriere liefern im Stadtgebiet kostenlos zu Ihnen nach\nHause. Bestellen können Sie auch bequem per\nWhatsApp: +49 541 33 103 0",
               "addtext": "20% Rabatt",
               "logo": "wenner_logo.png",
               "add": "buecher_wenner.png",
@@ -127,7 +127,7 @@
             {
               "name": "Zero",
               "title": "20% Auf Ihren Einkauf",
-              "text": "• Damenmode zum Wohlfühlen • Monatl. Trendkollektionen • Von casual bis formal • Elegante Abendmode • Wertige Basics • Accessoires",
+              "text": " • Damenmode zum Wohlfühlen\n • Monatl. Trendkollektionen\n • Von casual bis formal\n • Elegante Abendmode\n • Wertige Basics\n • Accessoires",
               "addtext": "20% Rabatt",
               "logo": "zero_logo.jpg",
               "add": "zero.png",

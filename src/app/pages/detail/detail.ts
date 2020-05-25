@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angula
 import { ConferenceData } from '../../providers/conference-data';
 import { ActivatedRoute } from '@angular/router';
 import { UserData } from '../../providers/user-data';
-import { Platform, ActionSheetController } from '@ionic/angular';
+import { Platform, ActionSheetController, AlertController } from '@ionic/angular';
 import { DOCUMENT} from '@angular/common';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { darkStyle } from './dark-style';
@@ -33,6 +33,7 @@ export class DetailPage implements AfterViewInit{
     public platform: Platform,
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
+    public alertController: AlertController,
   ) { }
 
   ionViewWillEnter() {
@@ -81,6 +82,18 @@ export class DetailPage implements AfterViewInit{
   //Share
   shareSession() {
     console.log('Clicked share session');
+  }
+
+  //Alert
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: this.session.addtext,
+      subHeader: this.session.title,
+      buttons: ['Einlösen']
+    });
+
+    await alert.present();
   }
 
   /* Map
