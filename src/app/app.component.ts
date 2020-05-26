@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 
@@ -48,6 +48,7 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
+    private cd: ChangeDetectorRef,
   ) {
     this.initializeApp();
   }
@@ -113,7 +114,7 @@ export class AppComponent implements OnInit {
   logout() {
     this.userData.logout().then(() => {
       return this.router.navigateByUrl('/app/tabs/home');
-    });
+    });    
   }
 
   openTutorial() {

@@ -5,12 +5,15 @@
     <!-- Sidemenu -->
     <ion-buttons *ngIf="!showSearchbar" slot="start">
       <ion-menu-button>
-        <ion-icon name="person-circle"></ion-icon>
+        <ion-icon style="width: 50px; height: 50px;" name="person-circle"></ion-icon>
       </ion-menu-button> 
     </ion-buttons>
 
-    <!-- Title -->
-    <ion-title *ngIf="!ios && !showSearchbar" class="ion-text-center">mylola</ion-title>
+    <div class="mylola"> 
+      <ion-title  *ngIf="!ios && !showSearchbar"> 
+        mylola
+      </ion-title>
+    </div>
 
     <!-- Search Function -->
     <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionChange)="updateSchedule()" (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
@@ -47,9 +50,9 @@
           <ion-row class="first-row">
 
             <!-- Logo -->
-            <ion-col col-4 class="logo"> 
+            <ion-col col-4  class="logo"> 
               <ion-avatar *ngIf="session">
-                <ion-img style="width: 40px; height: 40px;" src="..\assets\img\logo\{{session.logo}}"></ion-img>
+                <ion-img src="..\assets\img\logo\{{session.logo}}"></ion-img>
               </ion-avatar>
             </ion-col>
 
@@ -77,8 +80,10 @@
             <!-- Picture and Tear-off -->
             <ion-col col-12 *ngIf="session">
               <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
-              <ion-img class="tear-off" src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
-              <p class="add-text">{{session.addtext}}</p>
+              <div class="tear-off">
+                <ion-img class="" src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>  
+                <p class="">{{session.addtext}}</p>
+             </div>
             </ion-col>
 
           </ion-row>     
@@ -87,7 +92,7 @@
           <ion-row>
 
             <!-- Icons -->
-            <ion-col col-2 class="icons">
+            <ion-col col-1 class="icons">
               <ion-buttons >
                 <ion-button id="button1" (click)="toggleFavorite()">
                   <ion-icon *ngIf="!isFavorite" slot="icon-only" name="bookmark-outline"></ion-icon>
@@ -100,15 +105,18 @@
             </ion-col>
 
             <!-- Title -->
-            <ion-col class="title">
+            <ion-col col-10 class="title">
               <ion-label>
                 <p>{{session.title}}</p>
               </ion-label>
             </ion-col>
 
             <!-- Time -->
-            <ion-col col-2 class="time">
-              <p>TODO</p>
+            <ion-col col-1 class="time" *ngIf="dark">
+              <p>Vor 20 Minuten</p>
+            </ion-col>
+            <ion-col col-1 class="time" *ngIf="!dark">
+              <p>Vor 2 Tagen</p>
             </ion-col>
 
           </ion-row>

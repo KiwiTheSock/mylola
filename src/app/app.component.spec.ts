@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { UserData } from './providers/user-data';
+import { Darkmode } from './providers/darkmode';
 
 describe('AppComponent', () => {
   let menuSpy,
@@ -19,6 +20,7 @@ describe('AppComponent', () => {
     swUpdateSpy,
     platformReadySpy,
     platformSpy,
+    darkmodeSpy,
     app,
     fixture;
 
@@ -31,6 +33,7 @@ describe('AppComponent', () => {
     swUpdateSpy = jasmine.createSpyObj('SwUpdate', ['available', 'activateUpdate']);
     platformReadySpy = Promise.resolve();
     platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
+    darkmodeSpy = jasmine.createSpyObj('Darkmode', ['dark']);
 
     TestBed.configureTestingModule({
       declarations: [AppComponent],
@@ -43,7 +46,8 @@ describe('AppComponent', () => {
         { provide: StatusBar, useValue: statusBarSpy },
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: SwUpdate, useValue: swUpdateSpy },
-        { provide: Platform, useValue: platformSpy }
+        { provide: Platform, useValue: platformSpy },
+        { provide: Darkmode, useValue: darkmodeSpy },
       ]
     }).compileComponents();
   }));

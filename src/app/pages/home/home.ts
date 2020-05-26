@@ -7,6 +7,7 @@ import { UserData } from '../../providers/user-data';
 import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -38,7 +39,7 @@ export class HomePage implements OnInit {
     public user: UserData,
     public config: Config,
     public popoverCtrl: PopoverController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
