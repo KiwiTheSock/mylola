@@ -81,8 +81,14 @@
           <p>{{session.place}}</p>
           <br />
           <p style="color: #DB001B;">{{session.website}}</p>
+          <ion-button (click)="openContact(session)">
+            <ion-icon slot="icon-only" ios="call-outline" md="call-sharp"></ion-icon>
+          </ion-button>
           <p>{{session.mail}}</p>
           <p style="color: #DB001B;">{{session.phone}}</p>
+          <ion-button (click)="openSpeakerShare(session)">
+            <ion-icon slot="icon-only" ios="call-outline" md="call-sharp"></ion-icon>
+          </ion-button>
       </ion-col>
     </ion-row> 
 
@@ -93,6 +99,7 @@
             <ion-icon name="logo-facebook"></ion-icon>
             <ion-label >Facebook</ion-label>
           </ion-chip>
+          
       </ion-col>
     </ion-row> 
     

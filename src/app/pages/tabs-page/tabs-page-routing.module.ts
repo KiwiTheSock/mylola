@@ -24,23 +24,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'speakers',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../speaker-list/speaker-list.module').then(m => m.SpeakerListModule)
-          },
-          {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../detail/detail.module').then(m => m.DetailModule)
-          },
-          {
-            path: 'speaker-details/:speakerId',
-            loadChildren: () => import('../speaker-detail/speaker-detail.module').then(m => m.SpeakerDetailModule)
-          }
-        ]
-      },
-      {
         path: 'favorites',
         children: [
           {

@@ -102,6 +102,76 @@ export class DetailPage implements AfterViewInit{
     return await modal.present();
   }
 
+  //Facebook
+  openExternalUrl(url: string) {
+    this.inAppBrowser.create(
+      url,
+      '_blank'
+    );
+  }
+
+  async openSpeakerShare(session: any) {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Share ' + session.name,
+      buttons: [
+        {
+          text: 'Copy Link',
+          handler: () => {
+            console.log(
+              'Copy link clicked on https://twitter.com/' + session.twitter
+            );
+            if (
+              (window as any).cordova &&
+              (window as any).cordova.plugins.clipboard
+            ) {
+              (window as any).cordova.plugins.clipboard.copy(
+                'https://twitter.com/' + session.twitter
+              );
+            }
+          }
+        },
+        {
+          text: 'Share via ...'
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+
+    await actionSheet.present();
+  }
+
+  async openContact(session: any) {
+    const mode = 'ios'; // this.config.get('mode');
+
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Contact ' + session.name,
+      buttons: [
+        {
+          text: `Email ( ${session.mail} )`,
+          icon: mode !== 'ios' ? 'mail' : null,
+          handler: () => {
+            window.open('mailto:' + session.mail);
+          }
+        },
+        {
+          text: `Call ( ${session.phone} )`,
+          icon: mode !== 'ios' ? 'call' : null,
+          handler: () => {
+            window.open('tel:' + session.phone);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+
+    await actionSheet.present();
+  }
   /* Map
   * --------------------------------------------------------
   */

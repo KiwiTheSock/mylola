@@ -9,8 +9,6 @@ import { EventsModule } from '../events/events.module';
 import { FavoritesModule } from '../favorites/favorites.module';
 import { HomeModule } from '../home/home.module';
 import { DetailModule } from '../detail/detail.module';
-import { SpeakerDetailModule } from '../speaker-detail/speaker-detail.module';
-import { SpeakerListModule } from '../speaker-list/speaker-list.module';
 
 @NgModule({
   imports: [
@@ -20,8 +18,6 @@ import { SpeakerListModule } from '../speaker-list/speaker-list.module';
     FavoritesModule,
     HomeModule,
     DetailModule,
-    SpeakerDetailModule,
-    SpeakerListModule,
     TabsPageRoutingModule
   ],
   declarations: [
