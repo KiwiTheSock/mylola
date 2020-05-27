@@ -82,9 +82,9 @@
 
             <!-- Picture and Tear-off -->
             <ion-col col-12 *ngIf="session">
-              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
+              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/favorites/detail/{{session.id}}"></ion-img>
               <div class="tear-off">
-                <ion-img src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>  
+                <ion-img src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/favorites/detail/{{session.id}}"></ion-img>  
                 <p class="">{{session.addtext}}</p>
              </div>
             </ion-col>
@@ -97,9 +97,9 @@
             <!-- Icons -->
             <ion-col col-1 class="icons">
               <ion-buttons >
-                <ion-button id="button1" (click)="toggleFavorite()">
-                  <ion-icon *ngIf="!isFavorite" slot="icon-only" name="bookmark-outline"></ion-icon>
-                  <ion-icon *ngIf="isFavorite" slot="icon-only" name="bookmark"></ion-icon>
+                <ion-button id="button1" (click)="toggleFavorite(session)">
+                  <ion-icon *ngIf="session.fav" slot="icon-only" name="bookmark-outline"></ion-icon>
+                  <ion-icon *ngIf="!session.fav" slot="icon-only" name="bookmark"></ion-icon>
                 </ion-button>
                 <ion-button id="button2" (click)="shareSession()">
                   <ion-icon slot="icon-only" name="share-social"></ion-icon>

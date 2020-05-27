@@ -97,9 +97,9 @@
             <!-- Icons -->
             <ion-col col-1 class="icons">
               <ion-buttons >
-                <ion-button id="button1" (click)="toggleFavorite()">
-                  <ion-icon *ngIf="!isFavorite" slot="icon-only" name="bookmark-outline"></ion-icon>
-                  <ion-icon *ngIf="isFavorite" slot="icon-only" name="bookmark"></ion-icon>
+                <ion-button id="button1" (click)="toggleFavorite(session)">
+                  <ion-icon *ngIf="session.fav" slot="icon-only" name="bookmark-outline"></ion-icon>
+                  <ion-icon *ngIf="!session.fav" slot="icon-only" name="bookmark"></ion-icon>
                 </ion-button>
                 <ion-button id="button2" (click)="shareSession()">
                   <ion-icon slot="icon-only" name="share-social"></ion-icon>

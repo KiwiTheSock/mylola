@@ -19,13 +19,8 @@ export class DetailPage implements AfterViewInit{
   //Map
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
-  //Favorites
   session: any;
-  isFavorite = false;
   defaultHref = '';
-
-  //Speaker?
-  speaker: any;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -49,9 +44,10 @@ export class DetailPage implements AfterViewInit{
             for (const session of group.sessions) {
               if (session && session.id === sessionId) {
                 this.session = session;
+                /*
                 this.isFavorite = this.userProvider.hasFavorite(
                   this.session.name
-                );
+                );*/
                 break;
               }
             }
@@ -66,13 +62,13 @@ export class DetailPage implements AfterViewInit{
   }
 
   //Favorites
-  toggleFavorite() {
-    if (this.userProvider.hasFavorite(this.session.name)) {
-      this.userProvider.removeFavorite(this.session.name);
-      this.isFavorite = false;
+  toggleFavorite(session: any) {
+    if (this.userProvider.hasFavorite(session.name)) {
+      this.userProvider.removeFavorite(session.name);
+      session.fav = true;
     } else {
-      this.userProvider.addFavorite(this.session.name);
-      this.isFavorite = true;
+      this.userProvider.addFavorite(session.name);
+      session.fav = false;
     }
   }
 
@@ -82,12 +78,12 @@ export class DetailPage implements AfterViewInit{
   }
 
   //Modal
-  async presentModal() {
+  async presentModal(session: any) {
     const modal = await this.modalController.create({
       component: ModalPage,
       cssClass: 'modal',
       swipeToClose: true, //iOS
-      componentProps: { users: 'Douglas' }
+      componentProps: { session: session }
     });
    
     //Passed back data

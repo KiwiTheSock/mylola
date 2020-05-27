@@ -31,10 +31,10 @@
 
     <ion-row>
       <!-- Icons -->
-      <ion-col col-6 class="icons">
-        <ion-button (click)="toggleFavorite()">
-          <ion-icon *ngIf="!isFavorite" name="bookmark-outline"></ion-icon>
-          <ion-icon *ngIf="isFavorite" name="bookmark"></ion-icon>
+      <ion-col col-6 *ngIf="session" class="icons">
+        <ion-button (click)="toggleFavorite(session)">
+          <ion-icon *ngIf="session.fav" name="bookmark-outline"></ion-icon>
+          <ion-icon *ngIf="!session.fav" name="bookmark"></ion-icon>
         </ion-button>
         
         <ion-button (click)="shareSession()">
@@ -60,7 +60,7 @@
      
     <!-- Button -->
     <ion-row>
-      <ion-col col-12 *ngIf="session" class="buttons" (click) ="presentAlert()"> 
+      <ion-col col-12 *ngIf="session" class="buttons" (click) ="presentModal(session)"> 
         <ion-button>{{session.button}}</ion-button>
       </ion-col>
     </ion-row>  

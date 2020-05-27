@@ -92,8 +92,14 @@ export class HomePage implements OnInit {
   }
 
   //Favorites
-  toggleFavorite() {
-    console.log('Clicked favorite');
+  toggleFavorite(session: any) {
+    if (this.user.hasFavorite(session.name)) {
+      this.user.removeFavorite(session.name);
+      session.fav = true;
+    } else {
+      this.user.addFavorite(session.name);
+      session.fav = false;
+    }
   }
 
   //Share
