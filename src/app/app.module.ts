@@ -15,6 +15,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 
+import { Darkmode } from './providers/darkmode';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -28,7 +30,7 @@ import { FormsModule } from '@angular/forms';
     })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar],
+  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode,],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

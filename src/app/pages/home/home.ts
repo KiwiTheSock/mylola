@@ -6,7 +6,7 @@ import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover';
-
+import { Darkmode } from '../../providers/darkmode';
 
 @Component({
   selector: 'page-home',
@@ -40,6 +40,7 @@ export class HomePage implements OnInit {
     public config: Config,
     public popoverCtrl: PopoverController,
     private route: ActivatedRoute,
+    public darkmode: Darkmode,
   ) { }
 
   ngOnInit() {

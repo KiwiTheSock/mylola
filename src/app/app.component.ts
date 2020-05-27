@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 
 import { UserData } from './providers/user-data';
+import { Darkmode } from './providers/darkmode';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +37,6 @@ export class AppComponent implements OnInit {
     }
   ];
   loggedIn = false;
-  dark = false;
 
   constructor(
     private menu: MenuController,
@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
     private cd: ChangeDetectorRef,
+    public darkmode: Darkmode,
   ) {
     this.initializeApp();
   }
@@ -121,5 +122,9 @@ export class AppComponent implements OnInit {
     this.menu.enable(false);
     this.storage.set('ion_did_tutorial', false);
     this.router.navigateByUrl('/tutorial');
+  }
+
+  changeDarkmode(){
+    this.darkmode.darkmode();
   }
 }

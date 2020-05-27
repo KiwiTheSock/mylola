@@ -9,11 +9,9 @@
       </ion-menu-button> 
     </ion-buttons>
 
-    <div class="mylola"> 
-      <ion-title  *ngIf="!ios && !showSearchbar"> 
-        mylola
-      </ion-title>
-    </div>
+    <!-- Mylola -->
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" *ngIf="!ios && !showSearchbar"></ion-img>  
+    
 
     <!-- Search Function -->
     <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionChange)="updateSchedule()" (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
@@ -81,7 +79,7 @@
             <ion-col col-12 *ngIf="session">
               <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
               <div class="tear-off">
-                <ion-img class="" src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>  
+                <ion-img src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>  
                 <p class="">{{session.addtext}}</p>
              </div>
             </ion-col>
@@ -112,11 +110,21 @@
             </ion-col>
 
             <!-- Time -->
-            <ion-col col-1 class="time" *ngIf="dark">
+            <ion-col col-1 class="time">
               <p>Vor 20 Minuten</p>
             </ion-col>
-            <ion-col col-1 class="time" *ngIf="!dark">
-              <p>Vor 2 Tagen</p>
+
+          </ion-row>
+
+          <!-- Fourth Row -->
+          <ion-row>
+
+            <!-- Separation -->
+            <ion-col col-12 *ngIf="darkmode.dark">
+              <ion-img src="..\assets\img\mylola\Trennung_dunkel.png"></ion-img>  
+            </ion-col>
+            <ion-col col-12 *ngIf="!darkmode.dark">
+              <ion-img src="..\assets\img\mylola\Trennung_hell.png"></ion-img>  
             </ion-col>
 
           </ion-row>

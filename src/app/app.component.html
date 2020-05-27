@@ -91,8 +91,9 @@
             <ion-label>
               Dark Mode
             </ion-label>
-            <ion-toggle [(ngModel)]="dark" (ionChange)="darkmode()"></ion-toggle>
+            <ion-toggle [(ngModel)]="dark" (ionChange)="changeDarkmode()"></ion-toggle>
           </ion-item>
+
         </ion-list>
 
         <ion-list lines="none">
@@ -106,14 +107,6 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-
-        <ion-col col-1 class="time" *ngIf="dark">
-          <p>Vor 20 Minuten</p>
-        </ion-col>
-        <ion-col col-1 class="time" *ngIf="!dark">
-          <p>Vor 2 Tagen</p>
-        </ion-col>
-
       </ion-content>
     </ion-menu>
 

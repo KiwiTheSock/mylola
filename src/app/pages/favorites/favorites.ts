@@ -4,6 +4,7 @@ import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalCont
 import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
+import { Darkmode } from '../../providers/darkmode';
 
 @Component({
   selector: 'page-favorites',
@@ -33,7 +34,8 @@ export class FavoritesPage implements OnInit{
     public routerOutlet: IonRouterOutlet,
     public toastCtrl: ToastController,
     public user: UserData,
-    public config: Config
+    public config: Config,
+    public darkmode: Darkmode,
     ) {}
 
     ngOnInit() {
