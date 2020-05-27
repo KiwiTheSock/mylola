@@ -80,22 +80,19 @@
           <p>{{session.street}}</p>
           <p>{{session.place}}</p>
           <br />
-          <p style="color: #DB001B;">{{session.website}}</p>
           <ion-button (click)="openContact(session)">
             <ion-icon slot="icon-only" ios="call-outline" md="call-sharp"></ion-icon>
           </ion-button>
+          <p style="color: #DB001B;">{{session.website}}</p>
           <p>{{session.mail}}</p>
           <p style="color: #DB001B;">{{session.phone}}</p>
-          <ion-button (click)="openSpeakerShare(session)">
-            <ion-icon slot="icon-only" ios="call-outline" md="call-sharp"></ion-icon>
-          </ion-button>
       </ion-col>
     </ion-row> 
 
     <!-- Social Media -->
     <ion-row>
       <ion-col col-12 class="social-media">
-          <ion-chip color="facebook" button (click)="openExternalUrl('https://www.facebook.com/halloffamekinodeluxe')">
+          <ion-chip color="facebook" button (click) ="facebook(session)">
             <ion-icon name="logo-facebook"></ion-icon>
             <ion-label >Facebook</ion-label>
           </ion-chip>

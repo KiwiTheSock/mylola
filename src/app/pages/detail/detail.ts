@@ -103,6 +103,11 @@ export class DetailPage implements AfterViewInit{
   }
 
   //Facebook
+  facebook(session: any){
+    this.openExternalUrl(session.facebook); 
+  }
+
+  //External Website
   openExternalUrl(url: string) {
     this.inAppBrowser.create(
       url,
@@ -110,61 +115,36 @@ export class DetailPage implements AfterViewInit{
     );
   }
 
-  async openSpeakerShare(session: any) {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Share ' + session.name,
-      buttons: [
-        {
-          text: 'Copy Link',
-          handler: () => {
-            console.log(
-              'Copy link clicked on https://twitter.com/' + session.twitter
-            );
-            if (
-              (window as any).cordova &&
-              (window as any).cordova.plugins.clipboard
-            ) {
-              (window as any).cordova.plugins.clipboard.copy(
-                'https://twitter.com/' + session.twitter
-              );
-            }
-          }
-        },
-        {
-          text: 'Share via ...'
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    });
-
-    await actionSheet.present();
-  }
-
+  //Contact
   async openContact(session: any) {
     const mode = 'ios'; // this.config.get('mode');
 
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Contact ' + session.name,
+      header: 'Kontaktiere ' + session.name,
       buttons: [
         {
-          text: `Email ( ${session.mail} )`,
+          text: `Webseite ( ${session.website} )`,
+          icon: mode !== 'ios' ? 'website' : null,
+          handler: () => {
+            window.open(session.website);
+          }
+        },
+        {
+          text: `Mail ( ${session.mail} )`,
           icon: mode !== 'ios' ? 'mail' : null,
           handler: () => {
             window.open('mailto:' + session.mail);
           }
         },
         {
-          text: `Call ( ${session.phone} )`,
+          text: `Anrufen ( ${session.phone} )`,
           icon: mode !== 'ios' ? 'call' : null,
           handler: () => {
             window.open('tel:' + session.phone);
           }
         },
         {
-          text: 'Cancel',
+          text: 'Abbrechen',
           role: 'cancel'
         }
       ]
