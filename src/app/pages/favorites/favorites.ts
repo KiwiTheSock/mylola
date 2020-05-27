@@ -5,6 +5,7 @@ import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 import { Darkmode } from '../../providers/darkmode';
+import { Refresher } from '../../providers/refresher';
 
 @Component({
   selector: 'page-favorites',
@@ -36,6 +37,7 @@ export class FavoritesPage implements OnInit{
     public user: UserData,
     public config: Config,
     public darkmode: Darkmode,
+    public refresher: Refresher,
     ) {}
 
     ngOnInit() {
@@ -71,5 +73,10 @@ export class FavoritesPage implements OnInit{
         this.excludeTracks = data;
         this.updateSchedule();
       }
-    } 
+    }
+
+    //Refresh
+    refresh(){
+      this.refresher.doRefresh(event);
+    }
 }

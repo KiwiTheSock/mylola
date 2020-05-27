@@ -6,6 +6,8 @@ import { Platform, ActionSheetController, AlertController } from '@ionic/angular
 import { DOCUMENT} from '@angular/common';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { darkStyle } from './dark-style';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page'; 
 
 @Component({
   selector: 'page-detail',
@@ -34,6 +36,7 @@ export class DetailPage implements AfterViewInit{
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
     public alertController: AlertController,
+    public modalController : ModalController,
   ) { }
 
   ionViewWillEnter() {
@@ -62,12 +65,6 @@ export class DetailPage implements AfterViewInit{
     this.defaultHref = `/app/tabs/home`;
   }
 
-  /*
-  sessionClick(item: string) {
-    console.log('Clicked', item);
-  }
-  */
-
   //Favorites
   toggleFavorite() {
     if (this.userProvider.hasFavorite(this.session.name)) {
@@ -84,16 +81,25 @@ export class DetailPage implements AfterViewInit{
     console.log('Clicked share session');
   }
 
-  //Alert
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: this.session.addtext,
-      subHeader: this.session.title,
-      buttons: ['Einlösen']
+  //Modal
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalPage,
+      cssClass: 'modal',
+      swipeToClose: true, //iOS
+      componentProps: { users: 'Douglas' }
     });
-
-    await alert.present();
+   
+    //Passed back data
+    /*
+    modal.onDidDismiss()
+      .then((data) => {
+        const users = data['data']; 
+      console.log(data);
+    });
+    */
+   
+    return await modal.present();
   }
 
   /* Map

@@ -35,6 +35,11 @@
 <!-- Content -->
 <ion-content fullscreen="true">
 
+  <!-- Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <!-- List -->
   <ion-list #scheduleList [hidden]="shownSessions === 0">
     <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
@@ -111,7 +116,7 @@
 
             <!-- Time -->
             <ion-col col-1 class="time">
-              <p>Vor 20 Minuten</p>
+              <p>Vor 2 Tagen</p>
             </ion-col>
 
           </ion-row>

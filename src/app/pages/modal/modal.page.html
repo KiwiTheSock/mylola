@@ -1,0 +1,38 @@
+<ion-content class="popover" style="overflow: hidden;">
+
+    <ion-grid style="overflow: hidden;">
+
+      <ion-row>
+
+        <ion-col col-12 class="title">
+
+          <h2>{{session?.name}} Test</h2>
+        
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+
+        <ion-col col-12>
+          
+          <ion-img class="image" src="..\assets\img\coupon\barcode.png"></ion-img>
+        
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+
+        <ion-col col-12 class="button">
+          
+          <ion-button  *ngIf="!used" (click)="dismiss()">Einlösen</ion-button>
+          <ion-button  *ngIf="used" (click)="dismiss()">Eingelöst</ion-button>
+       
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  
+</ion-content>

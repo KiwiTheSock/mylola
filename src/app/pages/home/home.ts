@@ -7,6 +7,8 @@ import { UserData } from '../../providers/user-data';
 import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover';
 import { Darkmode } from '../../providers/darkmode';
+import { Refresher } from '../../providers/refresher';
+
 
 @Component({
   selector: 'page-home',
@@ -41,6 +43,7 @@ export class HomePage implements OnInit {
     public popoverCtrl: PopoverController,
     private route: ActivatedRoute,
     public darkmode: Darkmode,
+    public refresher: Refresher,
   ) { }
 
   ngOnInit() {
@@ -88,12 +91,6 @@ export class HomePage implements OnInit {
     await popover.present();
   }
 
-  /*
-  sessionClick(item: string) {
-    console.log('Clicked', item);
-  }
-  */
-
   //Favorites
   toggleFavorite() {
     console.log('Clicked favorite');
@@ -102,5 +99,10 @@ export class HomePage implements OnInit {
   //Share
   shareSession() {
     console.log('Clicked share session');
+  }
+
+  //Refresh
+  refresh(){
+    this.refresher.doRefresh(event);
   }
 }

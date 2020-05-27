@@ -16,12 +16,16 @@ import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 
 import { Darkmode } from './providers/darkmode';
+import { Refresher } from './providers/refresher';
+
+import { ModalPageModule } from './pages/modal/modal.module'; 
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ModalPageModule,
     FormsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
@@ -30,7 +34,7 @@ import { Darkmode } from './providers/darkmode';
     })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode,],
+  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, Refresher,],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -20,7 +20,7 @@
     <ion-list-header>Tracks</ion-list-header>
 
     <ion-item *ngFor="let track of tracks" [attr.track]="track.name | lowercase">
-      <ion-icon *ngIf="ios" slot="start" [name]="track.icon" color="medium"></ion-icon>
+      <ion-img class="icons" src="..\assets\img\mylola\{{track.icon}}"></ion-img>
       <ion-label>{{track.name}}</ion-label>
       <ion-checkbox [(ngModel)]="track.isChecked"></ion-checkbox>
     </ion-item>

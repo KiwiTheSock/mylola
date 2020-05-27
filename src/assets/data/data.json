@@ -318,39 +318,49 @@
 
   "map": [
     {
-      "name": "Monona Terrace Convention Center",
-      "lat": 43.071584,
-      "lng": -89.38012,
+      "name": "Hall of Fame ",
+      "lat": 52.27245330810547,
+      "lng": 8.059367179870605,
       "center": true
     },
     {
-      "name": "Ionic HQ",
-      "lat": 43.074395,
-      "lng": -89.381056
+      "name": "Whisky's",
+      "lat": 52.2810307,
+      "lng": 8.042276
     },
     {
-      "name": "Afterparty - Brocach Irish Pub",
-      "lat": 43.07336,
-      "lng": -89.38335
+      "name": "Café-Restaurant am Rubbenbruchsee",
+      "lat": 52.29263,
+      "lng": 7.9887174
+    },
+    {
+      "name": "Bücher Wenner",
+      "lat": 52.2744691,
+      "lng": 8.0468617
+    },
+    {
+      "name": "Zero",
+      "lat": 52.2744107,
+      "lng": 8.0473586
     }
   ],
 
   "tracks": [
     {
       "name": "Gastro & Nightlife",
-      "icon": ""
+      "icon": "logo_gastro.png"
     },
     {
       "name": "Shopping",
-      "icon": ""
+      "icon": "logo_shopping.png"
     },
     {
       "name": "Freizeit & Erleben",
-      "icon": ""
+      "icon": "logo_freizeit.png"
     },
     {
       "name": "Dienstleistungen",
-      "icon": ""
+      "icon": "logo_dienstleistungen.png"
     }
   ]
 }
