@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "ionic-conference-app",
+  "appId": "io.ionic.mylola",
+  "appName": "ionic-mylola-app",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

@@ -1,8 +1,8 @@
 {
-  "name": "ionic-conference-app",
+  "name": "ionic-mylola-app",
   "version": "0.0.0",
-  "description": "Ionic Conference App",
-  "author": "Ionic Team <hi@ionicframework.com>",
+  "description": "Ionic Mylola App",
+  "author": "Lucas Schulte <lucas.schulte95@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
     "ng": "ng",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/ionic-conference-app.git"
+    "url": ""
   },
   "private": true,
   "dependencies": {
