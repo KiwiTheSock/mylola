@@ -21,7 +21,7 @@ export class DetailPage implements AfterViewInit{
 
   session: any;
   defaultHref = '';
-
+  
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private dataProvider: ConferenceData, 
@@ -153,6 +153,9 @@ export class DetailPage implements AfterViewInit{
   */
 
   async ngAfterViewInit() {
+
+    var sessionID = parseInt(document.URL.split("/")[7]) -1;
+
     const appEl = this.doc.querySelector('ion-app');
     let isDark = false;
     let style = [];
@@ -165,29 +168,26 @@ export class DetailPage implements AfterViewInit{
     );
 
     let map;
-
+    
     this.dataProvider.getMap().subscribe((mapData: any) => {
       const mapEle = this.mapElement.nativeElement;
 
       map = new googleMaps.Map(mapEle, {
-        center: mapData.find((d: any) => d.center),
+        center: {
+          lat: mapData[sessionID].lat,
+          lng: mapData[sessionID].lng,
+        },
         zoom: 16,
         styles: style
       });
 
       mapData.forEach((markerData: any) => {
-        const infoWindow = new googleMaps.InfoWindow({
-          content: `<h5>${markerData.name}</h5>`
-        });
-
         const marker = new googleMaps.Marker({
-          position: markerData,
-          map,
-          title: markerData.name
-        });
-
-        marker.addListener('click', () => {
-          infoWindow.open(map, marker);
+          position:{
+            lat: mapData[sessionID].lat,
+            lng: mapData[sessionID].lng,
+          },
+          map
         });
       });
 
