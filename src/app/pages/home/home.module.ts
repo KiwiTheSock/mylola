@@ -8,6 +8,8 @@ import { HomeFilterPage } from '../home-filter/home-filter';
 import { PopoverPage } from '../popover/popover';
 import { HomePageRoutingModule } from './home-routing.module';
 
+import { TimePipeHome } from '../../providers/time-pipe-home.pipe';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { HomePageRoutingModule } from './home-routing.module';
   declarations: [
     HomePage,
     HomeFilterPage,
-    PopoverPage
+    PopoverPage,
+    TimePipeHome
   ],
   entryComponents: [
     HomeFilterPage,

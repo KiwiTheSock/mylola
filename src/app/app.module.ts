@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { Darkmode } from './providers/darkmode';
 import { Refresher } from './providers/refresher';
 
-import { ModalPageModule } from './pages/modal/modal.module'; 
+import { ModalPageModule } from './pages/modal/modal.module';
 
 @NgModule({
   imports: [
@@ -33,7 +33,7 @@ import { ModalPageModule } from './pages/modal/modal.module';
       enabled: environment.production
     })
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, ],
   providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, Refresher,],
   bootstrap: [AppComponent]
 })
