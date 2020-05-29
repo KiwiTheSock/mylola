@@ -3,7 +3,6 @@ import { Component, ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { ConferenceData } from '../../providers/conference-data';
-import { scheduled } from 'rxjs';
 
 @Component({
   selector: 'page-events',
@@ -24,7 +23,8 @@ export class EventsPage {
  
   calendar = {
     mode: 'month',
-    currentDate: new Date()
+    locale: 'de-DE',
+    currentDate: new Date(),
   };
 
   schedule: {name: string, title: string}[] = [];
