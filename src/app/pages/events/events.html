@@ -11,12 +11,12 @@
  
 <ion-content>
  
-  <!-- Card for adding a new event 
+  <!-- Card for adding a new event -->
   <ion-card>
-    <ion-card-header tappable (click)="collapseCard = !collapseCard">
+    <ion-card-header>
       <ion-card-title>New Event</ion-card-title>
     </ion-card-header>
-    <ion-card-content *ngIf="!collapseCard">
+    <ion-card-content>
  
       <ion-item>
         <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
@@ -40,7 +40,7 @@
  
     </ion-card-content>
   </ion-card>
-  -->
+
   <ion-row>
     <!-- Change the displayed calendar mode --> <!--
     <ion-col size="4">

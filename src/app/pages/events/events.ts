@@ -8,8 +8,8 @@ import { formatDate } from '@angular/common';
   templateUrl: 'events.html',
   styleUrls: ['./events.scss'],
 })
-export class EventsPage {
-
+export class EventsPage implements OnInit {
+ 
   event = {
     title: '',
     desc: '',
@@ -50,7 +50,7 @@ export class EventsPage {
   }
  
   // Create the right event format and reload source
-  /*
+  
   addEvent() {
     let eventCopy = {
       title: this.event.title,
@@ -72,7 +72,7 @@ export class EventsPage {
     this.myCal.loadEvents();
     this.resetEvent();
   }
-  */
+  
    // Change current month/week/day
  next() {
   var swiper = document.querySelector('.swiper-container')['swiper'];
