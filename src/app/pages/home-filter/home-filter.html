@@ -4,8 +4,8 @@
 <ion-header translucent="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button *ngIf="ios" (click)="dismiss()">Cancel</ion-button>
-      <ion-button *ngIf="!ios" (click)="selectAll(false)">Reset</ion-button>
+      <ion-button *ngIf="ios" (click)="dismiss()">Abbrechen</ion-button>
+      <ion-button *ngIf="!ios" (click)="selectAll(false)">Zurücksetzen</ion-button>
     </ion-buttons>
 
     <ion-title class="ion-text-center">
@@ -13,7 +13,7 @@
     </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button (click)="applyFilters()" strong>Done</ion-button>
+      <ion-button (click)="applyFilters()" strong>Fertig</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

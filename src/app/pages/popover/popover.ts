@@ -8,16 +8,7 @@ import { PopoverController } from '@ionic/angular';
         <ion-label>Melden</ion-label>
       </ion-item>
       <ion-item button (click)="support()">
-        <ion-label>Zu Favoriten hinzufügen</ion-label>
-      </ion-item>
-      <ion-item button (click)="support()">
         <ion-label>Beitrag verbergen</ion-label>
-      </ion-item>
-      <ion-item button (click)="support()">
-        <ion-label>Alle Beiträge verbergen</ion-label>
-      </ion-item>
-      <ion-item button (click)="support()">
-        <ion-label>Teilen</ion-label>
       </ion-item>
     </ion-list>
   `
@@ -26,7 +17,7 @@ export class PopoverPage {
   constructor(public popoverCtrl: PopoverController) {}
 
   support() {
-    // this.app.getRootNavs()[0].push('/support');
+    //this.app.getRootNavs()[0].push('/support');
     this.popoverCtrl.dismiss();
   }
 
