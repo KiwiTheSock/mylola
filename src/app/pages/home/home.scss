@@ -68,6 +68,11 @@ ion-col{
    margin-right: 15%;
  }
 
+ .name p{
+  font-family: Segoe_UI_Bold;
+  font-size: 20px;
+ }
+
  /* Ellipsis
  * --------------------------------------------------------
  */
@@ -123,12 +128,22 @@ ion-col{
   text-overflow: ellipsis;
 }
 
+.title p {
+  font-family: Segoe_UI_Bold;
+  font-size: 13px;
+}
+
 /* Time
  * --------------------------------------------------------
  */
 .time{
   font-size: 10px;
-  margin-top: 7.5px;
+  margin-top: 6.5px;
   max-width: 80px;
   right: -5px;
+}
+
+.time p {
+  font-family: Segoe_UI;
+  font-size: 10px;
 }

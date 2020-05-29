@@ -8,6 +8,7 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover';
 import { Darkmode } from '../../providers/darkmode';
 import { Refresher } from '../../providers/refresher';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -48,7 +49,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.updateSchedule();
-
     this.ios = this.config.get('mode') === 'ios';
   }
 
