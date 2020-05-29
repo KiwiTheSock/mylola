@@ -20,6 +20,8 @@ import { Refresher } from './providers/refresher';
 
 import { ModalPageModule } from './pages/modal/modal.module';
 
+import { NgCalendarModule } from 'ionic2-calendar'; 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { ModalPageModule } from './pages/modal/modal.module';
     HttpClientModule,
     ModalPageModule,
     FormsModule,
+    NgCalendarModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
