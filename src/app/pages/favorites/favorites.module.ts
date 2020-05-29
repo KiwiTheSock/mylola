@@ -7,6 +7,8 @@ import { FavoritesPage } from './favorites';
 import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
 import { FavoritesPageRoutingModule } from './favorites-routing.module';
 
+import { TimePipeFavorites } from '../../providers/time-pipe-favorites.pipe';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { FavoritesPageRoutingModule } from './favorites-routing.module';
   ],
   declarations: [
     FavoritesPage,
-    FavoritesFilterPage
+    FavoritesFilterPage,
+    TimePipeFavorites
   ],
   entryComponents: [
     FavoritesFilterPage

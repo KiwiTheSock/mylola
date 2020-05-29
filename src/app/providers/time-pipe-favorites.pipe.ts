@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'timePipeDetail'
+  name: 'timePipeFavorites'
 })
-export class TimePipeDetail implements PipeTransform {
+export class TimePipeFavorites implements PipeTransform {
 
   transform(d: any): string {
 
