@@ -23,7 +23,7 @@ export class LoginPage {
 
     if (form.valid) {
       this.userData.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/home');
+      this.router.navigateByUrl('/app/tabs/schedule');
     }
   }
 

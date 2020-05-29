@@ -62,7 +62,7 @@
             <!-- Name -->
             <ion-col col-4 class="name">
               <ion-label>
-                <h2>{{session.name}}</h2>
+                <p>{{session.name}}</p>
               </ion-label>
             </ion-col>
 
@@ -82,9 +82,9 @@
 
             <!-- Picture and Tear-off -->
             <ion-col col-12 *ngIf="session">
-              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/favorites/detail/{{session.id}}"></ion-img>
+              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
               <div class="tear-off">
-                <ion-img src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/favorites/detail/{{session.id}}"></ion-img>  
+                <ion-img src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>  
                 <p class="">{{session.addtext}}</p>
              </div>
             </ion-col>

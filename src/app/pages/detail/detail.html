@@ -51,9 +51,9 @@
     <!-- Text -->
     <ion-row>
       <ion-col col-12 >
-        <div *ngIf="session" class="ion-padding" >
+        <div *ngIf="session" class="text" >
           <h5>{{session.title}}</h5>
-          <p class="text">{{session.text}}</p>
+          <p>{{session.text}}</p>
         </div>
       </ion-col>
     </ion-row>  
@@ -61,7 +61,7 @@
     <!-- Button -->
     <ion-row>
       <ion-col col-12 *ngIf="session" class="buttons" (click) ="presentModal(session)"> 
-        <ion-button>{{session.button}}</ion-button>
+        <ion-button style="font-family: Segoe_UI_Bold; font-size: 16px;">{{session.button}}</ion-button>
       </ion-col>
     </ion-row>  
 

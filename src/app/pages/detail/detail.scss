@@ -21,6 +21,10 @@ ion-col{
   width: 100%;
   height: 100%;
   text-align: center;
+
+  font-family: Segoe_UI_Bold;
+  font-size: 24px;
+  
  }
 
 /* Profile and Backgound Pictures
@@ -28,14 +32,12 @@ ion-col{
  */
 
 .profile-background {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   margin-bottom: -20px;
 }
 
 .profile-background ion-avatar {
+  display: flex;
+  margin: auto;
   margin-top: calc(-35px + var(--ion-safe-area-top));
 }
 
@@ -55,16 +57,31 @@ ion-col{
  * --------------------------------------------------------
  */ 
 .time{
-  padding-left: 80px;
+  float: right;
+  margin-right: 15px;
   margin-bottom: -10px;
+  font-family: Segoe_UI;
+  font-size: 15px;
 }
 
-/* Button
+/* Text
  * --------------------------------------------------------
  */
 .text{
-  white-space: pre;
-  font-size: 12px;
+  white-space: pre-line;
+  word-wrap: break-word;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.text h5{
+  font-family: Segoe_UI_Bold;
+  font-size: 18px;
+}
+
+.text p{
+  font-family: Segoe_UI;
+  font-size: 15px;
 }
 
 /* Button
@@ -86,6 +103,13 @@ ion-col{
 
 .location h4{
   color: #DB001B;
+  font-family: Segoe_UI;
+  font-size: 24px;
+}
+
+.location p{
+  font-family: Segoe_UI;
+  line-height: 0.5;
 }
 
 /* Social Media
@@ -112,8 +136,13 @@ ion-col{
 .opening{
   text-align: center;
   margin-bottom: 60px;
+  font-family: Segoe_UI;
 }
 
 .opening h4{
   color: #DB001B;
+}
+
+.opening p {
+  line-height: 0.5;
 }
