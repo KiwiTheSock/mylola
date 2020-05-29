@@ -1,124 +1,105 @@
 import { CalendarComponent } from 'ionic2-calendar/calendar';
-import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
+import { Component, ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
+import { ConferenceData } from '../../providers/conference-data';
+import { scheduled } from 'rxjs';
 
 @Component({
   selector: 'page-events',
   templateUrl: 'events.html',
   styleUrls: ['./events.scss'],
 })
-export class EventsPage implements OnInit {
+export class EventsPage {
  
   event = {
     title: '',
     desc: '',
     startTime: '',
-    endTime: '',
-    allDay: false
+    endTime: ''
   };
- 
-  minDate = new Date().toISOString();
  
   eventSource = [];
   viewTitle;
  
   calendar = {
     mode: 'month',
-    currentDate: new Date(),
+    currentDate: new Date()
   };
+
+  schedule: {name: string, title: string}[] = [];
  
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
  
   constructor(
     private alertCtrl: AlertController, 
-    @Inject(LOCALE_ID) private locale: string
+    @Inject(LOCALE_ID) private locale: string,
+    private dataProvider: ConferenceData, 
     ) { }
  
-  ngOnInit() {
-    this.resetEvent();
+  ionViewDidEnter (){
+    this.addEvents();
   }
- 
-  resetEvent() {
-    this.event = {
-      title: '',
-      desc: '',
-      startTime: new Date().toISOString(),
-      endTime: new Date().toISOString(),
-      allDay: false
-    };
+
+  ionViewDidLeave(){
+    this.removeEvents();
   }
- 
-  // Create the right event format and reload source
-  
-  addEvent() {
+
+  //Add Events
+  addEvents() {
+
+    console.log(this.schedule);
+
     let eventCopy = {
-      title: this.event.title,
-      startTime:  new Date(this.event.startTime),
-      endTime: new Date(this.event.endTime),
-      allDay: this.event.allDay,
-      desc: this.event.desc
+      title: "Test",
+      desc: "Test",
+      startTime: new Date("2020-05-28T10:00:00"),
+      endTime: new Date("2020-05-28T12:00:00")
     }
- 
-    if (eventCopy.allDay) {
-      let start = eventCopy.startTime;
-      let end = eventCopy.endTime;
- 
-      eventCopy.startTime = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()));
-      eventCopy.endTime = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate() + 1));
-    }
- 
+    
     this.eventSource.push(eventCopy);
     this.myCal.loadEvents();
-    this.resetEvent();
+  }
+
+  //Remove Events
+  removeEvents(){
+    this.eventSource.pop();
   }
   
-   // Change current month/week/day
- next() {
-  var swiper = document.querySelector('.swiper-container')['swiper'];
-  swiper.slideNext();
-}
+  //Next month
+  next() {
+    var swiper = document.querySelector('.swiper-container')['swiper'];
+    swiper.slideNext();
+  }
+  
+  //Previous month
+  back() {
+    var swiper = document.querySelector('.swiper-container')['swiper'];
+    swiper.slidePrev();
+  }
+  
+  //Focus today
+  today() {
+    this.calendar.currentDate = new Date();
+  }
+  
+  //Changes the title (Month/Year)
+  onViewTitleChanged(title) {
+    this.viewTitle = title;
+  }
  
-back() {
-  var swiper = document.querySelector('.swiper-container')['swiper'];
-  swiper.slidePrev();
-}
- 
-// Change between month/week/day
-changeMode(mode) {
-  this.calendar.mode = mode;
-}
- 
-// Focus today
-today() {
-  this.calendar.currentDate = new Date();
-}
- 
-// Selected date reange and hence title changed
-onViewTitleChanged(title) {
-  this.viewTitle = title;
-}
- 
-// Calendar event was clicked
-async onEventSelected(event) {
-  // Use Angular date pipe for conversion
-  let start = formatDate(event.startTime, 'medium', this.locale);
-  let end = formatDate(event.endTime, 'medium', this.locale);
- 
-  const alert = await this.alertCtrl.create({
-    header: event.title,
-    subHeader: event.desc,
-    message: 'From: ' + start + '<br><br>To: ' + end,
-    buttons: ['OK']
-  });
-  alert.present();
-}
- 
-// Time slot was clicked
-onTimeSelected(ev) {
-  let selected = new Date(ev.selectedTime);
-  this.event.startTime = selected.toISOString();
-  selected.setHours(selected.getHours() + 1);
-  this.event.endTime = (selected.toISOString());
-}
+  //Calendar event was clicked
+  async onEventSelected(event) {
+    // Use Angular date pipe for conversion
+    let start = formatDate(event.startTime, 'medium', this.locale);
+    let end = formatDate(event.endTime, 'medium', this.locale);
+  
+    const alert = await this.alertCtrl.create({
+      header: event.title,
+      subHeader: event.desc,
+      message: 'Von: ' + start + '<br><br>Bis: ' + end,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 }

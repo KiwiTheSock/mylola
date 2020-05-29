@@ -120,4 +120,12 @@ export class ConferenceData {
       })
     );
   }
+
+  getSchedule() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.schedule;
+      })
+    );
+  }
 }
