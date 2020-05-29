@@ -8,7 +8,7 @@ export class TimePipeHome implements PipeTransform {
   transform(d: any): string {
 
     let currentDate = new Date(new Date().toUTCString());
-    let date = new Date(d + "Z");
+    let date = new Date(d);
 
     let year = currentDate.getFullYear() - date.getFullYear();
     let month = currentDate.getMonth() - date.getMonth();
