@@ -11,7 +11,7 @@ import { ConferenceData } from '../../providers/conference-data';
 })
 export class EventsPage {
   
-  events: {title: string, desc: string, startTime: string, endTime: string}[] = [];
+  events: {title: string, desc: string, startTime: string, endTime: string, id: string}[] = [];
 
   event = {
     title: '',
@@ -46,42 +46,58 @@ export class EventsPage {
           title: event.title,
           desc: event.desc,
           startTime: event.startTime,
-          endTime: event.endTime
+          endTime: event.endTime,
+          id: event.id
         });
       });
     });
-  }
-  
-  ionViewDidEnter(){
+
     this.addEvents();
   }
 
-  ionViewDidLeave(){
+  ionViewWillLeave(){
     this.removeEvents();
   }
-
+  
   //Add Events
   addEvents() {
-
-    for(let i = 0; i <= this.events.length; i++){
     
-      let eventCopy = {
-        title: this.events[i].title,
-        desc: this.events[i].desc,
-        startTime: new Date(this.events[i].startTime),
-        endTime: new Date(this.events[i].endTime)
-      }
+    let item1 = this.events.find(i => i.id === "1");
+
+    console.log(item1);
+
+    let item2 = this.events.find(i => i.id === "2");
+
+    console.log(item2);
+
+    var counter = 1;
+
+    for(var i = 0; i < this.events.length; i++){
       
+      let item = this.events.find(i => i.id === "" + counter);
+
+      let eventCopy = {
+        title: item.title,
+        desc: item.desc,
+        startTime: new Date(item.startTime),
+        endTime: new Date(item.endTime) 
+      }
+
       this.eventSource.push(eventCopy);
       this.myCal.loadEvents();
-    } 
-  }
-
-  //Remove Events
-  removeEvents(){
-    this.eventSource.pop();
+      
+      counter += 1;
+    }
   }
   
+  //Remove Events
+  removeEvents(){
+    for(let i = 0; i <= this.events.length; i++){
+      this.events.pop();
+      this.eventSource.pop();
+    }
+  }
+
   //Next month
   next() {
     var swiper = document.querySelector('.swiper-container')['swiper'];
