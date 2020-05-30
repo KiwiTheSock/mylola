@@ -19,17 +19,25 @@ ion-col{
     margin-right: 60px;
   }
 
+/* Previous Button
+ * --------------------------------------------------------
+ */
+.previous{
+    max-width: 50px;
+}
+
 /* Title
  * --------------------------------------------------------
  */
-.title{
-    margin: auto;
+.title ion-button{
+    padding-top: 10px;
+    margin: 0 auto; 
 }
 
 /* Forward Button
  * --------------------------------------------------------
  */
 .forward{
-    margin: auto;
-    float: right;
+    max-width: 50px; 
+    right: 10px;
 }

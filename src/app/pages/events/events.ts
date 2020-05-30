@@ -24,7 +24,8 @@ export class EventsPage {
   calendar = {
     mode: 'month',
     locale: 'de-DE',
-    currentDate: new Date(),
+    noEventsLabel: 'Keine Veranstaltungen',
+    currentDate: new Date()
   };
 
   schedule: {name: string, title: string}[] = [];
@@ -53,8 +54,8 @@ export class EventsPage {
     let eventCopy = {
       title: "Test",
       desc: "Test",
-      startTime: new Date("2020-05-28T10:00:00"),
-      endTime: new Date("2020-05-28T12:00:00")
+      startTime: new Date("2020-05-27T10:00:00"),
+      endTime: new Date("2020-05-27T12:00:00")
     }
     
     this.eventSource.push(eventCopy);
@@ -88,7 +89,7 @@ export class EventsPage {
     this.viewTitle = title;
   }
  
-  //Calendar event was clicked
+  //Alert
   async onEventSelected(event) {
     // Use Angular date pipe for conversion
     let start = formatDate(event.startTime, 'medium', this.locale);

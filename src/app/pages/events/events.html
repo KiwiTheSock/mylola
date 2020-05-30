@@ -20,7 +20,7 @@
   <ion-row>
 
     <!-- Move back one screen of the slides -->
-    <ion-col>
+    <ion-col class="previous">
       <ion-button fill="clear" (click)="back()">
         <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
       </ion-button>
@@ -40,13 +40,17 @@
       </ion-button>
     </ion-col>
   </ion-row>
- 
-  <calendar 
+
+  <calendar
   [eventSource]="eventSource" 
+  [calendarMode]="calendar.mode"
   [currentDate]="calendar.currentDate"
   [locale]="calendar.locale"
   (onEventSelected)="onEventSelected($event)"
   (onTitleChanged)="onViewTitleChanged($event)"
+  [startingDayMonth]="1"
+  [showEventDetail] = "true"
+  [noEventsLabel] = "calendar.noEventsLabel"
   >
   </calendar>
  
