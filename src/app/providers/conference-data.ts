@@ -121,10 +121,10 @@ export class ConferenceData {
     );
   }
 
-  getSchedule() {
+  getEvents() {
     return this.load().pipe(
       map((data: any) => {
-        return data.schedule;
+        return data.events;
       })
     );
   }

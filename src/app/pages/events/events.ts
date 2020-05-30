@@ -10,7 +10,9 @@ import { ConferenceData } from '../../providers/conference-data';
   styleUrls: ['./events.scss'],
 })
 export class EventsPage {
- 
+  
+  events: {title: string, desc: string, startTime: string, endTime: string}[] = [];
+
   event = {
     title: '',
     desc: '',
@@ -28,17 +30,29 @@ export class EventsPage {
     currentDate: new Date()
   };
 
-  schedule: {name: string, title: string}[] = [];
- 
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
  
   constructor(
     private alertCtrl: AlertController, 
     @Inject(LOCALE_ID) private locale: string,
     private dataProvider: ConferenceData, 
-    ) { }
- 
-  ionViewDidEnter (){
+    ) {}  
+
+  ionViewWillEnter(){
+    //Getting data
+    this.dataProvider.getEvents().subscribe((events: any[]) => {
+      events.forEach(event => {
+        this.events.push({
+          title: event.title,
+          desc: event.desc,
+          startTime: event.startTime,
+          endTime: event.endTime
+        });
+      });
+    });
+  }
+  
+  ionViewDidEnter(){
     this.addEvents();
   }
 
@@ -49,17 +63,18 @@ export class EventsPage {
   //Add Events
   addEvents() {
 
-    console.log(this.schedule);
-
-    let eventCopy = {
-      title: "Test",
-      desc: "Test",
-      startTime: new Date("2020-05-27T10:00:00"),
-      endTime: new Date("2020-05-27T12:00:00")
-    }
+    for(let i = 0; i <= this.events.length; i++){
     
-    this.eventSource.push(eventCopy);
-    this.myCal.loadEvents();
+      let eventCopy = {
+        title: this.events[i].title,
+        desc: this.events[i].desc,
+        startTime: new Date(this.events[i].startTime),
+        endTime: new Date(this.events[i].endTime)
+      }
+      
+      this.eventSource.push(eventCopy);
+      this.myCal.loadEvents();
+    } 
   }
 
   //Remove Events
