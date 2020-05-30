@@ -1,91 +1,57 @@
+<!-- Header -->
+<ion-header translucent="true">
+  <ion-toolbar>
+    
+    <!-- Sidemenu -->
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon style="width: 50px; height: 50px;" name="person-circle"></ion-icon>
+      </ion-menu-button> 
+    </ion-buttons>
 
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Veranstaltungen</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-  <!--
-  <div class="about-header">
-  
-    <div class="about-image madison" [ngStyle]="location === 'madison' && {'opacity': '1'}"></div>
-    <div class="about-image austin" [ngStyle]="location === 'austin' && {'opacity': '1'}"></div>
-    <div class="about-image chicago" [ngStyle]="location === 'chicago' && {'opacity': '1'}"></div>
-    <div class="about-image seattle" [ngStyle]="location === 'seattle' && {'opacity': '1'}"></div>
-  </div>
-
-  <div class="about-info">
-    <h3 class="ion-padding-top ion-padding-start">About</h3>
-
-    <p class="ion-padding-start ion-padding-end">
-      The Ionic Conference is a one-day conference on {{ conferenceDate | date: 'mediumDate' }} featuring talks from the Ionic team. It is focused on Ionic applications being built with Ionic Framework. This includes migrating apps to the latest version of the framework, Angular concepts, Webpack, Sass, and many other technologies used in Ionic 2. Tickets are completely sold out, and we’re expecting more than 1000 developers – making this the largest Ionic conference ever!
-    </p>
-
-    <h3 class="ion-padding-top ion-padding-start">Details</h3>
-
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label>
-          Location
-        </ion-label>
-        <ion-select [(ngModel)]="location" [interfaceOptions]="selectOptions">
-          <ion-select-option value="madison">Madison, WI</ion-select-option>
-          <ion-select-option value="austin">Austin, TX</ion-select-option>
-          <ion-select-option value="chicago">Chicago, IL</ion-select-option>
-          <ion-select-option value="seattle">Seattle, WA</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          Date
-        </ion-label>
-        <ion-datetime
-          displayFormat="MMM DD, YYYY"
-          max="2056"
-          [(ngModel)]="conferenceDate">
-        </ion-datetime>
-      </ion-item>
-    </ion-list>
-
-    <h3 class="ion-padding-top ion-padding-start">Internet</h3>
-
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label>
-          Wifi network
-        </ion-label>
-        <ion-label class="ion-text-end">
-          ica{{conferenceDate | date: 'y'}}
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          Password
-        </ion-label>
-        <ion-label class="ion-text-end">
-          makegoodthings
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </div>
-
-</ion-content>
-
+    <!-- Mylola -->
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" ></ion-img>  
+    
+  </ion-toolbar>
+</ion-header>
+ 
+<!-- Content -->
 <ion-content>
+  <ion-row>
 
--->
+    <!-- Move back one screen of the slides -->
+    <ion-col class="previous">
+      <ion-button fill="clear" (click)="back()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+    
+    <!-- Title -->
+    <ion-col class="title">
+      <ion-buttons>
+        <ion-button (click)="today()">{{ viewTitle }}</ion-button>
+      </ion-buttons>
+    </ion-col>
 
-  <div class="ion-padding">
+    <!-- Move forward one screen of the slides -->
+    <ion-col class="forward">
+      <ion-button fill="clear" (click)="next()">
+        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
 
-    <ion-calendar [(ngModel)]="date"
-      (onChange)="onChange($event)"
-      [type]="type"
-      [format]="'YYYY-MM-DD'">
-    </ion-calendar>
-
-  </div>
+  <calendar
+  [eventSource]="eventSource" 
+  [calendarMode]="calendar.mode"
+  [currentDate]="calendar.currentDate"
+  [locale]="calendar.locale"
+  (onEventSelected)="onEventSelected($event)"
+  (onTitleChanged)="onViewTitleChanged($event)"
+  [startingDayMonth]="1"
+  [showEventDetail] = "true"
+  [noEventsLabel] = "calendar.noEventsLabel"
+  >
+  </calendar>
+ 
 </ion-content>

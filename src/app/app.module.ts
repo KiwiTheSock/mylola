@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -20,6 +20,13 @@ import { Refresher } from './providers/refresher';
 
 import { ModalPageModule } from './pages/modal/modal.module';
 
+import { NgCalendarModule } from 'ionic2-calendar'; 
+
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+
+registerLocaleData(localeDe);
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -27,6 +34,7 @@ import { ModalPageModule } from './pages/modal/modal.module';
     HttpClientModule,
     ModalPageModule,
     FormsModule,
+    NgCalendarModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -34,8 +42,9 @@ import { ModalPageModule } from './pages/modal/modal.module';
     })
   ],
   declarations: [AppComponent, ],
-  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, Refresher,],
+  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, Refresher, { provide: LOCALE_ID, useValue: 'de' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
 

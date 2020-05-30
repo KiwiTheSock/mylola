@@ -120,4 +120,12 @@ export class ConferenceData {
       })
     );
   }
+
+  getEvents() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.events;
+      })
+    );
+  }
 }

@@ -213,5 +213,22 @@
       "name": "Dienstleistungen",
       "icon": "logo_dienstleistungen.png"
     }
+  ],
+
+  "events": [
+    {
+      "title": "Vino & Kino, Dienstag 11.02 19:30 Uhr",
+      "desc": "Erleben Sie dieses Event im Hall of Fame",
+      "startTime": "2020-02-11T19:30:00",
+      "endTime": "2020-02-11T23:59:59",
+      "id": "1"
+    },
+    {
+      "title": "The Ghost Wolves, Dienstag 11.02 20:00 Uhr",
+      "desc": "Erleben Sie dieses Event im Whisky's",
+      "startTime": "2020-02-11T20:00:00",
+      "endTime": "2020-02-11T23:59:59",
+      "id": "2"
+    }
   ]
 }
