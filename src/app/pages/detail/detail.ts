@@ -35,7 +35,6 @@ export class DetailPage implements AfterViewInit{
   ) { }
 
   ionViewWillEnter() {
-    //Favorites
     this.dataProvider.load().subscribe((data: any) => {
       if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
         const sessionId = this.route.snapshot.paramMap.get('sessionId');
@@ -44,10 +43,6 @@ export class DetailPage implements AfterViewInit{
             for (const session of group.sessions) {
               if (session && session.id === sessionId) {
                 this.session = session;
-                /*
-                this.isFavorite = this.userProvider.hasFavorite(
-                  this.session.name
-                );*/
                 break;
               }
             }

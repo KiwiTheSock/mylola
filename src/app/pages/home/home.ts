@@ -8,7 +8,6 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover';
 import { Darkmode } from '../../providers/darkmode';
 import { Refresher } from '../../providers/refresher';
-import { Observable } from 'rxjs';
 
 
 @Component({
