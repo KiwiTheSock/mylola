@@ -32,7 +32,7 @@
     <ion-row>
       <!-- Icons -->
       <ion-col col-6 *ngIf="session" class="icons">
-        <ion-button (click)="toggleFavorite(session)">
+        <ion-button>
           <ion-icon *ngIf="session.fav" name="bookmark-outline"></ion-icon>
           <ion-icon *ngIf="!session.fav" name="bookmark"></ion-icon>
         </ion-button>
@@ -44,7 +44,7 @@
 
       <!-- Time -->
       <ion-col col-6 *ngIf="session">
-        <p class="time">{{ session.upload | timePipeDetail}}</p>
+        <p class="time">Vor 2 Minuten</p>
       </ion-col>
     </ion-row>
   
@@ -80,9 +80,6 @@
           <p>{{session.street}}</p>
           <p>{{session.place}}</p>
           <br />
-          <ion-button (click)="openContact(session)">
-            <ion-icon slot="icon-only" ios="call-outline" md="call-sharp"></ion-icon>
-          </ion-button>
           <p style="color: #DB001B;">{{session.website}}</p>
           <p>{{session.mail}}</p>
           <p style="color: #DB001B;">{{session.phone}}</p>
@@ -92,7 +89,7 @@
     <!-- Social Media -->
     <ion-row>
       <ion-col col-12 class="social-media">
-          <ion-chip color="facebook" button (click) ="facebook(session)">
+          <ion-chip color="facebook">
             <ion-icon name="logo-facebook"></ion-icon>
             <ion-label >Facebook</ion-label>
           </ion-chip>
@@ -103,8 +100,12 @@
   </ion-grid>
 
   <!-- Map -->
-  <div #mapCanvas class="map-canvas"></div>
-
+  <ion-row>
+    <ion-col col-12 *ngIf="session">
+        <ion-img src="..\assets\img\add\{{session.add}}"></ion-img>
+    </ion-col>
+  </ion-row> 
+  
    <!-- Opening Hours-->
   <ion-grid>
     <ion-row>
