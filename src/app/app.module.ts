@@ -20,12 +20,9 @@ import { Refresher } from './providers/refresher';
 
 import { ModalPageModule } from './pages/modal/modal.module';
 
-import { NgCalendarModule } from 'ionic2-calendar'; 
+import { CalendarModule } from 'ion2-calendar'; 
 
-import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
 
-registerLocaleData(localeDe);
 
 @NgModule({
   imports: [
@@ -34,7 +31,7 @@ registerLocaleData(localeDe);
     HttpClientModule,
     ModalPageModule,
     FormsModule,
-    NgCalendarModule,
+    CalendarModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -42,7 +39,7 @@ registerLocaleData(localeDe);
     })
   ],
   declarations: [AppComponent, ],
-  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, Refresher, { provide: LOCALE_ID, useValue: 'de' }],
+  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, Refresher],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

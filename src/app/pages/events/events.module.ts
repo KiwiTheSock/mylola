@@ -6,14 +6,14 @@ import { IonicModule } from '@ionic/angular';
 import { EventsPage } from './events';
 import { EventsPageRoutingModule } from './events-routing.module';
 
-import { NgCalendarModule } from 'ionic2-calendar'; 
+import { CalendarModule } from 'ion2-calendar'; 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NgCalendarModule,
+    CalendarModule,
     EventsPageRoutingModule,
   ],
   declarations: [EventsPage],
