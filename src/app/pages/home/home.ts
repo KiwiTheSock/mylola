@@ -1,11 +1,6 @@
 import { Component, ViewChild, OnInit} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
-import { HomeFilterPage } from '../home-filter/home-filter';
+import { IonList, Config } from '@ionic/angular';
 import { ConferenceData } from '../../providers/conference-data';
-import { UserData } from '../../providers/user-data';
-import { PopoverController } from '@ionic/angular';
-import { PopoverPage } from '../popover/popover';
 import { Darkmode } from '../../providers/darkmode';
 import { Refresher } from '../../providers/refresher';
 
@@ -31,17 +26,8 @@ export class HomePage implements OnInit {
   showSearchbar: boolean;
 
   constructor(
-    public alertCtrl: AlertController,
     public confData: ConferenceData,
-    public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController,
-    public router: Router,
-    public routerOutlet: IonRouterOutlet,
-    public toastCtrl: ToastController,
-    public user: UserData,
     public config: Config,
-    public popoverCtrl: PopoverController,
-    private route: ActivatedRoute,
     public darkmode: Darkmode,
     public refresher: Refresher,
   ) { }
@@ -62,48 +48,6 @@ export class HomePage implements OnInit {
       this.shownSessions = data.shownSessions;
       this.groups = data.groups;
     });
-  }
-
-  //Filter
-  async presentFilter() {
-    const modal = await this.modalCtrl.create({
-      component: HomeFilterPage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: { excludedTracks: this.excludeTracks }
-    });
-    await modal.present();
-
-    const { data } = await modal.onWillDismiss();
-    if (data) {
-      this.excludeTracks = data;
-      this.updateSchedule();
-    }
-  }
-
-  //Popover
-  async presentPopover(event: Event) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverPage,
-      event
-    });
-    await popover.present();
-  }
-
-  //Favorites
-  toggleFavorite(session: any) {
-    if (this.user.hasFavorite(session.name)) {
-      this.user.removeFavorite(session.name);
-      session.fav = true;
-    } else {
-      this.user.addFavorite(session.name);
-      session.fav = false;
-    }
-  }
-
-  //Share
-  shareSession() {
-    console.log('Clicked share session');
   }
 
   //Refresh

@@ -5,7 +5,6 @@ import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
 import { PopoverController } from '@ionic/angular';
-import { PopoverPage } from '../popover/popover';
 import { Darkmode } from '../../providers/darkmode';
 import { Refresher } from '../../providers/refresher';
 
@@ -78,14 +77,7 @@ export class FavoritesPage implements OnInit{
       }
     }
 
-    //Popover
-  async presentPopover(event: Event) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverPage,
-      event
-    });
-    await popover.present();
-  }
+   
 
   //Favorites
   toggleFavorite(session: any) {

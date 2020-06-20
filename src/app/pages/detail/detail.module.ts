@@ -5,17 +5,14 @@ import { DetailPage } from './detail';
 import { DetailPageRoutingModule } from './detail-routing.module';
 import { IonicModule } from '@ionic/angular';
 
-import { TimePipeDetail } from '../../providers/time-pipe-detail.pipe';
-
 @NgModule({
   imports: [
     CommonModule,
-    IonicModule,
+    IonicModule, 
     DetailPageRoutingModule
   ],
   declarations: [
-    DetailPage,
-    TimePipeDetail,
+    DetailPage
   ]
 })
 export class DetailModule { }

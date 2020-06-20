@@ -5,10 +5,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home';
 import { HomeFilterPage } from '../home-filter/home-filter';
-import { PopoverPage } from '../popover/popover';
 import { HomePageRoutingModule } from './home-routing.module';
 
-import { TimePipeHome } from '../../providers/time-pipe-home.pipe';
 
 @NgModule({
   imports: [
@@ -19,13 +17,10 @@ import { TimePipeHome } from '../../providers/time-pipe-home.pipe';
   ],
   declarations: [
     HomePage,
-    HomeFilterPage,
-    PopoverPage,
-    TimePipeHome
+    HomeFilterPage
   ],
   entryComponents: [
-    HomeFilterPage,
-    PopoverPage
+    HomeFilterPage
   ]
 })
 export class HomeModule { }

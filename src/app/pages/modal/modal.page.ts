@@ -11,8 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModalPage {
 
-  used = false;
-
   session: any;
 
   constructor(
@@ -41,17 +39,8 @@ export class ModalPage {
     });
   }
 
-  // Data passed in by componentProps
-  //@Input() users: string;
   
   dismiss() {
     this.modalCtrl.dismiss({'dismissed': true});
   }
-
-  // can "dismiss" itself and optionally pass back data
-  /*
-  selectUser(user: string):void {
-    this.modalCtrl.dismiss(user);
-  }
-  */
 }

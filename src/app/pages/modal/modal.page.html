@@ -26,12 +26,8 @@
 
       <ion-row>
 
-        <ion-col col-12 class="button" *ngIf="!used">
+        <ion-col col-12 class="button">
           <ion-button (click)="dismiss()">Einlösen</ion-button>
-        </ion-col>
-
-        <ion-col col-12 class="button" *ngIf="used">
-          <ion-button (click)="dismiss()">Eingelöst</ion-button>
         </ion-col>
 
       </ion-row>
