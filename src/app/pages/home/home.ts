@@ -1,6 +1,6 @@
-import { Component, ViewChild, OnInit} from '@angular/core';
+import { Component, ViewChild, OnInit, Renderer2, Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
+import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams } from '@ionic/angular';
 import { HomeFilterPage } from '../home-filter/home-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
@@ -29,6 +29,7 @@ export class HomePage implements OnInit {
   groups: any = [];
   confDate: string;
   showSearchbar: boolean;
+  lastY = 0;
 
   constructor(
     public alertCtrl: AlertController,
@@ -44,6 +45,8 @@ export class HomePage implements OnInit {
     private route: ActivatedRoute,
     public darkmode: Darkmode,
     public refresher: Refresher,
+    private renderer: Renderer2,
+    public navParams: NavParams
   ) { }
 
   ngOnInit() {
@@ -52,7 +55,6 @@ export class HomePage implements OnInit {
   }
 
   ngDoCheck(){
-    console.log("Home");
     this.updateSchedule();
   }
 
@@ -109,5 +111,12 @@ export class HomePage implements OnInit {
   //Refresh
   refresh(){
     this.refresher.doRefresh(event);
+  }
+
+  btnActivate(ionicButton) {
+    if(ionicButton.color === 'medium')
+      ionicButton.color =  'danger';
+    else
+      ionicButton.color = 'medium';
   }
 }

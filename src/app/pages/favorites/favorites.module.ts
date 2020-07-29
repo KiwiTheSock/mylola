@@ -9,12 +9,15 @@ import { FavoritesPageRoutingModule } from './favorites-routing.module';
 
 import { TimePipeFavorites } from '../../providers/time-pipe-favorites.pipe';
 
+import { SharedModule } from '../../shared/shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavoritesPageRoutingModule
+    FavoritesPageRoutingModule,
+    SharedModule
   ],
   declarations: [
     FavoritesPage,

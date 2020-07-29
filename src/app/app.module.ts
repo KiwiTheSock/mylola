@@ -25,6 +25,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 
+import { NavParams } from '@ionic/angular';
+
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -42,7 +44,7 @@ registerLocaleData(localeDe);
     })
   ],
   declarations: [AppComponent, ],
-  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, Refresher, { provide: LOCALE_ID, useValue: 'de' }],
+  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, NavParams, Refresher, { provide: LOCALE_ID, useValue: 'de' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

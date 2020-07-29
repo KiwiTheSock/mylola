@@ -147,3 +147,43 @@ ion-col{
   font-family: Segoe_UI;
   font-size: 10px;
 }
+
+/* FILTER */
+.filter {
+
+  z-index: -1;
+  max-width: 500px;
+  margin: auto;
+  padding: 10px;
+  --background: rgba(var(--ion-color-medium-rgb), 0.14);
+
+  div {
+    text-align: center;
+  }
+
+  ion-fab-button {
+    margin: auto;
+    height: 50px;
+    width: 50px;
+    --box-shadow: none;
+  }
+
+  p {
+    font-size: 10px;
+  }
+
+  ion-button {
+    --box-shadow: none;
+  }
+
+  ion-img {
+    width: 25px;
+    margin-left: 1px;
+  }
+}
+
+.fab {
+  margin-bottom: 10px;
+  margin-right: 10px;
+ }
+ 

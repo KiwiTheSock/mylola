@@ -107,4 +107,11 @@ export class FavoritesPage implements OnInit{
     refresh(){
       this.refresher.doRefresh(event);
     }
+
+    btnActivate(ionicButton) {
+      if(ionicButton.color === 'medium')
+        ionicButton.color =  'danger';
+      else
+        ionicButton.color = 'medium';
+    }
 }

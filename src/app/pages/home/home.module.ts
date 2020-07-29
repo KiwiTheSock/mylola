@@ -10,12 +10,15 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { TimePipeHome } from '../../providers/time-pipe-home.pipe';
 
+import { SharedModule } from '../../shared/shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    SharedModule
   ],
   declarations: [
     HomePage,
