@@ -5,7 +5,7 @@
     <!-- Sidemenu -->
     <ion-buttons *ngIf="!showSearchbar" slot="start">
       <ion-menu-button>
-        <ion-icon style="width: 50px; height: 50px;" name="person-circle"></ion-icon>
+        <ion-icon style="width: 50px; height: 50px;" name="menu"></ion-icon>
       </ion-menu-button> 
     </ion-buttons>
 
@@ -21,12 +21,14 @@
       <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
+      <!--
       <ion-button *ngIf="!showSearchbar" (click)="presentFilter()">
         <span *ngIf="ios">Filter</span>
         <span *ngIf="!ios">
           <ion-icon slot="icon-only" name="options"></ion-icon>
         </span>
       </ion-button>
+      -->
     </ion-buttons> 
   </ion-toolbar>
 
