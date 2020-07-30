@@ -13,10 +13,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
   },
   {
-    path: 'support',
-    loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
   },
@@ -36,7 +32,16 @@ const routes: Routes = [
   {
     path: 'modal',
     loadChildren: () => import('./pages/modal/modal.module').then( m => m.ModalPageModule)
+  },
+  {
+    path: 'statistic',
+    loadChildren: () => import('./pages/statistic/statistic.module').then( m => m.StatisticPageModule)
+  },
+  {
+    path: 'add',
+    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
   }
+
 
 
 ];

@@ -98,14 +98,51 @@ ion-col{
 
 .tear-off p{
   position: absolute;
-  top: 78%;
-  left: 38%;
   margin: auto;
   text-align: center;
   font-weight: bolder;
   transform: rotate(-45deg);
-  color: black;
-  font-size: 7vw; 
+  color: black; 
+}
+
+@media all and (max-width: 420px){
+  .tear-off p{
+    top: 75%;
+    left: 38%;
+    font-size: 30px;
+  }
+}
+
+@media all and (min-width: 421px) and (max-width: 700px){
+  .tear-off p{
+    top: 78%;
+    left: 38%;
+    font-size: 38px;
+  }
+}
+
+@media all and (min-width: 701px) and (max-width: 999px){
+  .tear-off p{
+    top: 78%;
+    left: 38%;
+    font-size: 40px;
+  }
+}
+
+@media all and (min-width: 1000px){
+  .tear-off p{
+    top: 78%;
+    left: 38%;
+    font-size: 40px;
+  }
+}
+
+@media all and (min-width: 1800px){
+  .tear-off p{
+    top: 78%;
+    left: 38%;
+    font-size: 40px;
+  }
 }
 
 /* Icons
@@ -149,13 +186,15 @@ ion-col{
 }
 
 /* FILTER */
-.filter {
-
+.bg-filter {
+  --background: #cecece;
   z-index: -1;
+}
+
+.filter {
   max-width: 500px;
   margin: auto;
   padding: 10px;
-  --background: rgba(var(--ion-color-medium-rgb), 0.14);
 
   div {
     text-align: center;
@@ -185,5 +224,10 @@ ion-col{
 .fab {
  margin-bottom: 10px;
  margin-right: 10px;
+}
+
+.list {
+  max-width: 650px;
+  margin: auto;
 }
 

@@ -64,11 +64,11 @@ export class EventsPage {
     
     let item1 = this.events.find(i => i.id === "1");
 
-    console.log(item1);
+    //console.log(item1);
 
     let item2 = this.events.find(i => i.id === "2");
 
-    console.log(item2);
+    //console.log(item2);
 
     var counter = 1;
 

@@ -33,8 +33,8 @@
   </ion-toolbar>
 
     <!-- Filter -->
-    <ion-toolbar #header class="filter">
-      <ion-grid>
+    <ion-toolbar #header class="bg-filter">
+      <ion-grid class="filter">
         <ion-row>
           <ion-col>
             <div>
@@ -106,7 +106,7 @@
   </ion-refresher>
 
   <!-- List -->
-  <ion-list #scheduleList [hidden]="shownSessions === 0">
+  <ion-list #scheduleList [hidden]="shownSessions === 0" class="list">
     <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
 
       <!-- Item -->

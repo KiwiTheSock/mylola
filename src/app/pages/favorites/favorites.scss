@@ -149,13 +149,15 @@ ion-col{
 }
 
 /* FILTER */
-.filter {
-
+.bg-filter {
+  --background: #cecece;
   z-index: -1;
+}
+
+.filter {
   max-width: 500px;
   margin: auto;
   padding: 10px;
-  --background: rgba(var(--ion-color-medium-rgb), 0.14);
 
   div {
     text-align: center;
@@ -187,3 +189,7 @@ ion-col{
   margin-right: 10px;
  }
  
+ .list {
+  max-width: 650px;
+  margin: auto;
+}

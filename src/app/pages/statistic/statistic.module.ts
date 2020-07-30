@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { SupportPage } from './support';
-import { SupportPageRoutingModule } from './support-routing.module';
+
+import { StatisticPageRoutingModule } from './statistic-routing.module';
+
+import { StatisticPage } from './statistic.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SupportPageRoutingModule
+    StatisticPageRoutingModule
   ],
-  declarations: [
-    SupportPage,
-  ]
+  declarations: [StatisticPage]
 })
-export class SupportModule { }
+export class StatisticPageModule {}

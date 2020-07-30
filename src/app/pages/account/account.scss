@@ -1,5 +1,44 @@
+ion-grid{
+  padding: 0;
+}
+
+ion-row{
+  padding: 0;
+}
+
+ion-col{
+  padding: 0;
+}
+
+/* Mylola
+* --------------------------------------------------------
+*/
+.mylola{
+  height: 20px;
+  margin: auto;
+  margin-right: 60px;
+}
+
 img {
   max-width: 140px;
   border-radius: 50%;
   margin-top: 15%;
+}
+
+/* Profile and Backgound Pictures
+ * --------------------------------------------------------
+ */
+
+ .profile-background {
+  margin-bottom: -20px;
+}
+
+.profile-background ion-avatar {
+  display: flex;
+  margin: auto;
+  margin-top: calc(-35px + var(--ion-safe-area-top));
+}
+
+.profile-background ion-avatar ion-img {
+  border: 2px solid #DB001B;
 }
