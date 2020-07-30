@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 
 import { UserData } from './providers/user-data';
 import { Darkmode } from './providers/darkmode';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -50,6 +51,7 @@ export class AppComponent implements OnInit {
     private toastCtrl: ToastController,
     private cd: ChangeDetectorRef,
     public darkmode: Darkmode,
+    private authService: AuthService
   ) {
     this.initializeApp();
   }
@@ -113,6 +115,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
+    this.authService.logout();
     this.userData.logout().then(() => {
       return this.router.navigateByUrl('/app/tabs/schedule');
     });    

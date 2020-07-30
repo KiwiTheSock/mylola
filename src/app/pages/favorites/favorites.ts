@@ -18,6 +18,8 @@ export class FavoritesPage implements OnInit{
   // Gets a reference to the list element
   @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
 
+  tracks: { name: string, icon: string, isChecked: boolean }[] = [];
+
   ios: boolean;
   dayIndex = 0;
   queryText = '';
@@ -62,21 +64,75 @@ export class FavoritesPage implements OnInit{
     }
 
     //Filter
-    async presentFilter() {
-      const modal = await this.modalCtrl.create({
-        component: FavoritesFilterPage,
-        swipeToClose: true,
-        presentingElement: this.routerOutlet.nativeEl,
-        componentProps: { excludedTracks: this.excludeTracks }
+  ionViewWillEnter() {
+    this.confData.getTracks().subscribe((tracks: any[]) => {
+      tracks.forEach(track => {
+        this.tracks.push({
+          name: track.name,
+          icon: track.icon,
+          isChecked: (this.excludeTracks.indexOf(track.name) === -1)
+        });
       });
-      await modal.present();
-  
-      const { data } = await modal.onWillDismiss();
-      if (data) {
-        this.excludeTracks = data;
-        this.updateSchedule();
-      }
+    });
+  }
+
+  applyFilter(name) {
+
+    if (name == 1) {
+      this.excludeTracks.push("Gastro & Nightlife");
     }
+
+    if (name == 2) {
+      this.excludeTracks.push("Shopping");
+    }
+
+    if (name == 3) {
+      this.excludeTracks.push("Freizeit & Erleben");
+    }
+
+    if (name == 4) {
+      this.excludeTracks.push("Dienstleistungen");
+    }
+
+    if (name == 5) {
+      console.log("Button 5 Apply");
+    }
+
+    if (name == 6) {
+      console.log("Button 6 Apply");
+    }
+
+    this.updateSchedule();
+  }
+
+  dismissFilter(name){
+
+    if (name == 1) {
+      this.excludeTracks.pop("Gastro & Nightlife");
+    }
+
+    if (name == 2) {
+      this.excludeTracks.pop("Shopping");
+    }
+
+    if (name == 3) {
+      this.excludeTracks.pop("Freizeit & Erleben");
+    }
+
+    if (name == 4) {
+      this.excludeTracks.pop("Dienstleistungen");
+    }
+
+    if (name == 5) {
+      console.log("Button 5 Dismiss");
+    }
+
+    if (name == 6) {
+      console.log("Button 6 Dismiss");
+    }
+
+    this.updateSchedule();
+  }
 
     //Popover
   async presentPopover(event: Event) {
@@ -108,10 +164,16 @@ export class FavoritesPage implements OnInit{
       this.refresher.doRefresh(event);
     }
 
-    btnActivate(ionicButton) {
-      if(ionicButton.color === 'medium')
-        ionicButton.color =  'danger';
-      else
-        ionicButton.color = 'medium';
+    btnActivate(ionicButton, name) {
+
+      //Design
+      if (ionicButton.color === 'danger') { 
+        ionicButton.color = 'medium'; 
+        this.applyFilter(name);
+      }
+      else {
+        ionicButton.color = 'danger'; 
+        this.dismissFilter(name);
+      }
     }
 }

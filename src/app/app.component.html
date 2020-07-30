@@ -8,6 +8,7 @@
         </div>
 
         <div>
+          <!--
           <ion-list lines="none">
             <ion-list-header>
               Tabs
@@ -22,13 +23,19 @@
 
             </ion-menu-toggle>
           </ion-list>
+          -->
 
-          <ion-list *ngIf="loggedIn" lines="none">
-            <ion-list-header>
-              Account
-            </ion-list-header>
+          <ion-list *ngIf="loggedIn" lines="none" >
+            <ion-menu-toggle autoHide="false" *appHasRole="['USER']">
+              <ion-item routerLink="/profile" routerLinkActive="selected" routerDirection="root" detail="false">
+                <ion-icon slot="start" name="person-outline"></ion-icon>
+                <ion-label>
+                  Profil
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
 
-            <ion-menu-toggle autoHide="false">
+            <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
               <ion-item routerLink="/account" routerLinkActive="selected" routerDirection="root" detail="false">
                 <ion-icon slot="start" name="person-outline"></ion-icon>
                 <ion-label>
@@ -37,7 +44,7 @@
               </ion-item>
             </ion-menu-toggle>
 
-            <ion-menu-toggle autoHide="false">
+            <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
               <ion-item routerLink="/add" routerLinkActive="selected" routerDirection="root" detail="false">
                 <ion-icon slot="start" name="add-outline"></ion-icon>
                 <ion-label>
@@ -46,7 +53,7 @@
               </ion-item>
             </ion-menu-toggle>
 
-            <ion-menu-toggle autoHide="false">
+            <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
               <ion-item routerLink="/statistic" routerLinkActive="selected" routerDirection="root" detail="false">
                 <ion-icon slot="start" name="pie-chart-outline"></ion-icon>
                 <ion-label>
@@ -75,9 +82,6 @@
           </ion-list>
 
           <ion-list *ngIf="!loggedIn" lines="none">
-            <ion-list-header>
-              Account
-            </ion-list-header>
 
             <ion-menu-toggle autoHide="false">
               <ion-item routerLink="/login" routerLinkActive="selected" routerDirection="root" detail="false">
@@ -97,11 +101,8 @@
             </ion-item>
 
           </ion-list>
-
+<!--
           <ion-list lines="none">
-            <ion-list-header>
-              Tutorial
-            </ion-list-header>
             <ion-menu-toggle autoHide="false">
               <ion-item button (click)="openTutorial()" detail="false">
                 <ion-icon slot="start" name="hammer-outline"></ion-icon>
@@ -109,6 +110,7 @@
               </ion-item>
             </ion-menu-toggle>
           </ion-list>
+-->
         </div>
       </ion-content>
     </ion-menu>

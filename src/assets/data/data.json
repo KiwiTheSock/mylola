@@ -187,19 +187,19 @@
   "tracks": [
     {
       "name": "Gastro & Nightlife",
-      "icon": "logo_gastro.png"
+      "icon": "gastro_icon.png"
     },
     {
       "name": "Shopping",
-      "icon": "logo_shopping.png"
+      "icon": "shopping_icon.png"
     },
     {
       "name": "Freizeit & Erleben",
-      "icon": "logo_freizeit.png"
+      "icon": "freizeit_icon.png"
     },
     {
       "name": "Dienstleistungen",
-      "icon": "logo_dienstleistungen.png"
+      "icon": "dienstleistungen_icon.png"
     }
   ],
 

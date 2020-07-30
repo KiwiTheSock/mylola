@@ -1,6 +1,6 @@
-import { Component, ViewChild, OnInit, Renderer2, Input} from '@angular/core';
+import { Component, ViewChild, OnInit, Renderer2, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams } from '@ionic/angular';
+import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll } from '@ionic/angular';
 import { HomeFilterPage } from '../home-filter/home-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
@@ -8,6 +8,7 @@ import { PopoverController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover';
 import { Darkmode } from '../../providers/darkmode';
 import { Refresher } from '../../providers/refresher';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -18,6 +19,9 @@ import { Refresher } from '../../providers/refresher';
 export class HomePage implements OnInit {
   // Gets a reference to the list element
   @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+  tracks: { name: string, icon: string, isChecked: boolean }[] = [];
 
   //Timeline
   ios: boolean;
@@ -30,6 +34,9 @@ export class HomePage implements OnInit {
   confDate: string;
   showSearchbar: boolean;
   lastY = 0;
+
+  page = 0;
+  maximumPages = 5;
 
   constructor(
     public alertCtrl: AlertController,
@@ -46,15 +53,86 @@ export class HomePage implements OnInit {
     public darkmode: Darkmode,
     public refresher: Refresher,
     private renderer: Renderer2,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.updateSchedule();
-    this.ios = this.config.get('mode') === 'ios';
   }
 
-  ngDoCheck(){
+  ngDoCheck() {
+    this.updateSchedule();
+  }
+
+  //Filter
+  ionViewWillEnter() {
+    this.confData.getTracks().subscribe((tracks: any[]) => {
+      tracks.forEach(track => {
+        this.tracks.push({
+          name: track.name,
+          icon: track.icon,
+          isChecked: (this.excludeTracks.indexOf(track.name) === -1)
+        });
+      });
+    });
+  }
+
+  applyFilter(name) {
+
+    if (name == 1) {
+      this.excludeTracks.push("Gastro & Nightlife");
+    }
+
+    if (name == 2) {
+      this.excludeTracks.push("Shopping");
+    }
+
+    if (name == 3) {
+      this.excludeTracks.push("Freizeit & Erleben");
+    }
+
+    if (name == 4) {
+      this.excludeTracks.push("Dienstleistungen");
+    }
+
+    if (name == 5) {
+      console.log("Button 5 Apply");
+    }
+
+    if (name == 6) {
+      console.log("Button 6 Apply");
+    }
+
+    this.updateSchedule();
+  }
+
+  dismissFilter(name){
+
+    if (name == 1) {
+      this.excludeTracks.pop("Gastro & Nightlife");
+    }
+
+    if (name == 2) {
+      this.excludeTracks.pop("Shopping");
+    }
+
+    if (name == 3) {
+      this.excludeTracks.pop("Freizeit & Erleben");
+    }
+
+    if (name == 4) {
+      this.excludeTracks.pop("Dienstleistungen");
+    }
+
+    if (name == 5) {
+      console.log("Button 5 Dismiss");
+    }
+
+    if (name == 6) {
+      console.log("Button 6 Dismiss");
+    }
+
     this.updateSchedule();
   }
 
@@ -66,20 +144,15 @@ export class HomePage implements OnInit {
     });
   }
 
-  //Filter
-  async presentFilter() {
-    const modal = await this.modalCtrl.create({
-      component: HomeFilterPage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: { excludedTracks: this.excludeTracks }
-    });
-    await modal.present();
+  loadMore(infiniteScroll) {
+    this.page++;
 
-    const { data } = await modal.onWillDismiss();
-    if (data) {
-      this.excludeTracks = data;
-      this.updateSchedule();
+    //insert function here
+
+    console.log('Page: ', this.page);
+
+    if(this.page === this.maximumPages) {
+      this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
     }
   }
 
@@ -109,14 +182,20 @@ export class HomePage implements OnInit {
   }
 
   //Refresh
-  refresh(){
+  refresh() {
     this.refresher.doRefresh(event);
   }
 
-  btnActivate(ionicButton) {
-    if(ionicButton.color === 'medium')
-      ionicButton.color =  'danger';
-    else
-      ionicButton.color = 'medium';
+  btnActivate(ionicButton, name) {
+
+    //Design
+    if (ionicButton.color === 'danger') { 
+      ionicButton.color = 'medium'; 
+      this.applyFilter(name);
+    }
+    else {
+      ionicButton.color = 'danger'; 
+      this.dismissFilter(name);
+    }
   }
 }

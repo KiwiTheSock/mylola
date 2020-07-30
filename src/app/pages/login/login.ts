@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 import { UserOptions } from '../../interfaces/user-options';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'page-login',
@@ -10,24 +11,28 @@ import { UserOptions } from '../../interfaces/user-options';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
-  submitted = false;
-
-  constructor(
-    public userData: UserData,
-    public router: Router
-  ) { }
-
-  onLogin(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.userData.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/schedule');
-    }
+  user = {
+    email: '',
+    pw: ''
   }
 
-  onSignup() {
-    this.router.navigateByUrl('/signup');
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private userData: UserData
+  ){}
+
+  signIn() {
+    this.auth.signIn(this.user).subscribe(user => {
+     
+      this.userData.login(this.user.email);
+      let role = user['role'];
+
+      if(role == 'ADMIN') {
+        this.router.navigateByUrl('/app/tabs/schedule');
+      } else if (role == 'USER') {
+        this.router.navigateByUrl('/app/tabs/schedule');
+      }
+    });
   }
 }

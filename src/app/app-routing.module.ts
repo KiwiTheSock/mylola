@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CheckTutorial } from './providers/check-tutorial.service';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
+    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule),
+    canActivate: [AuthGuard],
+    data: {
+      role: 'ADMIN'
+    }
   },
   {
     path: 'login',
@@ -35,12 +40,29 @@ const routes: Routes = [
   },
   {
     path: 'statistic',
-    loadChildren: () => import('./pages/statistic/statistic.module').then( m => m.StatisticPageModule)
+    loadChildren: () => import('./pages/statistic/statistic.module').then( m => m.StatisticPageModule),
+    canActivate: [AuthGuard],
+    data: {
+      role: 'ADMIN'
+    }
   },
   {
     path: 'add',
-    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
+    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule),
+    canActivate: [AuthGuard],
+    data: {
+      role: 'ADMIN'
+    }
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard],
+    data: {
+      role: 'USER'
+    }
   }
+
 
 
 

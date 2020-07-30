@@ -26,6 +26,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 
 import { NavParams } from '@ionic/angular';
+import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(localeDe);
 
@@ -41,9 +42,10 @@ registerLocaleData(localeDe);
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
-    })
+    }),
+    SharedModule
   ],
-  declarations: [AppComponent, ],
+  declarations: [AppComponent],
   providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, NavParams, Refresher, { provide: LOCALE_ID, useValue: 'de' }],
   bootstrap: [AppComponent]
 })
