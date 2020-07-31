@@ -150,7 +150,7 @@ ion-col{
 
 /* FILTER */
 .bg-filter {
-  --background: #cecece;
+  --background: rgba(var(--ion-color-light-rgb), 1);
   z-index: -1;
 }
 

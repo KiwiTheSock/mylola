@@ -28,6 +28,9 @@ import localeDe from '@angular/common/locales/de';
 import { NavParams } from '@ionic/angular';
 import { SharedModule } from './shared/shared.module';
 
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -43,7 +46,9 @@ registerLocaleData(localeDe);
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     }),
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule, 
+    NgxChartsModule
   ],
   declarations: [AppComponent],
   providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, NavParams, Refresher, { provide: LOCALE_ID, useValue: 'de' }],

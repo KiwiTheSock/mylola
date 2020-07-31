@@ -12,8 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 export class ModalPage {
 
   used = false;
-
   session: any;
+
+  title = 'app';
+  elementType = 'url';
+  value = 'https://www.mylola.de/';
 
   constructor(
     public modalCtrl : ModalController,

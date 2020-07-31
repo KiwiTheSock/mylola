@@ -18,15 +18,36 @@
 
         <ion-col col-12>
           
-          <ion-img class="image" src="..\assets\img\coupon\barcode.png"></ion-img>
+          <div style="text-align:center">
+            <ngx-qrcode 
+            [elementType]="elementType" 
+            [value] = "value"
+            cssClass = "aclass"
+            errorCorrectionLevel = "L"
+            >
+            </ngx-qrcode>
+            <!--<p>{{this.value}}</p>  [bc-display-value]="true"-->
+          </div>
         
+        
+          <div style="text-align:center">
+            <ngx-barcode6
+            [bc-format]="'CODE128'"
+            [bc-value]="value"
+            [bc-display-value]="false" 
+            [bc-width]="1"
+            >
+            </ngx-barcode6>
+            
+          </div>
+          
         </ion-col>
 
       </ion-row>
 
       <ion-row>
 
-        <p> ToDo: Bildslider </p>
+        <p> ToDo: Bildslider, Login prüfen </p>
 
         <ion-col col-12 class="button" *ngIf="!used">
           <ion-button (click)="dismiss()">Einlösen</ion-button>

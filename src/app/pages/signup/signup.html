@@ -1,7 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <!-- Back Button -->
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
     <ion-title>Registrieren</ion-title>
   </ion-toolbar>
@@ -13,35 +14,19 @@
     <img src="../assets/img/mylola/mylola_slogan_red.png" alt="Ionic Logo">
   </div>
 
-  <form #signupForm="ngForm" novalidate>
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label position="stacked" color="primary">Username</ion-label>
-        <ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" required>
-        </ion-input>
-      </ion-item>
-      <ion-text color="danger">
-        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-          Username wird benötigt
-        </p>
-      </ion-text>
+  <ion-item>
+    <ion-label position="stacked">Benutzername</ion-label>
+    <ion-input type="email" clearInput placeholder="Benutzername" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked" color="primary">Passwort</ion-label>
-        <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
-        </ion-input>
-      </ion-item>
-      <ion-text color="danger">
-        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
-          Passwort wird benötigt
-        </p>
-      </ion-text>
-    </ion-list>
+  <ion-item>
+    <ion-label position="stacked">Passwort</ion-label>
+    <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.pw"></ion-input>
+  </ion-item>
 
-    <div class="ion-padding">
-      <ion-button (click)="onSignup(signupForm)" type="submit" expand="block">Erstellen</ion-button>
-    </div>
-  </form>
+  <div class="ion-padding">
+    <ion-button (click)="onSignup()" type="submit" expand="block">Registrieren</ion-button>
+  </div>
 
   <ion-row>
     <ion-col>

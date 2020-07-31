@@ -53,7 +53,7 @@ export class DetailPage implements AfterViewInit{
   }
 
   ionViewDidEnter() {
-    this.defaultHref = `/app/tabs/home`;
+    this.defaultHref = `/app/tabs/schedule`;
   }
 
   //Favorites

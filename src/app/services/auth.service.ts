@@ -59,6 +59,7 @@ export class AuthService {
   }
 
   hasRoles(roles: string): boolean {
+
     for (const oneRole of roles) {
       if (!this.authState.value || !(this.authState.value.role.includes(oneRole))) {
         return false;

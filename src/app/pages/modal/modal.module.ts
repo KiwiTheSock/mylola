@@ -8,12 +8,17 @@ import { ModalPageRoutingModule } from './modal-routing.module';
 
 import { ModalPage } from './modal.page';
 
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { NgxBarcode6Module } from 'ngx-barcode6';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ModalPageRoutingModule
+    ModalPageRoutingModule,
+    NgxQRCodeModule,
+    NgxBarcode6Module
   ],
   declarations: [ModalPage]
 })

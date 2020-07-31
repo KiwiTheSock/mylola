@@ -10,17 +10,24 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: 'login.html',
   styleUrls: ['./login.scss'],
 })
+
 export class LoginPage {
   user = {
     email: '',
     pw: ''
   }
 
+  defaultHref = '';
+
   constructor(
     private auth: AuthService,
     private router: Router,
     private userData: UserData
   ){}
+
+  ionViewDidEnter() {
+    this.defaultHref = `/app/tabs/schedule`;
+  }
 
   signIn() {
     this.auth.signIn(this.user).subscribe(user => {
@@ -34,5 +41,8 @@ export class LoginPage {
         this.router.navigateByUrl('/app/tabs/schedule');
       }
     });
+    this.user.email = "";
+    this.user.pw = "";
   }
+
 }

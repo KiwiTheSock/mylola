@@ -8,7 +8,7 @@
         </div>
 
         <div>
-          <!--
+          
           <ion-list lines="none">
             <ion-list-header>
               Tabs
@@ -23,9 +23,14 @@
 
             </ion-menu-toggle>
           </ion-list>
-          -->
+          
 
           <ion-list *ngIf="loggedIn" lines="none" >
+
+            <ion-list-header>
+              Mylola
+            </ion-list-header>
+
             <ion-menu-toggle autoHide="false" *appHasRole="['USER']">
               <ion-item routerLink="/profile" routerLinkActive="selected" routerDirection="root" detail="false">
                 <ion-icon slot="start" name="person-outline"></ion-icon>
@@ -82,6 +87,10 @@
           </ion-list>
 
           <ion-list *ngIf="!loggedIn" lines="none">
+
+            <ion-list-header>
+              Mylola
+            </ion-list-header>
 
             <ion-menu-toggle autoHide="false">
               <ion-item routerLink="/login" routerLinkActive="selected" routerDirection="root" detail="false">

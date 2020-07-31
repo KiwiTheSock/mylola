@@ -103,26 +103,50 @@ export class HomePage implements OnInit {
     if (name == 6) {
       console.log("Button 6 Apply");
     }
-
     this.updateSchedule();
   }
 
-  dismissFilter(name){
+  dismissFilter(name) {
 
     if (name == 1) {
-      this.excludeTracks.pop("Gastro & Nightlife");
+      //this.excludeTracks.pop("Gastro & Nightlife");
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Gastro & Nightlife") {
+          console.log("Gastro & Nightlife: ", value);
+          this.excludeTracks.splice(index, 1);
+        }
+      });
     }
 
     if (name == 2) {
-      this.excludeTracks.pop("Shopping");
+      //this.excludeTracks.pop("Shopping");
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Shopping") {
+          console.log("Shopping: ", value);
+          this.excludeTracks.splice(index, 1);
+        }
+      });
     }
 
     if (name == 3) {
-      this.excludeTracks.pop("Freizeit & Erleben");
+      //this.excludeTracks.pop("Freizeit & Erleben");
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Freizeit & Erleben") {
+          console.log("Freizeit & Erleben: ", value);
+          this.excludeTracks.splice(index, 1);
+        }
+      });
     }
 
+
     if (name == 4) {
-      this.excludeTracks.pop("Dienstleistungen");
+      //this.excludeTracks.pop("Dienstleistungen");
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Dienstleistungen") {
+          console.log("Dienstleistungen: ", value);
+          this.excludeTracks.splice(index, 1);
+        }
+      });
     }
 
     if (name == 5) {
@@ -151,7 +175,7 @@ export class HomePage implements OnInit {
 
     console.log('Page: ', this.page);
 
-    if(this.page === this.maximumPages) {
+    if (this.page === this.maximumPages) {
       this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
     }
   }
@@ -189,12 +213,12 @@ export class HomePage implements OnInit {
   btnActivate(ionicButton, name) {
 
     //Design
-    if (ionicButton.color === 'danger') { 
-      ionicButton.color = 'medium'; 
+    if (ionicButton.color === 'danger') {
+      ionicButton.color = 'medium';
       this.applyFilter(name);
     }
     else {
-      ionicButton.color = 'danger'; 
+      ionicButton.color = 'danger';
       this.dismissFilter(name);
     }
   }

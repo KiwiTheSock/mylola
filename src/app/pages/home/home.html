@@ -195,12 +195,12 @@
   </ion-list>
 
   <!-- Placeholder -->
-  <ion-list-header [hidden]="shownSessions > 0">
-    Keine Einträge gefunden
+  <ion-list-header [hidden]="shownSessions">
+    <p style="margin: auto;">Keine Einträge gefunden</p>
   </ion-list-header>
 
    <ion-fab class="fab" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button *appHasRole="['ADMIN']"> 
+    <ion-fab-button *appHasRole="['ADMIN']" routerLink="/add"> 
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

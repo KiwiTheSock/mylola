@@ -8,12 +8,15 @@ import { StatisticPageRoutingModule } from './statistic-routing.module';
 
 import { StatisticPage } from './statistic.page';
 
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StatisticPageRoutingModule
+    StatisticPageRoutingModule,
+    NgxChartsModule
   ],
   declarations: [StatisticPage]
 })

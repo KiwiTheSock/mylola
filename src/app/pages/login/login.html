@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar>
+    
+    <!-- Sidemenu -->
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button>
+        <ion-icon style="width: 50px; height: 50px;" name="menu"></ion-icon>
+      </ion-menu-button> 
     </ion-buttons>
 
     <ion-title>Login</ion-title>
@@ -9,31 +13,29 @@
 </ion-header>
 
 <ion-content>
+
   <div class="login-logo">
     <img src="../assets/img/mylola/mylola_slogan_red.png" alt="Ionic logo">
   </div>
 
-  
   <ion-item>
-    <ion-label position="stacked">Email</ion-label>
-    <ion-input type="email" placeholder="Email" [(ngModel)]="user.email"></ion-input>
+    <ion-label position="stacked">Benutzername</ion-label>
+    <ion-input type="email" clearInput placeholder="Benutzername" [(ngModel)]="user.email"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">Password</ion-label>
-    <ion-input type="password" placeholder="Password" [(ngModel)]="user.pw"></ion-input>
+    <ion-label position="stacked">Passwort</ion-label>
+    <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.pw"></ion-input>
   </ion-item>
 
-  
-
-  <ion-button expand="block" (click)="signIn()">Login</ion-button>
-
- 
+  <div class="ion-padding">
+    <ion-button expand="block" (click)="signIn()">Einloggen</ion-button>
+  </div>
 
   <ion-row>
     <ion-col>
       <a href="" routerLink="/signup">Registrieren</a>
     </ion-col>
   </ion-row>
-   
+
 </ion-content>
