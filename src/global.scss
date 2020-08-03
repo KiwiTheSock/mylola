@@ -57,3 +57,19 @@
 .monthview-primary-with-event {
   background-color: #DB001B !important;
 }
+
+/* Orange Border
+ * --------------------------------------------------------
+ */
+
+* {
+	outline:none;
+}
+
+/* Button
+ * --------------------------------------------------------
+ */
+ion-activated{
+  --background: blue;
+}
+
