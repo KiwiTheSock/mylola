@@ -82,10 +82,10 @@ ion-col{
   opacity: 0.7;
   top: 0;
   left: 0;
-  width: 50%;
-  height: 50%;
-  margin-left: 50%;
-  margin-top: 17%;
+  width: 40%;
+  height: 40%;
+  margin-left: 60%;
+  margin-top: 27%;
 }
 
 .tear-off p{
@@ -97,43 +97,50 @@ ion-col{
   color: black; 
 }
 
-@media all and (max-width: 420px){
+@media (max-width:319px)  { 
   .tear-off p{
     top: 75%;
     left: 38%;
-    font-size: 30px;
+    font-size: 0.875em;
   }
 }
 
-@media all and (min-width: 421px) and (max-width: 700px){
+@media (min-width:320px)  { 
   .tear-off p{
-    top: 78%;
+    top: 75%;
     left: 38%;
+    font-size: 1.0em;
+  }
+}
+
+@media (min-width:360px)  { 
+  .tear-off p{
+    top: 75%;
+    left: 38%;
+    font-size: 1.3em;
+  }
+}
+
+@media (min-width:420px)  { 
+  .tear-off p{
+    top: 75%;
+    left: 38%;
+    font-size: 1.5em;
+  }
+}
+@media (min-width:480px)  { 
+  .tear-off p{
+    top: 75%;
+    left: 38%;
+    font-size: 1.8em;
+  }
+}
+
+@media (min-width:650px)  { 
+  .tear-off p{
+    top: 70%;
+    left: 35%;
     font-size: 38px;
-  }
-}
-
-@media all and (min-width: 701px) and (max-width: 999px){
-  .tear-off p{
-    top: 78%;
-    left: 38%;
-    font-size: 40px;
-  }
-}
-
-@media all and (min-width: 1000px){
-  .tear-off p{
-    top: 78%;
-    left: 38%;
-    font-size: 40px;
-  }
-}
-
-@media all and (min-width: 1800px){
-  .tear-off p{
-    top: 78%;
-    left: 38%;
-    font-size: 40px;
   }
 }
 

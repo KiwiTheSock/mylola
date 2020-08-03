@@ -83,29 +83,73 @@ ion-col{
 }
 
 /* Tear-off
- * --------------------------------------------------------
- */
+* --------------------------------------------------------
+*/
 .tear-off{
-  position: absolute;
-  opacity: 0.7;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 50%;
-  margin-left: 50%;
-  margin-top: 17%;
+ position: absolute;
+ opacity: 0.7;
+ top: 0;
+ left: 0;
+ width: 40%;
+ height: 40%;
+ margin-left: 60%;
+ margin-top: 27%;
 }
 
 .tear-off p{
-  position: absolute;
-  top: 78%;
-  left: 38%;
-  margin: auto;
-  text-align: center;
-  font-weight: bolder;
-  transform: rotate(-45deg);
-  color: black;
-  font-size: 7vw; 
+ position: absolute;
+ margin: auto;
+ text-align: center;
+ font-weight: bolder;
+ transform: rotate(-45deg);
+ color: black; 
+}
+
+@media (max-width:319px)  { 
+ .tear-off p{
+   top: 75%;
+   left: 38%;
+   font-size: 0.875em;
+ }
+}
+
+@media (min-width:320px)  { 
+ .tear-off p{
+   top: 75%;
+   left: 38%;
+   font-size: 1.0em;
+ }
+}
+
+@media (min-width:360px)  { 
+ .tear-off p{
+   top: 75%;
+   left: 38%;
+   font-size: 1.3em;
+ }
+}
+
+@media (min-width:420px)  { 
+ .tear-off p{
+   top: 75%;
+   left: 38%;
+   font-size: 1.5em;
+ }
+}
+@media (min-width:480px)  { 
+ .tear-off p{
+   top: 75%;
+   left: 38%;
+   font-size: 1.8em;
+ }
+}
+
+@media (min-width:650px)  { 
+ .tear-off p{
+   top: 70%;
+   left: 35%;
+   font-size: 38px;
+ }
 }
 
 /* Icons

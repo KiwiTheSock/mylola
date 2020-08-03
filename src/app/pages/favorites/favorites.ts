@@ -1,13 +1,11 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
-import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
-import { ConferenceData } from '../../providers/conference-data';
-import { UserData } from '../../providers/user-data';
+import { ConferenceData } from '../../services/conference-data';
+import { UserData } from '../../services/user-data';
 import { PopoverController } from '@ionic/angular';
-import { PopoverPage } from '../popover/popover';
-import { Darkmode } from '../../providers/darkmode';
-import { Refresher } from '../../providers/refresher';
+import { Darkmode } from '../../services/darkmode';
+import { Refresher } from '../../services/refresher';
 
 @Component({
   selector: 'page-favorites',
@@ -132,15 +130,6 @@ export class FavoritesPage implements OnInit{
     }
 
     this.updateSchedule();
-  }
-
-    //Popover
-  async presentPopover(event: Event) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverPage,
-      event
-    });
-    await popover.present();
   }
 
   //Favorites

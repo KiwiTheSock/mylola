@@ -15,7 +15,7 @@
 
 <!-- Content -->
 <ion-content fullscreen="true">
-  <ion-grid>  
+  <ion-grid class="content">  
   
     <!-- Banner and Logo -->
     <ion-row>
@@ -80,9 +80,7 @@
           <p>{{session.street}}</p>
           <p>{{session.place}}</p>
           <br />
-          <ion-button (click)="openContact(session)">
-            <ion-icon slot="icon-only" ios="call-outline" md="call-sharp"></ion-icon>
-          </ion-button>
+          <ion-button (click)="openContact(session)">Kontaktiere {{session.name}}</ion-button>
           <p style="color: #DB001B;">{{session.website}}</p>
           <p>{{session.mail}}</p>
           <p style="color: #DB001B;">{{session.phone}}</p>
@@ -106,7 +104,7 @@
   <div #mapCanvas class="map-canvas"></div>
 
    <!-- Opening Hours-->
-  <ion-grid>
+  <ion-grid class="content">
     <ion-row>
       <ion-col col-12 *ngIf="session" class="opening">
         <h4>Öffnungszeiten</h4>
@@ -117,6 +115,7 @@
         <p>{{session.opening[4]}}</p>
         <p>{{session.opening[5]}}</p>
         <p>{{session.opening[6]}}</p>
+        <br>
       </ion-col>
     </ion-row>
   </ion-grid>

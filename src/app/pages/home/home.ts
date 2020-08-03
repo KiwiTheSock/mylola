@@ -1,13 +1,11 @@
 import { Component, ViewChild, OnInit, Renderer2, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll } from '@ionic/angular';
-import { HomeFilterPage } from '../home-filter/home-filter';
-import { ConferenceData } from '../../providers/conference-data';
-import { UserData } from '../../providers/user-data';
+import { ConferenceData } from '../../services/conference-data';
+import { UserData } from '../../services/user-data';
 import { PopoverController } from '@ionic/angular';
-import { PopoverPage } from '../popover/popover';
-import { Darkmode } from '../../providers/darkmode';
-import { Refresher } from '../../providers/refresher';
+import { Darkmode } from '../../services/darkmode';
+import { Refresher } from '../../services/refresher';
 import { AuthService } from '../../services/auth.service';
 
 
@@ -112,7 +110,6 @@ export class HomePage implements OnInit {
       //this.excludeTracks.pop("Gastro & Nightlife");
       this.excludeTracks.forEach((value, index) => {
         if (value == "Gastro & Nightlife") {
-          console.log("Gastro & Nightlife: ", value);
           this.excludeTracks.splice(index, 1);
         }
       });
@@ -122,7 +119,6 @@ export class HomePage implements OnInit {
       //this.excludeTracks.pop("Shopping");
       this.excludeTracks.forEach((value, index) => {
         if (value == "Shopping") {
-          console.log("Shopping: ", value);
           this.excludeTracks.splice(index, 1);
         }
       });
@@ -132,7 +128,6 @@ export class HomePage implements OnInit {
       //this.excludeTracks.pop("Freizeit & Erleben");
       this.excludeTracks.forEach((value, index) => {
         if (value == "Freizeit & Erleben") {
-          console.log("Freizeit & Erleben: ", value);
           this.excludeTracks.splice(index, 1);
         }
       });
@@ -143,7 +138,6 @@ export class HomePage implements OnInit {
       //this.excludeTracks.pop("Dienstleistungen");
       this.excludeTracks.forEach((value, index) => {
         if (value == "Dienstleistungen") {
-          console.log("Dienstleistungen: ", value);
           this.excludeTracks.splice(index, 1);
         }
       });
@@ -178,15 +172,6 @@ export class HomePage implements OnInit {
     if (this.page === this.maximumPages) {
       this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
     }
-  }
-
-  //Popover
-  async presentPopover(event: Event) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverPage,
-      event
-    });
-    await popover.present();
   }
 
   //Favorites

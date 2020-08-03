@@ -2,15 +2,15 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angula
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 
-import { MenuController, Platform, ToastController } from '@ionic/angular';
+import { MenuController, Platform, ToastController, PopoverController, ModalController } from '@ionic/angular';
 
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Storage } from '@ionic/storage';
 
-import { UserData } from './providers/user-data';
-import { Darkmode } from './providers/darkmode';
+import { UserData } from './services/user-data';
+import { Darkmode } from './services/darkmode';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
     }
   ];
   loggedIn = false;
+  session: any;
 
   constructor(
     private menu: MenuController,
@@ -51,7 +52,9 @@ export class AppComponent implements OnInit {
     private toastCtrl: ToastController,
     private cd: ChangeDetectorRef,
     public darkmode: Darkmode,
-    private authService: AuthService
+    private authService: AuthService,
+    public popoverCtrl: PopoverController,
+    public modalController : ModalController,
   ) {
     this.initializeApp();
   }
@@ -118,7 +121,7 @@ export class AppComponent implements OnInit {
     this.authService.logout();
     this.userData.logout().then(() => {
       return this.router.navigateByUrl('/app/tabs/schedule');
-    });    
+    });
   }
 
   openTutorial() {

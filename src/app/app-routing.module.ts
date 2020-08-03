@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckTutorial } from './providers/check-tutorial.service';
+import { CheckTutorial } from './services/check-tutorial.service';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -62,10 +62,7 @@ const routes: Routes = [
       role: 'USER'
     }
   }
-
-
-
-
+  
 ];
 
 @NgModule({

@@ -1,70 +1,61 @@
 <!-- Header -->
 <ion-header translucent="true">
   <ion-toolbar>
-    
+
     <!-- Sidemenu -->
     <ion-buttons slot="start">
       <ion-menu-button>
         <ion-icon style="width: 50px; height: 50px;" name="menu"></ion-icon>
-      </ion-menu-button> 
+      </ion-menu-button>
     </ion-buttons>
 
     <!-- Mylola -->
-    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" ></ion-img>  
-    
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png"></ion-img>
+
   </ion-toolbar>
 </ion-header>
- 
+
 <!-- Content -->
 <ion-content>
-  <ion-row>
+  <div class="content">
+    <ion-row>
 
-    <!-- Move back one screen of the slides -->
-    <ion-col class="previous">
-      <ion-button fill="clear" (click)="back()">
-        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-col>
-    
-    <!-- Title -->
-    <ion-col class="title">
-      <ion-buttons>
-        <ion-button (click)="today()">{{ viewTitle }}</ion-button>
-      </ion-buttons>
-    </ion-col>
+      <!-- Move back one screen of the slides -->
+      <ion-col class="previous">
+        <ion-button fill="clear" (click)="back()">
+          <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
 
-    <!-- Move forward one screen of the slides -->
-    <ion-col class="forward">
-      <ion-button fill="clear" (click)="next()">
-        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
+      <!-- Title -->
+      <ion-col class="title">
+        <ion-buttons>
+          <ion-button (click)="today()">{{ viewTitle }}</ion-button>
+        </ion-buttons>
+      </ion-col>
 
-  <calendar
-  [eventSource]="eventSource" 
-  [calendarMode]="calendar.mode"
-  [currentDate]="calendar.currentDate"
-  (onEventSelected)="onEventSelected($event)"
-  (onTitleChanged)="onViewTitleChanged($event)"
-  startHour="6"
-  endHour="20"
-  step="30"
-  startingDayWeek="1"
-  [monthviewDisplayEventTemplate]="template"
-  [noEventsLabel] = "calendar.noEventsLabel"
-  [locale]="calendar.locale"
-  >
-  </calendar>
+      <!-- Move forward one screen of the slides -->
+      <ion-col class="forward">
+        <ion-button fill="clear" (click)="next()">
+          <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
-  <ng-template #template let-view="view" let-row="row" let-col="col">
-    <div [class.with-event]="view.dates[row*7+col].events.length">
-      {{view.dates[row*7+col].label}}
-      <div class="indicator-container">
-        <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
+    <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+      (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" startHour="6"
+      endHour="20" step="30" startingDayWeek="1" [monthviewDisplayEventTemplate]="template"
+      [noEventsLabel]="calendar.noEventsLabel" [locale]="calendar.locale">
+    </calendar>
+
+    <ng-template #template let-view="view" let-row="row" let-col="col">
+      <div [class.with-event]="view.dates[row*7+col].events.length">
+        {{view.dates[row*7+col].label}}
+        <div class="indicator-container">
+          <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
+        </div>
       </div>
-    </div>
-  </ng-template>
- 
- 
+    </ng-template>
+
+  </div>
 </ion-content>

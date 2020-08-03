@@ -1,64 +1,48 @@
 <ion-content class="popover" style="overflow: hidden;">
 
-    <ion-grid style="overflow: hidden;">
+  <ion-grid class="modal">
 
-      <ion-row>
+    <ion-row>
 
-        <ion-col col-12 class="title">
+      <ion-col col-12 class="title">
 
-          
-          <h2>{{session?.addtext}}</h2>
-          
 
-        </ion-col>
+        <h2>{{session?.addtext}}</h2>
 
-      </ion-row>
 
-      <ion-row>
+      </ion-col>
 
-        <ion-col col-12>
-          
-          <div style="text-align:center">
-            <ngx-qrcode 
-            [elementType]="elementType" 
-            [value] = "value"
-            cssClass = "aclass"
-            errorCorrectionLevel = "L"
-            >
-            </ngx-qrcode>
-            <!--<p>{{this.value}}</p>  [bc-display-value]="true"-->
-          </div>
-        
-        
-          <div style="text-align:center">
-            <ngx-barcode6
-            [bc-format]="'CODE128'"
-            [bc-value]="value"
-            [bc-display-value]="false" 
-            [bc-width]="1"
-            >
-            </ngx-barcode6>
-            
-          </div>
-          
-        </ion-col>
+    </ion-row>
 
-      </ion-row>
+    <ion-row>
 
-      <ion-row>
+      <ion-col col-12>
 
-        <p> ToDo: Bildslider, Login prüfen </p>
+        <div style="text-align:center">
+          <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
+          </ngx-qrcode>
+          <!--<p>{{this.value}}</p>  [bc-display-value]="true"-->
+        </div>
 
-        <ion-col col-12 class="button" *ngIf="!used">
-          <ion-button (click)="dismiss()">Einlösen</ion-button>
-        </ion-col>
 
-        <ion-col col-12 class="button" *ngIf="used">
-          <ion-button (click)="dismiss()">Eingelöst</ion-button>
-        </ion-col>
+        <div style="text-align:center">
+          <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="value" [bc-display-value]="false" [bc-width]="1">
+          </ngx-barcode6>
 
-      </ion-row>
+        </div>
 
-    </ion-grid>
-  
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col col-12 class="button">
+        <ion-button (click)="dismiss()">Einlösen</ion-button>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
 </ion-content>

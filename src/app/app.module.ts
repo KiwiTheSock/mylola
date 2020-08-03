@@ -15,8 +15,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 
-import { Darkmode } from './providers/darkmode';
-import { Refresher } from './providers/refresher';
+import { Darkmode } from './services/darkmode';
+import { Refresher } from './services/refresher';
 
 import { ModalPageModule } from './pages/modal/modal.module';
 
@@ -26,7 +26,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 
 import { NavParams } from '@ionic/angular';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './directives/shared.module';
 
 import { NgxChartsModule }from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

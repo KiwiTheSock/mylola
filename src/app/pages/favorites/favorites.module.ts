@@ -4,12 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { FavoritesPage } from './favorites';
-import { FavoritesFilterPage } from '../favorites-filter/favorites-filter';
 import { FavoritesPageRoutingModule } from './favorites-routing.module';
 
-import { TimePipeFavorites } from '../../providers/time-pipe-favorites.pipe';
+import { TimePipeFavorites } from '../../services/time-pipe-favorites.pipe';
 
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
   imports: [
@@ -21,11 +20,7 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   declarations: [
     FavoritesPage,
-    FavoritesFilterPage,
     TimePipeFavorites
-  ],
-  entryComponents: [
-    FavoritesFilterPage
   ]
 })
 export class FavoritesModule { }

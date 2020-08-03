@@ -57,7 +57,14 @@ ion-col{
     --color: --ion-text-color;
     --box-shadow: none;
     --ripple-color: transparent;
+  
+    ion-icon{
+      width: 28px;
+      height: 28px;
+    }
+
   }
+
 }
 
 /* Time
@@ -133,7 +140,8 @@ ion-col{
 .map-canvas {
 
   height: 50%;
-  width: 100%;
+  max-width: 650px;
+  margin: auto;
 }
 
 /* Opening Hours
@@ -152,4 +160,9 @@ ion-col{
 
 .opening p {
   line-height: 0.5;
+}
+
+.content{
+  max-width: 650px;
+  margin: auto;
 }

@@ -4,13 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home';
-import { HomeFilterPage } from '../home-filter/home-filter';
-import { PopoverPage } from '../popover/popover';
 import { HomePageRoutingModule } from './home-routing.module';
 
-import { TimePipeHome } from '../../providers/time-pipe-home.pipe';
+import { TimePipeHome } from '../../services/time-pipe-home.pipe';
 
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
   imports: [
@@ -22,13 +20,7 @@ import { SharedModule } from '../../shared/shared.module';
   ],
   declarations: [
     HomePage,
-    HomeFilterPage,
-    PopoverPage,
     TimePipeHome
-  ],
-  entryComponents: [
-    HomeFilterPage,
-    PopoverPage
   ]
 })
 export class HomeModule { }

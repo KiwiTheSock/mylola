@@ -17,10 +17,15 @@
 
 <ion-content>
 
-  <ngx-charts-advanced-pie-chart 
-  [results]="saleData"
-  [gradient]="true"
-  [scheme]="colorScheme">
-</ngx-charts-advanced-pie-chart>
+  <ion-grid class="content">
 
+ 
+
+    <ngx-charts-advanced-pie-chart 
+      [results]="saleData"
+      [gradient]="true"
+      [scheme]="colorScheme">
+    </ngx-charts-advanced-pie-chart>
+
+  </ion-grid>
 </ion-content>

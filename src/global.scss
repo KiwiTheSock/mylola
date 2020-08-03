@@ -38,16 +38,7 @@
  * --------------------------------------------------------
  */
  .modal{
-    width: 70%;
-    height: 50%;
-
-    margin-top: 40%;
-    margin-left: 15%;
-    
-    opacity: 0.97;
-
-    border: 1px solid black;
-    border-radius: 20px;
+    --background: transparent !important;
   }
 
 /* Calendar
