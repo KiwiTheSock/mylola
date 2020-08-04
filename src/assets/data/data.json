@@ -30,6 +30,7 @@
               ],
               "upload": "2020-05-29T13:57:00", 
               "fav": "false", 
+              "not": "false",
               "tracks": ["Gastro & Nightlife"],
               "id": "1"
             },
@@ -59,6 +60,7 @@
               ],
               "upload": "2020-05-28T13:00:00", 
               "fav": "false", 
+              "not": "false",
               "tracks": ["Gastro & Nightlife"],
               "id": "2"
             },
@@ -88,6 +90,7 @@
               ],
               "upload": "2020-05-28T12:55:00", 
               "fav": "false", 
+              "not": "false",
               "tracks": ["Gastro & Nightlife"],
               "id": "3"
             },
@@ -117,6 +120,7 @@
               ],
               "upload": "2020-05-28T12:50:00", 
               "fav": "false", 
+              "not": "false",
               "tracks": ["Shopping"],
               "id": "4"
             },
@@ -145,6 +149,7 @@
                 "Sonntag: GESCHLOSSEN"
               ],
               "fav": "false",
+              "not": "false",
               "upload": "2020-05-28T12:45:00", 
               "tracks": ["Shopping"],
               "id": "5"

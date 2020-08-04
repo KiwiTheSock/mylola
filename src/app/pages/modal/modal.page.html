@@ -1,6 +1,6 @@
-<ion-content class="popover" style="overflow: hidden;">
+<ion-content>
 
-  <ion-grid class="modal">
+  <ion-grid class="content">
 
     <ion-row>
 
@@ -18,18 +18,24 @@
 
       <ion-col col-12>
 
-        <div style="text-align:center">
-          <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
-          </ngx-qrcode>
-          <!--<p>{{this.value}}</p>  [bc-display-value]="true"-->
-        </div>
+        <ion-slides #slides pager="false" [options]="slideOptions">
+    
+          <ion-slide>
+            <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
+            </ngx-qrcode>
+            <!--<p>{{this.value}}</p>  [bc-display-value]="true"-->
+          </ion-slide>
 
+          <ion-slide>
+            <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="value" [bc-display-value]="false" [bc-width]="0.75">
+            </ngx-barcode6>
+          </ion-slide>
+      
+        </ion-slides>
 
-        <div style="text-align:center">
-          <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="value" [bc-display-value]="false" [bc-width]="1">
-          </ngx-barcode6>
-
-        </div>
+        <!-- Arrows -->
+        <div class="swiper-button-next swiper-button-black"></div>
+        <div class="swiper-button-prev swiper-button-black"></div>
 
       </ion-col>
 

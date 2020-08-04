@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 
-import { ModalController } from '@ionic/angular'; 
+import { ModalController, IonSlides } from '@ionic/angular'; 
 import { ConferenceData } from '../../services/conference-data';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,6 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ModalPage {
 
+  @ViewChild('slides', { static: true }) slides: IonSlides;
+
+  slideOptions = {
+    loop: true
+  };
+  
   used = false;
   session: any;
 

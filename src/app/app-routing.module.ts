@@ -61,7 +61,11 @@ const routes: Routes = [
     data: {
       role: 'USER'
     }
+  },  {
+    path: 'modal-logout',
+    loadChildren: () => import('./pages/modal-logout/modal-logout.module').then( m => m.ModalLogoutPageModule)
   }
+
   
 ];
 

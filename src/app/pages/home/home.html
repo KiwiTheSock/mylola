@@ -140,7 +140,7 @@
                   <ion-icon *ngIf="session.fav" slot="icon-only" name="bookmark-outline"></ion-icon>
                   <ion-icon *ngIf="!session.fav" slot="icon-only" name="bookmark"></ion-icon>
                 </ion-button>
-                <ion-button id="button2" (click)="shareSession()">
+                <ion-button id="button2" (click)="shareSession(session)">
                   <ion-icon slot="icon-only" name="share-social"></ion-icon>
                 </ion-button>
               </ion-buttons>

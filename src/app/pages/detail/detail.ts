@@ -1,13 +1,18 @@
 import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angular/core';
 import { ConferenceData } from '../../services/conference-data';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from '../../services/user-data';
-import { Platform, ActionSheetController, AlertController } from '@ionic/angular';
+import { Platform, ActionSheetController, AlertController, NavController } from '@ionic/angular';
 import { DOCUMENT} from '@angular/common';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { darkStyle } from './dark-style';
 import { ModalController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page'; 
+import { Plugins, AppState } from '@capacitor/core';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { AuthService } from '../../services/auth.service';
+
+const { App } = Plugins;
 
 @Component({
   selector: 'page-detail',
@@ -21,6 +26,9 @@ export class DetailPage implements AfterViewInit{
 
   session: any;
   defaultHref = '';
+
+  text: string='Mylola ... teilen ... bla bla';
+  link: string='https://www.mylola.de/';
   
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -32,6 +40,9 @@ export class DetailPage implements AfterViewInit{
     public inAppBrowser: InAppBrowser,
     public alertController: AlertController,
     public modalController : ModalController,
+    private socialSharing: SocialSharing,
+    private authService: AuthService,
+    private router: Router,
   ) { }
 
   ionViewWillEnter() {
@@ -68,15 +79,26 @@ export class DetailPage implements AfterViewInit{
   }
 
   //Share
-  shareSession() {
-    console.log('Clicked share session');
+  shareSession(session: any) {
+    const url = this.link;
+    const text = 'Test'+'\n';
+    this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
+  }
+
+  //Notification
+  notification(session: any) {
+    if (session.not == false) {
+      session.not = true;
+    } else {
+      session.not = false;
+    }
   }
 
   //Modal
   async presentModal(session: any) {
     const modal = await this.modalController.create({
       component: ModalPage,
-      cssClass: 'modal',
+      cssClass: 'modal-css',
       swipeToClose: true, //iOS
       componentProps: { session: session }
     });
@@ -93,17 +115,30 @@ export class DetailPage implements AfterViewInit{
     return await modal.present();
   }
 
-  //Facebook
-  facebook(session: any){
-    this.openExternalUrl(session.facebook); 
+  isLoggedIn(session: any){
+    if(this.authService.getRole() == null){
+      this.router.navigateByUrl('/login');
+    } else{
+      this.presentModal(session)
+    }
   }
 
-  //External Website
-  openExternalUrl(url: string) {
-    this.inAppBrowser.create(
-      url,
-      '_blank'
-    );
+  //Facebook
+  facebook(session: any){
+    window.open(session.facebook, '_system','location=yes');
+  }
+
+  //Browser
+  async launchBrowser(url){
+    var ret = await App.canOpenUrl({ url: url });
+
+    var retx = await App.openUrl({ url: url });
+    console.log("Open url response: ", ret);
+  }
+  
+  //Mail
+  sendEmail(mail){
+    this.socialSharing.shareViaEmail('', '', [mail]);
   }
 
   //Contact
@@ -117,14 +152,16 @@ export class DetailPage implements AfterViewInit{
           text: `Webseite ( ${session.website} )`,
           icon: mode !== 'ios' ? 'website' : null,
           handler: () => {
-            window.open(session.website);
+            //window.open(session.website);
+            this.launchBrowser(session.website);
           }
         },
         {
           text: `Mail ( ${session.mail} )`,
           icon: mode !== 'ios' ? 'mail' : null,
           handler: () => {
-            window.open('mailto:' + session.mail);
+            //window.open('mailto:' + session.mail);
+            this.sendEmail(session.mail);
           }
         },
         {

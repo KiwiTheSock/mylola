@@ -58,6 +58,10 @@ export class AuthService {
     return this.authState.asObservable();
   }
 
+  getRole(){
+    return this.authState.value;
+  }
+
   hasRoles(roles: string): boolean {
 
     for (const oneRole of roles) {

@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 import { UserData } from './services/user-data';
 import { Darkmode } from './services/darkmode';
 import { AuthService } from './services/auth.service';
+import { ModalLogoutPage } from './pages/modal-logout/modal-logout.page';
 
 @Component({
   selector: 'app-root',
@@ -54,7 +55,7 @@ export class AppComponent implements OnInit {
     public darkmode: Darkmode,
     private authService: AuthService,
     public popoverCtrl: PopoverController,
-    public modalController : ModalController,
+    public modalController: ModalController,
   ) {
     this.initializeApp();
   }
@@ -117,6 +118,27 @@ export class AppComponent implements OnInit {
     });
   }
 
+  //Modal
+  async presentModal(session: any) {
+    const modal = await this.modalController.create({
+      component: ModalLogoutPage,
+      cssClass: 'modal-logout-css',
+      swipeToClose: true, //iOS
+      componentProps: { session: session }
+    });
+
+    //Passed back data
+    /*
+    modal.onDidDismiss()
+      .then((data) => {
+        const users = data['data']; 
+      console.log(data);
+    });
+    */
+
+    return await modal.present();
+  }
+
   logout() {
     this.authService.logout();
     this.userData.logout().then(() => {
@@ -130,7 +152,7 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/tutorial');
   }
 
-  changeDarkmode(){
+  changeDarkmode() {
     this.darkmode.darkmode();
   }
 }

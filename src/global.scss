@@ -37,9 +37,23 @@
 /* Modal
  * --------------------------------------------------------
  */
- .modal{
-    --background: transparent !important;
-  }
+ .modal-css .modal-wrapper {  
+  margin: auto;
+  border-radius: 25px;
+
+  //Media Queries (dadurch wird Content auch ausgerichtet)
+  width: 75%;
+  height: 40%;
+}
+
+.modal-logout-css .modal-wrapper {  
+  margin: auto;
+  border-radius: 25px;
+
+  //Media Queries (dadurch wird Content auch ausgerichtet)
+  width: 75%;
+  height: 25%;
+}
 
 /* Calendar
  * --------------------------------------------------------

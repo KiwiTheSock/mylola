@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content fullscreen="true">
-  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false" [options]="slideOptions">
     <ion-slide>
       <img src="assets/img/ica-slidebox-img-1.png" class="slide-image" />
       <h2 class="slide-title">
@@ -45,5 +45,10 @@
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
     </ion-slide>
+     <!-- Add Arrows -->
   </ion-slides>
+  <!-- -->
+  <div class="swiper-button-next swiper-button-black"></div>
+  <div class="swiper-button-prev swiper-button-black"></div>
+  <!-- -->
 </ion-content>

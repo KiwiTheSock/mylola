@@ -7,6 +7,7 @@ import { PopoverController } from '@ionic/angular';
 import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
 import { AuthService } from '../../services/auth.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 
 @Component({
@@ -36,6 +37,9 @@ export class HomePage implements OnInit {
   page = 0;
   maximumPages = 5;
 
+  text: string='Mylola ... teilen ... bla bla';
+  link: string='https://www.mylola.de/';
+
   constructor(
     public alertCtrl: AlertController,
     public confData: ConferenceData,
@@ -52,7 +56,8 @@ export class HomePage implements OnInit {
     public refresher: Refresher,
     private renderer: Renderer2,
     public navParams: NavParams,
-    private authService: AuthService
+    private authService: AuthService,
+    private socialSharing: SocialSharing
   ) { }
 
   ngOnInit() {
@@ -186,8 +191,10 @@ export class HomePage implements OnInit {
   }
 
   //Share
-  shareSession() {
-    console.log('Clicked share session');
+  shareSession(session: any) {
+    const url = this.link;
+    const text = 'Test'+'\n';
+    this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
   }
 
   //Refresh

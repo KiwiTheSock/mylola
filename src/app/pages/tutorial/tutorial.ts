@@ -15,6 +15,13 @@ export class TutorialPage {
 
   @ViewChild('slides', { static: true }) slides: IonSlides;
 
+  slideOptions = {
+    //initialSlide: 0,
+    //slidesPerView: 1,
+    //autoplay: true,
+    //loop: true
+  };
+
   constructor(
     public menu: MenuController,
     public router: Router,

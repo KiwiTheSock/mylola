@@ -6,6 +6,7 @@ import { UserData } from '../../services/user-data';
 import { PopoverController } from '@ionic/angular';
 import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'page-favorites',
@@ -28,6 +29,9 @@ export class FavoritesPage implements OnInit{
   confDate: string;
   showSearchbar: boolean;
 
+  text: string='Mylola ... teilen ... bla bla';
+  link: string='https://www.mylola.de/';
+
   constructor(
     public alertCtrl: AlertController,
     public confData: ConferenceData,
@@ -41,6 +45,7 @@ export class FavoritesPage implements OnInit{
     public popoverCtrl: PopoverController,
     public darkmode: Darkmode,
     public refresher: Refresher,
+    private socialSharing: SocialSharing
     ) {}
 
     ngOnInit() {
@@ -144,8 +149,10 @@ export class FavoritesPage implements OnInit{
   }
 
   //Share
-  shareSession() {
-    console.log('Clicked share session');
+  shareSession(session: any) {
+    const url = this.link;
+    const text = 'Test'+'\n';
+    this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
   }
 
     //Refresh

@@ -50,13 +50,13 @@ ion-col{
  */
 .icons{
   padding-left: 10px;
-  margin-bottom: -10px;
-  
+
   ion-button{
     --background: --ion-background-color;
     --color: --ion-text-color;
     --box-shadow: none;
     --ripple-color: transparent;
+    margin-right: -20px;
   
     ion-icon{
       width: 28px;
