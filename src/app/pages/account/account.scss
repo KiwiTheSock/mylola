@@ -29,10 +29,6 @@ img {
  * --------------------------------------------------------
  */
 
- .profile-background {
-  margin-bottom: -20px;
-}
-
 .profile-background ion-avatar {
   display: flex;
   margin: auto;
@@ -46,4 +42,6 @@ img {
 .content {
   max-width: 650px;
   margin: auto;
+  text-align: center;
 }
+

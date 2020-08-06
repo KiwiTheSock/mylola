@@ -14,4 +14,8 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
   }
 
+  openSettings() {
+    console.log("Settings");
+  }
+
 }

@@ -42,17 +42,12 @@
           <ion-icon slot="icon-only" name="share-social"></ion-icon>
         </ion-button>
 
-        <ion-button (click)="notification(session)">
-          <ion-icon *ngIf="session.not" name="notifications-outline"></ion-icon>
-          <ion-icon *ngIf="!session.not" name="notifications"></ion-icon>
-        </ion-button>
-
       </ion-col>
 
-      <!-- Time -->
       <ion-col col-6 *ngIf="session">
         <p class="time">{{ session.upload | timePipeDetail}}</p>
       </ion-col>
+
     </ion-row>
 
     <!-- Text -->
@@ -86,17 +81,28 @@
         <p style="font-weight: bold;">{{session.name}}</p>
         <p>{{session.street}}</p>
         <p>{{session.place}}</p>
-        <br />
-        <ion-button (click)="openContact(session)">Kontaktiere {{session.name}}</ion-button>
-        <p style="color: #DB001B;">{{session.website}}</p>
-        <p>{{session.mail}}</p>
-        <p style="color: #DB001B;">{{session.phone}}</p>
+        <ion-button (click)="notification()">{{session.name}} abonnieren</ion-button>
       </ion-col>
     </ion-row>
 
+    <ion-item-divider></ion-item-divider>
+
+    <ion-row>
+      <ion-col col-12 *ngIf="session" class="location">
+        <h4>Kontakt</h4>
+        <p style="color: #DB001B;">{{session.website}}</p>
+        <p>{{session.mail}}</p>
+        <p style="color: #DB001B;">{{session.phone}}</p>
+        <ion-button (click)="openContact(session)">Kontaktiere {{session.name}}</ion-button>    
+      </ion-col>
+    </ion-row>
+
+    <ion-item-divider></ion-item-divider>
+
     <!-- Social Media -->
     <ion-row>
-      <ion-col col-12 class="social-media">
+      <ion-col col-12 class="social-media location">
+        <h4>Social Media</h4>
         <ion-chip color="facebook" button (click)="facebook(session)">
           <ion-icon name="logo-facebook"></ion-icon>
           <ion-label>Facebook</ion-label>

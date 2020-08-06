@@ -10,4 +10,13 @@
   .content {
     max-width: 650px;
     margin: auto;
+    text-align: center;
+  }
+
+  ion-list {
+    overflow: hidden;
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }

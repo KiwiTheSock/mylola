@@ -1,41 +1,130 @@
 <!-- Header -->
 <ion-header translucent="true">
   <ion-toolbar>
-    
+
     <!-- Sidemenu -->
     <ion-buttons slot="start">
       <ion-menu-button>
         <ion-icon style="width: 50px; height: 50px;" name="menu"></ion-icon>
-      </ion-menu-button> 
+      </ion-menu-button>
     </ion-buttons>
 
     <!-- Mylola -->
-    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" ></ion-img>  
-    
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png"></ion-img>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!-- Content -->
+<ion-content fullscreen="true">
   <ion-grid class="content">
 
-    <p>Bild (freiwillig)</p>
-    <br>
-    <ion-button>
-      <ion-icon name="settings-outline"></ion-icon>
-    </ion-button>
-    <br>
-    <p>Benutzername</p>
-    <p>E-Mail</p>
-    <p>Passwort</p>
-    <br>
-    <p>Vorname (freiwillig)</p>
-    <p>Nachname (freiwillig)</p>
-    <br>
-    <p>Telefonnummer (freiwillig)</p>
-    <p>Straße (freiwillig)</p>
-    <p>Hausnummer (freiwillig)</p>
-    <p>PLZ (freiwillig)</p>
-    <p>Ort (freiwillig)</p>
+    <!-- Username -->
+    <ion-row>
+      <ion-col>
+        <h1><b>User</b></h1>
+      </ion-col>
+    </ion-row>
+
+    <!-- Button -->
+    <ion-row>
+      <ion-col>
+
+        <ion-button fill="outline" shape="round"  (click)="openSettings()" style="border-radius: 100px;">
+          Profil bearbeiten
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+
+    <!-- Abos -->
+    <ion-item-divider>
+      <ion-label>
+        Abonnierte Unternehmen
+      </ion-label>
+    </ion-item-divider>
+
+
+    <ion-row>
+      <ion-col>
+
+        <ion-list style="max-height: 200px;">
+          <ion-item>
+            <ion-label>Hall of Fame</ion-label>
+            <ion-button slot="end">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-label>Whisky's</ion-label>
+            <ion-button slot="end">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-label>Café-Restaurant am Rubbenbruchsee</ion-label>
+            <ion-button slot="end">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-label>Bücher Wenner</ion-label>
+            <ion-button slot="end">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-button slot="end">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+            <ion-label>Zero</ion-label>
+          </ion-item>
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+
+    <!-- Personal data -->
+    <ion-item-divider>
+      <ion-label>
+        Persönliche Daten
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-row>
+      <ion-col col-12 class="personal">
+        <p>Max</p>
+        <p>Mustermann</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- Location -->
+    <ion-item-divider>
+      <ion-label>
+        Addresse
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-row>
+      <ion-col col-12 class="location">
+        <p>Musterstraße 1</p>
+        <p>49078 Osnabrück</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- Contact -->
+    <ion-item-divider>
+      <ion-label>
+        Kontakt
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-row>
+      <ion-col class="contact">
+        <p>user@user.com</p>
+        <p>017654093421</p>
+      </ion-col>
+    </ion-row>
 
   </ion-grid>
 </ion-content>

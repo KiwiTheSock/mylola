@@ -86,12 +86,8 @@ export class DetailPage implements AfterViewInit{
   }
 
   //Notification
-  notification(session: any) {
-    if (session.not == false) {
-      session.not = true;
-    } else {
-      session.not = false;
-    }
+  notification() {
+    console.log("Abonniert");
   }
 
   //Modal
@@ -116,7 +112,8 @@ export class DetailPage implements AfterViewInit{
   }
 
   isLoggedIn(session: any){
-    if(this.authService.getRole() == null){
+    console.log(this.authService.getRole());
+    if(this.authService.getRole() == null || this.authService.getRole().user == null || this.authService.getRole().email == null){
       this.router.navigateByUrl('/login');
     } else{
       this.presentModal(session)
