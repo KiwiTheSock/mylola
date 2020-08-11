@@ -64,6 +64,10 @@ const routes: Routes = [
   },  {
     path: 'modal-logout',
     loadChildren: () => import('./pages/modal-logout/modal-logout.module').then( m => m.ModalLogoutPageModule)
+  },
+  {
+    path: 'modal-image',
+    loadChildren: () => import('./pages/modal-image/modal-image.module').then( m => m.ModalImagePageModule)
   }
 
   

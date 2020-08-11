@@ -33,6 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
+import { Camera } from "@ionic-native/camera/ngx";
+
 registerLocaleData(localeDe);
 
 @NgModule({
@@ -50,10 +52,10 @@ registerLocaleData(localeDe);
     }),
     SharedModule,
     BrowserAnimationsModule, 
-    NgxChartsModule
+    NgxChartsModule,
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, NavParams, Refresher, SocialSharing, { provide: LOCALE_ID, useValue: 'de' }],
+  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, NavParams, Refresher, Camera, SocialSharing, { provide: LOCALE_ID, useValue: 'de' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -16,36 +16,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="content">
+  <ion-card style="min-height: 30%;">
+    <ion-card-content>
+      <img [src]="croppedImage">
+    </ion-card-content>
+  </ion-card>
 
-    <ion-row>
+  <div class="center">
+    <ion-fab horizontal="center">
+      <ion-fab-button (click)="presentModal()">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
 
-      <ion-col>
-        <p>Foto aufnehmen-Button</p>
-        <p>Datum + Zeit mitliefern?</p>
-      </ion-col>
-
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-input placeholder="Coupon-Titel"></ion-input>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-      
-          <ion-textarea placeholder="Coupon-Text"></ion-textarea>
-       
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-input placeholder="Coupon-Abrisstext"></ion-input>
-      </ion-col>
-    </ion-row>
-
-  </ion-grid>
+  <div style="margin-top: 100px; text-align: center;">
+    <ion-input placeholder="Titel"></ion-input>
+    <ion-input placeholder="Abrisstext"></ion-input>
+    <ion-textarea placeholder="Beschreibung"></ion-textarea>
+    <p>Buttons</p>
+  </div>
 </ion-content>

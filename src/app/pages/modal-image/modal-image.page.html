@@ -1,0 +1,18 @@
+<ion-content class="content">
+
+  <div>
+    <image-cropper 
+    [imageBase64]="myImage" 
+    [maintainAspectRatio]="true" 
+    [aspectRatio]="4/3" 
+    format="png"
+    (imageCropped)="imageCropped($event)" 
+    outputType="base64">
+    </image-cropper>
+  </div>
+
+  <div style="margin-top: -20px;">
+    <ion-button style="border-radius: 25px;" expand="full" (click)="saveImage()">Bild speichern</ion-button>
+  </div>
+
+</ion-content>
