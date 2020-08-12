@@ -1,18 +1,21 @@
-<ion-content class="content">
+<ion-content>
 
-  <div>
-    <image-cropper 
-    [imageBase64]="myImage" 
-    [maintainAspectRatio]="true" 
-    [aspectRatio]="4/3" 
-    format="png"
-    (imageCropped)="imageCropped($event)" 
-    outputType="base64">
-    </image-cropper>
-  </div>
+  <ion-grid class="content">
 
-  <div style="margin-top: -20px;">
-    <ion-button style="border-radius: 25px;" expand="full" (click)="saveImage()">Bild speichern</ion-button>
-  </div>
+    <ion-row>
+      <ion-col>
+        <image-cropper [imageBase64]="myImage" [maintainAspectRatio]="true" [aspectRatio]="4/3" format="png"
+          (imageCropped)="imageCropped($event)" outputType="base64">
+        </image-cropper>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button fill="outline" shape="round" expand="full" (click)="saveImage()">Bild speichern</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>

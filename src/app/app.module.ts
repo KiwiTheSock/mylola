@@ -1,61 +1,64 @@
-import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { environment } from '../environments/environment';
+import { IonicModule } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { NgModule, LOCALE_ID } from '@angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+//Language
+import localeDe from '@angular/common/locales/de';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeDe);
+
+//imports
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ModalPageModule } from './pages/modal/modal.module';
+import { NgCalendarModule } from 'ionic2-calendar'; 
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+import { SharedModule } from './directives/shared.module';
+
+//providers
+import { Camera } from "@ionic-native/camera/ngx";
+import { Darkmode } from './services/darkmode';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { NavParams } from '@ionic/angular';
+import { Refresher } from './services/refresher';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-
-import { IonicModule } from '@ionic/angular';
-import { IonicStorageModule } from '@ionic/storage';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { FormsModule } from '@angular/forms';
-
-import { Darkmode } from './services/darkmode';
-import { Refresher } from './services/refresher';
-
-import { ModalPageModule } from './pages/modal/modal.module';
-
-import { NgCalendarModule } from 'ionic2-calendar'; 
-
-import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
-
-import { NavParams } from '@ionic/angular';
-import { SharedModule } from './directives/shared.module';
-
-import { NgxChartsModule }from '@swimlane/ngx-charts';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-
-import { Camera } from "@ionic-native/camera/ngx";
-
-registerLocaleData(localeDe);
-
 @NgModule({
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule, 
+    FormsModule,
     HttpClientModule,
     ModalPageModule,
-    FormsModule,
     NgCalendarModule,
+    NgxChartsModule,
+    SharedModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
-    }),
-    SharedModule,
-    BrowserAnimationsModule, 
-    NgxChartsModule,
+    })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar, Darkmode, NavParams, Refresher, Camera, SocialSharing, { provide: LOCALE_ID, useValue: 'de' }],
+  providers: [
+    Camera, 
+    Darkmode,
+    InAppBrowser, 
+    NavParams, 
+    Refresher, 
+    SocialSharing, 
+    SplashScreen, 
+    StatusBar, 
+    { provide: LOCALE_ID, useValue: 'de' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

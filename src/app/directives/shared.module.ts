@@ -3,10 +3,15 @@ import { CommonModule } from '@angular/common';
 import { HideHeaderDirective } from './hide-header.directive';
 import { HasRoleDirective } from './has-role.directive';
 
-
 @NgModule({
-    declarations: [HideHeaderDirective, HasRoleDirective],
-    exports: [HideHeaderDirective, HasRoleDirective],
+    declarations: [
+        HasRoleDirective,
+        HideHeaderDirective
+    ],
+    exports: [
+        HideHeaderDirective, 
+        HasRoleDirective
+    ],
     imports: [
         CommonModule
     ]

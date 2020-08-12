@@ -1,14 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-
 import { MenuController, Platform, ToastController, PopoverController, ModalController } from '@ionic/angular';
-
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 import { Storage } from '@ionic/storage';
-
 import { UserData } from './services/user-data';
 import { Darkmode } from './services/darkmode';
 import { AuthService } from './services/auth.service';
@@ -51,7 +47,6 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private cd: ChangeDetectorRef,
     public darkmode: Darkmode,
     private authService: AuthService,
     public popoverCtrl: PopoverController,
@@ -156,6 +151,3 @@ export class AppComponent implements OnInit {
     this.darkmode.darkmode();
   }
 }
-
-
-

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -48,7 +47,6 @@ export class AuthService {
     }
 
     this.authState.next(user);
-
     this.storage.set(TOKEN_KEY, user);
 
     return of(user);
@@ -63,7 +61,6 @@ export class AuthService {
   }
 
   hasRoles(roles: string): boolean {
-
     for (const oneRole of roles) {
       if (!this.authState.value || !(this.authState.value.role.includes(oneRole))) {
         return false;
@@ -76,4 +73,5 @@ export class AuthService {
     this.authState.next(null);
     this.storage.clear();
   }
+
 }

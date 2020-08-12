@@ -4,39 +4,51 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
-   <!-- Mylola -->
-   <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" ></ion-img>  
+    <!-- Mylola -->
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png"></ion-img>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="content">
+  <ion-grid class="content">
 
-  <div class="signup-logo">
-    <img src="../assets/img/mylola/mylola_slogan_red.png" alt="Ionic Logo">
-  </div>
+    <ion-row class="signup-logo">
+      <ion-col>
+        <img src="../assets/img/mylola/mylola_slogan_red.png" alt="Ionic Logo">
+      </ion-col>
+    </ion-row>
 
-  <ion-item>
-    <ion-label position="stacked">Benutzername</ion-label>
-    <ion-input type="email" clearInput placeholder="Benutzername" [(ngModel)]="user.email"></ion-input>
-  </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="stacked">Benutzername</ion-label>
+          <ion-input type="email" clearInput placeholder="Benutzername" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-  <ion-item>
-    <ion-label position="stacked">Passwort</ion-label>
-    <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.pw"></ion-input>
-  </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="stacked">Passwort</ion-label>
+          <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.pw"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-  <div class="ion-padding">
-    <ion-button (click)="onSignup()" type="submit" expand="block">Registrieren</ion-button>
-  </div>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <ion-button (click)="onSignup()" type="submit" expand="block">Registrieren</ion-button>
+      </ion-col>
+    </ion-row>
 
-  <ion-row>
-    <ion-col>
-      <a href="" routerLink="/login">Zum Login</a>
-    </ion-col>
-  </ion-row>
-</div>
+    <ion-row>
+      <ion-col>
+        <a href="" routerLink="/login">Zum Login</a>
+      </ion-col>
+    </ion-row>
 
+  </ion-grid>
 
 </ion-content>

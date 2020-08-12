@@ -9,32 +9,44 @@
     </ion-buttons>
 
     <!-- Mylola -->
-    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" ></ion-img>  
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png"></ion-img>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="content">
+  <ion-grid class="content">
 
-    <div class="login-logo">
-      <img src="../assets/img/mylola/mylola_slogan_red.png" alt="Ionic logo">
-    </div>
+    <ion-row class="login-logo">
+      <ion-col>
+        <img src="../assets/img/mylola/mylola_slogan_red.png" alt="Ionic logo">
+      </ion-col>
+    </ion-row>
 
-    <ion-item>
-      <ion-label position="stacked">Benutzername</ion-label>
-      <ion-input type="email" clearInput placeholder="Benutzername" [(ngModel)]="user.email"></ion-input>
-    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="stacked">Benutzername</ion-label>
+          <ion-input type="email" clearInput placeholder="Benutzername" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-    <ion-item>
-      <ion-label position="stacked">Passwort</ion-label>
-      <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.pw"></ion-input>
-    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="stacked">Passwort</ion-label>
+          <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.pw"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-    <div class="ion-padding">
-      <ion-button expand="block" (click)="signIn()">Einloggen</ion-button>
-    </div>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <ion-button expand="block" (click)="signIn()">Einloggen</ion-button>
+      </ion-col>
+    </ion-row>
 
     <ion-row style="text-align: center;">
       <ion-col>
@@ -45,6 +57,6 @@
       </ion-col>
     </ion-row>
 
-  </div>
+  </ion-grid>
 
 </ion-content>

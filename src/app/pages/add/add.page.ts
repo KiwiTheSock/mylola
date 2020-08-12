@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalImagePage } from '../modal-image/modal-image.page';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,10 +11,15 @@ import { ModalImagePage } from '../modal-image/modal-image.page';
 })
 export class AddPage {
 
+  titel = null;
+  text = null;
+  description = null;
+
   croppedImage = null;
   
   constructor(
-    public modalController: ModalController
+    public modalController: ModalController,
+    public router: Router
   ) { }
 
   async presentModal() {
@@ -30,6 +36,17 @@ export class AddPage {
     });
     
     return await modal.present();
+  }
+
+  createCoupon() {
+    console.log("Created Coupon");
+  }
+
+  cancel() {
+    this.titel = "";
+    this.text = "";
+    this.description = "";
+    return this.router.navigateByUrl('/app/tabs/schedule');
   }
 
 }
