@@ -19,9 +19,9 @@
 
   <ion-grid class="content">
 
-    <ion-row>
+    <ion-row class="picture">
       <ion-col>
-        <ion-card style="height: 200px;">
+        <ion-card>
           <ion-card-content>
             <img [src]="croppedImage">
           </ion-card-content>
@@ -29,38 +29,37 @@
       </ion-col>
     </ion-row>
 
-    <ion-row style="padding-bottom: 80px;">
+    <ion-row class="picture-button">
       <ion-col>
-        <ion-fab horizontal="center">
-          <ion-fab-button (click)="presentModal()">
-            <ion-icon name="camera-outline"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+        <ion-button fill="outline" shape="round"  (click)="presentModal()">
+          <ion-icon name="camera-outline"></ion-icon>
+          Foto machen
+        </ion-button>
       </ion-col>
     </ion-row>
 
-    <ion-row style="text-align: center;">
+    <ion-row class="titel">
       <ion-col>
-        <ion-input [(ngModel)]="titel" placeholder="Titel"></ion-input>
+        <ion-input maxLength="50" [(ngModel)]="titel" placeholder="Titel" required></ion-input>
       </ion-col>
     </ion-row>
 
-    <ion-row style="text-align: center;">
+    <ion-row class="text">
       <ion-col>
-        <ion-input [(ngModel)]="text" placeholder="Abrisstext"></ion-input>
+        <ion-input maxLength="20" [(ngModel)]="text" placeholder="Abrisstext" required></ion-input>
       </ion-col>
     </ion-row>
 
-    <ion-row style="text-align: center;">
+    <ion-row class="description">
       <ion-col>
-        <ion-textarea [(ngModel)]="description" placeholder="Beschreibung"></ion-textarea>
+        <textarea maxLength="500" [(ngModel)]="description" placeholder=" Beschreibung" ></textarea>
       </ion-col>
     </ion-row>
 
     <ion-row class="buttons">
 
       <ion-col>
-        <ion-fab  horizontal="center">
+        <ion-fab horizontal="center">
           <ion-fab-button color="success" (click)="createCoupon()">
             <ion-icon name="checkmark"></ion-icon>
           </ion-fab-button>

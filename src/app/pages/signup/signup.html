@@ -31,8 +31,26 @@
     <ion-row>
       <ion-col>
         <ion-item>
+          <ion-label position="stacked">E-Mail</ion-label>
+          <ion-input type="email" clearInput placeholder="E-Mail" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
           <ion-label position="stacked">Passwort</ion-label>
           <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.pw"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="stacked">Passwort wiederholen</ion-label>
+          <ion-input type="password" clearInput placeholder="Passwort wiederholen" [(ngModel)]="user.pw"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

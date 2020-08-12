@@ -4,13 +4,13 @@
 
     <ion-row>
       <ion-col>
-        <image-cropper [imageBase64]="myImage" [maintainAspectRatio]="true" [aspectRatio]="4/3" format="png"
+        <image-cropper [imageBase64]="myImage" [maintainAspectRatio]="true" [aspectRatio]="16/9" format="png"
           (imageCropped)="imageCropped($event)" outputType="base64">
         </image-cropper>
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row class="button">
       <ion-col>
         <ion-button fill="outline" shape="round" expand="full" (click)="saveImage()">Bild speichern</ion-button>
       </ion-col>

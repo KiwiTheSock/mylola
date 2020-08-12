@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
 
@@ -10,16 +10,18 @@ import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
 })
 export class ModalImagePage {
 
-  myImage = null;
-  croppedImage = null;
+  myImage = "../../assets/img/add/platzhalter.png";
+  croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
   
   @ViewChild(ImageCropperComponent, { static: false }) angularCropper: ImageCropperComponent;
 
   constructor(
     private camera: Camera,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private platform: Platform
   ) { 
     this.captureImage();
+    this.backButtonEvent();
   }
 
   captureImage() {
@@ -49,6 +51,12 @@ export class ModalImagePage {
 
   dismiss() {
     this.modalController.dismiss({ 'dismissed': true });
+  }
+
+  backButtonEvent(){
+    this.platform.backButton.subscribe(() => {
+      this.modalController.dismiss(this.croppedImage);
+    })
   }
 
 }

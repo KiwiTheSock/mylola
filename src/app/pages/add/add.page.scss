@@ -13,24 +13,51 @@ ion-col{
 /* Mylola
  * --------------------------------------------------------
  */
- .mylola{
-    height: 20px;
-    margin: auto;
-    margin-right: 60px;
-  }
-
-  .content {
-    max-width: 650px;
-    margin: auto;
-  }
+.mylola{
+  height: 20px;
+  margin: auto;
+  margin-right: 60px;
+}
 
 .content {
   max-width: 650px;
+  margin: auto;
+  overflow: visible;
+}
+
+.picture {
+  text-align: center;
+}
+
+.picture-button{
+  text-align: center;
+  padding-bottom: 10px;
+
+  ion-icon{
+    padding-right: 5px;
+  }
+}
+
+.titel {
+  border: 1px grey solid;
+  margin-bottom: 10px;
+}
+
+.text {
+  border: 1px grey solid;
+  margin-bottom: 10px;
+}
+
+.description{
+  textarea{
+    border: 1px grey solid;
+    height: 200px;
+    width: 100%; 
+    resize: none;
+  }
 }
 
 .buttons {
-  position: fixed;
-  left: 0;
-  bottom: 80px;
-  right: 0;
+ margin-top: 10px;
+ margin-bottom: 70px;
 }

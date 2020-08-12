@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewEncapsulation, ViewChildren, QueryList } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { MenuController, Platform, ToastController, PopoverController, ModalController } from '@ionic/angular';
+import { MenuController, Platform, ToastController, PopoverController, ModalController, IonRouterOutlet, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
@@ -9,6 +9,7 @@ import { UserData } from './services/user-data';
 import { Darkmode } from './services/darkmode';
 import { AuthService } from './services/auth.service';
 import { ModalLogoutPage } from './pages/modal-logout/modal-logout.page';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,11 @@ export class AppComponent implements OnInit {
   loggedIn = false;
   session: any;
 
+  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList < IonRouterOutlet > ;
+
+  lastTimeBackPress = 0;
+  timePeriodToExit = 2000;
+
   constructor(
     private menu: MenuController,
     private platform: Platform,
@@ -51,6 +57,8 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     public popoverCtrl: PopoverController,
     public modalController: ModalController,
+    private alertController: AlertController,
+    private location: Location
   ) {
     this.initializeApp();
   }

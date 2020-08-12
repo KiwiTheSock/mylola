@@ -14,18 +14,21 @@ export class AddPage {
   titel = null;
   text = null;
   description = null;
-
   croppedImage = null;
   
   constructor(
     public modalController: ModalController,
     public router: Router
-  ) { }
+  ) { 
+    if(this.croppedImage == "" || this.croppedImage == null){
+      this.croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
+    }
+  }
 
   async presentModal() {
     const modal = await this.modalController.create({
       component: ModalImagePage,
-      cssClass: 'my-custom-class',
+      cssClass: 'modal-image-css',
       swipeToClose: true, //iOS
     });
 

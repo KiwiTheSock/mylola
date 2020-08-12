@@ -113,7 +113,7 @@ export class DetailPage implements AfterViewInit{
 
   isLoggedIn(session: any){
     console.log(this.authService.getRole());
-    if(this.authService.getRole() == null || this.authService.getRole().user == null || this.authService.getRole().email == null){
+    if(this.authService.getRole() == null || this.authService.getRole().email == null){
       this.router.navigateByUrl('/login');
     } else{
       this.presentModal(session)
