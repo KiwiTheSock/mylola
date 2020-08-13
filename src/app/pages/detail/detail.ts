@@ -177,6 +177,11 @@ export class DetailPage implements AfterViewInit{
 
     await actionSheet.present();
   }
+
+  openSettings() {
+    console.log("Bearbeiten");
+  }
+
   /* Map
   * --------------------------------------------------------
   */

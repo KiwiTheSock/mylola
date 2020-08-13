@@ -24,6 +24,7 @@ import { SharedModule } from './directives/shared.module';
 //providers
 import { Camera } from "@ionic-native/camera/ngx";
 import { Darkmode } from './services/darkmode';
+import { File } from '@ionic-native/file/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NavParams } from '@ionic/angular';
 import { Refresher } from './services/refresher';
@@ -52,6 +53,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   providers: [
     Camera, 
     Darkmode,
+    File,
     InAppBrowser, 
     NavParams, 
     Refresher, 

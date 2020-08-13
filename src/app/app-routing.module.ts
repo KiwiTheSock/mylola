@@ -61,14 +61,35 @@ const routes: Routes = [
     data: {
       role: 'USER'
     }
-  },  {
+  },
+  {
     path: 'modal-logout',
     loadChildren: () => import('./pages/modal-logout/modal-logout.module').then( m => m.ModalLogoutPageModule)
   },
   {
     path: 'modal-image',
     loadChildren: () => import('./pages/modal-image/modal-image.module').then( m => m.ModalImagePageModule)
+  },
+  {
+    path: 'account-edit',
+    loadChildren: () => import('./pages/account-edit/account-edit.module').then( m => m.AccountEditPageModule),
+    canActivate: [AuthGuard],
+    data: {
+      role: 'ADMIN'
+    }
+  },
+  {
+    path: 'profile-edit',
+    loadChildren: () => import('./pages/profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule),
+    canActivate: [AuthGuard],
+    data: {
+      role: 'USER'
+    }
+  },  {
+    path: 'detail-edit',
+    loadChildren: () => import('./pages/detail-edit/detail-edit.module').then( m => m.DetailEditPageModule)
   }
+
 
   
 ];

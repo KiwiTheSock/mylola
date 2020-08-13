@@ -30,6 +30,14 @@
     </ion-row>
 
     <ion-row>
+      <ion-col class="settings-button">
+        <ion-button (click)="openSettings()">
+          <ion-icon name="settings-sharp"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
       <!-- Icons -->
       <ion-col col-6 *ngIf="session" class="icons">
 

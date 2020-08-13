@@ -45,6 +45,28 @@ ion-col{
   border: 2px solid #DB001B;
 }
 
+/* Settings button
+ * --------------------------------------------------------
+ */
+
+.settings-button ion-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -50px;
+
+  --background: --ion-background-color;
+  --background-hover: --ion-background-color;
+  --color: white;
+  --box-shadow: none;
+  --ripple-color: transparent;
+
+  ion-icon{
+    width: 28px;
+    height: 28px;
+  }
+}
+
 /* Icons
  * --------------------------------------------------------
  */

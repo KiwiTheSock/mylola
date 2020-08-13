@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ActionSheetController } from '@ionic/angular';
 import { ModalImagePage } from '../modal-image/modal-image.page';
 import { Router } from '@angular/router';
-
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-add',
@@ -18,18 +19,46 @@ export class AddPage {
   
   constructor(
     public modalController: ModalController,
-    public router: Router
+    public router: Router,
+    private camera: Camera,
+    public actionSheetController: ActionSheetController,
+    private file: File
   ) { 
     if(this.croppedImage == "" || this.croppedImage == null){
       this.croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
     }
   }
 
-  async presentModal() {
+  async selectImage() {
+    const actionSheet = await this.actionSheetController.create({
+      header: "Bildquelle auswählen",
+      buttons: [{
+        text: 'Aus der Bibliothek laden',
+        handler: () => {
+          this.presentModal(this.camera.PictureSourceType.PHOTOLIBRARY);
+        }
+      },
+      {
+        text: 'Kamera benutzen',
+        handler: () => {
+          this.presentModal(this.camera.PictureSourceType.CAMERA);
+        }
+      },
+      {
+        text: 'Abbrechen',
+        role: 'cancel'
+      }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  async presentModal(sourceType) {
     const modal = await this.modalController.create({
       component: ModalImagePage,
       cssClass: 'modal-image-css',
       swipeToClose: true, //iOS
+      componentProps: { sourceType: sourceType }
     });
 
     //Passed back data
@@ -39,6 +68,10 @@ export class AddPage {
     });
     
     return await modal.present();
+  }
+
+  selectPicture() {
+    console.log("selectPicture")
   }
 
   createCoupon() {
