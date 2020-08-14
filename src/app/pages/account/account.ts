@@ -75,4 +75,5 @@ export class AccountPage implements AfterViewInit {
   openSettings() {
     console.log("Settings");
   }
+  
 }

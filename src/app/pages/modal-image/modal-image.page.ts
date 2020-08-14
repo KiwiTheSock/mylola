@@ -67,8 +67,9 @@ export class ModalImagePage {
 
   backButtonEvent(){
     this.platform.backButton.subscribe(() => {
-      this.modalController.dismiss(this.croppedImage);
+      this.modalController.dismiss("../../assets/img/add/kein-bild-vorhanden-16-9.png");
     })
   }
+  
 
 }

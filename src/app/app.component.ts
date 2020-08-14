@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, ViewChildren, QueryList } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { MenuController, Platform, ToastController, PopoverController, ModalController, IonRouterOutlet, AlertController } from '@ionic/angular';
+import { MenuController, Platform, ToastController, PopoverController, ModalController, IonRouterOutlet, AlertController, ActionSheetController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
@@ -9,7 +9,9 @@ import { UserData } from './services/user-data';
 import { Darkmode } from './services/darkmode';
 import { AuthService } from './services/auth.service';
 import { ModalLogoutPage } from './pages/modal-logout/modal-logout.page';
-import {Location} from '@angular/common';
+import { Location, PlatformLocation } from '@angular/common';
+import { DeviceInfo } from '@capacitor/core';
+
 
 @Component({
   selector: 'app-root',
@@ -38,10 +40,12 @@ export class AppComponent implements OnInit {
   loggedIn = false;
   session: any;
 
-  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList < IonRouterOutlet > ;
-
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
+
+  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+
+  croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
 
   constructor(
     private menu: MenuController,
@@ -58,9 +62,49 @@ export class AppComponent implements OnInit {
     public popoverCtrl: PopoverController,
     public modalController: ModalController,
     private alertController: AlertController,
-    private location: Location
+    private location: Location,
+    private platformLocation: PlatformLocation,
+    private actionSheetCtrl: ActionSheetController,
+    private nav: NavController
+
   ) {
     this.initializeApp();
+
+    //Only for browser
+    this.platformLocation.onPopState(async () => {
+      const modal = await this.modalController.getTop();
+      if (modal) {
+        modal.dismiss(this.croppedImage);
+      }
+    });
+
+    this.backButtonEvent();
+  }
+
+  backButtonEvent() {
+    this.platform.backButton.subscribeWithPriority(0, () => {
+      this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
+        if (this.router.url != '/app/tabs/schedule') {
+          await this.location.back();
+        } else if (this.router.url === '/app/tabs/schedule') {
+          if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
+            this.lastTimeBackPress = new Date().getTime();
+            this.presentToast();
+          } else {
+            navigator['app'].exitApp();
+          }
+        }
+      });
+    });
+  }
+
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Wenn Sie die App verlassen möchten, drücken Sie noch einaml auf die Zurück-Taste',
+      position: 'bottom',
+      duration: 2000
+    });
+    toast.present();
   }
 
   async ngOnInit() {
@@ -89,6 +133,7 @@ export class AppComponent implements OnInit {
   }
 
   initializeApp() {
+
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -139,7 +184,12 @@ export class AppComponent implements OnInit {
     });
     */
 
-    return await modal.present();
+    await modal.present();
+
+    if (!window.history.state.modal) {
+      const modalState = { modal: true };
+      history.pushState(modalState, null);
+    }
   }
 
   logout() {
@@ -158,4 +208,6 @@ export class AppComponent implements OnInit {
   changeDarkmode() {
     this.darkmode.darkmode();
   }
+
 }
+

@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, Renderer2, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll } from '@ionic/angular';
+import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll, Platform } from '@ionic/angular';
 import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
 import { PopoverController } from '@ionic/angular';
@@ -57,7 +57,8 @@ export class HomePage implements OnInit {
     private renderer: Renderer2,
     public navParams: NavParams,
     private authService: AuthService,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    private platform: Platform
   ) { }
 
   ngOnInit() {
@@ -214,4 +215,5 @@ export class HomePage implements OnInit {
       this.dismissFilter(name);
     }
   }
+
 }

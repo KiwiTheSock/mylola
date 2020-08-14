@@ -33,6 +33,10 @@
     <param name="android-package" value="nl.xservices.plugins.SocialSharing"/>
   </feature>
 
+  <feature name="Toast">
+    <param name="android-package" value="nl.xservices.plugins.Toast"/>
+  </feature>
+
   
   <preference name="ScrollEnabled" value="false" />
   <preference name="android-minSdkVersion" value="19" />

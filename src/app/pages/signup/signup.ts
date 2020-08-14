@@ -42,4 +42,5 @@ export class SignupPage {
     this.user.email = "";
     this.user.pw = "";
   }
+  
 }

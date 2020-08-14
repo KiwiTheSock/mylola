@@ -67,7 +67,12 @@ export class AddPage {
         this.croppedImage = data['data']; 
     });
     
-    return await modal.present();
+    await modal.present();
+
+    if(!window.history.state.modal) {
+      const modalState = { modal: true };
+      history.pushState(modalState, null);
+    }
   }
 
   selectPicture() {
@@ -85,4 +90,5 @@ export class AddPage {
     return this.router.navigateByUrl('/app/tabs/schedule');
   }
 
+  
 }

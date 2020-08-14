@@ -11,5 +11,5 @@ export class AccountEditPage implements OnInit {
 
   ngOnInit() {
   }
-
+  
 }

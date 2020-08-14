@@ -134,4 +134,5 @@ export class EventsPage {
     });
     alert.present();
   }
+
 }

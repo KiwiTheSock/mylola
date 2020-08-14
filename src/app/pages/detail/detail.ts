@@ -108,7 +108,12 @@ export class DetailPage implements AfterViewInit{
     });
     */
    
-    return await modal.present();
+    await modal.present();
+
+    if(!window.history.state.modal) {
+      const modalState = { modal: true };
+      history.pushState(modalState, null);
+    }
   }
 
   isLoggedIn(session: any){
