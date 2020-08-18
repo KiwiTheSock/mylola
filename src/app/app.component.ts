@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
 
   backButtonEvent() {
     this.platform.backButton.subscribeWithPriority(0, () => {
-      this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
+      this.routerOutlets.forEach(async (outlet: IonRouterOutlet) => {
         if (this.router.url != '/app/tabs/schedule') {
           await this.location.back();
         } else if (this.router.url === '/app/tabs/schedule') {
@@ -93,6 +93,11 @@ export class AppComponent implements OnInit {
           } else {
             navigator['app'].exitApp();
           }
+        }
+        else if (this.router.url === '/app/tabs/favorites') {
+          await this.router.navigate(['/app/tabs/schedule']);
+        } else if (this.router.url === '/app/tabs/events') {
+          await this.router.navigate(['/app/tabs/schedule']);
         }
       });
     });

@@ -15,7 +15,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: HomePage,
+            loadChildren: () => import('../home/home.module').then(m => m.HomeModule)
           },
           {
             path: 'detail/:sessionId',
@@ -28,7 +28,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: FavoritesPage,
+            loadChildren: () => import('../favorites/favorites.module').then(m => m.FavoritesModule)
           },
           {
             path: 'detail/:sessionId',
@@ -51,6 +51,11 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: '/app/tabs/schedule',
+    pathMatch: 'full'
   }
 ];
 
