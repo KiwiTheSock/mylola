@@ -11,6 +11,7 @@ import { AuthService } from './services/auth.service';
 import { ModalLogoutPage } from './pages/modal-logout/modal-logout.page';
 import { Location, PlatformLocation } from '@angular/common';
 import { DeviceInfo } from '@capacitor/core';
+import { state } from '@angular/animations';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { DeviceInfo } from '@capacitor/core';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
+
   appPages = [
     {
       title: 'Home',
@@ -77,14 +79,13 @@ export class AppComponent implements OnInit {
         modal.dismiss(this.croppedImage);
       }
     });
-
     this.backButtonEvent();
   }
 
   backButtonEvent() {
     this.platform.backButton.subscribeWithPriority(0, () => {
       this.routerOutlets.forEach(async (outlet: IonRouterOutlet) => {
-        if (this.router.url != '/app/tabs/schedule') {
+        if (this.router.url != '/app/tabs/schedule' && this.router.url != '/app/tabs/favorites' && this.router.url != '/app/tabs/events') {
           await this.location.back();
         } else if (this.router.url === '/app/tabs/schedule') {
           if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
@@ -96,6 +97,7 @@ export class AppComponent implements OnInit {
         }
         else if (this.router.url === '/app/tabs/favorites') {
           await this.router.navigate(['/app/tabs/schedule']);
+          
         } else if (this.router.url === '/app/tabs/events') {
           await this.router.navigate(['/app/tabs/schedule']);
         }

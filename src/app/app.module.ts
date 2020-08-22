@@ -14,7 +14,7 @@ registerLocaleData(localeDe);
 //imports
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalPageModule } from './pages/modal/modal.module';
 import { NgCalendarModule } from 'ionic2-calendar'; 
@@ -42,6 +42,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
     ModalPageModule,
     NgCalendarModule,
     NgxChartsModule,
+    ReactiveFormsModule,
     SharedModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),

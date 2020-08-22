@@ -31,7 +31,7 @@
 
     <ion-row class="picture-button">
       <ion-col>
-        <ion-button fill="outline" shape="round"  (click)="selectImage()">
+        <ion-button fill="outline" shape="round" (click)="selectImage()">
           Foto auswählen
         </ion-button>
       </ion-col>
@@ -51,15 +51,52 @@
 
     <ion-row class="description">
       <ion-col>
-        <textarea maxLength="500" [(ngModel)]="description" placeholder=" Beschreibung" ></textarea>
+        <textarea maxLength="500" [(ngModel)]="description" placeholder=" Beschreibung"></textarea>
       </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col style="text-align: center;">
+        <p>Aktions- oder Veranstaltungszeitraums festlegen</p>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="time" (ngSubmit)="submitForm()" >
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-datetime #start [(ngModel)]="starttime" formControlName="starttime" displayFormat="HH:mm, DD MMMM YYYY"
+              pickerFormat="DD-MMM-YYYY HH:mm" placeholder="Startzeit" doneText="Fertig" cancelText="Abbrechen"
+              monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
+              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
+              required></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-datetime #end [(ngModel)]="endtime" formControlName="endtime" displayFormat="HH:mm, DD MMMM YYYY"
+              pickerFormat="DD-MMM-YYYY HH:mm" placeholder="Endzeit" doneText="Fertig" cancelText="Abbrechen"
+              monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
+              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
+              required></ion-datetime>
+          </ion-item>
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
+        </ion-col>
+      </ion-row>
+    </form>
+
 
     <ion-row class="buttons">
 
       <ion-col>
         <ion-fab horizontal="center">
-          <ion-fab-button color="success" (click)="createCoupon()">
+          <ion-fab-button color="success" type="submit" (click)="createCoupon()">
             <ion-icon name="checkmark"></ion-icon>
           </ion-fab-button>
         </ion-fab>
