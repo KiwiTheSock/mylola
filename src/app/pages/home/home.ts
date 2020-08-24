@@ -8,7 +8,7 @@ import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
 import { AuthService } from '../../services/auth.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-
+import { TabsPage } from '../tabs-page/tabs-page';
 
 @Component({
   selector: 'page-home',
@@ -58,7 +58,8 @@ export class HomePage implements OnInit {
     public navParams: NavParams,
     private authService: AuthService,
     private socialSharing: SocialSharing,
-    private platform: Platform
+    private platform: Platform,
+    private tabs: TabsPage
   ) { }
 
   ngOnInit() {
@@ -80,6 +81,8 @@ export class HomePage implements OnInit {
         });
       });
     });
+
+    this.tabs.home();
   }
 
   applyFilter(name) {

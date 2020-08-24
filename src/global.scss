@@ -73,3 +73,23 @@
 	outline:none;
 }
 
+/* Tabs
+ * --------------------------------------------------------
+ */
+
+ion-tab-bar{
+  --background: none;
+  --border: none;
+  --color: none;
+}
+
+ion-tab-button{
+  --background: none;
+  --background-focused: none;
+  --background-focused-opacity: none;
+  --color: none;
+  --color-focused: none;
+  --color-selected: none;
+  --ripple-color: none;
+}
+
