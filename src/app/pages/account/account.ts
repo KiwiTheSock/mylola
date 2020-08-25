@@ -73,7 +73,7 @@ export class AccountPage implements AfterViewInit {
   }
 
   openSettings() {
-    console.log("Settings");
+    this.router.navigateByUrl('/account-edit');
   }
   
 }

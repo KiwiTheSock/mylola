@@ -1,9 +1,101 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile-edit</ion-title>
+    <!-- Back Button -->
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    </ion-buttons>
+    <!-- Mylola -->
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png"></ion-img>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen="true">
+  <ion-grid class="content">
 
+      <!-- Personal Data -->
+      <ion-item-divider>
+        <ion-label>
+          Persönliche Daten
+        </ion-label>
+      </ion-item-divider>
+  
+      <ion-row>
+        <ion-col class="ion-padding-top ion-text-center">
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Vorame</b></ion-label>
+            <ion-input maxLength="50" [(ngModel)]="name" value="{{name}}" required></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Nachname</b></ion-label>
+            <ion-input maxLength="50" [(ngModel)]="lastname" value="{{lastname}}" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+  
+      <!-- Location -->
+      <ion-item-divider>
+        <ion-label>
+          Addresse
+        </ion-label>
+      </ion-item-divider>
+  
+      <ion-row>
+        <ion-col>
+  
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Straße</b></ion-label>
+            <ion-input maxLength="50" [(ngModel)]="street" value="{{street}}" required></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Hausnummer</b></ion-label>
+            <ion-input maxLength="50" [(ngModel)]="streetnumber" value="{{streetnumber}}" required></ion-input>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-label class="label1"><b>PLZ</b></ion-label>
+            <ion-input maxLength="50" [(ngModel)]="postcode" value="{{postcode}}" required></ion-input>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Stadt</b></ion-label>
+            <ion-input maxLength="50" [(ngModel)]="city" value="{{city}}" required></ion-input>
+          </ion-item>
+  
+        </ion-col>
+      </ion-row>
+  
+      <!-- Contact -->
+      <ion-item-divider>
+        <ion-label>
+          Kontakt
+        </ion-label>
+      </ion-item-divider>
+  
+      <ion-row>
+        <ion-col>
+  
+          <ion-item lines="none">
+            <ion-label class="label1"><b>E-Mail</b></ion-label>
+            <ion-input maxLength="50" [(ngModel)]="email" value="{{email}}" required></ion-input>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Telefon</b></ion-label>
+            <ion-input maxLength="50" [(ngModel)]="phone" value="{{phone}}" required></ion-input>
+          </ion-item>
+  
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="save">
+          <ion-button fill="outline" shape="round" (click)="save()">
+            Speichern
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+  </ion-grid>
 </ion-content>

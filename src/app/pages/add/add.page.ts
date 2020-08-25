@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { ModalController, ActionSheetController, IonDatetime } from '@ionic/angular';
 import { ModalImagePage } from '../modal-image/modal-image.page';
 import { Router } from '@angular/router';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
@@ -121,7 +121,7 @@ export class AddPage implements OnInit{
 
   //Cancel
   cancel() {
-    return this.router.navigateByUrl('/app/tabs/schedule');
+    this.router.navigateByUrl('/app/tabs/schedule');
   }
  
 }

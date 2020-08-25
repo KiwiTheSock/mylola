@@ -27,6 +27,8 @@ export class DetailPage implements AfterViewInit{
   session: any;
   defaultHref = '';
 
+  show = false;
+
   text: string='Mylola ... teilen ... bla bla';
   link: string='https://www.mylola.de/';
   
@@ -61,6 +63,14 @@ export class DetailPage implements AfterViewInit{
         }
       }
     });
+
+    this.edit();
+  }
+
+  edit() {
+    if (this.authService.getRole().role == "ADMIN" && this.router.url === "/app/tabs/schedule/detail/1"){
+      this.show = true;
+    }
   }
 
   ionViewDidEnter() {
@@ -184,7 +194,7 @@ export class DetailPage implements AfterViewInit{
   }
 
   openSettings() {
-    console.log("Bearbeiten");
+    this.router.navigateByUrl("/detail-edit"); 
   }
 
   /* Map

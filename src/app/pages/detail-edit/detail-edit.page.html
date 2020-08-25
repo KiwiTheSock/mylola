@@ -1,9 +1,145 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>detail-edit</ion-title>
+    <!-- Back Button -->
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    </ion-buttons>
+    <!-- Mylola -->
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png"></ion-img>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen="true">
+  <ion-grid class="content">
 
+    <!-- Titlepicture -->
+    <ion-item-divider>
+      <ion-label>
+        Couponbild
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-row>
+      <ion-col col-12 class="ion-padding-top ion-text-center">
+        <div>
+          <img [src]="croppedImage">
+        </div>
+        <ion-button fill="outline" shape="round" (click)="picture()">
+          Couponbild ändern
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <!-- Name -->
+    <ion-item-divider>
+      <ion-label>
+        Titel
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-row>
+      <ion-col class="ion-padding-top ion-text-center">
+        <ion-item lines="none">
+          <ion-label class="label1"><b>Titel</b></ion-label>
+          <ion-input maxLength="50" [(ngModel)]="title" value="{{title}}" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!--  -->
+    <ion-item-divider>
+      <ion-label>
+        Abrisstext
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-row>
+      <ion-col class="ion-padding-top ion-text-center">
+
+        <ion-item lines="none">
+          <ion-label class="label1"><b>Abrisstext</b></ion-label>
+          <ion-input maxLength="50" [(ngModel)]="text" value="{{text}}" required></ion-input>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+
+    <!-- Describtion -->
+    <ion-item-divider>
+      <ion-label>
+        Beschreibung
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-row>
+      <ion-col class="ion-padding-top ion-text-center">
+
+        <ion-item lines="none" class="description">
+          <ion-label class="label1"><b>Beschreibung</b></ion-label>
+          <textarea maxLength="1000" [(ngModel)]="describtion" value="{{describtion}}" required></textarea>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+
+    <!-- Social Media -->
+    <ion-item-divider>
+      <ion-label>
+        Aktions- oder Veranstaltungszeitraum
+      </ion-label>
+    </ion-item-divider>
+
+    <form [formGroup]="time" (ngSubmit)="submitForm()" >
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <p><b>Startzeit</b></p>
+            <ion-datetime #start [(ngModel)]="starttime" formControlName="starttime" displayFormat="HH:mm, DD MMMM YYYY"
+              pickerFormat="DD-MMM-YYYY HH:mm" doneText="Fertig" cancelText="Abbrechen"
+              monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
+              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
+              required></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <p><b>Endzeit</b></p>
+            <ion-datetime #end [(ngModel)]="endtime" formControlName="endtime" displayFormat="HH:mm, DD MMMM YYYY"
+              pickerFormat="DD-MMM-YYYY HH:mm" doneText="Fertig" cancelText="Abbrechen"
+              monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
+              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
+              required></ion-datetime>
+          </ion-item>
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-row class="buttons">
+
+      <ion-col>
+        <ion-fab horizontal="center">
+          <ion-fab-button color="success" type="submit" (click)="editCoupon()">
+            <ion-icon name="checkmark"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+
+      <ion-col>
+        <ion-fab horizontal="center">
+          <ion-fab-button (click)="cancel()">
+            <ion-icon name="close"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

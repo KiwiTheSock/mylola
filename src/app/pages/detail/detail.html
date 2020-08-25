@@ -31,7 +31,7 @@
 
     <ion-row>
       <ion-col class="settings-button">
-        <ion-button (click)="openSettings()">
+        <ion-button (click)="openSettings()" *ngIf="show">
           <ion-icon name="settings-sharp"></ion-icon>
         </ion-button>
       </ion-col>
