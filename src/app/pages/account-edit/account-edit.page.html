@@ -167,71 +167,101 @@
       </ion-label>
     </ion-item-divider>
 
-    <ion-row>
-      <ion-col>
+    <form [formGroup]="time" (ngSubmit)="submitForm()">
+      <ion-row>
+        <ion-col>
 
-        <ion-item lines="none">
-          <p><b>Montag</b></p>
-          <ion-datetime id="one" [(ngModel)]="mo_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-          <ion-datetime id="two" [(ngModel)]="mo_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-        </ion-item>
+          <ion-item lines="none">
+            <p><b>Montag</b></p>
+            <ion-datetime [(ngModel)]="mo_starttime" formControlName="mo_starttime" displayFormat="HH:mm" pickerFormat="HH:mm"
+              doneText="Fertig" cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime [(ngModel)]="mo_endtime" formControlName="mo_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+          </ion-item>
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mo_endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
 
-        <ion-item lines="none">
-          <p><b>Dienstag</b></p>
-          <ion-datetime [(ngModel)]="tu_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-          <ion-datetime [(ngModel)]="tu_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-        </ion-item>
+          <ion-item lines="none">
+            <p><b>Dienstag</b></p>
+            <ion-datetime [(ngModel)]="tu_starttime" formControlName="tu_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime [(ngModel)]="tu_endtime" formControlName="tu_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+          </ion-item>
+           <!-- Error messages -->
+           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.tu_endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
 
-        <ion-item lines="none">
-          <p><b>Mittwoch</b></p>
-          <ion-datetime [(ngModel)]="we_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-          <ion-datetime [(ngModel)]="we_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-        </ion-item>
+          <ion-item lines="none">
+            <p><b>Mittwoch</b></p>
+            <ion-datetime [(ngModel)]="we_starttime" formControlName="we_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime [(ngModel)]="we_endtime" formControlName="we_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+          </ion-item>
+           <!-- Error messages -->
+           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.we_endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
 
-        <ion-item lines="none">
-          <p><b>Donnerstag</b></p>
-          <ion-datetime [(ngModel)]="th_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-          <ion-datetime [(ngModel)]="th_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-        </ion-item>
+          <ion-item lines="none">
+            <p><b>Donnerstag</b></p>
+            <ion-datetime [(ngModel)]="th_starttime" formControlName="th_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime [(ngModel)]="th_endtime" formControlName="th_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+          </ion-item>
+           <!-- Error messages -->
+           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.th_endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
 
-        <ion-item lines="none">
-          <p><b>Freitag</b></p>
-          <ion-datetime [(ngModel)]="fr_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-          <ion-datetime [(ngModel)]="fr_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-        </ion-item>
+          <ion-item lines="none">
+            <p><b>Freitag</b></p>
+            <ion-datetime [(ngModel)]="fr_starttime" formControlName="fr_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime [(ngModel)]="fr_endtime" formControlName="fr_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+          </ion-item>
+           <!-- Error messages -->
+           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fr_endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
 
-        <ion-item lines="none">
-          <p><b>Samstag</b></p>
-          <ion-datetime [(ngModel)]="sa_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-          <ion-datetime [(ngModel)]="sa_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-        </ion-item>
+          <ion-item lines="none">
+            <p><b>Samstag</b></p>
+            <ion-datetime [(ngModel)]="sa_starttime" formControlName="sa_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime [(ngModel)]="sa_endtime" formControlName="sa_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+          </ion-item>
+           <!-- Error messages -->
+           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sa_endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
 
-        <ion-item lines="none">
-          <p><b>Sonntag</b></p>
-          <ion-datetime [(ngModel)]="su_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-          <ion-datetime [(ngModel)]="su_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
-            cancelText="Abbrechen" required></ion-datetime>
-        </ion-item>
+          <ion-item lines="none">
+            <p><b>Sonntag</b></p>
+            <ion-datetime [(ngModel)]="su_starttime" formControlName="su_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime [(ngModel)]="su_endtime" formControlName="su_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+              cancelText="Abbrechen" required></ion-datetime>
+          </ion-item>
+           <!-- Error messages -->
+           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.su_endtime.errors?.required">
+            Endzeit vor Startzeit!
+          </span>
 
-      </ion-col>
-    </ion-row>
+        </ion-col>
+      </ion-row>
+    </form>
 
     <ion-row>
       <ion-col class="save">
-        <ion-button fill="outline" shape="round" (click)="save()">
+        <ion-button fill="outline" shape="round" (click)="edit()">
           Speichern
         </ion-button>
       </ion-col>

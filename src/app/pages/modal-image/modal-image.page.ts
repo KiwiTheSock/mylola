@@ -15,6 +15,8 @@ export class ModalImagePage {
   croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
 
   sourceType = this.navParams.get('sourceType');
+
+  aspectRatio: number;
   
   @ViewChild(ImageCropperComponent, { static: false }) angularCropper: ImageCropperComponent;
 

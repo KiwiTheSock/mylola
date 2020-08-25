@@ -11,13 +11,13 @@ export class TabsPage {
   color1 = "";
   color2 = "";
   color3 = "";
-  red = "#DB001B"; //primary
-  grey = "#666666" //text
+  red = "#DB001B";  //primary
+  grey = "#909090"; //Kompromiss Darkmode/Lightmode
 
-  constructor() {}
+  constructor(
+  ) {}
 
   getSelectedTab() {
-    console.log(this.tabs.getSelected());
     if(this.tabs.getSelected() == "schedule"){
       this.color1 = this.red;
       this.color2 = this.grey;

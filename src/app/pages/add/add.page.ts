@@ -13,9 +13,6 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class AddPage implements OnInit{
 
-  @ViewChild('start') start;
-  @ViewChild('end') end;
-
   time: FormGroup;
   isSubmitted = false;
 
@@ -77,7 +74,10 @@ export class AddPage implements OnInit{
       component: ModalImagePage,
       cssClass: 'modal-image-css',
       swipeToClose: true, //iOS
-      componentProps: { sourceType: sourceType }
+      componentProps: { 
+        sourceType: sourceType,
+        aspectRatio: 16/9
+      }
     });
 
     //Passed back data

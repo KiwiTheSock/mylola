@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
 import { ModalImagePage } from '../modal-image/modal-image.page';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-account-edit',
@@ -15,10 +16,14 @@ export class AccountEditPage {
     private router: Router,
     public actionSheetController: ActionSheetController,
     private camera: Camera,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public formBuilder: FormBuilder
   ) { }
 
   defaultHref = '';
+
+  time: FormGroup;
+  isSubmitted = false;
 
   croppedProfileImage = "../assets/img/logo/halloffame_logo.png";
   croppedTitleImage = "../assets/img/banner/banner_halloffame.png";
@@ -59,9 +64,28 @@ export class AccountEditPage {
   public sa_starttime: string = "10:00";
   public sa_endtime: string = "24:00";
 
-   //Sunday
-   public su_starttime: string = "10:00";
-   public su_endtime: string = "23:00";
+  //Sunday
+  public su_starttime: string = "10:00";
+  public su_endtime: string = "23:00";
+
+  ngOnInit() {
+    this.time = this.formBuilder.group({
+      mo_starttime: ['', Validators.required],
+      mo_endtime: ['', Validators.required],
+      tu_starttime: ['', Validators.required],
+      tu_endtime: ['', Validators.required],
+      we_starttime: ['', Validators.required],
+      we_endtime: ['', Validators.required],
+      th_starttime: ['', Validators.required],
+      th_endtime: ['', Validators.required],
+      fr_starttime: ['', Validators.required],
+      fr_endtime: ['', Validators.required],
+      sa_starttime: ['', Validators.required],
+      sa_endtime: ['', Validators.required],
+      su_starttime: ['', Validators.required],
+      su_endtime: ['', Validators.required],
+    });
+  }
 
   async profilePicture() {
     const actionSheet = await this.actionSheetController.create({
@@ -117,18 +141,21 @@ export class AccountEditPage {
       component: ModalImagePage,
       cssClass: 'modal-image-css',
       swipeToClose: true, //iOS
-      componentProps: { sourceType: sourceType }
+      componentProps: {
+        sourceType: sourceType,
+        aspectRatio: 1 / 1
+      }
     });
 
     //Passed back data
     modal.onDidDismiss()
       .then((data) => {
-        this.croppedProfileImage = data['data']; 
-    });
-    
+        this.croppedProfileImage = data['data'];
+      });
+
     await modal.present();
 
-    if(!window.history.state.modal) {
+    if (!window.history.state.modal) {
       const modalState = { modal: true };
       history.pushState(modalState, null);
     }
@@ -140,25 +167,65 @@ export class AccountEditPage {
       component: ModalImagePage,
       cssClass: 'modal-image-css',
       swipeToClose: true, //iOS
-      componentProps: { sourceType: sourceType }
+      componentProps: {
+        sourceType: sourceType,
+        aspectRatio: 16 / 3 //Maße noch prüfen
+      }
     });
 
     //Passed back data
     modal.onDidDismiss()
       .then((data) => {
-        this.croppedTitleImage = data['data']; 
-    });
-    
+        this.croppedTitleImage = data['data'];
+      });
+
     await modal.present();
 
-    if(!window.history.state.modal) {
+    if (!window.history.state.modal) {
       const modalState = { modal: true };
       history.pushState(modalState, null);
     }
   }
 
-  save() {
+  get errorControl() {
+    return this.time.controls;
+  }
+
+  //API Call
+  edit() {
+
+    this.submitForm();
+    if (this.mo_starttime > this.mo_endtime) {
+      this.time.get("mo_endtime").reset();
+    } else if (this.tu_starttime > this.tu_endtime) {
+      this.time.get("tu_endtime").reset();
+    } else if (this.we_starttime > this.we_endtime) {
+      this.time.get("we_endtime").reset();
+    } else if (this.th_starttime > this.th_endtime) {
+      this.time.get("th_endtime").reset();
+    } else if (this.fr_starttime > this.fr_endtime) {
+      this.time.get("fr_endtime").reset();
+    } else if (this.sa_starttime > this.sa_endtime) {
+      this.time.get("sa_endtime").reset();
+    } else if (this.su_starttime > this.su_endtime) {
+      this.time.get("su_endtime").reset();
+    } else if (this.submitForm()) {
+      this.cancel();
+    }
+
+  }
+
+  submitForm() {
+    this.isSubmitted = true;
+    if (!this.time.valid) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  cancel() {
     this.router.navigateByUrl('/account');
   }
-  
+
 }
