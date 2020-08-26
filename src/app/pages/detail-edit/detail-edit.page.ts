@@ -25,8 +25,8 @@ export class DetailEditPage implements OnInit {
   time: FormGroup;
   isSubmitted = false;
 
-  public starttime: string = "06:00, 01 01 2020"; //displayFormat="HH:mm, DD MMMM YYYY"
-  public endtime: string = "23:59, 12 31 2020"; //displayFormat="HH:mm, DD MMMM YYYY"
+  public starttime = "2020-02-11T19:30:00";
+  public endtime: string = "2020-02-11T23:59:00";
 
   constructor(
     private router: Router,

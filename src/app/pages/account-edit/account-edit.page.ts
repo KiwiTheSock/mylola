@@ -169,7 +169,7 @@ export class AccountEditPage {
       swipeToClose: true, //iOS
       componentProps: {
         sourceType: sourceType,
-        aspectRatio: 16 / 3 //Maße noch prüfen
+        aspectRatio: 574 / 135 
       }
     });
 
