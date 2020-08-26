@@ -32,7 +32,6 @@ export class HideHeaderDirective implements OnInit {
                 this.renderer.setStyle(this.header, 'margin-top', '0');
             });
         }
-
         this.lastY = $event.detail.scrollTop;
     }
 

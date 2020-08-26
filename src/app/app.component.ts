@@ -1,18 +1,19 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Location, PlatformLocation } from '@angular/common';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { MenuController, Platform, ToastController, PopoverController, ModalController, IonRouterOutlet, AlertController, ActionSheetController, NavController } from '@ionic/angular';
+
+import { MenuController, Platform, ToastController, PopoverController, ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Storage } from '@ionic/storage';
+
 import { UserData } from './services/user-data';
 import { Darkmode } from './services/darkmode';
 import { AuthService } from './services/auth.service';
-import { ModalLogoutPage } from './pages/modal-logout/modal-logout.page';
-import { Location, PlatformLocation } from '@angular/common';
-import { DeviceInfo } from '@capacitor/core';
-import { state } from '@angular/animations';
 
+import { ModalLogoutPage } from './pages/modal-logout/modal-logout.page';
 
 @Component({
   selector: 'app-root',
@@ -39,14 +40,16 @@ export class AppComponent implements OnInit {
       icon: 'calendar'
     }
   ];
+
   loggedIn = false;
+
   session: any;
 
+  //Back Button
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
 
-  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
-
+  //Only for browser
   croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
 
   constructor(
@@ -63,13 +66,10 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     public popoverCtrl: PopoverController,
     public modalController: ModalController,
-    private alertController: AlertController,
     private location: Location,
     private platformLocation: PlatformLocation,
-    private actionSheetCtrl: ActionSheetController,
-    private nav: NavController
-
   ) {
+    //Initialize App
     this.initializeApp();
 
     //Only for browser
@@ -79,39 +79,9 @@ export class AppComponent implements OnInit {
         modal.dismiss(this.croppedImage);
       }
     });
+
+    //Back Button
     this.backButtonEvent();
-  }
-
-  backButtonEvent() {
-    this.platform.backButton.subscribeWithPriority(0, () => {
-      this.routerOutlets.forEach(async (outlet: IonRouterOutlet) => {
-        if (this.router.url != '/app/tabs/schedule' && this.router.url != '/app/tabs/favorites' && this.router.url != '/app/tabs/events') {
-          await this.location.back();
-        } else if (this.router.url === '/app/tabs/schedule') {
-          if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
-            this.lastTimeBackPress = new Date().getTime();
-            this.presentToast();
-          } else {
-            navigator['app'].exitApp();
-          }
-        }
-        else if (this.router.url === '/app/tabs/favorites') {
-          await this.router.navigate(['/app/tabs/schedule']);
-          
-        } else if (this.router.url === '/app/tabs/events') {
-          await this.router.navigate(['/app/tabs/schedule']);
-        }
-      });
-    });
-  }
-
-  async presentToast() {
-    const toast = await this.toastCtrl.create({
-      message: 'Wenn Sie die App verlassen möchten, drücken Sie noch einaml auf die Zurück-Taste',
-      position: 'bottom',
-      duration: 2000
-    });
-    toast.present();
   }
 
   async ngOnInit() {
@@ -139,8 +109,10 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /*
+   *  Initialize App
+   */
   initializeApp() {
-
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -173,7 +145,41 @@ export class AppComponent implements OnInit {
     });
   }
 
-  //Modal
+  /*
+   *  Back Button
+   */
+  backButtonEvent() {
+    this.platform.backButton.subscribe(() => {
+      if (this.router.url != '/app/tabs/schedule' && this.router.url != '/app/tabs/favorites' && this.router.url != '/app/tabs/events') {
+        this.location.back();
+      } else if (this.router.url === '/app/tabs/schedule') {
+        if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
+          this.lastTimeBackPress = new Date().getTime();
+          this.presentToast();
+        } else {
+          navigator['app'].exitApp();
+        }
+      }
+      else if (this.router.url === '/app/tabs/favorites') {
+        this.router.navigate(['/app/tabs/schedule']);
+      } else if (this.router.url === '/app/tabs/events') {
+        this.router.navigate(['/app/tabs/schedule']);
+      }
+    });
+  }
+
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Wenn Sie die App verlassen möchten, drücken Sie noch einaml auf die Zurück-Taste',
+      position: 'bottom',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  /*
+   *  Logout Modal
+   */
   async presentModal(session: any) {
     const modal = await this.modalController.create({
       component: ModalLogoutPage,
@@ -181,15 +187,6 @@ export class AppComponent implements OnInit {
       swipeToClose: true, //iOS
       componentProps: { session: session }
     });
-
-    //Passed back data
-    /*
-    modal.onDidDismiss()
-      .then((data) => {
-        const users = data['data']; 
-      console.log(data);
-    });
-    */
 
     await modal.present();
 
@@ -205,16 +202,21 @@ export class AppComponent implements OnInit {
       return this.router.navigateByUrl('/app/tabs/schedule');
     });
   }
-
+  
+  /*
+   *  Tutorial
+   */
   openTutorial() {
     this.menu.enable(false);
     this.storage.set('ion_did_tutorial', false);
     this.router.navigateByUrl('/tutorial');
   }
 
+  /*
+   *  Darkmode
+   */
   changeDarkmode() {
     this.darkmode.darkmode();
   }
 
 }
-

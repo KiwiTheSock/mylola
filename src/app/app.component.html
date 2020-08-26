@@ -1,131 +1,124 @@
 <ion-app [class.dark-theme]="!darkmode.dark">
-  
-    <ion-menu contentId="main-content">
-      <ion-content>
-        <div class="menu-header-bg"></div>
+  <ion-menu contentId="main-content">
+    <ion-content>
 
-        <div class="header-content">
-          <img src="../assets/img/mylola/mylola_slogan.png">
-        </div>
+      <!-- Header Background -->
+      <div class="menu-header-bg"></div>
 
-        <div>
-          <ion-list lines="none">
+      <!-- Header Content -->
+      <div class="header-content">
+        <img src="../assets/img/mylola/mylola_slogan.png">
+      </div>
 
-            <ion-list-header>
-              Tabs
-            </ion-list-header>
+      <!-- Sidemenu -->
+      <div>
+        <ion-list lines="none">
 
-            <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index">
-              <ion-item [routerLink]="p.url" routerLinkActive="selected" routerDirection="root" detail="false">
-                <ion-icon slot="start" [name]="p.icon + '-outline'"></ion-icon>
-                <ion-label>
-                  {{p.title}}
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
+          <!-- Tabs -->
+          <ion-list-header>
+            Tabs
+          </ion-list-header>
 
-          </ion-list>
-          
-          <ion-list *ngIf="loggedIn" lines="none" >
-
-            <ion-list-header>
-              Mylola
-            </ion-list-header>
-
-            <ion-menu-toggle autoHide="false" *appHasRole="['USER']">
-              <ion-item routerLink="/profile" routerLinkActive="selected" routerDirection="root" detail="false">
-                <ion-icon slot="start" name="person-outline"></ion-icon>
-                <ion-label>
-                  Profil
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-
-            <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
-              <ion-item routerLink="/account" routerLinkActive="selected" routerDirection="root" detail="false">
-                <ion-icon slot="start" name="person-outline"></ion-icon>
-                <ion-label>
-                  Profil
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-
-            <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
-              <ion-item routerLink="/add" routerLinkActive="selected" routerDirection="root" detail="false">
-                <ion-icon slot="start" name="add-outline"></ion-icon>
-                <ion-label>
-                  Coupon hinzufügen
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-
-            <!--  WUNSCHKRITERIUM
-            <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
-              <ion-item routerLink="/statistic" routerLinkActive="selected" routerDirection="root" detail="false">
-                <ion-icon slot="start" name="pie-chart-outline"></ion-icon>
-                <ion-label>
-                  Statistik
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-            -->
-
-            <ion-item>
-              <ion-icon slot="start" name="moon-outline"></ion-icon>
+          <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item [routerLink]="p.url" routerLinkActive="selected" routerDirection="root" detail="false">
+              <ion-icon slot="start" [name]="p.icon + '-outline'"></ion-icon>
               <ion-label>
-                Dark Mode
+                {{p.title}}
               </ion-label>
-              <ion-toggle [(ngModel)]="dark" (ionChange)="changeDarkmode()"></ion-toggle>
             </ion-item>
+          </ion-menu-toggle>
 
-            <ion-menu-toggle autoHide="false">
-              <ion-item button (click) ="presentModal(session)" detail="false">
-                <ion-icon slot="start" name="log-out-outline"></ion-icon>
-                <ion-label>
-                  Logout
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
+        </ion-list>
 
-          </ion-list>
+        <!-- LOGGED IN -->
+        <ion-list *ngIf="loggedIn" lines="none">
 
-          <ion-list *ngIf="!loggedIn" lines="none">
+          <!-- Pages -->
+          <ion-list-header>
+            Mylola
+          </ion-list-header>
 
-            <ion-list-header>
-              Mylola
-            </ion-list-header>
-
-            <ion-menu-toggle autoHide="false">
-              <ion-item routerLink="/login" routerLinkActive="selected" routerDirection="root" detail="false">
-                <ion-icon slot="start" name="log-in-outline"></ion-icon>
-                <ion-label>
-                  Login
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-
-            <ion-item>
-              <ion-icon slot="start" name="moon-outline"></ion-icon>
+          <!-- User Profil -->
+          <ion-menu-toggle autoHide="false" *appHasRole="['USER']">
+            <ion-item routerLink="/profile" routerLinkActive="selected" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="person-outline"></ion-icon>
               <ion-label>
-                Dark Mode
+                Profil
               </ion-label>
-              <ion-toggle [(ngModel)]="dark" (ionChange)="changeDarkmode()"></ion-toggle>
             </ion-item>
+          </ion-menu-toggle>
 
-          </ion-list>
-<!-- 
-          <ion-list lines="none">
-            <ion-menu-toggle autoHide="false">
-              <ion-item button (click)="openTutorial()" detail="false">
-                <ion-icon slot="start" name="hammer-outline"></ion-icon>
-                <ion-label>Show Tutorial</ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          </ion-list>
- -->
-        </div>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-  
+          <!-- Company Profil -->
+          <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
+            <ion-item routerLink="/account" routerLinkActive="selected" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="person-outline"></ion-icon>
+              <ion-label>
+                Profil
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <!-- Add Coupon -->
+          <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
+            <ion-item routerLink="/add" routerLinkActive="selected" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="add-outline"></ion-icon>
+              <ion-label>
+                Coupon hinzufügen
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <!-- Darkmode -->
+          <ion-item>
+            <ion-icon slot="start" name="moon-outline"></ion-icon>
+            <ion-label>
+              Darkmode
+            </ion-label>
+            <ion-toggle [(ngModel)]="dark" (ionChange)="changeDarkmode()"></ion-toggle>
+          </ion-item>
+
+          <!-- Logout -->
+          <ion-menu-toggle autoHide="false">
+            <ion-item button (click)="presentModal(session)" detail="false">
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              <ion-label>
+                Logout
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+        </ion-list>
+
+        <!-- NOT LOGGED IN -->
+        <ion-list *ngIf="!loggedIn" lines="none">
+
+          <!-- Pages -->
+          <ion-list-header>
+            Mylola
+          </ion-list-header>
+
+          <!-- Login -->
+          <ion-menu-toggle autoHide="false">
+            <ion-item routerLink="/login" routerLinkActive="selected" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="log-in-outline"></ion-icon>
+              <ion-label>
+                Login
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <!-- Darkmode -->
+          <ion-item>
+            <ion-icon slot="start" name="moon-outline"></ion-icon>
+            <ion-label>
+              Darkmode
+            </ion-label>
+            <ion-toggle [(ngModel)]="dark" (ionChange)="changeDarkmode()"></ion-toggle>
+          </ion-item>
+
+        </ion-list>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

@@ -1,4 +1,6 @@
-
+/*
+ * Design Menu
+*/
 ion-menu ion-content {
   --padding-top: 20px;
   --padding-bottom: 20px;
@@ -59,7 +61,6 @@ ion-menu.md ion-list:not(:last-of-type) {
   border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
 }
 
-
 /*
  * iOS Menu
 */
@@ -88,6 +89,9 @@ ion-menu.ios ion-item.selected ion-icon {
   color: var(--ion-color-primary);
 }
 
+/*
+ * Menu Header Background
+*/
 .menu-header-bg{
   height: 210px;
   width: 350px;
@@ -101,6 +105,9 @@ ion-menu.ios ion-item.selected ion-icon {
   margin-bottom: 60px
 }
 
+/*
+ * Menu Content
+*/
 .header-content{
   position: absolute;
   top: 20px;
@@ -115,9 +122,7 @@ ion-menu.ios ion-item.selected ion-icon {
 
 .menu-items {
   margin: 0px;
-
- 
-
+  
   .active {
     border-left: 5px solid;
     color: #7590d6;

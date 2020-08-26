@@ -34,7 +34,7 @@ export class AuthService {
     })
   }
 
-  //Normally this should be a rest api call
+  //API Call
   signIn(credentials) {
     let email = credentials.email;
     let pw = credentials.pw;
