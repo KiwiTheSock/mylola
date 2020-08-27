@@ -9,9 +9,11 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { AddPageRoutingModule } from './add-routing.module';
 import { AddPage } from './add.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

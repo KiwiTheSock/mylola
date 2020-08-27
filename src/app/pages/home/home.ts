@@ -73,12 +73,10 @@ export class HomePage implements OnInit {
     this.updateSchedule();
 
     //API TEST
-    /*
     this.apiService.login().subscribe(response => {
       console.log(response);
       this.data = response;
     })  
-    */
   }
 
   ngDoCheck() {

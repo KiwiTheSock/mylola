@@ -37,14 +37,14 @@
 /* Modal
  * --------------------------------------------------------
  */
- .modal-css .modal-wrapper {  
+.modal-css .modal-wrapper {
   margin: auto;
   border-radius: 25px;
   max-width: 350px;
   max-height: 300px;
 }
 
-.modal-logout-css .modal-wrapper {  
+.modal-logout-css .modal-wrapper {
   margin: auto;
   border-radius: 25px;
   max-width: 350px;
@@ -60,7 +60,6 @@
 /* Calendar
  * --------------------------------------------------------
  */
-
 .monthview-primary-with-event {
   background-color: var(--ion-color-primary) !important;
 }
@@ -68,20 +67,19 @@
 /* Orange Border
  * --------------------------------------------------------
  */
-
 * {
-	outline:none;
+  outline: none;
 }
 
 /* Tabs
  * --------------------------------------------------------
  */
 
-ion-tab-bar{
+ion-tab-bar {
   --color: none;
 }
 
-ion-tab-button{
+ion-tab-button {
   --background: none;
   --background-focused: none;
   --background-focused-opacity: none;
