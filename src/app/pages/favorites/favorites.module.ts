@@ -9,7 +9,6 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { FavoritesPage } from './favorites';
 import { FavoritesPageRoutingModule } from './favorites-routing.module';
-import { TimePipeFavorites } from '../../services/time-pipe-favorites.pipe';
 import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
@@ -21,8 +20,7 @@ import { SharedModule } from '../../directives/shared.module';
     SharedModule
   ],
   declarations: [
-    FavoritesPage,
-    TimePipeFavorites
+    FavoritesPage
   ]
 })
 export class FavoritesModule { }

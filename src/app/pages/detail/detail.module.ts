@@ -8,17 +8,17 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { DetailPage } from './detail';
 import { DetailPageRoutingModule } from './detail-routing.module';
-import { TimePipeDetail } from '../../services/time-pipe-detail.pipe';
+import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    DetailPageRoutingModule
+    DetailPageRoutingModule,
+    SharedModule
   ],
   declarations: [
     DetailPage,
-    TimePipeDetail,
   ]
 })
 export class DetailModule { }

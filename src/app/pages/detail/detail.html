@@ -59,7 +59,7 @@
 
       <!-- Time -->
       <ion-col col-6 *ngIf="session">
-        <p class="time">{{ session.upload | timePipeDetail}}</p>
+        <p class="time">{{ session.upload | timePipe}}</p>
       </ion-col>
 
     </ion-row>
@@ -128,7 +128,7 @@
   </ion-grid>
 
   <!-- Map -->
-  <div #mapCanvas class="map-canvas"></div>
+  <div #map class="map"></div>
 
   <!-- Opening Hours-->
   <ion-grid class="content">

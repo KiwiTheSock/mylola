@@ -1,10 +1,10 @@
 //Angular
-import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DOCUMENT} from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
 //Ionic
-import { Platform, ActionSheetController, AlertController, NavController } from '@ionic/angular';
+import { Platform, ActionSheetController, AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
 //Ionic-Native
@@ -18,19 +18,30 @@ const { App } = Plugins;
 //Others
 import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
-import { darkStyle } from './dark-style';
-import { ModalCouponPage } from '../modal-coupon/modal-coupon.page'; 
+import { ModalCouponPage } from '../modal-coupon/modal-coupon.page';
 import { AuthService } from '../../services/auth.service';
+import { mapStyle } from './mapStyle';
+
+declare var google: any;
 
 @Component({
   selector: 'page-detail',
   styleUrls: ['./detail.scss'],
   templateUrl: 'detail.html'
 })
-export class DetailPage implements AfterViewInit{
+export class DetailPage {
 
   //Map
-  @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
+  @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
+  map: any;
+  infoWindows: any = [];
+  markers: any = [
+    {
+      title: "Hall of Fame",
+      latitude: "52.27245330810547",
+      longitude: "8.059367179870605"
+    }
+  ]
 
   session: any;
 
@@ -40,19 +51,19 @@ export class DetailPage implements AfterViewInit{
   show = false;
 
   //Share Data
-  text: string='Mylola ... teilen ... bla bla';
-  link: string='https://www.mylola.de/';
-  
+  text: string = 'Mylola ... teilen ... bla bla';
+  link: string = 'https://www.mylola.de/';
+
   constructor(
     @Inject(DOCUMENT) private doc: Document,
-    private dataProvider: ConferenceData, 
+    private dataProvider: ConferenceData,
     private userProvider: UserData,
     private route: ActivatedRoute,
     public platform: Platform,
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
     public alertController: AlertController,
-    public modalController : ModalController,
+    public modalController: ModalController,
     private socialSharing: SocialSharing,
     private authService: AuthService,
     private router: Router,
@@ -80,13 +91,15 @@ export class DetailPage implements AfterViewInit{
 
   ionViewDidEnter() {
     this.defaultHref = `/app/tabs/home`;
+
+    this.showMap(this.markers);
   }
 
   /* Company Coupon Edit
   * --------------------------------------------------------
   */
   edit() {
-    if (this.authService.getRole().role == "ADMIN" && this.router.url === "/app/tabs/home/detail/1"){
+    if (this.authService.getRole().role == "ADMIN" && this.router.url === "/app/tabs/home/detail/1") {
       this.show = true;
     }
   }
@@ -109,7 +122,7 @@ export class DetailPage implements AfterViewInit{
   */
   shareSession(session: any) {
     const url = this.link;
-    const text = 'Test'+'\n';
+    const text = 'Test' + '\n';
     this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
   }
 
@@ -130,10 +143,10 @@ export class DetailPage implements AfterViewInit{
       swipeToClose: true, //iOS
       componentProps: { session: session }
     });
-   
+
     await modal.present();
 
-    if(!window.history.state.modal) {
+    if (!window.history.state.modal) {
       const modalState = { modal: true };
       history.pushState(modalState, null);
     }
@@ -142,11 +155,11 @@ export class DetailPage implements AfterViewInit{
   /* Logged In
   * --------------------------------------------------------
   */
-  isLoggedIn(session: any){
+  isLoggedIn(session: any) {
     console.log(this.authService.getRole());
-    if(this.authService.getRole() == null || this.authService.getRole().email == null){
+    if (this.authService.getRole() == null || this.authService.getRole().email == null) {
       this.router.navigateByUrl('/login');
-    } else{
+    } else {
       this.presentModal(session)
     }
   }
@@ -154,24 +167,24 @@ export class DetailPage implements AfterViewInit{
   /* Facebook
   * --------------------------------------------------------
   */
-  facebook(session: any){
-    window.open(session.facebook, '_system','location=yes');
+  facebook(session: any) {
+    window.open(session.facebook, '_system', 'location=yes');
   }
 
   /* Browser
   * --------------------------------------------------------
   */
-  async launchBrowser(url){
+  async launchBrowser(url) {
     var ret = await App.canOpenUrl({ url: url });
 
     var retx = await App.openUrl({ url: url });
     console.log("Open url response: ", ret);
   }
-  
+
   /* E-Mail
   * --------------------------------------------------------
   */
-  sendEmail(mail){
+  sendEmail(mail) {
     this.socialSharing.shareViaEmail('', '', [mail]);
   }
 
@@ -221,99 +234,84 @@ export class DetailPage implements AfterViewInit{
   * --------------------------------------------------------
   */
   openSettings() {
-    this.router.navigateByUrl("/detail-edit"); 
+    this.router.navigateByUrl("/detail-edit");
   }
 
   /* Map
   * --------------------------------------------------------
   */
-
-  async ngAfterViewInit() {
-
-    var sessionID = parseInt(document.URL.split("/")[7]) -1;
-
-    const appEl = this.doc.querySelector('ion-app');
-    let isDark = false;
-    let style = [];
-    if (appEl.classList.contains('dark-theme')) {
-      style = darkStyle;
-    }
-
-    const googleMaps = await getGoogleMaps(
-      'AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw'
-    );
-
-    let map;
-    
-    this.dataProvider.getMap().subscribe((mapData: any) => {
-      const mapEle = this.mapElement.nativeElement;
-
-      map = new googleMaps.Map(mapEle, {
-        center: {
-          lat: mapData[sessionID].lat,
-          lng: mapData[sessionID].lng,
-        },
-        zoom: 16,
-        styles: style
+  addMarkersToMap(markers) {
+    for (let marker of markers) {
+      let position = new google.maps.LatLng(marker.latitude, marker.longitude);
+      let mapMarker = new google.maps.Marker({
+        position: position,
+        title: marker.title,
+        latitude: marker.latitude,
+        longitude: marker.longitude
       });
 
-      mapData.forEach((markerData: any) => {
-        const marker = new googleMaps.Marker({
-          position:{
-            lat: mapData[sessionID].lat,
-            lng: mapData[sessionID].lng,
-          },
-          map
+      mapMarker.setMap(this.map);
+      this.addInfoWindowToMarker(mapMarker);
+    }
+  }
+
+  addInfoWindowToMarker(marker) {
+    let infoWindowContent = '<div id="content">' +
+      '<h2 id="firstHeading" class="firstHEading">' + marker.title + '</h2>' +
+      //'<p>Latitude: ' + marker.latitude + '</p>' +
+      //'<p>Longitude: ' + marker.longitude + '</p>' +
+      '<ion-button id="navigate">Navigieren</ion-button>' +
+      '</div>';
+    let infoWindow = new google.maps.InfoWindow({
+      content: infoWindowContent
+    });
+
+    marker.addListener('click', () => {
+      this.closeAllInfoWindows();
+      infoWindow.open(this.map, marker);
+
+      google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+        document.getElementById('navigate').addEventListener('click', () => {
+          console.log('navigate button clicked');
+          //code to navigate using google maps app
+          window.open('https://www.google.com/maps/dir/?api=1&destination=' + marker.latitude + ',' + marker.longitude);
         });
       });
 
-      googleMaps.event.addListenerOnce(map, 'idle', () => {
-        mapEle.classList.add('show-map');
-      });
     });
+    this.infoWindows.push(infoWindow);
+  }
 
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const el = mutation.target as HTMLElement;
-          isDark = el.classList.contains('dark-theme');
-          if (map && isDark) {
-            map.setOptions({styles: darkStyle});
-          } else if (map) {
-            map.setOptions({styles: []});
-          }
-        }
-      });
-    });
-    observer.observe(appEl, {
-      attributes: true
-    });
+  closeAllInfoWindows() {
+    for (let window of this.infoWindows) {
+      window.close();
+    }
+  }
+
+  showMap(markers) {
+    const location = new google.maps.LatLng(markers[0].latitude, markers[0].longitude);
+    let style = [];
+    const options = {
+      center: location,
+      zoom: 15,
+      disableDefaultUI: true,
+    }
+
+    if (this.isDarkMode()) {
+      style = mapStyle;
+    }
+
+    this.map = new google.maps.Map(this.mapRef.nativeElement, { options, styles: style });
+    this.addMarkersToMap(this.markers);
+  }
+
+  isDarkMode() {
+    //Returns true if the time is between 7pm to 5am
+    let time = new Date().getHours();
+    return (time > 5 && time < 19) ? false : true;
   }
 }
 
-//Map
-function getGoogleMaps(apiKey: string): Promise<any> {
-  const win = window as any;
-  const googleModule = win.google;
-  if (googleModule && googleModule.maps) {
-    return Promise.resolve(googleModule.maps);
-  }
 
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.31`;
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-    script.onload = () => {
-      const googleModule2 = win.google;
-      if (googleModule2 && googleModule2.maps) {
-        resolve(googleModule2.maps);
-      } else {
-        reject('google maps not available');
-      }
-    };
-  });
-}
 
 

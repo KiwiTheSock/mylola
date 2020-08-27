@@ -9,7 +9,6 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { HomePage } from './home';
 import { HomePageRoutingModule } from './home-routing.module';
-import { TimePipeHome } from '../../services/time-pipe-home.pipe';
 import { SharedModule } from '../../directives/shared.module';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { SharedModule } from '../../directives/shared.module';
   ],
   declarations: [
     HomePage,
-    TimePipeHome
   ]
 })
 export class HomeModule { }
