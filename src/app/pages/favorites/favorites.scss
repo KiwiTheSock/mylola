@@ -1,11 +1,3 @@
-/*
- * Material Design uses the ripple for activated
- * so only style the iOS activated background
- */
- .ios ion-fab-button {
-  --background-activated: var(--ion-color-step-250, #d9d9d9);
-}
-
 /* Mylola
  * --------------------------------------------------------
  */
@@ -13,6 +5,14 @@
   height: 20px;
   margin: auto;
   //margin-left: 30px;
+}
+
+/* Menu
+ * --------------------------------------------------------
+ */
+.menu{
+  width: 50px; 
+  height: 50px;
 }
 
 /* Item
@@ -38,7 +38,7 @@
 }
 
 .logo ion-img{
-  border: 2px solid #DB001B;
+  border: 2px solid var(--ion-color-primary);
   width: 50px;
   height: 50px;
 }
@@ -207,6 +207,15 @@
   }
 }
 
+.filter2{
+  max-width: 300px; 
+  margin: auto;
+}
+
+.button-center {
+  text-align: center;
+}
+
 /* List
  * --------------------------------------------------------
  */
@@ -214,3 +223,10 @@
   max-width: 650px;
   margin: auto;
 }
+
+/* Placeholder
+ * --------------------------------------------------------
+ */
+ .placeholder{
+  margin: auto;
+ }

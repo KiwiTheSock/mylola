@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   appPages = [
     {
       title: 'Home',
-      url: '/app/tabs/schedule',
+      url: '/app/tabs/home',
       icon: 'home'
     },
     {
@@ -153,9 +153,9 @@ export class AppComponent implements OnInit {
   */
   backButtonEvent() {
     this.platform.backButton.subscribe(() => {
-      if (this.router.url != '/app/tabs/schedule' && this.router.url != '/app/tabs/favorites' && this.router.url != '/app/tabs/events') {
+      if (this.router.url != '/app/tabs/home' && this.router.url != '/app/tabs/favorites' && this.router.url != '/app/tabs/events') {
         this.location.back();
-      } else if (this.router.url === '/app/tabs/schedule') {
+      } else if (this.router.url === '/app/tabs/home') {
         if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
           this.lastTimeBackPress = new Date().getTime();
           this.presentToast();
@@ -164,9 +164,9 @@ export class AppComponent implements OnInit {
         }
       }
       else if (this.router.url === '/app/tabs/favorites') {
-        this.router.navigate(['/app/tabs/schedule']);
+        this.router.navigate(['/app/tabs/home']);
       } else if (this.router.url === '/app/tabs/events') {
-        this.router.navigate(['/app/tabs/schedule']);
+        this.router.navigate(['/app/tabs/home']);
       }
     });
   }
@@ -202,7 +202,7 @@ export class AppComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
+      return this.router.navigateByUrl('/app/tabs/home');
     });
   }
 

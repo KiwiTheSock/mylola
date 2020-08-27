@@ -5,7 +5,7 @@
     <!-- Sidemenu -->
     <ion-buttons *ngIf="!showSearchbar" slot="start">
       <ion-menu-button>
-        <ion-icon style="width: 50px; height: 50px;" name="menu"></ion-icon>
+        <ion-icon class="menu" name="menu"></ion-icon>
       </ion-menu-button>
     </ion-buttons>
 
@@ -64,14 +64,14 @@
         </ion-col>
       </ion-row>
 
-      <ion-row style="max-width: 300px; margin: auto;">
+      <ion-row class="filter2">
         <ion-col>
-          <div style="text-align: center;">
+          <div class="button-center">
             <ion-button #fifth color="danger" (click)="btnActivate(fifth, '5')">In der Nähe</ion-button>
           </div>
         </ion-col>
         <ion-col>
-          <div style="text-align: center;">
+          <div class="button-center">
             <ion-button #sixth color="danger" (click)="btnActivate(sixth, '6')">Bald endend</ion-button>
           </div>
         </ion-col>
@@ -122,11 +122,11 @@
 
             <!-- Picture and Tear-off -->
             <ion-col col-12 *ngIf="session">
-              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}">
+              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/home/detail/{{session.id}}">
               </ion-img>
               <div class="tear-off">
                 <ion-img src="..\assets\img\mylola\Abrissecke_rund.png"
-                  routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
+                  routerLink="/app/tabs/home/detail/{{session.id}}"></ion-img>
                 <p class="">{{session.addtext}}</p>
               </div>
             </ion-col>
@@ -182,7 +182,7 @@
 
   <!-- Placeholder -->
   <ion-list-header [hidden]="shownSessions">
-    <p style="margin: auto;">Keine Einträge gefunden</p>
+    <p class="placeholder">Keine Einträge gefunden</p>
   </ion-list-header>
 
 </ion-content>

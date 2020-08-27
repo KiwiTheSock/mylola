@@ -126,7 +126,7 @@ export class DetailEditPage implements OnInit {
   }
 
   cancel() {
-    this.router.navigateByUrl("/app/tabs/schedule/detail/1");
+    this.router.navigateByUrl("/app/tabs/home/detail/1");
   }
 
 }

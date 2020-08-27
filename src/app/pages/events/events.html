@@ -5,7 +5,7 @@
     <!-- Sidemenu -->
     <ion-buttons slot="start">
       <ion-menu-button>
-        <ion-icon style="width: 50px; height: 50px;" name="menu"></ion-icon>
+        <ion-icon class="menu" name="menu"></ion-icon>
       </ion-menu-button>
     </ion-buttons>
 
@@ -46,7 +46,7 @@
     <ion-row>
       <ion-col>
         
-        <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+        <calendar class="calendar" [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
           (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" startHour="6"
           endHour="20" step="30" startingDayWeek="1" [monthviewDisplayEventTemplate]="template"
           [noEventsLabel]="calendar.noEventsLabel" [locale]="calendar.locale">

@@ -45,7 +45,7 @@
    ion-input {
     border-radius: 5px !important;
     //margin-left: 50px;
-    border: 1px solid #707070 !important;
+    border: 1px solid var(--ion-color-medium-shade) !important;
     max-width: 50vw; 
     max-height: 10vh;
     --placeholder-opacity: 1;
@@ -58,7 +58,7 @@
   ion-datetime  {
     border-radius: 5px !important;
     margin-left: 20px;
-    border: 1px solid #707070 !important;
+    border: 1px solid var(--ion-color-medium-shade) !important;
     width: 220px;
   }
 
@@ -75,7 +75,7 @@
   .description{
     textarea{
       border-radius: 5px !important;
-      border: 1px grey solid;
+      border: 1px var(--ion-color-medium-shade) solid;
       height: 200px;
       width: 490px; 
       resize: none;

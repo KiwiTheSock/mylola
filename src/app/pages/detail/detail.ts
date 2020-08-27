@@ -19,7 +19,7 @@ const { App } = Plugins;
 import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
 import { darkStyle } from './dark-style';
-import { ModalPage } from '../modal/modal.page'; 
+import { ModalCouponPage } from '../modal-coupon/modal-coupon.page'; 
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -79,14 +79,14 @@ export class DetailPage implements AfterViewInit{
   }
 
   ionViewDidEnter() {
-    this.defaultHref = `/app/tabs/schedule`;
+    this.defaultHref = `/app/tabs/home`;
   }
 
   /* Company Coupon Edit
   * --------------------------------------------------------
   */
   edit() {
-    if (this.authService.getRole().role == "ADMIN" && this.router.url === "/app/tabs/schedule/detail/1"){
+    if (this.authService.getRole().role == "ADMIN" && this.router.url === "/app/tabs/home/detail/1"){
       this.show = true;
     }
   }
@@ -125,7 +125,7 @@ export class DetailPage implements AfterViewInit{
   */
   async presentModal(session: any) {
     const modal = await this.modalController.create({
-      component: ModalPage,
+      component: ModalCouponPage,
       cssClass: 'modal-css',
       swipeToClose: true, //iOS
       componentProps: { session: session }

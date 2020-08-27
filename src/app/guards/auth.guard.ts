@@ -30,9 +30,9 @@ export class AuthGuard implements CanActivate {
           } else {
             this.showAlert();
             if (role == 'USER') {
-              return this.router.parseUrl('/app/tabs/schedule');
+              return this.router.parseUrl('/app/tabs/home');
             } else if (role == 'ADMIN'){
-              return this.router.parseUrl('/app/tabs/schedule');
+              return this.router.parseUrl('/app/tabs/home');
             } else {
               return this.router.parseUrl('/login');
             }

@@ -28,7 +28,7 @@ export class ModalLogoutPage{
 
     this.authService.logout();
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
+      return this.router.navigateByUrl('/app/tabs/home');
     });
     
   } 

@@ -11,7 +11,7 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'schedule',
+        path: 'home',
         children: [
           {
             path: '',
@@ -47,14 +47,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/app/tabs/schedule',
+        redirectTo: '/app/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/app/tabs/schedule',
+    redirectTo: '/app/tabs/home',
     pathMatch: 'full'
   }
 ];

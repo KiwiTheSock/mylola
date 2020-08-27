@@ -7,6 +7,14 @@
   //margin-left: 30px;
 }
 
+/* Menu
+ * --------------------------------------------------------
+ */
+ .menu{
+  width: 50px; 
+  height: 50px;
+}
+
 /* Item
  * --------------------------------------------------------
  */
@@ -32,7 +40,7 @@
 }
 
 .logo ion-img{
-  border: 2px solid #DB001B;
+  border: 2px solid var(--ion-color-primary);
   width: 50px;
   height: 50px;
 }
@@ -208,6 +216,15 @@
   }
 }
 
+.filter2{
+  max-width: 300px; 
+  margin: auto;
+}
+
+.button-center {
+  text-align: center;
+}
+
 /* Fab-Button
  * --------------------------------------------------------
  */
@@ -226,3 +243,9 @@
   margin: auto;
 }
 
+/* Placeholder
+ * --------------------------------------------------------
+ */
+ .placeholder{
+  margin: auto;
+ }

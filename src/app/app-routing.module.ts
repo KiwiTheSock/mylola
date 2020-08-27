@@ -14,16 +14,16 @@ const routes: Routes = [
   },
   //ADMIN
   {
-    path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule),
+    path: 'profile-company',
+    loadChildren: () => import('./pages/profile-company/profile-company.module').then(m => m.ProfileCompanyPageModule), 
     canActivate: [AuthGuard],
     data: {
       role: 'ADMIN'
     }
   },
   {
-    path: 'account-edit',
-    loadChildren: () => import('./pages/account-edit/account-edit.module').then(m => m.AccountEditPageModule),
+    path: 'profile-company-edit',
+    loadChildren: () => import('./pages/profile-company-edit/profile-company-edit.module').then(m => m.ProfileCompanyEditPageModule),
     canActivate: [AuthGuard],
     data: {
       role: 'ADMIN'
@@ -39,16 +39,16 @@ const routes: Routes = [
   },
   //USER
   {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
+    path: 'profile-customer',
+    loadChildren: () => import('./pages/profile-customer/profile-customer.module').then(m => m.ProfileCustomerPageModule),
     canActivate: [AuthGuard],
     data: {
       role: 'USER'
     }
   },
   {
-    path: 'profile-edit',
-    loadChildren: () => import('./pages/profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule),
+    path: 'profile-customer-edit',
+    loadChildren: () => import('./pages/profile-customer-edit/profile-customer-edit.module').then(m => m.ProfileEditPageModule),
     canActivate: [AuthGuard],
     data: {
       role: 'USER'
@@ -67,8 +67,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
   },
   {
-    path: 'modal',
-    loadChildren: () => import('./pages/modal/modal.module').then(m => m.ModalPageModule)
+    path: 'modal-coupon',
+    loadChildren: () => import('./pages/modal-coupon/modal-coupon.module').then(m => m.ModalCouponPageModule)
   },
   {
     path: 'modal-logout',
@@ -79,8 +79,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/modal-image/modal-image.module').then(m => m.ModalImagePageModule)
   },
   {
-    path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignUpModule)
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule)
   },
   {
     path: 'tabs',

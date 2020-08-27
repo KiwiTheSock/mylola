@@ -30,7 +30,7 @@
 }
 
 .profile-background ion-avatar ion-img {
-  border: 2px solid #DB001B;
+  border: 2px solid var(--ion-color-primary);
 }
 
 /* Settings button
@@ -110,7 +110,6 @@
  */
 .buttons{
   text-align: center;
-  font-size: medium;
   height: 50px;
   margin-bottom: 20px;
 }
@@ -132,6 +131,11 @@
   font-family: Segoe_UI;
   line-height: 0.5;
 }
+
+.red{
+  color: var(--ion-color-primary);
+}
+
 
 /* Social Media
  * --------------------------------------------------------

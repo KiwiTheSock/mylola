@@ -136,7 +136,7 @@ export class AddPage implements OnInit{
   }
 
   cancel() {
-    this.router.navigateByUrl('/app/tabs/schedule');
+    this.router.navigateByUrl('/app/tabs/home');
   }
  
 }

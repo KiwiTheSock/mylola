@@ -7,34 +7,33 @@ import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
-  styleUrls: ['./login.scss'],
+  selector: 'page-register',
+  templateUrl: 'register.html',
+  styleUrls: ['./register.scss'],
 })
-
-export class LoginPage {
-
+export class RegisterPage {
+  
   user = {
     email: '',
     pw: ''
   }
-
+  
   defaultHref = '';
 
   constructor(
     private auth: AuthService,
-    private router: Router,
-    private userData: UserData
-  ){}
+    public router: Router,
+    public userData: UserData
+  ) {}
 
   ionViewDidEnter() {
     this.defaultHref = `/app/tabs/home`;
   }
 
-  /* Login
-   * --------------------------------------------------------
-   */
-  signIn() {
+/* Login
+ * --------------------------------------------------------
+ */
+  onSignup() {
     this.auth.signIn(this.user).subscribe(user => {
      
       this.userData.login(this.user.email);
@@ -49,5 +48,5 @@ export class LoginPage {
     this.user.email = "";
     this.user.pw = "";
   }
-
+  
 }

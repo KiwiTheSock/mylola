@@ -30,7 +30,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Darkmode } from './services/darkmode';
 import { environment } from '../environments/environment';
-import { ModalPageModule } from './pages/modal/modal.module';
+import { ModalCouponPageModule } from './pages/modal-coupon/modal-coupon.module';
 import { NgCalendarModule } from 'ionic2-calendar'; 
 import { NgxChartsModule }from '@swimlane/ngx-charts';
 import { Refresher } from './services/refresher';
@@ -43,7 +43,7 @@ import { SharedModule } from './directives/shared.module';
     BrowserAnimationsModule, 
     FormsModule,
     HttpClientModule,
-    ModalPageModule,
+    ModalCouponPageModule,
     NgCalendarModule,
     NgxChartsModule,
     ReactiveFormsModule,

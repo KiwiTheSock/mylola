@@ -21,11 +21,11 @@ export class TabsPage {
   ) {}
 
   getSelectedTab() {
-    if(this.tabs.getSelected() == "schedule"){
+    if(this.tabs.getSelected() == "home"){
       this.color1 = this.red;
       this.color2 = this.grey;
       this.color3 = this.grey;
-      this.tabs.select("schedule");
+      this.tabs.select("home");
     } else if(this.tabs.getSelected() == "favorites") {
       this.color1 = this.grey;
       this.color2 = this.red;
@@ -58,7 +58,7 @@ export class TabsPage {
   }
 
   home(){
-    this.tabs.select("schedule");
+    this.tabs.select("home");
     this.getSelectedTab();
   }
 

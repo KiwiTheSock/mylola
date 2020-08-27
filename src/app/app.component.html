@@ -40,7 +40,7 @@
 
           <!-- User Profil -->
           <ion-menu-toggle autoHide="false" *appHasRole="['USER']">
-            <ion-item routerLink="/profile" routerLinkActive="selected" routerDirection="root" detail="false">
+            <ion-item routerLink="/profile-customer" routerLinkActive="selected" routerDirection="root" detail="false">
               <ion-icon slot="start" name="person-outline"></ion-icon>
               <ion-label>
                 Profil
@@ -50,7 +50,7 @@
 
           <!-- Company Profil -->
           <ion-menu-toggle autoHide="false" *appHasRole="['ADMIN']">
-            <ion-item routerLink="/account" routerLinkActive="selected" routerDirection="root" detail="false">
+            <ion-item routerLink="/profile-company" routerLinkActive="selected" routerDirection="root" detail="false">
               <ion-icon slot="start" name="person-outline"></ion-icon>
               <ion-label>
                 Profil
