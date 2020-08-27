@@ -17,18 +17,23 @@
 <ion-content fullscreen="true">
   <ion-grid class="content">
 
-    <!-- Banner and Logo -->
     <ion-row>
       <ion-col col-12 class="profile-background" *ngIf="session">
+
+        <!-- Banner -->
         <div>
           <ion-img src="..\assets\img\banner\{{session.banner}}"></ion-img>
         </div>
+
+        <!-- Logo -->
         <ion-avatar>
           <ion-img src="..\assets\img\logo\{{session.logo}}"></ion-img>
         </ion-avatar>
+
       </ion-col>
     </ion-row>
 
+    <!-- Settings -->
     <ion-row>
       <ion-col class="settings-button">
         <ion-button (click)="openSettings()" *ngIf="show">
@@ -52,6 +57,7 @@
 
       </ion-col>
 
+      <!-- Time -->
       <ion-col col-6 *ngIf="session">
         <p class="time">{{ session.upload | timePipeDetail}}</p>
       </ion-col>

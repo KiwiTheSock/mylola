@@ -1,10 +1,17 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { ModalController, ActionSheetController, IonDatetime } from '@ionic/angular';
-import { ModalImagePage } from '../modal-image/modal-image.page';
+//Angular
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+
+//Ionic
+import { ModalController, ActionSheetController } from '@ionic/angular';
+
+//Ionic-Native
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+
+//Others
+import { ModalImagePage } from '../modal-image/modal-image.page';
 
 @Component({
   selector: 'app-add',
@@ -13,9 +20,11 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class AddPage implements OnInit{
 
+  //Form Validation
   time: FormGroup;
   isSubmitted = false;
 
+  //Data
   titel = null;
   text = null;
   description = null;
@@ -24,18 +33,22 @@ export class AddPage implements OnInit{
   endtime = null;
 
   constructor(
+    public actionSheetController: ActionSheetController,
+    private camera: Camera,
+    private file: File,
+    public formBuilder: FormBuilder,
     public modalController: ModalController,
     public router: Router,
-    private camera: Camera,
-    public actionSheetController: ActionSheetController,
-    private file: File,
-    public formBuilder: FormBuilder
   ) { 
+    //CroppedImage
     if(this.croppedImage == "" || this.croppedImage == null){
       this.croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
     }
   }
 
+  /* Form Validation
+   * --------------------------------------------------------
+   */
   ngOnInit(){
     this.time = this.formBuilder.group({
       starttime: ['', Validators.required],
@@ -43,7 +56,9 @@ export class AddPage implements OnInit{
     });
   }
 
-  //Image
+  /* Image
+   * --------------------------------------------------------
+   */
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
       header: "Bildquelle auswählen",
@@ -68,7 +83,6 @@ export class AddPage implements OnInit{
     await actionSheet.present();
   }
 
-  //Modal
   async presentModal(sourceType) {
     const modal = await this.modalController.create({
       component: ModalImagePage,
@@ -80,7 +94,6 @@ export class AddPage implements OnInit{
       }
     });
 
-    //Passed back data
     modal.onDidDismiss()
       .then((data) => {
         this.croppedImage = data['data']; 
@@ -94,20 +107,23 @@ export class AddPage implements OnInit{
     }
   }
 
+  /* Error Messages
+  * --------------------------------------------------------
+  */
   get errorControl() {
     return this.time.controls;
   }
 
-  //API Call
+  /* Create Coupons (API CALL)
+  * --------------------------------------------------------
+  */
   createCoupon() {
-
     this.submitForm();
     if(new Date(this.starttime) > new Date(this.endtime)){
       this.time.get("endtime").reset();
     } else if(this.submitForm()){
       this.cancel();
     }
-
   }
 
   submitForm(){
@@ -119,7 +135,6 @@ export class AddPage implements OnInit{
     }
   }
 
-  //Cancel
   cancel() {
     this.router.navigateByUrl('/app/tabs/schedule');
   }

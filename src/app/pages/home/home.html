@@ -1,82 +1,83 @@
 <!-- Header -->
 <ion-header>
   <ion-toolbar>
-    
+
     <!-- Sidemenu -->
     <ion-buttons *ngIf="!showSearchbar" slot="start">
       <ion-menu-button>
         <ion-icon style="width: 50px; height: 50px;" name="menu"></ion-icon>
-      </ion-menu-button> 
+      </ion-menu-button>
     </ion-buttons>
 
     <!-- Mylola -->
-    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" *ngIf="!ios && !showSearchbar"></ion-img>  
-    
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" *ngIf="!ios && !showSearchbar"></ion-img>
+
 
     <!-- Search Function -->
-    <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionChange)="updateSchedule()" (ionCancel)="showSearchbar = false" placeholder="Suchen"></ion-searchbar>
+    <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText"
+      (ionChange)="updateSchedule()" (ionCancel)="showSearchbar = false" placeholder="Suchen"></ion-searchbar>
 
     <!-- Search and Filter Icons -->
     <ion-buttons slot="end">
       <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
-    </ion-buttons> 
+    </ion-buttons>
   </ion-toolbar>
 
-    <!-- Filter -->
-    <ion-toolbar #header class="bg-filter">
-      <ion-grid class="filter">
-        <ion-row>
-          <ion-col>
-            <div>
-              <!-- Medium color changeable in variables.scss -->
-              <ion-fab-button #first color="danger" (click)="btnActivate(first, '1')">
-                <ion-img src="../assets/img/icon/gastro_icon.png"></ion-img>
-              </ion-fab-button>
-              <p>Gastro & Nightlife</p>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div>
-              <ion-fab-button #second color="danger" (click)="btnActivate(second, '2')">
-                <ion-img src="../assets/img/icon/shopping_icon.png"></ion-img>
-              </ion-fab-button>
-              <p>Shopping</p>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div>
-              <ion-fab-button #third color="danger" (click)="btnActivate(third, '3')">
-                <ion-img src="../assets/img/icon/freizeit_icon.png"></ion-img>
-              </ion-fab-button>
-              <p>Freizeit & Erleben</p>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div>
-              <ion-fab-button #fourth color="danger" (click)="btnActivate(fourth, '4')">
-                <ion-img src="../assets/img/icon/dienstleistungen_icon.png"></ion-img>
-              </ion-fab-button>
-              <p>Dienstleistungen</p>
-            </div>
-          </ion-col>
-        </ion-row>
+  <!-- Filter -->
+  <ion-toolbar #header class="bg-filter">
+    <ion-grid class="filter">
+      <ion-row>
+        <ion-col>
+          <div>
+            <!-- Medium color changeable in variables.scss -->
+            <ion-fab-button #first color="danger" (click)="btnActivate(first, '1')">
+              <ion-img src="../assets/img/icon/gastro_icon.png"></ion-img>
+            </ion-fab-button>
+            <p>Gastro & Nightlife</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-fab-button #second color="danger" (click)="btnActivate(second, '2')">
+              <ion-img src="../assets/img/icon/shopping_icon.png"></ion-img>
+            </ion-fab-button>
+            <p>Shopping</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-fab-button #third color="danger" (click)="btnActivate(third, '3')">
+              <ion-img src="../assets/img/icon/freizeit_icon.png"></ion-img>
+            </ion-fab-button>
+            <p>Freizeit & Erleben</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-fab-button #fourth color="danger" (click)="btnActivate(fourth, '4')">
+              <ion-img src="../assets/img/icon/dienstleistungen_icon.png"></ion-img>
+            </ion-fab-button>
+            <p>Dienstleistungen</p>
+          </div>
+        </ion-col>
+      </ion-row>
 
-        <ion-row style="max-width: 300px; margin: auto;">
-          <ion-col>
-            <div style="text-align: center;">
-              <ion-button #fifth color="danger" (click)="btnActivate(fifth, '5')">In der Nähe</ion-button>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div style="text-align: center;">
-              <ion-button #sixth color="danger" (click)="btnActivate(sixth, '6')">Bald endend</ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-toolbar>
+      <ion-row style="max-width: 300px; margin: auto;">
+        <ion-col>
+          <div style="text-align: center;">
+            <ion-button #fifth color="danger" (click)="btnActivate(fifth, '5')">In der Nähe</ion-button>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div style="text-align: center;">
+            <ion-button #sixth color="danger" (click)="btnActivate(sixth, '6')">Bald endend</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
 
 </ion-header>
 
@@ -101,7 +102,7 @@
           <ion-row class="first-row">
 
             <!-- Logo -->
-            <ion-col col-4  class="logo"> 
+            <ion-col col-4 class="logo">
               <ion-avatar *ngIf="session">
                 <ion-img src="..\assets\img\logo\{{session.logo}}"></ion-img>
               </ion-avatar>
@@ -115,27 +116,29 @@
             </ion-col>
 
           </ion-row>
-        
+
           <!-- Second Row -->
           <ion-row>
 
             <!-- Picture and Tear-off -->
             <ion-col col-12 *ngIf="session">
-              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
+              <ion-img src="..\assets\img\add\{{session.add}}" routerLink="/app/tabs/schedule/detail/{{session.id}}">
+              </ion-img>
               <div class="tear-off">
-                <ion-img src="..\assets\img\mylola\Abrissecke_rund.png" routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>  
+                <ion-img src="..\assets\img\mylola\Abrissecke_rund.png"
+                  routerLink="/app/tabs/schedule/detail/{{session.id}}"></ion-img>
                 <p class="">{{session.addtext}}</p>
-             </div>
+              </div>
             </ion-col>
 
-          </ion-row>     
-          
+          </ion-row>
+
           <!-- Third Row -->
           <ion-row>
 
             <!-- Icons -->
             <ion-col col-1 class="icons">
-              <ion-buttons >
+              <ion-buttons>
                 <ion-button id="button1" (click)="toggleFavorite(session)">
                   <ion-icon *ngIf="session.fav" slot="icon-only" name="bookmark-outline"></ion-icon>
                   <ion-icon *ngIf="!session.fav" slot="icon-only" name="bookmark"></ion-icon>
@@ -165,14 +168,14 @@
 
             <!-- Separation -->
             <ion-col col-12 *ngIf="darkmode.dark">
-              <ion-img src="..\assets\img\mylola\Trennung_dunkel.png"></ion-img>  
+              <ion-img src="..\assets\img\mylola\Trennung_dunkel.png"></ion-img>
             </ion-col>
             <ion-col col-12 *ngIf="!darkmode.dark">
-              <ion-img src="..\assets\img\mylola\Trennung_hell.png"></ion-img>  
+              <ion-img src="..\assets\img\mylola\Trennung_hell.png"></ion-img>
             </ion-col>
 
           </ion-row>
-        </ion-grid>  
+        </ion-grid>
       </div>
     </ion-item-group>
   </ion-list>
@@ -182,12 +185,14 @@
     <p style="margin: auto;">Keine Einträge gefunden</p>
   </ion-list-header>
 
-   <ion-fab class="fab" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button *appHasRole="['ADMIN']" routerLink="/add"> 
+  <!-- Fab-Button -->
+  <ion-fab class="fab" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button *appHasRole="['ADMIN']" routerLink="/add">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
+  <!-- Infinite Scroll -->
   <ion-infinite-scroll threshold="50px" (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content>
     </ion-infinite-scroll-content>

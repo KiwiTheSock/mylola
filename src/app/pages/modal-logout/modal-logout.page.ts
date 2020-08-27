@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+//Angular
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+//Ionic
 import { ModalController } from '@ionic/angular';
+
+//Others
 import { AuthService } from '../../services/auth.service';
 import { UserData } from '../../services/user-data';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-logout',
@@ -18,10 +23,9 @@ export class ModalLogoutPage{
     private router: Router,
   ) { }
 
-
   logout() {
     this.modalCtrl.dismiss({'dismissed': true});
-    
+
     this.authService.logout();
     this.userData.logout().then(() => {
       return this.router.navigateByUrl('/app/tabs/schedule');
@@ -31,7 +35,6 @@ export class ModalLogoutPage{
 
   // Data passed in by componentProps
   //@Input() users: string;
-  
   dismiss() {
     this.modalCtrl.dismiss({'dismissed': true});
   }

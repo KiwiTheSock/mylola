@@ -1,9 +1,16 @@
+//Angular
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActionSheetController, ModalController } from '@ionic/angular';
-import { Camera } from '@ionic-native/camera/ngx';
-import { ModalImagePage } from '../modal-image/modal-image.page';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+
+//Ionic
+import { ActionSheetController, ModalController } from '@ionic/angular';
+
+//Ionic-Native
+import { Camera } from '@ionic-native/camera/ngx';
+
+//Others
+import { ModalImagePage } from '../modal-image/modal-image.page';
 
 @Component({
   selector: 'app-account-edit',
@@ -22,12 +29,15 @@ export class AccountEditPage {
 
   defaultHref = '';
 
+  //Form Validation
   time: FormGroup;
   isSubmitted = false;
 
+  //CroppedImages
   croppedProfileImage = "../assets/img/logo/halloffame_logo.png";
   croppedTitleImage = "../assets/img/banner/banner_halloffame.png";
 
+  //Data
   public name: string = "Hall of Fame";
   public street: string = "Theodor-Heuss-Platz";
   public streetnumber: string = "6-9";
@@ -87,6 +97,9 @@ export class AccountEditPage {
     });
   }
 
+  /* Profile Image
+  * --------------------------------------------------------
+  */
   async profilePicture() {
     const actionSheet = await this.actionSheetController.create({
       header: "Bildquelle auswählen",
@@ -111,6 +124,9 @@ export class AccountEditPage {
     await actionSheet.present();
   }
 
+  /* Title Image
+  * --------------------------------------------------------
+  */
   async titlePicture() {
     const actionSheet = await this.actionSheetController.create({
       header: "Bildquelle auswählen",
@@ -135,7 +151,9 @@ export class AccountEditPage {
     await actionSheet.present();
   }
 
-  //Modal ProfileImage
+  /* Modal Profile Image
+  * --------------------------------------------------------
+  */
   async presentModalProfile(sourceType) {
     const modal = await this.modalController.create({
       component: ModalImagePage,
@@ -161,7 +179,9 @@ export class AccountEditPage {
     }
   }
 
-  //Modal TitleImage
+  /* Modal Title Image
+  * --------------------------------------------------------
+  */
   async presentModalTitle(sourceType) {
     const modal = await this.modalController.create({
       component: ModalImagePage,
@@ -191,7 +211,9 @@ export class AccountEditPage {
     return this.time.controls;
   }
 
-  //API Call
+  /* Edit (API CALL)
+  * --------------------------------------------------------
+  */
   edit() {
 
     this.submitForm();

@@ -1,8 +1,9 @@
+//Angular
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
+//Ionic
 import { MenuController, IonSlides } from '@ionic/angular';
-
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -11,10 +12,10 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./tutorial.scss'],
 })
 export class TutorialPage {
-  showSkip = true;
-
+ 
+  //Slides
   @ViewChild('slides', { static: true }) slides: IonSlides;
-
+  showSkip = true;
   slideOptions = {
     //initialSlide: 0,
     //slidesPerView: 1,

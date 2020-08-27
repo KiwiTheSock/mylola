@@ -11,6 +11,8 @@ import { ConferenceData } from '../../services/conference-data';
 })
 export class EventsPage {
   
+  @ViewChild(CalendarComponent) myCal: CalendarComponent;
+
   events: {title: string, desc: string, startTime: string, endTime: string, id: string}[] = [];
 
   event = {
@@ -29,8 +31,6 @@ export class EventsPage {
     noEventsLabel: 'Keine Veranstaltungen',
     currentDate: new Date()
   };
-
-  @ViewChild(CalendarComponent) myCal: CalendarComponent;
  
   constructor(
     private alertCtrl: AlertController, 
@@ -59,17 +59,13 @@ export class EventsPage {
     this.removeEvents();
   }
   
-  //Add Events
+  /* Add Events
+   * --------------------------------------------------------
+   */
   addEvents() {
     
     let item1 = this.events.find(i => i.id === "1");
-
-    //console.log(item1);
-
     let item2 = this.events.find(i => i.id === "2");
-
-    //console.log(item2);
-
     var counter = 1;
 
     for(var i = 0; i < this.events.length; i++){
@@ -90,7 +86,9 @@ export class EventsPage {
     }
   }
   
-  //Remove Events
+  /* Remove Events
+   * --------------------------------------------------------
+   */
   removeEvents(){
     for(let i = 0; i <= this.events.length; i++){
       this.events.pop();
@@ -98,29 +96,39 @@ export class EventsPage {
     }
   }
 
-  //Next month
+  /* Next Month
+   * --------------------------------------------------------
+   */
   next() {
     var swiper = document.querySelector('.swiper-container')['swiper'];
     swiper.slideNext();
   }
   
-  //Previous month
+  /* Previous Month
+   * --------------------------------------------------------
+   */
   back() {
     var swiper = document.querySelector('.swiper-container')['swiper'];
     swiper.slidePrev();
   }
   
-  //Focus today
+  /* Get Today
+   * --------------------------------------------------------
+   */
   today() {
     this.calendar.currentDate = new Date();
   }
   
-  //Changes the title (Month/Year)
+  /* Changes The Title (Month/Year)
+   * --------------------------------------------------------
+   */
   onViewTitleChanged(title) {
     this.viewTitle = title;
   }
  
-  //Alert
+  /* Alert 
+   * --------------------------------------------------------
+   */
   async onEventSelected(event) {
     // Use Angular date pipe for conversion
     let start = formatDate(event.startTime, 'medium', this.locale);

@@ -1,19 +1,22 @@
+//Angular
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location, PlatformLocation } from '@angular/common';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 
+//Ionic
 import { MenuController, Platform, ToastController, PopoverController, ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
+//Ionic-Native
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { UserData } from './services/user-data';
-import { Darkmode } from './services/darkmode';
+//Others
 import { AuthService } from './services/auth.service';
-
+import { Darkmode } from './services/darkmode';
 import { ModalLogoutPage } from './pages/modal-logout/modal-logout.page';
+import { UserData } from './services/user-data';
 
 @Component({
   selector: 'app-root',
@@ -45,11 +48,11 @@ export class AppComponent implements OnInit {
 
   session: any;
 
-  //Back Button
+  //Hardware Back Button
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
 
-  //Only for browser
+  //Only For Browser
   croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
 
   constructor(
@@ -72,7 +75,7 @@ export class AppComponent implements OnInit {
     //Initialize App
     this.initializeApp();
 
-    //Only for browser
+    //Only For Browser
     this.platformLocation.onPopState(async () => {
       const modal = await this.modalController.getTop();
       if (modal) {
@@ -80,8 +83,18 @@ export class AppComponent implements OnInit {
       }
     });
 
-    //Back Button
+    //Hardware Back Button
     this.backButtonEvent();
+  }
+
+  /* Initialize App
+  * --------------------------------------------------------
+  */
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
   }
 
   async ngOnInit() {
@@ -106,16 +119,6 @@ export class AppComponent implements OnInit {
         .onDidDismiss()
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
-    });
-  }
-
-  /*
-   *  Initialize App
-   */
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
     });
   }
 
@@ -145,9 +148,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  /*
-   *  Back Button
-   */
+  /* Hardware Back Button
+  * --------------------------------------------------------
+  */
   backButtonEvent() {
     this.platform.backButton.subscribe(() => {
       if (this.router.url != '/app/tabs/schedule' && this.router.url != '/app/tabs/favorites' && this.router.url != '/app/tabs/events') {
@@ -177,9 +180,9 @@ export class AppComponent implements OnInit {
     toast.present();
   }
 
-  /*
-   *  Logout Modal
-   */
+  /* Logout Modal
+  * --------------------------------------------------------
+  */
   async presentModal(session: any) {
     const modal = await this.modalController.create({
       component: ModalLogoutPage,
@@ -202,19 +205,19 @@ export class AppComponent implements OnInit {
       return this.router.navigateByUrl('/app/tabs/schedule');
     });
   }
-  
-  /*
-   *  Tutorial
-   */
+
+  /* Tutorial
+  * --------------------------------------------------------
+  */
   openTutorial() {
     this.menu.enable(false);
     this.storage.set('ion_did_tutorial', false);
     this.router.navigateByUrl('/tutorial');
   }
 
-  /*
-   *  Darkmode
-   */
+  /* Darkmode
+  * --------------------------------------------------------
+  */
   changeDarkmode() {
     this.darkmode.darkmode();
   }

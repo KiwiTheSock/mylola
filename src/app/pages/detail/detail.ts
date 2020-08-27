@@ -1,18 +1,26 @@
+//Angular
 import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import { ConferenceData } from '../../services/conference-data';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserData } from '../../services/user-data';
-import { Platform, ActionSheetController, AlertController, NavController } from '@ionic/angular';
 import { DOCUMENT} from '@angular/common';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { darkStyle } from './dark-style';
-import { ModalController } from '@ionic/angular';
-import { ModalPage } from '../modal/modal.page'; 
-import { Plugins, AppState } from '@capacitor/core';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { AuthService } from '../../services/auth.service';
 
+//Ionic
+import { Platform, ActionSheetController, AlertController, NavController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+
+//Ionic-Native
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
+//Capacitor
+import { Plugins } from '@capacitor/core';
 const { App } = Plugins;
+
+//Others
+import { ConferenceData } from '../../services/conference-data';
+import { UserData } from '../../services/user-data';
+import { darkStyle } from './dark-style';
+import { ModalPage } from '../modal/modal.page'; 
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'page-detail',
@@ -25,10 +33,13 @@ export class DetailPage implements AfterViewInit{
   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
   session: any;
+
   defaultHref = '';
 
+  //Company Coupon Edit
   show = false;
 
+  //Share Data
   text: string='Mylola ... teilen ... bla bla';
   link: string='https://www.mylola.de/';
   
@@ -67,17 +78,22 @@ export class DetailPage implements AfterViewInit{
     this.edit();
   }
 
+  ionViewDidEnter() {
+    this.defaultHref = `/app/tabs/schedule`;
+  }
+
+  /* Company Coupon Edit
+  * --------------------------------------------------------
+  */
   edit() {
     if (this.authService.getRole().role == "ADMIN" && this.router.url === "/app/tabs/schedule/detail/1"){
       this.show = true;
     }
   }
 
-  ionViewDidEnter() {
-    this.defaultHref = `/app/tabs/schedule`;
-  }
-
-  //Favorites
+  /* Favorites (API CALL)
+  * --------------------------------------------------------
+  */
   toggleFavorite(session: any) {
     if (this.userProvider.hasFavorite(session.name)) {
       this.userProvider.removeFavorite(session.name);
@@ -88,19 +104,25 @@ export class DetailPage implements AfterViewInit{
     }
   }
 
-  //Share
+  /* Share
+  * --------------------------------------------------------
+  */
   shareSession(session: any) {
     const url = this.link;
     const text = 'Test'+'\n';
     this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
   }
 
-  //Notification
+  /* Notification (API CALL)
+  * --------------------------------------------------------
+  */
   notification() {
     console.log("Abonniert");
   }
 
-  //Modal
+  /* Modal Coupon
+  * --------------------------------------------------------
+  */
   async presentModal(session: any) {
     const modal = await this.modalController.create({
       component: ModalPage,
@@ -108,15 +130,6 @@ export class DetailPage implements AfterViewInit{
       swipeToClose: true, //iOS
       componentProps: { session: session }
     });
-   
-    //Passed back data
-    /*
-    modal.onDidDismiss()
-      .then((data) => {
-        const users = data['data']; 
-      console.log(data);
-    });
-    */
    
     await modal.present();
 
@@ -126,6 +139,9 @@ export class DetailPage implements AfterViewInit{
     }
   }
 
+  /* Logged In
+  * --------------------------------------------------------
+  */
   isLoggedIn(session: any){
     console.log(this.authService.getRole());
     if(this.authService.getRole() == null || this.authService.getRole().email == null){
@@ -135,12 +151,16 @@ export class DetailPage implements AfterViewInit{
     }
   }
 
-  //Facebook
+  /* Facebook
+  * --------------------------------------------------------
+  */
   facebook(session: any){
     window.open(session.facebook, '_system','location=yes');
   }
 
-  //Browser
+  /* Browser
+  * --------------------------------------------------------
+  */
   async launchBrowser(url){
     var ret = await App.canOpenUrl({ url: url });
 
@@ -148,12 +168,16 @@ export class DetailPage implements AfterViewInit{
     console.log("Open url response: ", ret);
   }
   
-  //Mail
+  /* E-Mail
+  * --------------------------------------------------------
+  */
   sendEmail(mail){
     this.socialSharing.shareViaEmail('', '', [mail]);
   }
 
-  //Contact
+  /* Contact
+  * --------------------------------------------------------
+  */
   async openContact(session: any) {
     const mode = 'ios'; // this.config.get('mode');
 
@@ -193,6 +217,9 @@ export class DetailPage implements AfterViewInit{
     await actionSheet.present();
   }
 
+  /* Settings
+  * --------------------------------------------------------
+  */
   openSettings() {
     this.router.navigateByUrl("/detail-edit"); 
   }

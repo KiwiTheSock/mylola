@@ -1,28 +1,24 @@
+<!-- Tabs -->
 <ion-tabs #myTabs (ionTabsDidChange)="getSelectedTab()">
-
   <ion-tab-bar slot="bottom">
 
+    <!-- First Tab -->
     <ion-tab-button [ngStyle]="tab1()" [routerLink]="['/app/tabs/schedule']">
-    
       <ion-icon name="home"></ion-icon>
       <ion-label>Home</ion-label>
-     
     </ion-tab-button>
 
+    <!-- Second Tab -->
     <ion-tab-button [ngStyle]="tab2()" [routerLink]="['/app/tabs/favorites']">
-      
       <ion-icon name="bookmarks"></ion-icon>
       <ion-label>Favoriten</ion-label>
-   
     </ion-tab-button>
 
+    <!-- Third Tab -->
     <ion-tab-button [ngStyle]="tab3()" [routerLink]="['/app/tabs/events']">
-     
       <ion-icon  name="calendar"></ion-icon>
       <ion-label>Veranstaltungen</ion-label>
-    
     </ion-tab-button>
 
   </ion-tab-bar>
-
 </ion-tabs>

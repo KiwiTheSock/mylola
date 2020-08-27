@@ -1,7 +1,11 @@
+//Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+//Ionic
 import { IonicModule } from '@ionic/angular';
 
+//Others
 import { AccountPage } from './account';
 import { AccountPageRoutingModule } from './account-routing.module';
 

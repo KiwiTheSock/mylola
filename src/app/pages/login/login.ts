@@ -1,6 +1,8 @@
+//Angular
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
+//Others
 import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
 })
 
 export class LoginPage {
+
   user = {
     email: '',
     pw: ''
@@ -28,6 +31,9 @@ export class LoginPage {
     this.defaultHref = `/app/tabs/schedule`;
   }
 
+  /* Login
+   * --------------------------------------------------------
+   */
   signIn() {
     this.auth.signIn(this.user).subscribe(user => {
      

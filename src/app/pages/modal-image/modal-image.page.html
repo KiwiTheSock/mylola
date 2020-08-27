@@ -1,7 +1,8 @@
+<!-- Content -->
 <ion-content>
-
   <ion-grid class="content">
 
+    <!-- Image Cropper -->
     <ion-row>
       <ion-col>
         <image-cropper [imageBase64]="myImage" [maintainAspectRatio]="true" [aspectRatio]="aspectRatio" format="png"
@@ -10,6 +11,7 @@
       </ion-col>
     </ion-row>
 
+    <!-- Button -->
     <ion-row class="button">
       <ion-col>
         <ion-button fill="outline" shape="round" expand="full" (click)="saveImage()">Bild speichern</ion-button>

@@ -15,10 +15,11 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Content -->
 <ion-content>
-
   <ion-grid class="content">
 
+    <!-- Coupon Image -->
     <ion-row class="picture">
       <ion-col>
         <ion-card>
@@ -37,24 +38,28 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="titel">
+    <!-- Title -->
+    <ion-row class="title">
       <ion-col>
         <ion-input maxLength="50" [(ngModel)]="titel" placeholder="Titel" required></ion-input>
       </ion-col>
     </ion-row>
 
+    <!-- Text -->
     <ion-row class="text">
       <ion-col>
         <ion-input maxLength="20" [(ngModel)]="text" placeholder="Abrisstext" required></ion-input>
       </ion-col>
     </ion-row>
 
+    <!-- Beschreibung -->
     <ion-row class="description">
       <ion-col>
         <textarea maxLength="1000" [(ngModel)]="description" placeholder=" Beschreibung"></textarea>
       </ion-col>
     </ion-row>
 
+    <!-- Time Span -->
     <ion-row>
       <ion-col style="text-align: center;">
         <p>Aktions- oder Veranstaltungszeitraums festlegen</p>
@@ -91,7 +96,7 @@
       </ion-row>
     </form>
 
-
+    <!-- Buttons -->
     <ion-row class="buttons">
 
       <ion-col>

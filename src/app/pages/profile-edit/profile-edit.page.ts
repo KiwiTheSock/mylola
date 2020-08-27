@@ -1,3 +1,4 @@
+//Angular
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,6 +15,7 @@ export class ProfileEditPage {
 
   defaultHref = '';
 
+  //Data
   public name: string = "Max";
   public lastname: string = "Mustermann";
   public street: string = "Musterstraße";
@@ -24,6 +26,9 @@ export class ProfileEditPage {
   public phone: string = "017654093421";
 
 
+/* Button
+ * --------------------------------------------------------
+ */
   save() {
     this.router.navigateByUrl('/profile');
   }

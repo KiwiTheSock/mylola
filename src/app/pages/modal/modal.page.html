@@ -1,31 +1,27 @@
+<!-- Content -->
 <ion-content>
-
   <ion-grid class="content">
 
+    <!-- Title -->
     <ion-row>
-
       <ion-col col-12 class="title">
-
-
         <h2>{{session?.addtext}}</h2>
-
-
       </ion-col>
-
     </ion-row>
 
+    <!-- Slides -->
     <ion-row>
-
       <ion-col col-12>
-
         <ion-slides #slides pager="false" [options]="slideOptions">
-    
+
+          <!-- QR-Code -->
           <ion-slide>
             <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
             </ngx-qrcode>
             <!--<p>{{this.value}}</p>  [bc-display-value]="true"-->
           </ion-slide>
 
+          <!-- Barcode -->
           <ion-slide>
             <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="value" [bc-display-value]="false" [bc-width]="0.75">
             </ngx-barcode6>
@@ -38,15 +34,13 @@
         <div class="swiper-button-prev swiper-button-black"></div>
 
       </ion-col>
-
     </ion-row>
 
+    <!-- Button -->
     <ion-row>
-
       <ion-col col-12 class="button">
         <ion-button (click)="dismiss()">Einlösen</ion-button>
       </ion-col>
-
     </ion-row>
 
   </ion-grid>

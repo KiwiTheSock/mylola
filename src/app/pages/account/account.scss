@@ -1,15 +1,3 @@
-ion-grid{
-  padding: 0;
-}
-
-ion-row{
-  padding: 0;
-}
-
-ion-col{
-  padding: 0;
-}
-
 /* Mylola
 * --------------------------------------------------------
 */
@@ -19,16 +7,18 @@ ion-col{
   margin-right: 60px;
 }
 
-img {
-  max-width: 140px;
-  border-radius: 50%;
-  margin-top: 15%;
-}
-
-/* Profile and Backgound Pictures
+/* Content
  * --------------------------------------------------------
  */
+ .content {
+  max-width: 650px;
+  margin: auto;
+  text-align: center;
+}
 
+/* Profile And Backgound Pictures
+ * --------------------------------------------------------
+ */
 .profile-background ion-avatar {
   display: flex;
   margin: auto;
@@ -38,10 +28,3 @@ img {
 .profile-background ion-avatar ion-img {
   border: 2px solid #DB001B;
 }
-
-.content {
-  max-width: 650px;
-  margin: auto;
-  text-align: center;
-}
-

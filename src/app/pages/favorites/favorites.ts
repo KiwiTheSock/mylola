@@ -1,24 +1,34 @@
+//Angular
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+//Ionic
 import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+
+//Ionic-Native
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
+//Others
 import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
-import { PopoverController } from '@ionic/angular';
 import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'page-favorites',
   templateUrl: 'favorites.html',
   styleUrls: ['./favorites.scss']
 })
-export class FavoritesPage implements OnInit{
+export class FavoritesPage implements OnInit {
+
   // Gets a reference to the list element
   @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
 
+  //Filter
   tracks: { name: string, icon: string, isChecked: boolean }[] = [];
 
+  //Data
   ios: boolean;
   dayIndex = 0;
   queryText = '';
@@ -29,8 +39,9 @@ export class FavoritesPage implements OnInit{
   confDate: string;
   showSearchbar: boolean;
 
-  text: string='Mylola ... teilen ... bla bla';
-  link: string='https://www.mylola.de/';
+  //Create Coupon
+  text: string = 'Mylola';
+  link: string = 'https://www.mylola.de/';
 
   constructor(
     public alertCtrl: AlertController,
@@ -46,27 +57,28 @@ export class FavoritesPage implements OnInit{
     public darkmode: Darkmode,
     public refresher: Refresher,
     private socialSharing: SocialSharing
-    ) {}
+  ) { }
 
-    ngOnInit() {
-      this.updateSchedule();
-  
-      this.ios = this.config.get('mode') === 'ios';
-    }
+  ngOnInit() {
+    this.updateSchedule();
 
-    ngDoCheck(){
-      this.updateSchedule();
-    }
-    
-    //Update Timeline
-    updateSchedule() {
-      this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-        this.shownSessions = data.shownSessions;
-        this.groups = data.groups;
-      });
-    }
+    this.ios = this.config.get('mode') === 'ios';
+  }
 
-    //Filter
+  ngDoCheck() {
+    this.updateSchedule();
+  }
+
+  /* Update Timeline
+   * --------------------------------------------------------
+   */
+  updateSchedule() {
+    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
+      this.shownSessions = data.shownSessions;
+      this.groups = data.groups;
+    });
+  }
+
   ionViewWillEnter() {
     this.confData.getTracks().subscribe((tracks: any[]) => {
       tracks.forEach(track => {
@@ -79,6 +91,9 @@ export class FavoritesPage implements OnInit{
     });
   }
 
+  /* Filter
+   * --------------------------------------------------------
+   */
   applyFilter(name) {
 
     if (name == 1) {
@@ -108,7 +123,7 @@ export class FavoritesPage implements OnInit{
     this.updateSchedule();
   }
 
-  dismissFilter(name){
+  dismissFilter(name) {
 
     if (name == 1) {
       this.excludeTracks.pop("Gastro & Nightlife");
@@ -137,7 +152,21 @@ export class FavoritesPage implements OnInit{
     this.updateSchedule();
   }
 
-  //Favorites
+  btnActivate(ionicButton, name) {
+    //Design
+    if (ionicButton.color === 'danger') {
+      ionicButton.color = 'medium';
+      this.applyFilter(name);
+    }
+    else {
+      ionicButton.color = 'danger';
+      this.dismissFilter(name);
+    }
+  }
+
+  /* Favorites
+   * --------------------------------------------------------
+   */
   toggleFavorite(session: any) {
     if (this.user.hasFavorite(session.name)) {
       this.user.removeFavorite(session.name);
@@ -148,28 +177,19 @@ export class FavoritesPage implements OnInit{
     }
   }
 
-  //Share
+  /* Share
+   * --------------------------------------------------------
+   */
   shareSession(session: any) {
     const url = this.link;
-    const text = 'Test'+'\n';
+    const text = 'Test' + '\n';
     this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
   }
 
-    //Refresh
-    refresh(){
-      this.refresher.doRefresh(event);
-    }
-
-    btnActivate(ionicButton, name) {
-
-      //Design
-      if (ionicButton.color === 'danger') { 
-        ionicButton.color = 'medium'; 
-        this.applyFilter(name);
-      }
-      else {
-        ionicButton.color = 'danger'; 
-        this.dismissFilter(name);
-      }
-    }
+  /* Refresher
+   * --------------------------------------------------------
+   */
+  refresh() {
+    this.refresher.doRefresh(event);
+  }
 }

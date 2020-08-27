@@ -1,18 +1,23 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
+
     <!-- Back Button -->
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
+
     <!-- Mylola -->
     <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png"></ion-img>
+
   </ion-toolbar>
 </ion-header>
 
+<!-- Content -->
 <ion-content fullscreen="true">
   <ion-grid class="content">
 
-    <!-- Profilepicture -->
+    <!-- Profile Image -->
     <ion-item-divider>
       <ion-label>
         Profilbild
@@ -25,14 +30,14 @@
     </ion-item-divider>
 
     <ion-row>
-      <ion-col class="profile-picture">
+      <ion-col class="profile-image">
         <ion-avatar>
           <img [src]="croppedProfileImage">
         </ion-avatar>
       </ion-col>
     </ion-row>
 
-    <!-- Titlepicture -->
+    <!-- Title Image -->
     <ion-item-divider>
       <ion-label>
         Titelbild
@@ -52,7 +57,7 @@
       </ion-col>
     </ion-row>
 
-    <!-- Name -->
+    <!-- Company Name -->
     <ion-item-divider>
       <ion-label>
         Name
@@ -259,6 +264,7 @@
       </ion-row>
     </form>
 
+    <!-- Save Button -->
     <ion-row>
       <ion-col class="save">
         <ion-button fill="outline" shape="round" (click)="edit()">

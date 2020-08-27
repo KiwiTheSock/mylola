@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
     <!-- Back Button -->
@@ -9,10 +10,11 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Content -->
 <ion-content fullscreen="true">
   <ion-grid class="content">
 
-    <!-- Titlepicture -->
+    <!-- Title Image -->
     <ion-item-divider>
       <ion-label>
         Couponbild
@@ -40,13 +42,13 @@
     <ion-row>
       <ion-col class="ion-padding-top ion-text-center">
         <ion-item lines="none">
-          <ion-label class="label1"><b>Titel</b></ion-label>
+          <ion-label class="label"><b>Titel</b></ion-label>
           <ion-input maxLength="50" [(ngModel)]="title" value="{{title}}" required></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
 
-    <!--  -->
+    <!-- Text -->
     <ion-item-divider>
       <ion-label>
         Abrisstext
@@ -57,14 +59,14 @@
       <ion-col class="ion-padding-top ion-text-center">
 
         <ion-item lines="none">
-          <ion-label class="label1"><b>Abrisstext</b></ion-label>
+          <ion-label class="label"><b>Abrisstext</b></ion-label>
           <ion-input maxLength="50" [(ngModel)]="text" value="{{text}}" required></ion-input>
         </ion-item>
 
       </ion-col>
     </ion-row>
 
-    <!-- Describtion -->
+    <!-- Description -->
     <ion-item-divider>
       <ion-label>
         Beschreibung
@@ -75,8 +77,8 @@
       <ion-col class="ion-padding-top ion-text-center">
 
         <ion-item lines="none" class="description">
-          <ion-label class="label1"><b>Beschreibung</b></ion-label>
-          <textarea maxLength="1000" [(ngModel)]="describtion" value="{{describtion}}" required></textarea>
+          <ion-label class="label"><b>Beschreibung</b></ion-label>
+          <textarea maxLength="1000" [(ngModel)]="description" value="{{description}}" required></textarea>
         </ion-item>
 
       </ion-col>
@@ -94,7 +96,7 @@
         <ion-col>
           <ion-item lines="none">
             <p><b>Startzeit</b></p>
-            <ion-datetime #start [(ngModel)]="starttime" formControlName="starttime" displayFormat="HH:mm, DD MMMM YYYY"
+            <ion-datetime [(ngModel)]="starttime" formControlName="starttime" displayFormat="HH:mm, DD MMMM YYYY"
               pickerFormat="DD-MMM-YYYY HH:mm" doneText="Fertig" cancelText="Abbrechen"
               monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
               monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
@@ -107,7 +109,7 @@
         <ion-col>
           <ion-item lines="none">
             <p><b>Endzeit</b></p>
-            <ion-datetime #end [(ngModel)]="endtime" formControlName="endtime" displayFormat="HH:mm, DD MMMM YYYY"
+            <ion-datetime [(ngModel)]="endtime" formControlName="endtime" displayFormat="HH:mm, DD MMMM YYYY"
               pickerFormat="DD-MMM-YYYY HH:mm" doneText="Fertig" cancelText="Abbrechen"
               monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
               monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
@@ -121,6 +123,7 @@
       </ion-row>
     </form>
 
+    <!-- Buttons -->
     <ion-row class="buttons">
 
       <ion-col>

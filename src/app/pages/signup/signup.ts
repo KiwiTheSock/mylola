@@ -1,6 +1,8 @@
+//Angular
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
+//Others
 import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./signup.scss'],
 })
 export class SignupPage {
+  
   user = {
     email: '',
     pw: ''
@@ -27,6 +30,9 @@ export class SignupPage {
     this.defaultHref = `/app/tabs/schedule`;
   }
 
+/* Login
+ * --------------------------------------------------------
+ */
   onSignup() {
     this.auth.signIn(this.user).subscribe(user => {
      

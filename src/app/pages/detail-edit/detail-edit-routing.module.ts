@@ -1,6 +1,8 @@
+//Angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+//Others
 import { DetailEditPage } from './detail-edit.page';
 
 const routes: Routes = [

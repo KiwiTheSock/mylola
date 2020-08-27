@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar>
 
@@ -14,16 +15,18 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Content -->
 <ion-content>
-
   <ion-grid class="content">
 
+    <!-- Logo -->
     <ion-row class="login-logo">
       <ion-col>
         <img src="../assets/img/mylola/mylola_slogan_red.png" alt="Ionic logo">
       </ion-col>
     </ion-row>
 
+    <!-- Username -->
     <ion-row>
       <ion-col>
         <ion-item>
@@ -33,6 +36,7 @@
       </ion-col>
     </ion-row>
 
+    <!-- Password -->
     <ion-row>
       <ion-col>
         <ion-item>
@@ -42,12 +46,14 @@
       </ion-col>
     </ion-row>
 
+    <!-- Login -->
     <ion-row class="ion-padding">
       <ion-col>
         <ion-button expand="block" (click)="signIn()">Einloggen</ion-button>
       </ion-col>
     </ion-row>
 
+    <!-- Links -->
     <ion-row style="text-align: center;">
       <ion-col>
         <a href="" routerLink="/signup">Registrieren</a>

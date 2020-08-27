@@ -1,10 +1,13 @@
+//Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+//Ionic
 import { IonicModule } from '@ionic/angular';
 
+//Others
 import { TabsPage } from './tabs-page';
 import { TabsPageRoutingModule } from './tabs-page-routing.module';
-
 import { EventsModule } from '../events/events.module';
 import { FavoritesModule } from '../favorites/favorites.module';
 import { HomeModule } from '../home/home.module';

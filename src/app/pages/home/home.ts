@@ -9,6 +9,7 @@ import { Refresher } from '../../services/refresher';
 import { AuthService } from '../../services/auth.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { TabsPage } from '../tabs-page/tabs-page';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'page-home',
@@ -40,6 +41,9 @@ export class HomePage implements OnInit {
   text: string='Mylola ... teilen ... bla bla';
   link: string='https://www.mylola.de/';
 
+  //API Test
+  data: any
+
   constructor(
     public alertCtrl: AlertController,
     public confData: ConferenceData,
@@ -59,11 +63,20 @@ export class HomePage implements OnInit {
     private authService: AuthService,
     private socialSharing: SocialSharing,
     private platform: Platform,
-    private tabs: TabsPage
-  ) { }
+    private tabs: TabsPage,
+    public apiService: ApiService,
+  ) {
+    this.data = [];
+   }
 
   ngOnInit() {
     this.updateSchedule();
+
+    //API TEST
+    this.apiService.login().subscribe(response => {
+      console.log(response);
+      this.data = response;
+    })  
   }
 
   ngDoCheck() {
