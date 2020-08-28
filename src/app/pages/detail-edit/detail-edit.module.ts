@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { DetailEditPageRoutingModule } from './detail-edit-routing.module';
 import { DetailEditPage } from './detail-edit.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { DetailEditPage } from './detail-edit.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    DetailEditPageRoutingModule
+    DetailEditPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [DetailEditPage]
 })

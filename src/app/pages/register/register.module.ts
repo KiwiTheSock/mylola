@@ -9,10 +9,12 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { RegisterPage } from './register';
 import { RegisterPageRoutingModule } from './register-routing.module';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    ComponentsModule,
     FormsModule,
     IonicModule,
     RegisterPageRoutingModule

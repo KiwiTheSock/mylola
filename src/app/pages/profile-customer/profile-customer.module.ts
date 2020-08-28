@@ -9,10 +9,12 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { ProfileCustomerPageRoutingModule } from './profile-customer-routing.module';
 import { ProfileCustomerPage } from './profile-customer.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    ComponentsModule,
     FormsModule,
     IonicModule,
     ProfileCustomerPageRoutingModule

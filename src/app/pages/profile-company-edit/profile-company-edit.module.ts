@@ -9,10 +9,12 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { ProfileCompanyEditPageRoutingModule } from './profile-company-edit-routing.module';
 import { ProfileCompanyEditPage } from './profile-company-edit.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,

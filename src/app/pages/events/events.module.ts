@@ -10,9 +10,11 @@ import { IonicModule } from '@ionic/angular';
 import { EventsPage } from './events';
 import { EventsPageRoutingModule } from './events-routing.module';
 import { NgCalendarModule } from 'ionic2-calendar'; 
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule,
     FormsModule,
     IonicModule,

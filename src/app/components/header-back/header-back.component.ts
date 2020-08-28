@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderBackComponent implements OnInit {
 
+  defaultHref = "";
+
   constructor() { }
 
   ngOnInit() {}

@@ -12,8 +12,6 @@ import { ModalImagePage } from '../modal-image/modal-image.page';
 })
 export class DetailEditPage implements OnInit {
 
-  defaultHref = "";
-
   croppedImage = "../assets/img/add/halloffame_vinokino.png";
 
   //Data

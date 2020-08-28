@@ -1,70 +1,69 @@
 /* Mylola
  * --------------------------------------------------------
  */
-.mylola{
+.mylola {
   height: 20px;
   margin: auto;
-  //margin-left: 30px;
 }
 
 /* Menu
  * --------------------------------------------------------
  */
- .menu{
-  width: 50px; 
+.menu {
+  width: 50px;
   height: 50px;
 }
 
 /* Item
  * --------------------------------------------------------
  */
-.item{
-  margin: 10px 0px 10px 0px; 
-  
+.item {
+  margin: 10px 0px 10px 0px;
+
 }
 
 /*First Row
  * --------------------------------------------------------
  */
-.first-row{
+.first-row {
   margin-bottom: -10px;
 }
 
 /* Logo
  * --------------------------------------------------------
  */
-.logo{
+.logo {
   margin-left: 2%;
   max-width: 50px;
 
 }
 
-.logo ion-img{
+.logo ion-img {
   border: 2px solid var(--ion-color-primary);
   width: 50px;
   height: 50px;
 }
 
- /* Name
+/* Name
  * --------------------------------------------------------
  */
- .name{
-   margin-left: 2%;
-   margin-top: 12.5px;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   margin-right: 15%;
- }
+.name {
+  margin-left: 2%;
+  margin-top: 12.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 15%;
+}
 
- .name p{
+.name p {
   font-family: Segoe_UI_Bold;
   font-size: 20px;
- }
+}
 
 /* Tear-off
  * --------------------------------------------------------
  */
-.tear-off{
+.tear-off {
   position: absolute;
   opacity: 0.7;
   top: 0;
@@ -75,56 +74,57 @@
   margin-top: 27%;
 }
 
-.tear-off p{
+.tear-off p {
   position: absolute;
   margin: auto;
   text-align: center;
   font-weight: bolder;
   transform: rotate(-45deg);
-  color: black; 
+  color: black;
 }
 
-@media (max-width:319px)  { 
-  .tear-off p{
+@media (max-width:319px) {
+  .tear-off p {
     top: 75%;
     left: 38%;
     font-size: 0.875em;
   }
 }
 
-@media (min-width:320px)  { 
-  .tear-off p{
+@media (min-width:320px) {
+  .tear-off p {
     top: 75%;
     left: 38%;
     font-size: 1.0em;
   }
 }
 
-@media (min-width:360px)  { 
-  .tear-off p{
+@media (min-width:360px) {
+  .tear-off p {
     top: 75%;
     left: 38%;
     font-size: 1.3em;
   }
 }
 
-@media (min-width:420px)  { 
-  .tear-off p{
+@media (min-width:420px) {
+  .tear-off p {
     top: 75%;
     left: 38%;
     font-size: 1.5em;
   }
 }
-@media (min-width:480px)  { 
-  .tear-off p{
+
+@media (min-width:480px) {
+  .tear-off p {
     top: 75%;
     left: 38%;
     font-size: 1.8em;
   }
 }
 
-@media (min-width:650px)  { 
-  .tear-off p{
+@media (min-width:650px) {
+  .tear-off p {
     top: 70%;
     left: 35%;
     font-size: 38px;
@@ -134,16 +134,16 @@
 /* Icons
  * --------------------------------------------------------
  */
-.icons{
+.icons {
   max-width: 80px;
-  
+
 }
 
-.icons #button1{
+.icons #button1 {
   --ripple-color: transparent;
 }
 
-.icons #button2{
+.icons #button2 {
   margin-left: -15px;
   --ripple-color: transparent;
 }
@@ -151,7 +151,7 @@
 /* Title
  * --------------------------------------------------------
  */
-.title{
+.title {
   margin-top: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -165,7 +165,7 @@
 /* Time
  * --------------------------------------------------------
  */
-.time{
+.time {
   font-size: 10px;
   margin-top: 6.5px;
   max-width: 80px;
@@ -216,8 +216,8 @@
   }
 }
 
-.filter2{
-  max-width: 300px; 
+.filter2 {
+  max-width: 300px;
   margin: auto;
 }
 
@@ -230,8 +230,8 @@
  */
 
 .fab {
- margin-bottom: 10px;
- margin-right: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 /* List
@@ -246,6 +246,6 @@
 /* Placeholder
  * --------------------------------------------------------
  */
- .placeholder{
+.placeholder {
   margin: auto;
- }
+}

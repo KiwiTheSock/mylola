@@ -1,41 +1,41 @@
 /* Mylola
  * --------------------------------------------------------
  */
- .mylola{
-    height: 20px;
-    margin: auto;
-    margin-right: 60px;
-  }
+.mylola {
+  height: 20px;
+  margin: auto;
+  margin-right: 60px;
+}
 
 /* Menu
  * --------------------------------------------------------
  */
- .menu{
-  width: 50px; 
+.menu {
+  width: 50px;
   height: 50px;
- }
+}
 
 /* Previous Button
  * --------------------------------------------------------
  */
-.previous{
-    max-width: 50px;
+.previous {
+  max-width: 50px;
 }
 
 /* Title
  * --------------------------------------------------------
  */
-.title ion-button{
-    padding-top: 10px;
-    margin: 0 auto; 
+.title ion-button {
+  padding-top: 10px;
+  margin: 0 auto;
 }
 
 /* Forward Button
  * --------------------------------------------------------
  */
-.forward{
-    max-width: 50px; 
-    right: 10px;
+.forward {
+  max-width: 50px;
+  right: 10px;
 }
 
 
@@ -43,25 +43,70 @@
  * --------------------------------------------------------
  */
 .indicator-container {
-    padding-left: 0.5rem;
-    padding-bottom: 0.4rem;
-  }
-   
-  .event-indicator {
-    background: var(--ion-color-light);
-    width: 5px;
-    height: 5px;
-    border-radius: 5px;
-    display: table-cell;
-  }
-   
-  .with-event {
-    background-color: var(--ion-color-primary);
-  }
+  padding-left: 0.5rem;
+  padding-bottom: 0.4rem;
+}
 
-  .content{
-    max-width: 650px;
-    margin: auto;;
-  }
+.event-indicator {
+  background: var(--ion-color-light);
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  display: table-cell;
+}
 
-  
+.with-event {
+  background-color: var(--ion-color-primary);
+}
+
+.content {
+  max-width: 650px;
+  margin: auto;
+  ;
+}
+
+.event-detail-container {
+  color: green;
+  --background: green;
+}
+
+.monthview-eventdetail-timecolumn {
+  color: green;
+  --background: green;
+}
+
+div {
+  .input-wrapper {
+    color: green;
+    --background: green;
+  }
+}
+
+span {
+  .event-detail {
+    color: green;
+    --background: green;
+  }
+}
+
+ion-list {
+  .event-detail-container {
+    .md {
+      .list-md {
+        .hydrated {
+          color: green;
+          --background: green;
+        }
+      }
+    }
+  }
+}
+
+ion-list event-detail-container .md list-md .hydrated{
+  color: green;
+  --background: green;
+}
+
+.table-bordered[_ngcontent-jto-c5] {
+  border: 1px solid yellow !important;
+}

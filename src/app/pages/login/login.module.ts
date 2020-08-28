@@ -9,13 +9,15 @@ import { IonicModule } from '@ionic/angular';
 //Others
 import { LoginPage } from './login';
 import { LoginPageRoutingModule } from './login-routing.module';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule
+    LoginPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [
     LoginPage,
