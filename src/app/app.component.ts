@@ -2,7 +2,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location, PlatformLocation } from '@angular/common';
 import { Router } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
 
 //Ionic
 import { MenuController, Platform, ToastController, PopoverController, ModalController } from '@ionic/angular';
@@ -63,7 +62,6 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private storage: Storage,
     private userData: UserData,
-    private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
     public darkmode: Darkmode,
     private authService: AuthService,
@@ -100,26 +98,6 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     this.checkLoginStatus();
     this.listenForLoginEvents();
-
-    this.swUpdate.available.subscribe(async res => {
-      const toast = await this.toastCtrl.create({
-        message: 'Update available!',
-        position: 'bottom',
-        buttons: [
-          {
-            role: 'cancel',
-            text: 'Reload'
-          }
-        ]
-      });
-
-      await toast.present();
-
-      toast
-        .onDidDismiss()
-        .then(() => this.swUpdate.activateUpdate())
-        .then(() => window.location.reload());
-    });
   }
 
   checkLoginStatus() {

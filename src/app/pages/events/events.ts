@@ -3,6 +3,8 @@ import { Component, ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { ConferenceData } from '../../services/conference-data';
+import { Router } from '@angular/router';
+import { TestBed } from '@angular/core/testing';
 
 @Component({
   selector: 'page-events',
@@ -16,6 +18,7 @@ export class EventsPage {
   events: {title: string, desc: string, startTime: string, endTime: string, id: string}[] = [];
 
   event = {
+    id: '',
     title: '',
     desc: '',
     startTime: '',
@@ -36,6 +39,7 @@ export class EventsPage {
     private alertCtrl: AlertController, 
     @Inject(LOCALE_ID) private locale: string,
     private dataProvider: ConferenceData, 
+    private router: Router
     ) {}  
 
   ionViewWillEnter(){
@@ -73,6 +77,7 @@ export class EventsPage {
       let item = this.events.find(i => i.id === "" + counter);
 
       let eventCopy = {
+        id: item.id,
         title: item.title,
         desc: item.desc,
         startTime: new Date(item.startTime),
@@ -126,21 +131,12 @@ export class EventsPage {
     this.viewTitle = title;
   }
  
-  /* Alert 
-   * --------------------------------------------------------
-   */
-  async onEventSelected(event) {
-    // Use Angular date pipe for conversion
-    let start = formatDate(event.startTime, 'medium', this.locale);
-    let end = formatDate(event.endTime, 'medium', this.locale);
-  
-    const alert = await this.alertCtrl.create({
-      header: event.title,
-      subHeader: event.desc,
-      message: 'Von: ' + start + '<br><br>Bis: ' + end,
-      buttons: ['OK']
-    });
-    alert.present();
+  onEventSelected(event) {
+    this.router.navigateByUrl("/app/tabs/home/detail/" + event.id);
+  }
+
+  test(){ //Routing im ANUS
+    this.router.navigateByUrl("/app/tabs/home/detail/1");
   }
 
 }

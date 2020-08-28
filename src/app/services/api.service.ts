@@ -2,9 +2,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
-//Ionic-Native
-import { HTTP } from '@ionic-native/http/ngx';
-
 //Others
 import { throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -25,7 +22,6 @@ export class ApiService {
 
   constructor(
     private httpClient: HttpClient,
-    private nativeHttp: HTTP
   ) {
     this.data = [];
   }

@@ -115,24 +115,12 @@
     </form>
 
     <!-- Buttons -->
-    <ion-row class="buttons">
-
+    <ion-row >
       <ion-col>
-        <ion-fab horizontal="center">
-          <ion-fab-button color="success" type="submit" (click)="editCoupon()">
-            <ion-icon name="checkmark"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+        <ion-button fill="outline" shape="round" type="submit" (click)="editCoupon()">
+          Coupon speichern
+        </ion-button>
       </ion-col>
-
-      <ion-col>
-        <ion-fab horizontal="center">
-          <ion-fab-button (click)="cancel()">
-            <ion-icon name="close"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-      </ion-col>
-
     </ion-row>
 
   </ion-grid>

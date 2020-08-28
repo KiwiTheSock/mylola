@@ -8,7 +8,6 @@ import { ModalController, ActionSheetController } from '@ionic/angular';
 
 //Ionic-Native
 import { Camera } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/file/ngx';
 
 //Others
 import { ModalImagePage } from '../modal-image/modal-image.page';
@@ -35,7 +34,6 @@ export class AddPage implements OnInit{
   constructor(
     public actionSheetController: ActionSheetController,
     private camera: Camera,
-    private file: File,
     public formBuilder: FormBuilder,
     public modalController: ModalController,
     public router: Router,

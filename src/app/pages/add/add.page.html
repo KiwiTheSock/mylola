@@ -52,7 +52,7 @@
       </ion-col>
     </ion-row>
 
-    <form [formGroup]="time" (ngSubmit)="submitForm()" >
+    <form [formGroup]="time" (ngSubmit)="submitForm()">
       <ion-row>
         <ion-col>
           <ion-item lines="none">
@@ -82,25 +82,13 @@
       </ion-row>
     </form>
 
-    <!-- Buttons -->
-    <ion-row class="buttons">
-
+    <!-- Button -->
+    <ion-row class="picture-button">
       <ion-col>
-        <ion-fab horizontal="center">
-          <ion-fab-button color="success" type="submit" (click)="createCoupon()">
-            <ion-icon name="checkmark"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+        <ion-button fill="outline" shape="round" type="submit" (click)="createCoupon()">
+          Coupon erstellen
+        </ion-button>
       </ion-col>
-
-      <ion-col>
-        <ion-fab horizontal="center">
-          <ion-fab-button (click)="cancel()">
-            <ion-icon name="close"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-      </ion-col>
-
     </ion-row>
 
   </ion-grid>

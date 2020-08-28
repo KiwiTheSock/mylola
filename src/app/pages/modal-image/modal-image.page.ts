@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { ModalController, Platform, NavParams } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
-import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-modal-image',
@@ -11,7 +10,7 @@ import { File } from '@ionic-native/file/ngx';
 })
 export class ModalImagePage {
 
-  myImage = "../../assets/img/add/platzhalter.png";
+  myImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
   croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
 
   sourceType = this.navParams.get('sourceType');
@@ -24,7 +23,6 @@ export class ModalImagePage {
     private camera: Camera,
     public modalController: ModalController,
     private platform: Platform,
-    private file: File,
     private navParams: NavParams
   ) { 
     this.captureImage();

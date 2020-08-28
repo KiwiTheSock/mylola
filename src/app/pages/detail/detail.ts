@@ -8,7 +8,6 @@ import { Platform, ActionSheetController, AlertController } from '@ionic/angular
 import { ModalController } from '@ionic/angular';
 
 //Ionic-Native
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 //Capacitor
@@ -61,7 +60,6 @@ export class DetailPage {
     private route: ActivatedRoute,
     public platform: Platform,
     public actionSheetCtrl: ActionSheetController,
-    public inAppBrowser: InAppBrowser,
     public alertController: AlertController,
     public modalController: ModalController,
     private socialSharing: SocialSharing,
@@ -257,7 +255,7 @@ export class DetailPage {
 
   addInfoWindowToMarker(marker) {
     let infoWindowContent = '<div id="content">' +
-      '<h2 id="firstHeading" class="firstHEading">' + marker.title + '</h2>' +
+      //'<h2 id="firstHeading" class="firstHEading">' + marker.title + '</h2>' +
       //'<p>Latitude: ' + marker.latitude + '</p>' +
       //'<p>Longitude: ' + marker.longitude + '</p>' +
       '<ion-button id="navigate">Navigieren</ion-button>' +
