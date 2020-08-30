@@ -134,9 +134,4 @@ export class EventsPage {
   onEventSelected(event) {
     this.router.navigateByUrl("/app/tabs/home/detail/" + event.id);
   }
-
-  test(){ //Routing im ANUS
-    this.router.navigateByUrl("/app/tabs/home/detail/1");
-  }
-
 }

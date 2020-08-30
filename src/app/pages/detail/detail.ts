@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 //Ionic
-import { Platform, ActionSheetController, AlertController } from '@ionic/angular';
+import { Platform, ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
 //Ionic-Native
@@ -65,6 +65,7 @@ export class DetailPage {
     private socialSharing: SocialSharing,
     private authService: AuthService,
     private router: Router,
+    public toastController: ToastController
   ) { }
 
   ionViewWillEnter() {
@@ -127,8 +128,17 @@ export class DetailPage {
   /* Notification (API CALL)
   * --------------------------------------------------------
   */
-  notification() {
+  notification(session: any) {
     console.log("Abonniert");
+    this.presentToast(session)
+  }
+
+  async presentToast(session: any) {
+    const toast = await this.toastController.create({
+      message: session.name + ' abonniert.',
+      duration: 2000
+    });
+    toast.present();
   }
 
   /* Modal Coupon

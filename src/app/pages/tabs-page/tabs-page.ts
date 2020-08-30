@@ -3,6 +3,8 @@ import { Component, ViewChild } from '@angular/core';
 
 //Ionic
 import { IonTabs } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { CssSelector } from '@angular/compiler';
 
 @Component({
   templateUrl: 'tabs-page.html'
@@ -15,27 +17,36 @@ export class TabsPage {
   color2 = "";
   color3 = "";
   red = "#DB001B";  //primary
-  grey = "#909090"; //Kompromiss Darkmode/Lightmode
+  grey = "#909090"; 
 
   constructor(
-  ) {}
+    private router: Router
+  ) { }
 
   getSelectedTab() {
-    if(this.tabs.getSelected() == "home"){
+    var arr = [];
+    arr = this.router.url.split('/');
+    if(arr.includes("detail")){
+      if (this.tabs.getSelected() == "home") {
+        this.color1 = this.red;
+        this.color2 = this.grey;
+        this.color3 = this.grey;
+        this.tabs.select("home");
+      } else if (this.tabs.getSelected() == "favorites") {
+        this.color1 = this.grey;
+        this.color2 = this.red;
+        this.color3 = this.grey;
+        this.tabs.select("favorites");
+      } else if (this.tabs.getSelected() == "events") {
+        this.color1 = this.grey;
+        this.color2 = this.grey;
+        this.color3 = this.red;
+        this.tabs.select("events");
+      }
+    } else {
       this.color1 = this.red;
       this.color2 = this.grey;
       this.color3 = this.grey;
-      this.tabs.select("home");
-    } else if(this.tabs.getSelected() == "favorites") {
-      this.color1 = this.grey;
-      this.color2 = this.red;
-      this.color3 = this.grey;
-      this.tabs.select("favorites");
-    } else if(this.tabs.getSelected() == "events") {
-      this.color1 = this.grey;
-      this.color2 = this.grey;
-      this.color3 = this.red;
-      this.tabs.select("events");
     }
   }
 
@@ -57,7 +68,7 @@ export class TabsPage {
     };
   }
 
-  home(){
+  home() {
     this.tabs.select("home");
     this.getSelectedTab();
   }

@@ -4,7 +4,7 @@
 
     <!-- Back Button -->
     <ion-buttons slot="start">
-      <ion-back-button [defaultHref]=""></ion-back-button>
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
 
     <!-- Title -->
@@ -95,7 +95,7 @@
         <p><b>{{session.name}}</b></p>
         <p>{{session.street}}</p>
         <p>{{session.place}}</p>
-        <ion-button (click)="notification()">{{session.name}} abonnieren</ion-button>
+        <ion-button (click)="notification(session)">{{session.name}} abonnieren</ion-button>
       </ion-col>
     </ion-row>
 
