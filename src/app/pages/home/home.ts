@@ -222,12 +222,12 @@ export class HomePage implements OnInit {
   btnActivate(ionicButton, name) {
 
     //Design
-    if (ionicButton.color === 'danger') {
+    if (ionicButton.color === 'primary') {
       ionicButton.color = 'medium';
       this.applyFilter(name);
     }
     else {
-      ionicButton.color = 'danger';
+      ionicButton.color = 'primary';
       this.dismissFilter(name);
     }
   }

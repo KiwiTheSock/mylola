@@ -131,10 +131,7 @@ export class AppComponent implements OnInit {
   */
   backButtonEvent() {
     this.platform.backButton.subscribe(() => {
-
-      var arr = [];
-      arr = this.router.url.split('/');
-      if (this.router.url != '/app/tabs/home' && this.router.url != '/app/tabs/favorites' && this.router.url != '/app/tabs/events' && arr[4] != "detail") {
+      if (this.router.url != '/app/tabs/home' && this.router.url != '/app/tabs/favorites' && this.router.url != '/app/tabs/events' && !this.router.url.includes("detail")) {
         this.location.back();
       } else if (this.router.url === '/app/tabs/home') {
         if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
@@ -148,7 +145,7 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/app/tabs/home']);
       } else if (this.router.url === '/app/tabs/events') {
         this.router.navigate(['/app/tabs/home']);
-      } else if (arr.includes("detail")){
+      } else if (this.router.url.includes("detail")){
         this.router.navigate(['/app/tabs/home']);
       }
     });

@@ -4,29 +4,28 @@ import { Component, ViewChild } from '@angular/core';
 //Ionic
 import { IonTabs } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { CssSelector } from '@angular/compiler';
+import { style } from '@angular/animations';
 
 @Component({
-  templateUrl: 'tabs-page.html'
+  templateUrl: 'tabs-page.html',
+  styleUrls: ['./tabs-page.scss']
 })
 export class TabsPage {
 
   @ViewChild('myTabs') tabs: IonTabs;
-
   color1 = "";
   color2 = "";
   color3 = "";
-  red = "#DB001B";  //primary
-  grey = "#909090"; 
+  red = "primary"; 
+  grey = "medium";
 
   constructor(
     private router: Router
   ) { }
 
   getSelectedTab() {
-    var arr = [];
-    arr = this.router.url.split('/');
-    if(arr.includes("detail")){
+
+    if (!this.router.url.includes("detail")) {
       if (this.tabs.getSelected() == "home") {
         this.color1 = this.red;
         this.color2 = this.grey;
@@ -50,22 +49,19 @@ export class TabsPage {
     }
   }
 
-  tab1() {
-    return {
-      'color': this.color1
-    };
+  tab1(icon, label) {
+    icon.color = this.color1;
+    label.color = this.color1;
   }
 
-  tab2() {
-    return {
-      'color': this.color2
-    };
+  tab2(icon, label) {
+    icon.color = this.color2;
+    label.color = this.color2;
   }
 
-  tab3() {
-    return {
-      'color': this.color3
-    };
+  tab3(icon, label) {
+    icon.color = this.color3;
+    label.color = this.color3;
   }
 
   home() {
