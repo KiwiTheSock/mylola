@@ -128,4 +128,12 @@ export class ConferenceData {
       })
     );
   }
+
+  getAbos() {
+    return this.load().pipe(
+      map((data: any) => {
+        return data.abos;
+      })
+    );
+  }
 }

@@ -20,6 +20,7 @@ import { UserData } from '../../services/user-data';
 import { ModalCouponPage } from '../modal-coupon/modal-coupon.page';
 import { AuthService } from '../../services/auth.service';
 import { mapStyle } from './mapStyle';
+import { Darkmode } from '../../services/darkmode';
 
 declare var google: any;
 
@@ -34,13 +35,6 @@ export class DetailPage {
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
   map: any;
   infoWindows: any = [];
-  markers: any = [
-    {
-      title: "Hall of Fame",
-      latitude: "52.27245330810547",
-      longitude: "8.059367179870605"
-    }
-  ]
 
   session: any;
 
@@ -65,7 +59,8 @@ export class DetailPage {
     private socialSharing: SocialSharing,
     private authService: AuthService,
     private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private darkmode: Darkmode
   ) { }
 
   ionViewWillEnter() {
@@ -91,7 +86,7 @@ export class DetailPage {
   ionViewDidEnter() {
     this.defaultHref = `/app/tabs/home`;
 
-    this.showMap(this.markers);
+    this.showMap();
   }
 
   /* Company Coupon Edit
@@ -179,6 +174,13 @@ export class DetailPage {
     window.open(session.facebook, '_system', 'location=yes');
   }
 
+  /* Instagram
+   * --------------------------------------------------------
+   */
+  instagram(session: any) {
+    window.open(session.instagram, '_system', 'location=yes');
+  }
+
   /* Browser
   * --------------------------------------------------------
   */
@@ -248,19 +250,17 @@ export class DetailPage {
   /* Map
   * --------------------------------------------------------
   */
-  addMarkersToMap(markers) {
-    for (let marker of markers) {
-      let position = new google.maps.LatLng(marker.latitude, marker.longitude);
-      let mapMarker = new google.maps.Marker({
-        position: position,
-        title: marker.title,
-        latitude: marker.latitude,
-        longitude: marker.longitude
-      });
+  addMarkersToMap(marker) {
+    let position = new google.maps.LatLng(marker.lat, marker.lng);
+    let mapMarker = new google.maps.Marker({
+      position: position,
+      title: marker.name,
+      latitude: marker.lat,
+      longitude: marker.lng
+    });
 
-      mapMarker.setMap(this.map);
-      this.addInfoWindowToMarker(mapMarker);
-    }
+    mapMarker.setMap(this.map);
+    this.addInfoWindowToMarker(mapMarker);
   }
 
   addInfoWindowToMarker(marker) {
@@ -296,27 +296,34 @@ export class DetailPage {
     }
   }
 
-  showMap(markers) {
-    const location = new google.maps.LatLng(markers[0].latitude, markers[0].longitude);
-    let style = [];
-    const options = {
-      center: location,
-      zoom: 15,
-      disableDefaultUI: true,
-    }
+  showMap() {
 
-    if (this.isDarkMode()) {
-      style = mapStyle;
-    }
+    this.dataProvider.getMap().subscribe((markers: any) => {
 
-    this.map = new google.maps.Map(this.mapRef.nativeElement, { options, styles: style });
-    this.addMarkersToMap(this.markers);
-  }
+      //Get Data
+      const sessionId = this.route.snapshot.paramMap.get('sessionId');
+      var id: number = +sessionId;
+      var marker: any = {
+        name: markers[id - 1].name,
+        lat: markers[id - 1].lat,
+        lng: markers[id - 1].lng
+      }
 
-  isDarkMode() {
-    //Returns true if the time is between 7pm to 5am
-    let time = new Date().getHours();
-    return (time > 5 && time < 19) ? false : true;
+      const location = new google.maps.LatLng(marker.lat, marker.lng);
+      let style = [];
+      const options = {
+        center: location,
+        zoom: 15,
+        disableDefaultUI: true,
+      }
+
+      if (this.darkmode.dark) {
+        style = mapStyle;
+      }
+
+      this.map = new google.maps.Map(this.mapRef.nativeElement, { options, styles: style });
+      this.addMarkersToMap(marker);
+    });
   }
 }
 

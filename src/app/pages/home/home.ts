@@ -87,10 +87,31 @@ export class HomePage implements OnInit {
     this.updateSchedule();
 
     //API TEST
-    this.apiService.login().subscribe(response => {
+    let login = {
+      "username": "Fatoni",
+      "password": "asdf1234"
+    }
+
+    let register = {
+      "username": "Dexter",
+      "password": "asdf1234",
+      "email":"dexter@test.com"
+    }
+
+    var addcoupon = {
+      "titel": "blalala",
+      "description": "blabasdasdasdasdasdaasd asdasd la",
+      "catcher": "bla",
+      "code": "1234",
+      "startDate": "2000-14-01",
+      "endDate": "2001-14-01",
+      "category": "Shopping"
+    }
+
+    this.apiService.getCouponById(1).subscribe(response => {
       console.log(response);
       this.data = response;
-    })
+    }) 
   }
 
   ngDoCheck() {

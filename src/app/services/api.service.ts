@@ -15,7 +15,7 @@ export class ApiService {
   base_path = 'http://srv06-dev.mindq.kunden.openroot.de:8088';
 
   //Token
-  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTg1MzU2MjUsImV4cCI6MTU5ODUzOTIyNSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiRmF0b25pIn0.PyQcqaOEKayXaQ0_yMfJaYdfI-Io_wbEoTSXj_Ey-_mwHpAvc1sS62wQ0ug1BEb79S4jbNSl4IpJ_92SwPW6cp0aVSKeqNwQnBbNnYcBbOnDaqbv95bmjI65GT3sQVsIIDUkGAXir9-PZpcRuRkklzrojgBAZHry9NjMAzyxzZQSvabJVwFvD1W4EcpO9_90DbxL-s5SQn70ymHwbfovKO2lpc0jSG7ZmZzrzu1f3c4fuYTfT8jriEPWgvguyrHGJ6sqfzjyK_SEbaDEIH7zvLs1u7miGGh3SPAH4srvILgXfUpj_32RvKeiKooNjbLIfMZDa6mT2XaMOXW4t1YoJToz2si42AMP6cMykyG2UbPvEfeC4gk6q4-pJL0hcwQNi1CrvZm14kGQfprS4p0tTzq8W2viimP-MvKu79V73XTW806vmwAj8kIzviEB6aZ_X4wOcaTZJQK0SntZwDIFALk0o02WlwXJLqJz-SHGcSjBctia6IIfpthF8184IkWrJMMdiGhlsC893NVzv9l6h5oPwff1C-abxEAO0pUJmdpGVNTMTYn_jRM62qrJYWLoBzKcZpx6oLmsgxbvaiBmYq-BegfXXGDKBxeM82FzfvBYmKmg77TXtS4SEvrpgoOkpYdhHXNEaMicyzh14LKYAa63VPC1WT8B4SaMT9lXAXY';
+  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTg4NzA4NzIsImV4cCI6MTU5ODg3NDQ3Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiRmF0b25pIn0.vNdgPLiFjG9U0mesV4Fmp35cjLqYSkU434W0ggv-unH9SDFEV3w4ogYGmJCJZjRc2Fq0ThwHIZn-kIKOqnsSjLID0xZSIlqiC3zWwo5-gTqv4Rjpl4ock_fYv3ENEW0wujcj4pM-DDKUwRBRTja7lVu2E5QSSpvS1DEjPABCc5FJsF6HVh-vzh6qeaE69GvnwvWFEkGP-eKiVUm1O-T7e3NBvf6RBrvssZcf3t937kosbL0kq59dBYxZG2XXadNKorSKIP-QAx_NP4QcS9G_Y-AG-L92K1e9-SpIaOO0OV4UCxU9nIsVd-RsptQMiB-hedSFkd0KCrgNkJX-mCCBcUtHSLXbN7tt4amrjYgbLYRl7NIfLQurlrDb31hhgpltXpETsJnIupPFAW7nhstEPDXtxV5XrEWh__M2a_flI1NVomjtgreuBHpcID1hXEY4DUFO0IBdj_8zdqAz_pCKLKRmPl7UXP90f9ynsy_JJw-k0KIhgLyCcGTFuruiY1yIPUnMMqT6KXPZP_midCAD_i7bOlT4eWUIhDLjAIaWNsVSDUqwDLprLkAe6KoekAJ0GoCUnNo3ARiOFmPLtoykWKwO99I_9UP2uhhQvU0cgq_moamKDECTSQcVp45YlutFM_lTXPURkKRoO3eicxlLF-27E60M--rBHT3-QXR7paQ';
   //token: any = null;
 
   data: any;
@@ -117,7 +117,7 @@ export class ApiService {
   //Coupons
   getCouponById(id: number) {
     return this.httpClient
-      .get(this.base_path + '/api/coupon/' + id, this.httpOptions)
+      .get(this.base_path + '/api/coupons/' + id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -148,7 +148,7 @@ export class ApiService {
    * --------------------------------------------------------
    */
 
-  //Coupons
+  //Coupons (id: Company)
   addCoupon(id: number, item) {
     return this.httpClient
       .post(this.base_path + '/api/coupons/' + id, JSON.stringify(item), this.httpOptions)
@@ -159,9 +159,9 @@ export class ApiService {
   }
 
   //Favorite
-  addFavorite(customer_id: number, coupon_id: number, item) {
+  addFavorite(customer_id: number, coupon_id: number) {
     return this.httpClient
-      .post(this.base_path + '/api/favorit/' + customer_id + '/' + coupon_id, JSON.stringify(item), this.httpOptions)
+      .post(this.base_path + '/api/favorit/' + customer_id + '/' + coupon_id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -169,9 +169,9 @@ export class ApiService {
   }
 
   //Devaluation
-  addDevaluation(customer_id: number, coupon_id: number, item) {
+  addDevaluation(customer_id: number, coupon_id: number) {
     return this.httpClient
-      .post(this.base_path + '/api/devaluation/' + customer_id + '/' + coupon_id, JSON.stringify(item), this.httpOptions)
+      .post(this.base_path + '/api/devaluation/' + customer_id + '/' + coupon_id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -232,8 +232,8 @@ export class ApiService {
       )
   }
 
-   //Hours
-   updateHours(id: number, item) {
+  //Hours
+  updateHours(id: number, item) {
     return this.httpClient
       .put(this.base_path + '/api/' + id + '/hours/', JSON.stringify(item), this.httpOptions)
       .pipe(
@@ -289,9 +289,10 @@ export class ApiService {
   /* Register (POST)
    * --------------------------------------------------------
    */
-  register() {
+  register(item) {
+
     return this.httpClient
-      .post(this.base_path + '/registerUser/Justus/asdf1234/justus@test.com', {})
+      .post(this.base_path + '/registerUser', JSON.stringify(item))
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -301,15 +302,10 @@ export class ApiService {
   /* Login (POST)
    * --------------------------------------------------------
    */
-  login() {
-
-    let body = {
-      "username": "Fatoni",
-      "password": "asdf1234"
-    }
+  login(item) {
 
     return this.httpClient
-      .post(this.base_path + '/api/login_check', body)
+      .post(this.base_path + '/api/login_check', JSON.stringify(item))
       .pipe(
         retry(2),
         catchError(this.handleError)

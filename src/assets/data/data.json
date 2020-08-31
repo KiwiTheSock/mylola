@@ -19,6 +19,7 @@
               "mail": "info@hall-of-fame.online",
               "phone": "03871-2114040",
               "facebook": "https://www.facebook.com/halloffamekinodeluxe",
+              "instagram": "https://www.instagram.com/halloffameosna/",
               "opening": [
                 "Montag: 13:30 - 22:00", 
                 "Dienstag: 13:30 - 22:00",
@@ -49,6 +50,7 @@
               "mail": "whiskys-os@web.de",
               "phone": "",
               "facebook": "https://www.facebook.com/whiskysosnabrueck/",
+              "instagram": "",
               "opening": [
                 "Montag: GESCHLOSSEN",
                 "Dienstag: 19:00 - 01:00",
@@ -79,6 +81,7 @@
               "mail": "info@rubbenbruchsee.eu",
               "phone": "0541-127433",
               "facebook": "https://www.facebook.com/rubbenbruchsee/",
+              "instagram": "",
               "opening": [
                 "Montag: 11:00 - 21:00",
                 "Dienstag: 11:00 - 21:00",
@@ -109,6 +112,7 @@
               "mail": "info@buecher-wenner.de",
               "phone": "0541-331030",
               "facebook": "https://www.facebook.com/buchwenner/",
+              "instagram": "",
               "opening": [
                 "Montag: 09:30 - 19:00",
                 "Dienstag: 09:30 - 19:00",
@@ -139,6 +143,7 @@
               "mail": "",
               "phone": "",
               "facebook": "https://www.facebook.com/zero.talk/",
+              "instagram": "",
               "opening": [
                 "Montag: 10:00 - 19:00",
                 "Dienstag: 10:00 - 19:00",
@@ -164,8 +169,7 @@
     {
       "name": "Hall of Fame ",
       "lat": 52.272030,
-      "lng": 8.059320,
-      "center": true
+      "lng": 8.059320
     },
     {
       "name": "Whisky's",
@@ -227,5 +231,23 @@
       "endTime": "2020-02-11T23:59:59",
       "id": "2"
     }
+  ],
+  "abos": [
+    {
+      "name": "Hall of Fame "
+    },
+    {
+      "name": "Whisky's"
+    },
+    {
+      "name": "Café-Restaurant am Rubbenbruchsee"
+    },
+    {
+      "name": "Bücher Wenner"
+    },
+    {
+      "name": "Zero"
+    }
   ]
+
 }

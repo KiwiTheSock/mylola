@@ -4,7 +4,6 @@ import { Component, ViewChild } from '@angular/core';
 //Ionic
 import { IonTabs } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { style } from '@angular/animations';
 
 @Component({
   templateUrl: 'tabs-page.html',

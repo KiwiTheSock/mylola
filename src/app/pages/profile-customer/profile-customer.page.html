@@ -31,36 +31,14 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item>
-            <ion-label>Hall of Fame</ion-label>
-            <ion-button slot="end">
+
+          <ion-item *ngFor="let item of abos">
+            <ion-label>{{item.name}}</ion-label>
+            <ion-button slot="end" (click)="deabo()">
               <ion-icon name="close"></ion-icon>
             </ion-button>
           </ion-item>
-          <ion-item>
-            <ion-label>Whisky's</ion-label>
-            <ion-button slot="end">
-              <ion-icon name="close"></ion-icon>
-            </ion-button>
-          </ion-item>
-          <ion-item>
-            <ion-label>Café-Restaurant am Rubbenbruchsee</ion-label>
-            <ion-button slot="end">
-              <ion-icon name="close"></ion-icon>
-            </ion-button>
-          </ion-item>
-          <ion-item>
-            <ion-label>Bücher Wenner</ion-label>
-            <ion-button slot="end">
-              <ion-icon name="close"></ion-icon>
-            </ion-button>
-          </ion-item>
-          <ion-item>
-            <ion-button slot="end">
-              <ion-icon name="close"></ion-icon>
-            </ion-button>
-            <ion-label>Zero</ion-label>
-          </ion-item>
+
         </ion-list>
 
       </ion-col>

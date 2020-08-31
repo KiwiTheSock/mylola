@@ -115,11 +115,15 @@
 
     <!-- Social Media -->
     <ion-row>
-      <ion-col col-12 class="social-media location">
+      <ion-col col-12 class="social-media location" *ngIf="session">
         <h4>Social Media</h4>
-        <ion-chip color="facebook" button (click)="facebook(session)">
+        <ion-chip color="facebook" button (click)="facebook(session)" *ngIf="session.facebook">
           <ion-icon name="logo-facebook"></ion-icon>
           <ion-label>Facebook</ion-label>
+        </ion-chip>
+        <ion-chip color="instagram" button (click)="instagram(session)" *ngIf="session.instagram">
+          <ion-icon name="logo-instagram"></ion-icon>
+          <ion-label>Instagram</ion-label>
         </ion-chip>
 
       </ion-col>

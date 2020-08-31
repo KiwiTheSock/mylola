@@ -1,6 +1,7 @@
 //Angular
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConferenceData } from '../../services/conference-data';
 
 @Component({
   selector: 'app-profile-customer',
@@ -9,9 +10,18 @@ import { Router } from '@angular/router';
 })
 export class ProfileCustomerPage {
 
+  abos: any;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private dataProvider: ConferenceData
   ) { }
+
+  ionViewWillEnter() {
+    this.dataProvider.getAbos().subscribe((data: any) => {
+      this.abos = data;
+    })
+  }
 
   /* Settings
   * --------------------------------------------------------
@@ -19,5 +29,11 @@ export class ProfileCustomerPage {
   openSettings() {
     this.router.navigateByUrl("/profile-customer-edit");
   }
+
+  deabo(){
+    console.log("Deabonniert!");
+  }
+
+
 
 }
