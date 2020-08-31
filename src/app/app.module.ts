@@ -14,6 +14,7 @@ import { NavParams } from '@ionic/angular';
 
 //Ionic-Native
 import { Camera } from "@ionic-native/camera/ngx";
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -48,6 +49,7 @@ import { SharedModule } from './directives/shared.module';
   providers: [
     Camera, 
     Darkmode,
+    Geolocation,
     NavParams, 
     Refresher, 
     SocialSharing, 

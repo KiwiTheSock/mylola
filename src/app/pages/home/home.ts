@@ -1,13 +1,21 @@
+//Angular
 import { Component, ViewChild, OnInit, Renderer2, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+//Ionic
 import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll, Platform } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+
+//Ionic-Native
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+//Others
 import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
-import { PopoverController } from '@ionic/angular';
 import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
 import { AuthService } from '../../services/auth.service';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { TabsPage } from '../tabs-page/tabs-page';
 import { ApiService } from '../../services/api.service';
 
@@ -38,11 +46,15 @@ export class HomePage implements OnInit {
   page = 0;
   maximumPages = 5;
 
-  text: string='Mylola ... teilen ... bla bla';
-  link: string='https://www.mylola.de/';
+  text: string = 'Mylola ... teilen ... bla bla';
+  link: string = 'https://www.mylola.de/';
+
+  //Position
+  lat = null;
+  lng = null;
 
   //API Test
-  data: any
+  data: any;
 
   constructor(
     public alertCtrl: AlertController,
@@ -65,9 +77,11 @@ export class HomePage implements OnInit {
     private platform: Platform,
     private tabs: TabsPage,
     public apiService: ApiService,
+    private geo: Geolocation
+
   ) {
     this.data = [];
-   }
+  }
 
   ngOnInit() {
     this.updateSchedule();
@@ -76,7 +90,7 @@ export class HomePage implements OnInit {
     this.apiService.login().subscribe(response => {
       console.log(response);
       this.data = response;
-    })  
+    })
   }
 
   ngDoCheck() {
@@ -118,6 +132,7 @@ export class HomePage implements OnInit {
 
     if (name == 5) {
       console.log("Button 5 Apply");
+      this.position();
     }
 
     if (name == 6) {
@@ -210,7 +225,7 @@ export class HomePage implements OnInit {
   //Share
   shareSession(session: any) {
     const url = this.link;
-    const text = 'Test'+'\n';
+    const text = 'Test' + '\n';
     this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
   }
 
@@ -230,6 +245,23 @@ export class HomePage implements OnInit {
       ionicButton.color = 'primary';
       this.dismissFilter(name);
     }
+  }
+
+  //Wont work for browser
+  position() {
+    this.geo.getCurrentPosition({
+      timeout: 10000,
+      enableHighAccuracy: false
+    }).then(res => {
+      this.lat = res.coords.latitude;
+      this.lng = res.coords.longitude;
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    console.log("LNG: ", this.lng);
+    console.log("LAT: ", this.lat);
+
   }
 
 }
