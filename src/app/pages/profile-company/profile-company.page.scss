@@ -43,3 +43,15 @@
  .media{
   padding-right: 5px;
  }
+
+ /* ion-list
+* --------------------------------------------------------
+*/
+ion-list {
+  max-height: 200px;
+  overflow: hidden;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
