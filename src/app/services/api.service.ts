@@ -15,7 +15,7 @@ export class ApiService {
   base_path = 'http://srv06-dev.mindq.kunden.openroot.de:8088';
 
   //Token
-  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTg4NzA4NzIsImV4cCI6MTU5ODg3NDQ3Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiRmF0b25pIn0.vNdgPLiFjG9U0mesV4Fmp35cjLqYSkU434W0ggv-unH9SDFEV3w4ogYGmJCJZjRc2Fq0ThwHIZn-kIKOqnsSjLID0xZSIlqiC3zWwo5-gTqv4Rjpl4ock_fYv3ENEW0wujcj4pM-DDKUwRBRTja7lVu2E5QSSpvS1DEjPABCc5FJsF6HVh-vzh6qeaE69GvnwvWFEkGP-eKiVUm1O-T7e3NBvf6RBrvssZcf3t937kosbL0kq59dBYxZG2XXadNKorSKIP-QAx_NP4QcS9G_Y-AG-L92K1e9-SpIaOO0OV4UCxU9nIsVd-RsptQMiB-hedSFkd0KCrgNkJX-mCCBcUtHSLXbN7tt4amrjYgbLYRl7NIfLQurlrDb31hhgpltXpETsJnIupPFAW7nhstEPDXtxV5XrEWh__M2a_flI1NVomjtgreuBHpcID1hXEY4DUFO0IBdj_8zdqAz_pCKLKRmPl7UXP90f9ynsy_JJw-k0KIhgLyCcGTFuruiY1yIPUnMMqT6KXPZP_midCAD_i7bOlT4eWUIhDLjAIaWNsVSDUqwDLprLkAe6KoekAJ0GoCUnNo3ARiOFmPLtoykWKwO99I_9UP2uhhQvU0cgq_moamKDECTSQcVp45YlutFM_lTXPURkKRoO3eicxlLF-27E60M--rBHT3-QXR7paQ';
+  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTg5MDEwODAsImV4cCI6MTU5ODkwNDY4MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiS2V2aW4ifQ.Y6vCoy05czKlwcA395Y1zKGj2VToJdr9kzCqiFC0jkkhd9dnf4e4MsR2U-EnXMjicVS35FmRFTI9gcMTVW7_c7ahBugf3gYxrcYvk2kHyDAd6NYSzgnXtL_K5qQMw0RdYsUahAx-7V8mz6AuFh9E_rRAq60bddh3DsbWD0cOf8Jl2U9nKLzg-RUqddQLUBmVjSxvhGQyVXHJlaGvn6chZQWvhljeDJ8RTlFkUkjR60hvqvkDB1oZE2IGLY9uZjwocPSmJuwVHUeqoTf5wF7XwChnzGfxAqNQl249eVbaV1uosJxqi-QbDy4iKgkQHSe8VOr3xz8U6l32AaKO2hVm89b_5Mzsrj61plzt32bIOoXcw7Ry7jNxukKKOfw5Gh8lZFTrqnU7FduT9SxVHZ_hCgDUbFWf_N8BLYC-8fDiOYdsLs9TZkDUbGfXKkNSEwvtccVN-gwG-KYq1gGivwYgfEfAdo5VAH4IV4uHcCMJd2zRZAp7TgCWLhizDgHOmTEH8rZu93WnByU6O8zlEgfBX27vgalZPJQKCpxFg5rYN4N31UFy5w-XPYf00JJwwob2cTXpDjj7KsdQ9NPt3QfPCpd2los7L3EIyL1nyEFUs6ovtxOcwBqCksXvXFloSU4nYoxll5SbkZmDozeOmBEsTpdBRul5S8ov4Gq0atyk9Vs';
   //token: any = null;
 
   data: any;
@@ -50,6 +50,8 @@ export class ApiService {
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
+
+      console.error("Error as String: ", JSON.stringify(error));
     }
     // return an observable with a user-facing error message
     return throwError(
@@ -77,7 +79,7 @@ export class ApiService {
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   //Customer
@@ -144,44 +146,48 @@ export class ApiService {
       )
   }
 
-  /* POST
+  /* GET (ID, ID)
    * --------------------------------------------------------
    */
-
-  //Coupons (id: Company)
-  addCoupon(id: number, item) {
-    return this.httpClient
-      .post(this.base_path + '/api/coupons/' + id, JSON.stringify(item), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
 
   //Favorite
   addFavorite(customer_id: number, coupon_id: number) {
     return this.httpClient
-      .post(this.base_path + '/api/favorit/' + customer_id + '/' + coupon_id, this.httpOptions)
+      .get(this.base_path + '/api/favorit/' + customer_id + '/' + coupon_id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
 
-  //Devaluation
-  addDevaluation(customer_id: number, coupon_id: number) {
+  //Devaluation 
+  addDevaluation(coupon_id: number, customer_id:number) {
     return this.httpClient
-      .post(this.base_path + '/api/devaluation/' + customer_id + '/' + coupon_id, this.httpOptions)
+      .get(this.base_path + '/api/devaluations/' + customer_id + '/' + coupon_id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
 
-  //Hours
-  addHours(id: number, item) {
+  /* POST
+   * --------------------------------------------------------
+   */
+
+  //Coupons
+  addCoupon(company_id: number, item) {
     return this.httpClient
-      .post(this.base_path + '/api/' + id + '/hours', JSON.stringify(item), this.httpOptions)
+      .post(this.base_path + '/api/coupons/' + company_id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Hours 
+  addHours(company_id: number, item) {
+    return this.httpClient
+      .post(this.base_path + '/api/' + company_id + '/hours', JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -189,9 +195,9 @@ export class ApiService {
   }
 
   //URL
-  addURL(id: number, item) {
+  addURL(company_id: number, item) {
     return this.httpClient
-      .post(this.base_path + '/api/' + id + '/url', JSON.stringify(item), this.httpOptions)
+      .post(this.base_path + '/api/' + company_id + '/url', JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -235,7 +241,7 @@ export class ApiService {
   //Hours
   updateHours(id: number, item) {
     return this.httpClient
-      .put(this.base_path + '/api/' + id + '/hours/', JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/' + id + '/hours', JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -245,7 +251,7 @@ export class ApiService {
   //URL
   updateURL(id: number, item) {
     return this.httpClient
-      .put(this.base_path + '/api/' + id + '/url/', JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/' + id + '/url', JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -305,7 +311,7 @@ export class ApiService {
   login(item) {
 
     return this.httpClient
-      .post(this.base_path + '/api/login_check', JSON.stringify(item))
+      .post(this.base_path + '/api/login_check', item)
       .pipe(
         retry(2),
         catchError(this.handleError)

@@ -30,7 +30,7 @@ export class ProfileCompanyPage {
     this.router.navigateByUrl('/profile-company-edit');
   }
 
-  /* Logout Modal
+  /* Delete Modal
   * --------------------------------------------------------
   */
   async presentModal() {

@@ -93,6 +93,10 @@ const routes: Routes = [
   },  {
     path: 'modal-delete',
     loadChildren: () => import('./pages/modal-delete/modal-delete.module').then( m => m.ModalDeletePageModule)
+  },
+  {
+    path: 'modal-deabo',
+    loadChildren: () => import('./pages/modal-deabo/modal-deabo.module').then( m => m.ModalDeaboPageModule)
   }
 
 ];

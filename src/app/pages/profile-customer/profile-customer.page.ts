@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConferenceData } from '../../services/conference-data';
+import { ModalDeaboPage } from '../modal-deabo/modal-deabo.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile-customer',
@@ -14,7 +16,8 @@ export class ProfileCustomerPage {
 
   constructor(
     private router: Router,
-    private dataProvider: ConferenceData
+    private dataProvider: ConferenceData,
+    private modalController: ModalController
   ) { }
 
   ionViewWillEnter() {
@@ -30,9 +33,24 @@ export class ProfileCustomerPage {
     this.router.navigateByUrl("/profile-customer-edit");
   }
 
-  deabo(){
-    console.log("Deabonniert!");
+  /* Deabo Modal
+  * --------------------------------------------------------
+  */
+ async presentModal() {
+  const modal = await this.modalController.create({
+    component: ModalDeaboPage,
+    cssClass: 'modal-deabo-css',
+    swipeToClose: true, //iOS
+    componentProps: {}
+  });
+
+  await modal.present();
+
+  if (!window.history.state.modal) {
+    const modalState = { modal: true };
+    history.pushState(modalState, null);
   }
+}
 
 
 
