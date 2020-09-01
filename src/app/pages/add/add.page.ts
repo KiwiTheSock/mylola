@@ -1,6 +1,6 @@
 //Angular
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { Router } from '@angular/router';
 
 //Ionic
@@ -17,19 +17,41 @@ import { ModalImagePage } from '../modal-image/modal-image.page';
   templateUrl: './add.page.html',
   styleUrls: ['./add.page.scss'],
 })
-export class AddPage implements OnInit{
+export class AddPage implements OnInit {
 
   //Form Validation
-  time: FormGroup;
+  validations_add: FormGroup;
   isSubmitted = false;
 
-  //Data
-  titel = null;
-  text = null;
-  description = null;
+  validation_messages = {
+    'titel': [
+      { type: 'required', message: 'Title is required.' },
+      { type: 'minlength', message: 'Title must be at least 5 characters long.' },
+      { type: 'maxlength', message: 'Title cannot be more than 35 characters long.' }
+    ],
+    'text': [
+      { type: 'required', message: 'Abrisstext is required.' }
+    ],
+    'description': [
+      { type: 'required', message: 'Beschreibung is required.' },
+    ],
+    'starttime': [
+      { type: 'required', message: 'Starttime is required.' },
+    ],
+    'endtime': [
+      { type: 'required', message: 'Endtime is required.' },
+    ]
+  }
+
+  //Image
   croppedImage = null;
-  starttime = null;
-  endtime = null;
+
+  //Validation
+  titel: FormControl;
+  text: FormControl;
+  description: FormControl;
+  starttime;
+  endtime;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -37,9 +59,9 @@ export class AddPage implements OnInit{
     public formBuilder: FormBuilder,
     public modalController: ModalController,
     public router: Router,
-  ) { 
+  ) {
     //CroppedImage
-    if(this.croppedImage == "" || this.croppedImage == null){
+    if (this.croppedImage == "" || this.croppedImage == null) {
       this.croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
     }
   }
@@ -47,11 +69,25 @@ export class AddPage implements OnInit{
   /* Form Validation
    * --------------------------------------------------------
    */
-  ngOnInit(){
-    this.time = this.formBuilder.group({
-      starttime: ['', Validators.required],
-      endtime: ['', Validators.required],
-    });
+  ngOnInit() {
+
+    this.titel = new FormControl('', Validators.compose([
+      Validators.maxLength(35),
+      Validators.minLength(5),
+      Validators.required
+    ]));
+    this.text = new FormControl('', Validators.required),
+      this.description = new FormControl('', Validators.required),
+      this.starttime = new FormControl('', Validators.required),
+      this.endtime = new FormControl('', Validators.required),
+
+      this.validations_add = this.formBuilder.group({
+        titel: this.titel,
+        text: this.text,
+        description: this.description,
+        starttime: this.starttime,
+        endtime: this.endtime,
+      });
   }
 
   /* Image
@@ -86,30 +122,30 @@ export class AddPage implements OnInit{
       component: ModalImagePage,
       cssClass: 'modal-image-css',
       swipeToClose: true, //iOS
-      componentProps: { 
+      componentProps: {
         sourceType: sourceType,
-        aspectRatio: 16/9
+        aspectRatio: 16 / 9
       }
     });
 
     modal.onDidDismiss()
       .then((data) => {
-        this.croppedImage = data['data']; 
-    });
-    
+        this.croppedImage = data['data'];
+      });
+
     await modal.present();
 
-    if(!window.history.state.modal) {
+    if (!window.history.state.modal) {
       const modalState = { modal: true };
       history.pushState(modalState, null);
     }
   }
 
   /* Error Messages
-  * --------------------------------------------------------
-  */
+ * --------------------------------------------------------
+ */
   get errorControl() {
-    return this.time.controls;
+    return this.validations_add.controls;
   }
 
   /* Create Coupons (API CALL)
@@ -117,24 +153,25 @@ export class AddPage implements OnInit{
   */
   createCoupon() {
     this.submitForm();
-    if(new Date(this.starttime) > new Date(this.endtime)){
-      this.time.get("endtime").reset();
-    } else if(this.submitForm()){
+    if (new Date(this.starttime.value) > new Date(this.endtime.value)) {
+      this.validations_add.get("endtime").reset();
+    } else if (this.submitForm()) {
       this.cancel();
     }
   }
 
-  submitForm(){
+  submitForm() {
     this.isSubmitted = true;
-    if (!this.time.valid) {
-      return false;
-    } else {
+    if (this.validations_add.valid) {
       return true;
+    } else {
+      return false;
     }
   }
 
   cancel() {
     this.router.navigateByUrl('/app/tabs/home');
+    this.validations_add.reset();
   }
- 
+
 }

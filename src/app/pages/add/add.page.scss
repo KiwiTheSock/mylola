@@ -14,11 +14,11 @@
   text-align: center;
 }
 
-.picture-button{
+.picture-button {
   text-align: center;
   padding-bottom: 10px;
 
-  ion-icon{
+  ion-icon {
     padding-right: 5px;
   }
 }
@@ -60,22 +60,18 @@
 /* Description
  * --------------------------------------------------------
  */
-.description{
-  textarea{
-    border-radius: 5px !important;
-    border: 1px var(--ion-color-medium-shade) solid;
-    height: 200px;
-    width: 102%; 
-    margin-left: -5px;
-    resize: none;
-    padding: 20px 30px 20px 30px;
-  }
+.description {
+  border-radius: 5px !important;
+  border: 1px var(--ion-color-medium-shade) solid;
+  height: 200px;
+  width: 100%;
+  padding-left: 12px;
 }
 
 /* ion-datetime
  * --------------------------------------------------------
  */
-ion-datetime  {
+ion-datetime {
   border-radius: 5px !important;
   border: 1px solid var(--ion-color-medium-shade) !important;
   width: 100%;
@@ -85,8 +81,8 @@ ion-datetime  {
  * --------------------------------------------------------
  */
 .buttons {
- margin-top: 10px;
- margin-bottom: 70px;
+  margin-top: 10px;
+  margin-bottom: 70px;
 }
 
 /* Error Messages

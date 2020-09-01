@@ -138,7 +138,7 @@ export class HomePage implements OnInit {
       "telephone" : "01713442859"
     }
     
-    this.apiService.getCompanyById(1).subscribe(response => {
+    this.apiService.login(login).subscribe(response => {
       console.log(response);
       this.data = response;
     })

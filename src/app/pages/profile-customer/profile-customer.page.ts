@@ -25,6 +25,7 @@ export class ProfileCustomerPage {
 
 
   ionViewWillEnter() {
+   
     this.dataProvider.getAbos().subscribe((data: any) => {
       this.abos = data;
     })

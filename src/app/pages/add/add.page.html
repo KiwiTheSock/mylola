@@ -4,97 +4,146 @@
 <!-- Content -->
 <ion-content>
   <ion-grid class="content">
+    <form [formGroup]="validations_add" (ngSubmit)="submitForm()">
 
-    <!-- Coupon Image -->
-    <ion-row class="picture">
-      <ion-col>
-        <ion-card>
-          <ion-card-content>
-            <img [src]="croppedImage">
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+      <!-- Coupon Image -->
+      <ion-row class="picture">
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              <img [src]="croppedImage">
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="picture-button">
-      <ion-col>
-        <ion-button fill="outline" shape="round" (click)="selectImage()">
-          Foto auswählen
-        </ion-button>
-      </ion-col>
-    </ion-row>
+      <ion-row class="picture-button">
+        <ion-col>
+          <ion-button fill="outline" shape="round" (click)="selectImage()">
+            Foto auswählen
+          </ion-button>
+        </ion-col>
+      </ion-row>
 
-    <!-- Category -->
-    <ion-row class="category">
-      <ion-col>
-        <ion-item lines="none">
-          <ion-select placeholder="Kategorie" okText="Fertig" cancelText="Abbrechen">
-            <ion-select-option value="gastro">Gastro & Nightlife</ion-select-option>
-            <ion-select-option value="shopping">Shopping</ion-select-option>
-            <ion-select-option value="freizeit">Freizeit & Erleben</ion-select-option>
-            <ion-select-option value="dienstleistungen">Dienstleistungen</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <!-- Title -->
-    <ion-row class="title">
-      <ion-col>
-        <ion-input maxLength="35" [(ngModel)]="titel" placeholder="Titel" required></ion-input>
-      </ion-col>
-    </ion-row>
-
-    <!-- Text -->
-    <ion-row class="text">
-      <ion-col>
-        <ion-input maxLength="20" [(ngModel)]="text" placeholder="Abrisstext" required></ion-input>
-      </ion-col>
-    </ion-row>
-
-    <!-- Beschreibung -->
-    <ion-row class="description">
-      <ion-col>
-        <textarea maxLength="1000" [(ngModel)]="description" placeholder=" Beschreibung"></textarea>
-      </ion-col>
-    </ion-row>
-
-    <!-- Time Span -->
-    <ion-row>
-      <ion-col class="time">
-        <p>Aktions- oder Veranstaltungszeitraums festlegen</p>
-      </ion-col>
-    </ion-row>
-
-    <form [formGroup]="time" (ngSubmit)="submitForm()">
-      <ion-row>
+      <!-- Category -->
+      <ion-row class="category">
         <ion-col>
           <ion-item lines="none">
-            <ion-datetime [(ngModel)]="starttime" formControlName="starttime" displayFormat="HH:mm, DD MMMM YYYY"
-              pickerFormat="DD-MMM-YYYY HH:mm" placeholder="Startzeit" doneText="Fertig" cancelText="Abbrechen"
-              monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
-              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
-              required></ion-datetime>
+            <ion-select value="gastro" placeholder="Kategorie" okText="Fertig" cancelText="Abbrechen">
+              <ion-select-option value="gastro">Gastro & Nightlife</ion-select-option>
+              <ion-select-option value="shopping">Shopping</ion-select-option>
+              <ion-select-option value="freizeit">Freizeit & Erleben</ion-select-option>
+              <ion-select-option value="dienstleistungen">Dienstleistungen</ion-select-option>
+            </ion-select>
           </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- [(ngModel)] entfernen -->
+      <!-- Title -->
+      <ion-row class="title">
+        <ion-col>
+          <ion-input formControlName="titel" placeholder="Titel"></ion-input>
+        </ion-col>
+        <!-- Error messages -->
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.titel">
+            <div class="error"
+              *ngIf="validations_add.get('titel').hasError(validation.type) && (validations_add.get('titel').dirty || validations_add.get('titel').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-row>
+
+      <!-- Text -->
+      <ion-row class="text">
+        <ion-col>
+          <ion-input formControlName="text" placeholder="Abrisstext"></ion-input>
+        </ion-col>
+        <!-- Error messages -->
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.text">
+            <div class="error"
+              *ngIf="validations_add.get('text').hasError(validation.type) && (validations_add.get('text').dirty || validations_add.get('text').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-row>
+
+      <!-- Beschreibung -->
+      <ion-row class="description">
+        <ion-col>
+          <ion-item lines="none">
+            <ion-textarea formControlName="description" placeholder="Beschreibung"></ion-textarea>
+            <!-- Error messages -->
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.description">
+                <div class="error"
+                  *ngIf="validations_add.get('description').hasError(validation.type) && (validations_add.get('description').dirty || validations_add.get('description').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- Time Span -->
+      <ion-row>
+        <ion-col class="time">
+          <p>Aktions- oder Veranstaltungszeitraums festlegen</p>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>
           <ion-item lines="none">
-            <ion-datetime [(ngModel)]="endtime" formControlName="endtime" displayFormat="HH:mm, DD MMMM YYYY"
-              pickerFormat="DD-MMM-YYYY HH:mm" placeholder="Endzeit" doneText="Fertig" cancelText="Abbrechen"
+            <ion-datetime formControlName="starttime" displayFormat="HH:mm, DD MMMM YYYY"
+              pickerFormat="DD-MMM-YYYY HH:mm" placeholder="Startzeit" doneText="Fertig" cancelText="Abbrechen"
               monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
-              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
-              required></ion-datetime>
+              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" max="2120"></ion-datetime>
           </ion-item>
-          <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.endtime.errors?.required">
-            Endzeit vor Startzeit!
-          </span>
+        </ion-col>
+      </ion-row>
+
+      <!-- Error messages -->
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.starttime">
+          <div class="error"
+            *ngIf="validations_add.get('starttime').hasError(validation.type) && (validations_add.get('starttime').dirty || validations_add.get('endtime').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-datetime formControlName="endtime" displayFormat="HH:mm, DD MMMM YYYY" pickerFormat="DD-MMM-YYYY HH:mm"
+              placeholder="Endzeit" doneText="Fertig" cancelText="Abbrechen"
+              monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
+              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" max="2120"></ion-datetime>
+          </ion-item>
         </ion-col>
       </ion-row>
     </form>
+
+    <!-- Error messages -->
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.endtime">
+        <div class="error"
+          *ngIf="validations_add.get('endtime').hasError(validation.type) && (validations_add.get('endtime').dirty || validations_add.get('endtime').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Error messages -->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.endtime.errors?.required">
+      Endzeit vor Startzeit!
+    </span>
 
     <!-- Button -->
     <ion-row class="picture-button">
