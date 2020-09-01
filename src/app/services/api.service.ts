@@ -2,8 +2,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
+//Ionic
+import { Storage } from '@ionic/storage';
+
 //Others
-import { throwError } from 'rxjs';
+import { throwError, from, BehaviorSubject } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -15,16 +18,13 @@ export class ApiService {
   base_path = 'http://srv06-dev.mindq.kunden.openroot.de:8088';
 
   //Token
-  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTg5MDEwODAsImV4cCI6MTU5ODkwNDY4MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiS2V2aW4ifQ.Y6vCoy05czKlwcA395Y1zKGj2VToJdr9kzCqiFC0jkkhd9dnf4e4MsR2U-EnXMjicVS35FmRFTI9gcMTVW7_c7ahBugf3gYxrcYvk2kHyDAd6NYSzgnXtL_K5qQMw0RdYsUahAx-7V8mz6AuFh9E_rRAq60bddh3DsbWD0cOf8Jl2U9nKLzg-RUqddQLUBmVjSxvhGQyVXHJlaGvn6chZQWvhljeDJ8RTlFkUkjR60hvqvkDB1oZE2IGLY9uZjwocPSmJuwVHUeqoTf5wF7XwChnzGfxAqNQl249eVbaV1uosJxqi-QbDy4iKgkQHSe8VOr3xz8U6l32AaKO2hVm89b_5Mzsrj61plzt32bIOoXcw7Ry7jNxukKKOfw5Gh8lZFTrqnU7FduT9SxVHZ_hCgDUbFWf_N8BLYC-8fDiOYdsLs9TZkDUbGfXKkNSEwvtccVN-gwG-KYq1gGivwYgfEfAdo5VAH4IV4uHcCMJd2zRZAp7TgCWLhizDgHOmTEH8rZu93WnByU6O8zlEgfBX27vgalZPJQKCpxFg5rYN4N31UFy5w-XPYf00JJwwob2cTXpDjj7KsdQ9NPt3QfPCpd2los7L3EIyL1nyEFUs6ovtxOcwBqCksXvXFloSU4nYoxll5SbkZmDozeOmBEsTpdBRul5S8ov4Gq0atyk9Vs';
-  //token: any = null;
-
-  data: any;
+  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTg5Njk0MjksImV4cCI6MTU5ODk3MzAyOSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiS2V2aW4ifQ.WkYeGdE8GjYPPHa966qYaKLCXxb2lqiYo-5AgioRFm7P5Idv_VMpWclX_xTPCGuI89YVoV2Lvmvz9PWFPwCeDKnm55T2434fqJ2G-C7gifslJw7hUt8gLPs0HpSr-PeW935DBp-AD23RA-PAB4nCLRir9ttsv_ndzM3oQrEb83WLHigIEUfYKUMgx6__1EdstBPeXlGVNHkwWDF5D9NjiWHirSnfkDgmRZGH-QZKMdmURSj8V5JNDsGWqjxfUmuLPeAy3cZgLiaLaczRSpKboPrJ1WcPYbtoxZupfyOAbJ0sBQ9ozfpvU9JV2NiIoV_UIHqZJjA9giDwyg8kc0wDgEQwZPaTXmQa1Ej8wvM8aaUeLaUEePbaqD8CXsV7Eyr78UQx-eeRZAp-FEYz_m6V8VZEJvXSSXKh2zRR8fD7cwBp_8I-HA99RUV2A85z-vjqgstHfGZvzD7hukPG8SLdrX5FMT7bvwrpU67faIBOrRTAqD4hFXYlXOsM7uu2hC1LXEPp3vLqlYRmBAlvixjJZqKy1OGdEMMEo20LegZk126-7eJj7qa6mmWoJnwjVWvBJEC21CVWYT6eTsgg2aR473zpXK_6QZoZPowLxREVXvzlDjAisg1lGXG_Vg_qIom1iHWfdt1-NVR66JzFWzxBpq3g3bJf3lvSRIHxslAsh5U';
+  //token: any;
 
   constructor(
     private httpClient: HttpClient,
-  ) {
-    this.data = [];
-  }
+    private storage: Storage,
+  ) { }
 
   /* Http Options
    * --------------------------------------------------------
@@ -51,7 +51,7 @@ export class ApiService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
 
-      console.error("Error as String: ", JSON.stringify(error));
+      //console.error("Error as String: ", JSON.stringify(error));
     }
     // return an observable with a user-facing error message
     return throwError(
@@ -62,7 +62,18 @@ export class ApiService {
    * --------------------------------------------------------
    */
 
+  get(path: string) {
+    return this.httpClient
+      .get(this.base_path + path, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+
   //Companies
+  //Params: path = '/api/companies'
   getCompanies() {
     return this.httpClient
       .get(this.base_path + '/api/companies', this.httpOptions)
@@ -73,6 +84,7 @@ export class ApiService {
   }
 
   //Coupons
+  //Params: path = '/api/coupons'
   getCoupons() {
     return this.httpClient
       .get(this.base_path + '/api/coupons', this.httpOptions)
@@ -83,6 +95,7 @@ export class ApiService {
   }
 
   //Customer
+  //Params: path = '/api/customers'
   getCustomers() {
     return this.httpClient
       .get(this.base_path + '/api/customers', this.httpOptions)
@@ -93,6 +106,7 @@ export class ApiService {
   }
 
   //Devaluations
+  //Params: path = '/api/devaluations'
   getDevaluations() {
     return this.httpClient
       .get(this.base_path + '/api/devaluations', this.httpOptions)
@@ -106,7 +120,17 @@ export class ApiService {
    * --------------------------------------------------------
    */
 
+  getById(path: string, id: number) {
+    return this.httpClient
+      .get(this.base_path + path + id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   //Companies
+  //Params: path = '/api/company/', id: number
   getCompanyById(id: number) {
     return this.httpClient
       .get(this.base_path + '/api/company/' + id, this.httpOptions)
@@ -117,6 +141,7 @@ export class ApiService {
   }
 
   //Coupons
+  //Params: path = '/api/coupons/', id: number
   getCouponById(id: number) {
     return this.httpClient
       .get(this.base_path + '/api/coupons/' + id, this.httpOptions)
@@ -127,6 +152,7 @@ export class ApiService {
   }
 
   //Customer
+  //Params: path = '/api/customer/', id: number
   getCustomerById(id: number) {
     return this.httpClient
       .get(this.base_path + '/api/customer/' + id, this.httpOptions)
@@ -137,9 +163,10 @@ export class ApiService {
   }
 
   //Devaluations
+  //Params: path = /api/mydevaluations', id: number
   getDevaluationById(id: number) {
     return this.httpClient
-      .get(this.base_path + '/api/' + id + '/mydevaluations', this.httpOptions)
+      .get(this.base_path + '/api/mydevaluations/' + id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -149,8 +176,18 @@ export class ApiService {
   /* GET (ID, ID)
    * --------------------------------------------------------
    */
+  getbyId(path: string, customer_id: number, coupon_id: number) {
+    return this.httpClient
+      .get(this.base_path + path + customer_id + '/' + coupon_id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
 
   //Favorite
+  //Params: path = '/api/favorit/', customer_id: number, coupon_id: number
   addFavorite(customer_id: number, coupon_id: number) {
     return this.httpClient
       .get(this.base_path + '/api/favorit/' + customer_id + '/' + coupon_id, this.httpOptions)
@@ -161,7 +198,8 @@ export class ApiService {
   }
 
   //Devaluation 
-  addDevaluation(coupon_id: number, customer_id:number) {
+  //Params: path = '/api/devaluations/', id1: number, id2: number
+  addDevaluation(customer_id: number, coupon_id: number) {
     return this.httpClient
       .get(this.base_path + '/api/devaluations/' + customer_id + '/' + coupon_id, this.httpOptions)
       .pipe(
@@ -174,7 +212,18 @@ export class ApiService {
    * --------------------------------------------------------
    */
 
+  post(path: string, id: number, item) {
+    return this.httpClient
+      .post(this.base_path + path + id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+
   //Coupons
+  //Params: path = '/api/coupons/', id: number, item: array
   addCoupon(company_id: number, item) {
     return this.httpClient
       .post(this.base_path + '/api/coupons/' + company_id, JSON.stringify(item), this.httpOptions)
@@ -185,9 +234,10 @@ export class ApiService {
   }
 
   //Hours 
+  //Params: path = '/api/hours/', id: number, item: array
   addHours(company_id: number, item) {
     return this.httpClient
-      .post(this.base_path + '/api/' + company_id + '/hours', JSON.stringify(item), this.httpOptions)
+      .post(this.base_path + '/api/hours/' + company_id, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -195,9 +245,10 @@ export class ApiService {
   }
 
   //URL
+  //Params: path = '/api/url/', id: number, item: array
   addURL(company_id: number, item) {
     return this.httpClient
-      .post(this.base_path + '/api/' + company_id + '/url', JSON.stringify(item), this.httpOptions)
+      .post(this.base_path + '/api/url' + company_id, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -207,8 +258,17 @@ export class ApiService {
   /* PUT
    * --------------------------------------------------------
    */
+  put(path: string, id: number, item) {
+    return this.httpClient
+      .put(this.base_path + path + id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
 
   //Company
+  //Params: path = '/api/company/', id: number, item: array
   updateCompany(id: number, item) {
     return this.httpClient
       .put(this.base_path + '/api/company/' + id, JSON.stringify(item), this.httpOptions)
@@ -219,6 +279,7 @@ export class ApiService {
   }
 
   //Coupons
+  //Params: path = '/api/coupons/', id: number, item: array
   updateCoupon(id: number, item) {
     return this.httpClient
       .put(this.base_path + '/api/coupons/' + id, JSON.stringify(item), this.httpOptions)
@@ -229,6 +290,7 @@ export class ApiService {
   }
 
   //Customer
+  //Params: path = '/api/customer/', id: number, item: array
   updateCustomer(id: number, item) {
     return this.httpClient
       .put(this.base_path + '/api/customer/' + id, JSON.stringify(item), this.httpOptions)
@@ -239,9 +301,10 @@ export class ApiService {
   }
 
   //Hours
+  //Params: path = /api/hours/', id: number, item: array
   updateHours(id: number, item) {
     return this.httpClient
-      .put(this.base_path + '/api/' + id + '/hours', JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/hours/' + id, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -249,9 +312,10 @@ export class ApiService {
   }
 
   //URL
+  //Params: path = '/api/url', id: number, item: array
   updateURL(id: number, item) {
     return this.httpClient
-      .put(this.base_path + '/api/' + id + '/url', JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/url' + id, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -261,8 +325,17 @@ export class ApiService {
   /* DELETE
    * --------------------------------------------------------
    */
+  delete(path: string, id: number) {
+    return this.httpClient
+      .delete(this.base_path + path + id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
 
   //Company
+  //Params: path = '/api/company/', id: number
   deleteCompany(id: number) {
     return this.httpClient
       .delete(this.base_path + '/api/company/' + id, this.httpOptions)
@@ -273,6 +346,7 @@ export class ApiService {
   }
 
   //Coupons
+  //Params: path = '/api/coupons/', id: number
   deleteCoupon(id: number) {
     return this.httpClient
       .delete(this.base_path + '/api/coupons/' + id, this.httpOptions)
@@ -283,6 +357,7 @@ export class ApiService {
   }
 
   //Coupons
+  //Params: path = '/api/customer/', id: number
   deleteCustomer(id: number) {
     return this.httpClient
       .delete(this.base_path + '/api/customer/' + id, this.httpOptions)
@@ -298,7 +373,7 @@ export class ApiService {
   register(item) {
 
     return this.httpClient
-      .post(this.base_path + '/registerUser', JSON.stringify(item))
+      .post(this.base_path + '/registerUser', item)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -309,7 +384,6 @@ export class ApiService {
    * --------------------------------------------------------
    */
   login(item) {
-
     return this.httpClient
       .post(this.base_path + '/api/login_check', item)
       .pipe(
@@ -318,4 +392,11 @@ export class ApiService {
       )
   }
 
+  apiToken(item) {
+    this.login(item).subscribe((token: string) => {
+      let token_stringify = JSON.stringify(token);
+      let t = token_stringify.split("\"");
+      this.token ="'" + t[3] + "'";
+    })
+  }
 }

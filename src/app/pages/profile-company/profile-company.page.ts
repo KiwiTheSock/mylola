@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ConferenceData } from '../../services/conference-data';
 import { ModalController } from '@ionic/angular';
 import { ModalDeletePage } from '../modal-delete/modal-delete.page';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'page-profile-company',
@@ -12,16 +13,21 @@ import { ModalDeletePage } from '../modal-delete/modal-delete.page';
 })
 export class ProfileCompanyPage {
 
-  coupons: any = [
-    {
-      name: "Vino & Kino"
-    }
-  ]
+  profile: any;
+  coupons: any;
 
   constructor(
+    private apiService: ApiService,
     public router: Router,
     private modalController: ModalController
   ) { }
+
+  ionViewWillEnter() {
+    this.apiService.getCompanyById(1).subscribe((res: any) => {
+      this.profile = res;
+      this.coupons = res.coupons;
+    })
+  }
 
   /* Settings
   * --------------------------------------------------------

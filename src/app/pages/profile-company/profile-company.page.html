@@ -10,11 +10,11 @@
       <ion-col col-12 class="profile-background">
         <!-- Banner -->
         <div>
-          <ion-img src="..\assets\img\banner\banner_halloffame.png"></ion-img>
+          <ion-img src="{{profile?.bannerfilenameGEHTNICHT}}"></ion-img>
         </div>
         <!-- Logo -->
         <ion-avatar>
-          <ion-img src="..\assets\img\logo\halloffame_logo.png"></ion-img>
+          <ion-img src="{{profile?.logofilenameGEHTNICHT}}"></ion-img>
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -22,7 +22,7 @@
     <!-- Name -->
     <ion-row>
       <ion-col class="ion-padding-top ion-text-center">
-        <h1><b>Hall of Fame</b></h1>
+        <h1><b>{{profile?.name}}</b></h1>
       </ion-col>
     </ion-row>
 
@@ -49,7 +49,7 @@
         <ion-list>
 
           <ion-item *ngFor="let item of coupons">
-            <ion-label routerLink="/app/tabs/home/detail/1">{{item.name}}</ion-label>
+            <ion-label routerLink="/app/tabs/home/detail/{{item.id}}">{{item.title}}</ion-label>
             <ion-button slot="end" (click)="presentModal()">
               <ion-icon name="close"></ion-icon>
             </ion-button>
@@ -69,8 +69,8 @@
 
     <ion-row>
       <ion-col col-12 class="location">
-        <p>Theodor-Heuss-Platz 6-9</p>
-        <p>49074 Osnabrück</p>
+        <p>{{profile?.street}} {{profile?.housenumber}}</p>
+        <p>{{profile?.postcode}} {{profile?.place}}</p>
       </ion-col>
     </ion-row>
 
@@ -83,9 +83,9 @@
 
     <ion-row>
       <ion-col class="contact">
-        <p>hall-of-fame.online</p>
-        <p>info@hall-of-fame.online</p>
-        <p>038712114040</p>
+        <p>{{profile?.url.homepage}}</p>
+        <p>{{profile?.email}}</p>
+        <p>{{profile?.telephone}}</p>
       </ion-col>
     </ion-row>
 
@@ -99,10 +99,13 @@
     <ion-row>
       <ion-col>
         <p>
-          <ion-icon name="logo-facebook" class="media" color="facebook"></ion-icon>/halloffamekinodeluxe
+          <ion-icon name="logo-facebook" class="media" color="facebook"></ion-icon>{{profile?.url.facebook}}
         </p>
         <p>
-          <ion-icon name="logo-instagram" class="media" color="instagram"></ion-icon>/halloffameosna
+          <ion-icon name="logo-instagram" class="media" color="instagram"></ion-icon>{{profile?.url.instagram}}
+        </p>
+        <p>
+          <ion-icon name="logo-twitter" class="media" color="twitter"></ion-icon>{{profile?.url.twitter}}
         </p>
       </ion-col>
     </ion-row>
@@ -116,13 +119,13 @@
 
     <ion-row>
       <ion-col col-12 class="opening">
-        <p>Montag: 13:30 - 22:00</p>
-        <p>Dienstag: 13:30 - 22:00</p>
-        <p>Mittwoch: 13:30 - 22:00</p>
-        <p>Donnerstag: 13:30 - 22:00</p>
-        <p>Freitag: 13:30 - 24:00</p>
-        <p>Samstag: 10:00 - 24:00</p>
-        <p>Sonntag: 10:00 - 23:00</p>
+        <p>Montag: {{profile?.hours.monday}}</p>
+        <p>Dienstag: {{profile?.hours.tuesday}}</p>
+        <p>Mittwoch: {{profile?.hours.wednesday}}</p>
+        <p>Donnerstag: {{profile?.hours.thursday}}</p>
+        <p>Freitag: {{profile?.hours.friday}}</p>
+        <p>Samstag: {{profile?.hours.saturday}}</p>
+        <p>Sonntag: {{profile?.hours.sunday}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 //Others
 import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'page-register',
@@ -13,14 +14,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterPage {
   
+  //API Body
   user = {
-    email: '',
-    pw: ''
+    username: "",
+    email: "",
+    password: ""
   }
   
+  //Back Button
   defaultHref = '';
 
   constructor(
+    private alertCtrl: AlertController,
     private auth: AuthService,
     public router: Router,
     public userData: UserData
@@ -30,23 +35,28 @@ export class RegisterPage {
     this.defaultHref = `/app/tabs/home`;
   }
 
-/* Login
+/* Register
  * --------------------------------------------------------
  */
-  onSignup() {
-    this.auth.signIn(this.user).subscribe(user => {
-     
-      this.userData.login(this.user.email);
-      let role = user['role'];
-
-      if(role == 'ADMIN') {
+  register() {
+    this.auth.register(this.user).subscribe(async res => {
+      
+      if(res) {
+        this.userData.login(this.user.username);
         this.router.navigateByUrl('/app/tabs/home');
-      } else if (role == 'USER') {
-        this.router.navigateByUrl('/app/tabs/home');
+      } else {
+        const alert = await this.alertCtrl.create({
+          header: 'Register Failed',
+          message: 'Wrong credentials.',
+          buttons: ['OK']
+        });
+        await alert.present();
       }
     });
+
+    this.user.username = "";
     this.user.email = "";
-    this.user.pw = "";
+    this.user.password = "";
   }
   
 }

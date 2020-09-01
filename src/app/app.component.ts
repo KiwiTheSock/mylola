@@ -95,6 +95,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+ /* Login
+  * --------------------------------------------------------
+  */
   async ngOnInit() {
     this.checkLoginStatus();
     this.listenForLoginEvents();

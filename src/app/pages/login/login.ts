@@ -5,6 +5,12 @@ import { Router } from '@angular/router';
 //Others
 import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
+import { ApiService } from '../../services/api.service';
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { AlertController } from '@ionic/angular';
+
+const helper = new JwtHelperService();
+const TOKEN_KEY = 'jwt-token';
 
 @Component({
   selector: 'page-login',
@@ -14,40 +20,49 @@ import { AuthService } from '../../services/auth.service';
 
 export class LoginPage {
 
+  //API Body
   user = {
-    email: '',
-    pw: ''
+    username: "",
+    password: ""
   }
 
+  //Back Button
   defaultHref = '';
 
   constructor(
+    private api: ApiService,
     private auth: AuthService,
+    private alertCtrl: AlertController,
     private router: Router,
     private userData: UserData
-  ){}
+  ) { }
 
+  //Back Button
   ionViewDidEnter() {
     this.defaultHref = `/app/tabs/home`;
   }
 
-  /* Login
+  /* Login 
    * --------------------------------------------------------
    */
-  signIn() {
-    this.auth.signIn(this.user).subscribe(user => {
-     
-      this.userData.login(this.user.email);
-      let role = user['role'];
-
-      if(role == 'ADMIN') {
+  login() { 
+    
+    this.auth.login(this.user).subscribe(async res => {
+      if (res) {
+        this.userData.login(this.user.username);
         this.router.navigateByUrl('/app/tabs/home');
-      } else if (role == 'USER') {
-        this.router.navigateByUrl('/app/tabs/home');
+      } else {
+        const alert = await this.alertCtrl.create({
+          header: 'Login Failed',
+          message: 'Wrong credentials.',
+          buttons: ['OK']
+        });
+        await alert.present();
       }
     });
-    this.user.email = "";
-    this.user.pw = "";
+    
+    this.user.username = "";
+    this.user.password = "";
   }
 
 }

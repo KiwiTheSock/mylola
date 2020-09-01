@@ -88,8 +88,8 @@ export class HomePage implements OnInit {
 
     //API TEST
     let login = {
-      "username": "Kevin",
-      "password": "asdf1234"
+      username: "Kevin",
+      password: "asdf1234"
     }
 
     let register = {
@@ -132,16 +132,17 @@ export class HomePage implements OnInit {
     var company = {
       "name" : "Markmann(nicht)oderDoch",
       "street" : "Am Pappelgraben",
-      "housenumber" : "-56",
+      "housenumber" : "56",
       "postcode" : "49080",
       "place" : "Osnabrueck",
       "telephone" : "01713442859"
     }
-
-    this.apiService.login(login).subscribe(response => {
+    
+    this.apiService.getCompanyById(1).subscribe(response => {
       console.log(response);
       this.data = response;
-    }) 
+    })
+    
   }
 
   ngDoCheck() {

@@ -18,7 +18,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile-company/profile-company.module').then(m => m.ProfileCompanyPageModule), 
     canActivate: [AuthGuard],
     data: {
-      role: 'ADMIN'
+      role: 'ROLE_COMPANY'
     }
   },
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile-company-edit/profile-company-edit.module').then(m => m.ProfileCompanyEditPageModule),
     canActivate: [AuthGuard],
     data: {
-      role: 'ADMIN'
+      role: 'ROLE_COMPANY'
     }
   },
   {
@@ -34,7 +34,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add/add.module').then(m => m.AddPageModule),
     canActivate: [AuthGuard],
     data: {
-      role: 'ADMIN'
+      role: 'ROLE_COMPANY'
     }
   },
   //USER
@@ -43,7 +43,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile-customer/profile-customer.module').then(m => m.ProfileCustomerPageModule),
     canActivate: [AuthGuard],
     data: {
-      role: 'USER'
+      role: 'ROLE_USER'
     }
   },
   {
@@ -51,7 +51,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile-customer-edit/profile-customer-edit.module').then(m => m.ProfileEditPageModule),
     canActivate: [AuthGuard],
     data: {
-      role: 'USER'
+      role: 'ROLE_USER'
     }
   },
   {
@@ -90,7 +90,8 @@ const routes: Routes = [
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
     canLoad: [CheckTutorial]
-  },  {
+  },
+  {
     path: 'modal-delete',
     loadChildren: () => import('./pages/modal-delete/modal-delete.module').then( m => m.ModalDeletePageModule)
   },

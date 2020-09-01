@@ -8,14 +8,14 @@
     <!-- Username -->
     <ion-row>
       <ion-col>
-        <h1><b>User</b></h1>
+        <h1><b>{{profile?.username}}</b></h1>
       </ion-col>
     </ion-row>
 
     <!-- Button -->
     <ion-row>
       <ion-col>
-        <ion-button fill="outline" shape="round"  (click)="openSettings()">
+        <ion-button fill="outline" shape="round" (click)="openSettings()">
           Profil bearbeiten
         </ion-button>
       </ion-col>
@@ -53,8 +53,8 @@
 
     <ion-row>
       <ion-col col-12 class="personal">
-        <p>Max</p>
-        <p>Mustermann</p>
+        <p>{{profile?.firstname}}</p>
+        <p>{{profile?.lastname}}</p>
       </ion-col>
     </ion-row>
 
@@ -67,8 +67,8 @@
 
     <ion-row>
       <ion-col col-12 class="location">
-        <p>Musterstraße 1</p>
-        <p>49078 Osnabrück</p>
+        <p>{{profile?.street}} {{profile?.housenumber}}</p>
+        <p>{{profile?.postcode}} {{profile?.city}}</p>
       </ion-col>
     </ion-row>
 
@@ -81,8 +81,8 @@
 
     <ion-row>
       <ion-col class="contact">
-        <p>user@user.com</p>
-        <p>017654093421</p>
+        <p>{{profile?.email}}</p>
+        <p>{{profile?.telephone}}</p>
       </ion-col>
     </ion-row>
 

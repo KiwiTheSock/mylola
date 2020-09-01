@@ -17,7 +17,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="stacked">Benutzername</ion-label>
-          <ion-input type="email" clearInput placeholder="Benutzername" [(ngModel)]="user.email"></ion-input>
+          <ion-input type="text" clearInput placeholder="Benutzername" [(ngModel)]="user.username"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -37,7 +37,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="stacked">Passwort</ion-label>
-          <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.pw"></ion-input>
+          <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.password"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -46,7 +46,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="stacked">Passwort wiederholen</ion-label>
-          <ion-input type="password" clearInput placeholder="Passwort wiederholen" [(ngModel)]="user.pw"></ion-input>
+          <ion-input type="password" clearInput placeholder="Passwort wiederholen" [(ngModel)]="user.password"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -54,7 +54,7 @@
     <!-- Register -->
     <ion-row class="ion-padding">
       <ion-col>
-        <ion-button (click)="onSignup()" type="submit" expand="block">Registrieren</ion-button>
+        <ion-button (click)="register()" type="submit" expand="block">Registrieren</ion-button>
       </ion-col>
     </ion-row>
 

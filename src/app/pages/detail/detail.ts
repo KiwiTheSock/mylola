@@ -93,7 +93,7 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   edit() {
-    if (this.authService.getRole().role == "ADMIN" && this.router.url === "/app/tabs/home/detail/1") {
+    if (this.authService.getRole().role == "ROLE_COMPANY" && this.router.url === "/app/tabs/home/detail/1") {
       this.show = true;
     }
   }
@@ -159,7 +159,6 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   isLoggedIn(session: any) {
-    console.log(this.authService.getRole());
     if (this.authService.getRole() == null || this.authService.getRole().email == null) {
       this.router.navigateByUrl('/login');
     } else {

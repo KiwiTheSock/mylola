@@ -29,8 +29,9 @@
 .category {
   border-radius: 5px !important;
   border: 1px var(--ion-color-medium-shade) solid;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
+
 
 /* Title
  * --------------------------------------------------------
@@ -38,7 +39,10 @@
 .title {
   border-radius: 5px !important;
   border: 1px var(--ion-color-medium-shade) solid;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  height: 60px;
+  padding-left: 22px;
+  padding-top: 4px;
 }
 
 /* Text
@@ -48,6 +52,9 @@
   border-radius: 5px !important;
   border: 1px var(--ion-color-medium-shade) solid;
   margin-bottom: 10px;
+  height: 60px;
+  padding-left: 22px;
+  padding-top: 4px;
 }
 
 /* Description
@@ -58,8 +65,10 @@
     border-radius: 5px !important;
     border: 1px var(--ion-color-medium-shade) solid;
     height: 200px;
-    width: 100%; 
+    width: 102%; 
+    margin-left: -5px;
     resize: none;
+    padding: 20px 30px 20px 30px;
   }
 }
 
