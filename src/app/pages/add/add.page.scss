@@ -67,15 +67,11 @@
  * --------------------------------------------------------
  */
 .description {
-  textarea {
-    border-radius: 5px !important;
-    border: 1px var(--ion-color-medium-shade) solid;
-    height: 200px;
-    width: 120%;
-    padding-left: 33px;
-    padding-top: 12px;
-    resize: none;
-  }
+  border-radius: 5px !important;
+  border: 1px var(--ion-color-medium-shade) solid;
+  padding-left: 12px;
+  margin-left: 20px;
+  margin-right: 5px;
 }
 
 /* ion-datetime

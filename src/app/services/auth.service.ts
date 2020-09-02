@@ -81,11 +81,10 @@ export class AuthService {
   }
 
   hasRoles(roles: string): boolean {
-    if (this.userData.value) {
-      for (const oneRole of roles) {
-        if (!this.userData.value.roles || !(this.userData.value.roles.includes(oneRole))) {
-          return false;
-        }
+
+    for (const oneRole of roles) {
+      if (!this.userData.value.roles || !(this.userData.value.roles.includes(oneRole))) {
+        return false;
       }
     }
     return true;
@@ -95,6 +94,7 @@ export class AuthService {
     this.storage.remove(TOKEN_KEY).then(() => {
       this.userData.next(null);
       this.storage.clear();
+      this.userData.value.roles = null;
     });
   }
 
