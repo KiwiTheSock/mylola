@@ -159,7 +159,7 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   isLoggedIn(session: any) {
-    if (this.authService.getRole() == null || this.authService.getRole().email == null) {
+    if (this.authService.getRole() == null) {
       this.router.navigateByUrl('/login');
     } else {
       this.presentModal(session)

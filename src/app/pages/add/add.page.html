@@ -39,56 +39,73 @@
         </ion-col>
       </ion-row>
 
-      <!-- [(ngModel)] entfernen -->
       <!-- Title -->
       <ion-row class="title">
         <ion-col>
           <ion-input formControlName="titel" placeholder="Titel"></ion-input>
         </ion-col>
-        <!-- Error messages -->
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.titel">
-            <div class="error"
-              *ngIf="validations_add.get('titel').hasError(validation.type) && (validations_add.get('titel').dirty || validations_add.get('titel').touched)">
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
       </ion-row>
+
+      <!-- Error messages -->
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.titel">
+          <div class="error"
+            *ngIf="validations_add.get('titel').hasError(validation.type) && (validations_add.get('titel').dirty || validations_add.get('titel').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.titel.errors?.required">
+        Titel wird benötigt!
+      </span>
 
       <!-- Text -->
       <ion-row class="text">
         <ion-col>
           <ion-input formControlName="text" placeholder="Abrisstext"></ion-input>
         </ion-col>
-        <!-- Error messages -->
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.text">
-            <div class="error"
-              *ngIf="validations_add.get('text').hasError(validation.type) && (validations_add.get('text').dirty || validations_add.get('text').touched)">
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
       </ion-row>
+
+      <!-- Error messages -->
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.text">
+          <div class="error"
+            *ngIf="validations_add.get('text').hasError(validation.type) && (validations_add.get('text').dirty || validations_add.get('text').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.text.errors?.required">
+        Abrisstext wird benötigt!
+      </span>
 
       <!-- Beschreibung -->
       <ion-row class="description">
         <ion-col>
           <ion-item lines="none">
-            <ion-textarea formControlName="description" placeholder="Beschreibung"></ion-textarea>
-            <!-- Error messages -->
-            <div class="validation-errors">
-              <ng-container *ngFor="let validation of validation_messages.description">
-                <div class="error"
-                  *ngIf="validations_add.get('description').hasError(validation.type) && (validations_add.get('description').dirty || validations_add.get('description').touched)">
-                  {{ validation.message }}
-                </div>
-              </ng-container>
-            </div>
+            <textarea formControlName="description" placeholder="Beschreibung"></textarea>
           </ion-item>
         </ion-col>
       </ion-row>
+
+      <!-- Error messages -->
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.description">
+          <div class="error"
+            *ngIf="validations_add.get('description').hasError(validation.type) && (validations_add.get('description').dirty || validations_add.get('description').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.required">
+        Beschreibung wird benötigt!
+      </span>
 
       <!-- Time Span -->
       <ion-row>
@@ -117,6 +134,11 @@
           </div>
         </ng-container>
       </div>
+
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.starttime.errors?.required">
+        Startzeit wird benötigt!
+      </span>
 
       <ion-row>
         <ion-col>

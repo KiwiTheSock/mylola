@@ -25,21 +25,22 @@ export class AddPage implements OnInit {
 
   validation_messages = {
     'titel': [
-      { type: 'required', message: 'Title is required.' },
-      { type: 'minlength', message: 'Title must be at least 5 characters long.' },
-      { type: 'maxlength', message: 'Title cannot be more than 35 characters long.' }
+      { type: 'required', message: 'Titel wird benötigt.' },
+      { type: 'maxlength', message: 'Titel ist zu lang (max. 35 Zeichen).' }
     ],
     'text': [
-      { type: 'required', message: 'Abrisstext is required.' }
+      { type: 'required', message: 'Abrisstext wird benötigt.' },
+      { type: 'maxlength', message: 'Abrisstext ist zu lang (max. 20 Zeichen).' }
     ],
     'description': [
-      { type: 'required', message: 'Beschreibung is required.' },
+      { type: 'required', message: 'Beschreibung wird benötigt.' },
+      { type: 'maxlength', message: 'Beschreibung ist zu lang (max. 2000 Zeichen).' }
     ],
     'starttime': [
-      { type: 'required', message: 'Starttime is required.' },
+      { type: 'required', message: 'Startzeit wird benötigt.' },
     ],
     'endtime': [
-      { type: 'required', message: 'Endtime is required.' },
+      { type: 'required', message: 'Endzeit wird benötigt.' },
     ]
   }
 
@@ -73,12 +74,17 @@ export class AddPage implements OnInit {
 
     this.titel = new FormControl('', Validators.compose([
       Validators.maxLength(35),
-      Validators.minLength(5),
       Validators.required
     ]));
-    this.text = new FormControl('', Validators.required),
-      this.description = new FormControl('', Validators.required),
-      this.starttime = new FormControl('', Validators.required),
+    this.text = new FormControl('', Validators.compose([
+      Validators.maxLength(20),
+      Validators.required
+    ]));
+    this.description = new FormControl('', Validators.compose([
+      Validators.maxLength(2000),
+      Validators.required
+    ]));
+    this.starttime = new FormControl('', Validators.required),
       this.endtime = new FormControl('', Validators.required),
 
       this.validations_add = this.formBuilder.group({

@@ -126,7 +126,7 @@ export class HomePage implements OnInit {
     }
 
     var customer = {
-      "username": "Luchs"
+      "street": "Straße"
     }
 
     var company = {

@@ -74,12 +74,20 @@
       </ion-col>
     </ion-row>
 
-    <!-- Button -->
+    <!-- Button --> 
     <ion-row>
       <ion-col col-12 *ngIf="session" class="buttons" (click)="isLoggedIn(session)">
         <ion-button><b>{{session.button}}</b></ion-button>
       </ion-col>
     </ion-row>
+    
+    <!--
+    <ion-row>
+      <ion-col col-12 *ngIf="session" class="buttons">
+        <ion-button color="dark" disabled="true"><b>{{session.button}}</b></ion-button>
+      </ion-col>
+    </ion-row>
+    -->
 
     <!-- Pictures -->
     <ion-row>

@@ -18,7 +18,6 @@
           <ion-slide>
             <ngx-qrcode [elementType]="elementType" [value]="value" cssClass="aclass" errorCorrectionLevel="L">
             </ngx-qrcode>
-            <!--<p>{{this.value}}</p>  [bc-display-value]="true"-->
           </ion-slide>
 
           <!-- Barcode -->
@@ -26,7 +25,14 @@
             <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="value" [bc-display-value]="false" [bc-width]="0.75">
             </ngx-barcode6>
           </ion-slide>
-      
+
+          <!-- Numericcode -->
+          <ion-slide>
+            <div class="value">
+              <p><b>{{value}}</b></p>
+            </div>
+          </ion-slide>
+
         </ion-slides>
 
         <!-- Arrows -->

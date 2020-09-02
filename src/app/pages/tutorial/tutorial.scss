@@ -11,9 +11,23 @@ ion-toolbar {
   margin-top: 2.8rem;
 }
 
-.slide-image {
+.slide-image-first {
   max-height: 50%;
   max-width: 60%;
+  margin: 36px 0;
+  pointer-events: none;
+}
+
+.slide-image-second {
+  min-height: 50%;
+  min-width: 60%;
+  margin: 36px 0;
+  pointer-events: none;
+}
+
+.slide-image-third {
+  height: 50%;
+  width: 50%;
   margin: 36px 0;
   pointer-events: none;
 }
@@ -32,4 +46,3 @@ p {
     color: var(--ion-text-color, #000000);
   }
 }
-
