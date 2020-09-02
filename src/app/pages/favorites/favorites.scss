@@ -40,6 +40,10 @@
   margin-bottom: -10px;
 }
 
+.first-row.ios {
+  margin-bottom: 0px;
+}
+
 /* Logo
  * --------------------------------------------------------
  */
@@ -156,6 +160,7 @@
   --ripple-color: transparent;
   width: 25px;
   height: 25px;
+  color: var(--ion-color-medium);
 }
 
 .icons #button2 .ios {
@@ -163,6 +168,7 @@
   --ripple-color: transparent;
   width: 25px;
   height: 25px;
+  color: var(--ion-color-medium);
 }
 
 /* Title
@@ -243,6 +249,14 @@
   ion-img {
     width: 25px;
     margin-left: 1px;
+  }
+
+  ion-button.ios {
+    --background-activated: none;
+  }
+
+  ion-fab-button.ios {
+    --background-activated: none;
   }
 }
 

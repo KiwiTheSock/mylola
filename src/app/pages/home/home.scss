@@ -266,6 +266,10 @@
     width: 25px;
     margin-left: 1px;
   }
+
+  ion-fab-button.ios {
+    --background-activated: none;
+  }
 }
 
 .filter2 {
@@ -275,12 +279,12 @@
 
 .button-center {
   text-align: center;
+
 }
 
 /* Fab-Button
  * --------------------------------------------------------
  */
-
 .fab {
   margin-bottom: 10px;
   margin-right: 10px;
@@ -289,7 +293,6 @@
 /* List
  * --------------------------------------------------------
  */
-
 .list {
   max-width: 650px;
   margin: auto;

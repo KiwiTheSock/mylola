@@ -46,7 +46,7 @@ export class DetailPage {
   show = false;
 
   //Share Data
-  text: string = 'Mylola ... teilen ... bla bla';
+  text: string = 'Mylola';
   link: string = 'https://www.mylola.de/';
 
   constructor(
@@ -212,30 +212,30 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   async openContact(session: any) {
-    const mode = 'ios'; // this.config.get('mode');
+    const mode = this.ios; 
 
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Kontaktiere ' + session.name,
       buttons: [
         {
-          text: `Webseite ( ${session.website} )`,
-          icon: mode !== 'ios' ? 'website' : null,
+          text: `Webseite (${session.website})`,
+          icon: !mode ? 'website' : null,
           handler: () => {
             //window.open(session.website);
             this.launchBrowser(session.website);
           }
         },
         {
-          text: `Mail ( ${session.mail} )`,
-          icon: mode !== 'ios' ? 'mail' : null,
+          text: `Mail (${session.mail})`,
+          icon: !mode ? 'mail' : null,
           handler: () => {
             //window.open('mailto:' + session.mail);
             this.sendEmail(session.mail);
           }
         },
         {
-          text: `Anrufen ( ${session.phone} )`,
-          icon: mode !== 'ios' ? 'call' : null,
+          text: `Anrufen (${session.phone})`,
+          icon: !mode ? 'call' : null,
           handler: () => {
             window.open('tel:' + session.phone);
           }

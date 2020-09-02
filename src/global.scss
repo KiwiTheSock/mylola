@@ -102,3 +102,22 @@ ion-tab-button {
   --color-selected: none;
   --ripple-color: none;
 }
+
+/* Modal
+ * --------------------------------------------------------
+ */
+.action-sheet-button.sc-ion-action-sheet-ios {
+  color: black !important;
+}
+
+/* Buttons
+ * --------------------------------------------------------
+ */
+ion-button.ios {
+  --background-activated: none;
+}
+
+ion-fab-button.ios {
+  --background-activated: none;
+  --ripple-color: none;
+}
