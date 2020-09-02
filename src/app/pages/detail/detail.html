@@ -4,7 +4,8 @@
 
     <!-- Back Button -->
     <ion-buttons slot="start">
-      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+      <ion-back-button *ngIf="ios" [defaultHref]="defaultHref" text="Zurück"></ion-back-button>
+      <ion-back-button *ngIf="!ios" [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
 
     <!-- Title -->

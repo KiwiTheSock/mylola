@@ -14,6 +14,18 @@
   height: 50px;
 }
 
+.menu.ios {
+  width: 30px;
+  height: 30px;
+  color: var(--ion-color-medium);
+}
+
+.search.ios {
+  width: 20px;
+  height: 20px;
+  color: var(--ion-color-medium);
+}
+
 /* Item
  * --------------------------------------------------------
  */
@@ -27,6 +39,10 @@
  */
 .first-row {
   margin-bottom: -10px;
+}
+
+.first-row.ios {
+  margin-bottom: 0px;
 }
 
 /* Logo
@@ -63,9 +79,9 @@
 /* Image
  * --------------------------------------------------------
  */
-.used{
+.used {
   opacity: 0.4;
-  filter: alpha(opacity=40); 
+  filter: alpha(opacity=40);
 }
 
 /* Tear-off
@@ -156,11 +172,32 @@
   --ripple-color: transparent;
 }
 
+.icons #button1 .ios {
+  --ripple-color: transparent;
+  width: 25px;
+  height: 25px;
+  color: var(--ion-color-medium);
+}
+
+.icons #button2 .ios {
+  margin-left: 10px;
+  --ripple-color: transparent;
+  width: 25px;
+  height: 25px;
+  color: var(--ion-color-medium);
+}
+
 /* Title
  * --------------------------------------------------------
  */
 .title {
   margin-top: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title.ios {
+  margin-top: 6px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -176,6 +213,13 @@
 .time {
   font-size: 10px;
   margin-top: 6.5px;
+  max-width: 80px;
+  right: -5px;
+}
+
+.time.ios {
+  font-size: 10px;
+  margin-top: -2px;
   max-width: 80px;
   right: -5px;
 }

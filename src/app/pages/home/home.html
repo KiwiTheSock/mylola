@@ -10,7 +10,7 @@
     </ion-buttons>
 
     <!-- Mylola -->
-    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" *ngIf="!ios && !showSearchbar"></ion-img>
+    <ion-img class="mylola" src="..\assets\img\mylola\mylola_logo.png" *ngIf="!showSearchbar"></ion-img>
 
 
     <!-- Search Function -->
@@ -19,8 +19,8 @@
 
     <!-- Search Icon -->
     <ion-buttons slot="end">
-      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
-        <ion-icon slot="icon-only" name="search"></ion-icon>
+      <ion-button *ngIf="!showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search" class="search"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

@@ -1,7 +1,7 @@
 /* Title
  * --------------------------------------------------------
  */
- .title{
+.title {
   position: absolute;
   top: 0;
   left: 0;
@@ -12,8 +12,8 @@
 
   font-family: Segoe_UI_Bold;
   font-size: 24px;
-  
- }
+
+}
 
 /* Profile and Backgound Images
  * --------------------------------------------------------
@@ -48,7 +48,7 @@
   --box-shadow: none;
   --ripple-color: transparent;
 
-  ion-icon{
+  ion-icon {
     width: 28px;
     height: 28px;
   }
@@ -57,17 +57,17 @@
 /* Icons
  * --------------------------------------------------------
  */
-.icons{
+.icons {
   padding-left: 10px;
 
-  ion-button{
+  ion-button {
     --background: --ion-background-color;
     --color: --ion-text-color;
     --box-shadow: none;
     --ripple-color: transparent;
     margin-right: -20px;
-  
-    ion-icon{
+
+    ion-icon {
       width: 28px;
       height: 28px;
     }
@@ -76,8 +76,8 @@
 
 /* Time
  * --------------------------------------------------------
- */ 
-.time{
+ */
+.time {
   float: right;
   margin-right: 15px;
   margin-bottom: -10px;
@@ -88,19 +88,19 @@
 /* Text
  * --------------------------------------------------------
  */
-.text{
+.text {
   white-space: pre-line;
   word-wrap: break-word;
   margin-left: 30px;
   margin-right: 30px;
 }
 
-.text h5{
+.text h5 {
   font-family: Segoe_UI_Bold;
   font-size: 18px;
 }
 
-.text p{
+.text p {
   font-family: Segoe_UI;
   font-size: 15px;
 }
@@ -108,7 +108,7 @@
 /* Button
  * --------------------------------------------------------
  */
-.buttons{
+.buttons {
   text-align: center;
   height: 50px;
   margin-bottom: 20px;
@@ -117,22 +117,22 @@
 /* Location
  * --------------------------------------------------------
  */
-.location{
+.location {
   text-align: center;
 }
 
-.location h4{
+.location h4 {
   color: var(--ion-color-primary);
   font-family: Segoe_UI;
   font-size: 24px;
 }
 
-.location p{
+.location p {
   font-family: Segoe_UI;
   line-height: 0.5;
 }
 
-.red{
+.red {
   color: var(--ion-color-primary);
 }
 
@@ -140,10 +140,10 @@
 /* Social Media
  * --------------------------------------------------------
  */
- .social-media{
+.social-media {
   text-align: center;
   margin-bottom: 20px;
- }
+}
 
 /* Map
  * --------------------------------------------------------
@@ -161,13 +161,13 @@
  * --------------------------------------------------------
  */
 
-.opening{
+.opening {
   text-align: center;
   margin-bottom: 60px;
   font-family: Segoe_UI;
 }
 
-.opening h4{
+.opening h4 {
   color: var(--ion-color-primary);
 }
 
@@ -175,7 +175,7 @@
   line-height: 0.5;
 }
 
-.content{
+.content {
   max-width: 650px;
   margin: auto;
 }

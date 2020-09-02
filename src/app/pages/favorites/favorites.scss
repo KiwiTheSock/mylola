@@ -14,6 +14,18 @@
   height: 50px;
 }
 
+.menu.ios {
+  width: 30px;
+  height: 30px;
+  color: var(--ion-color-medium);
+}
+
+.search.ios {
+  width: 20px;
+  height: 20px;
+  color: var(--ion-color-medium);
+}
+
 /* Item
  * --------------------------------------------------------
  */
@@ -140,11 +152,30 @@
   margin-left: -15px;
 }
 
+.icons #button1 .ios {
+  --ripple-color: transparent;
+  width: 25px;
+  height: 25px;
+}
+
+.icons #button2 .ios {
+  margin-left: 10px;
+  --ripple-color: transparent;
+  width: 25px;
+  height: 25px;
+}
+
 /* Title
  * --------------------------------------------------------
  */
 .title {
   margin-top: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title.ios {
+  margin-top: 6px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -160,6 +191,13 @@
 .time {
   font-size: 10px;
   margin-top: 6.5px;
+  max-width: 80px;
+  right: -5px;
+}
+
+.time.ios {
+  font-size: 10px;
+  margin-top: -2px;
   max-width: 80px;
   right: -5px;
 }

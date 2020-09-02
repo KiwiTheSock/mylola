@@ -30,7 +30,7 @@ export class AuthService {
     this.user = this.userData.asObservable().pipe(
       filter(response => response)
     );
-    
+
   }
 
   loadUser() {
@@ -55,7 +55,7 @@ export class AuthService {
         return res;
       }),
       switchMap((token: string) => {
-        
+
         let token_stringify = JSON.stringify(token);
         let t = token_stringify.split("\"");
 
@@ -68,7 +68,7 @@ export class AuthService {
   }
 
   //API Call
-  register(register){
+  register(register) {
     return this.apiService.register(register);
   }
 
@@ -81,9 +81,11 @@ export class AuthService {
   }
 
   hasRoles(roles: string): boolean {
-    for (const oneRole of roles) {
-      if (!this.userData.value.roles || !(this.userData.value.roles.includes(oneRole))) {
-        return false;
+    if (this.userData.value) {
+      for (const oneRole of roles) {
+        if (!this.userData.value.roles || !(this.userData.value.roles.includes(oneRole))) {
+          return false;
+        }
       }
     }
     return true;

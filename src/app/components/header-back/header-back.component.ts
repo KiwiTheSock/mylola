@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-header-back',
@@ -7,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderBackComponent implements OnInit {
 
+  ios: boolean;
   defaultHref = "";
 
-  constructor() { }
+  constructor(
+    private platform: Platform
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.platform.platforms().includes("ios")){
+      this.ios = true;
+    }
+    else {
+      this.ios = false;
+    }
+  }
 
 }

@@ -31,6 +31,8 @@ declare var google: any;
 })
 export class DetailPage {
 
+  ios: boolean;
+
   //Map
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
   map: any;
@@ -62,6 +64,15 @@ export class DetailPage {
     public toastController: ToastController,
     private darkmode: Darkmode
   ) { }
+
+  ngOnInit() {
+    if (this.platform.platforms().includes("ios")) {
+      this.ios = true;
+    }
+    else {
+      this.ios = false;
+    }
+  }
 
   ionViewWillEnter() {
     this.dataProvider.load().subscribe((data: any) => {
