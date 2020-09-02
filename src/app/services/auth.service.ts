@@ -82,12 +82,14 @@ export class AuthService {
 
   hasRoles(roles: string): boolean {
 
-    for (const oneRole of roles) {
-      if (!this.userData.value.roles || !(this.userData.value.roles.includes(oneRole))) {
-        return false;
+    if (this.userData.value != null) {
+      for (const oneRole of roles) {
+        if (!this.userData.value.roles || !(this.userData.value.roles.includes(oneRole))) {
+          return false;
+        }
       }
+      return true;
     }
-    return true;
   }
 
   logout() {

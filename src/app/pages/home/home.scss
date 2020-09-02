@@ -160,7 +160,6 @@
  */
 .icons {
   max-width: 80px;
-
 }
 
 .icons #button1 {
@@ -265,6 +264,10 @@
   ion-img {
     width: 25px;
     margin-left: 1px;
+  }
+
+  ion-button.ios {
+    --background-activated: none;
   }
 
   ion-fab-button.ios {

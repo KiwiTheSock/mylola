@@ -152,8 +152,13 @@
   max-width: 80px;
 }
 
+.icons #button1 {
+  --ripple-color: transparent;
+}
+
 .icons #button2 {
   margin-left: -15px;
+  --ripple-color: transparent;
 }
 
 .icons #button1 .ios {
