@@ -10,7 +10,7 @@
     </ion-buttons>
 
     <!-- Mylola -->
-    <ion-img class="mylola" src=".\assets\img\mylola\mylola_logo.png" *ngIf="!showSearchbar"></ion-img>
+    <ion-img class="mylola" src="./assets/img/mylola/mylola_logo.png" *ngIf="!showSearchbar"></ion-img>
 
     <!-- Search Function -->
     <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText"
@@ -106,7 +106,7 @@
             <!-- Logo -->
             <ion-col col-4 class="logo">
               <ion-avatar *ngIf="session">
-                <ion-img src=".\assets\img\logo\{{session.logo}}"></ion-img>
+                <ion-img src="./assets/img/logo/{{session.logo}}"></ion-img>
               </ion-avatar>
             </ion-col>
 
@@ -124,10 +124,10 @@
 
             <!-- Picture and Tear-off -->
             <ion-col col-12 *ngIf="session">
-              <ion-img src=".\assets\img\add\{{session.add}}" routerLink="/app/tabs/favorites/detail/{{session.id}}">
+              <ion-img src="./assets/img/add/{{session.add}}" routerLink="/app/tabs/favorites/detail/{{session.id}}">
               </ion-img>
               <div class="tear-off">
-                <ion-img src=".\assets\img\mylola\Abrissecke_rund.png"
+                <ion-img src="./assets/img/mylola/Abrissecke_rund.png"
                   routerLink="/app/tabs/home/detail/{{session.id}}"></ion-img>
                 <p class="">{{session.addtext}}</p>
               </div>
@@ -170,10 +170,10 @@
 
             <!-- Separation -->
             <ion-col col-12 *ngIf="darkmode.dark">
-              <ion-img src=".\assets\img\mylola\Trennung_dunkel.png"></ion-img>
+              <ion-img src="./assets/img/mylola/Trennung_dunkel.png"></ion-img>
             </ion-col>
             <ion-col col-12 *ngIf="!darkmode.dark">
-              <ion-img src=".\assets\img\mylola\Trennung_hell.png"></ion-img>
+              <ion-img src="./assets/img/mylola/Trennung_hell.png"></ion-img>
             </ion-col>
 
           </ion-row>
