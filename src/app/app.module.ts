@@ -30,6 +30,7 @@ import { ModalCouponPageModule } from './pages/modal-coupon/modal-coupon.module'
 import { NgCalendarModule } from 'ionic2-calendar'; 
 import { Refresher } from './services/refresher';
 import { SharedModule } from './directives/shared.module';
+import {HidenavModule} from '../app/hidenav/hidenav.module';//'./hidenav/hidenav.module';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { SharedModule } from './directives/shared.module';
     NgCalendarModule,
     ReactiveFormsModule,
     SharedModule,
+    HidenavModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
   ],
