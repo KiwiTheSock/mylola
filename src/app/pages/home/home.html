@@ -28,7 +28,7 @@
   <!-- Filter -->
   <!-- <app-filter></app-filter> -->
 
-  <ion-toolbar #header class="bg-filter">
+  <ion-toolbar>
     <ion-grid class="filter">
       <ion-row>
         <ion-col>
@@ -65,7 +65,11 @@
           </div>
         </ion-col>
       </ion-row>
+    </ion-grid>
+  </ion-toolbar>
 
+  <ion-toolbar #header class="bg-filter">
+    <ion-grid>
       <ion-row class="filter2">
         <ion-col>
           <div class="button-center">
@@ -124,17 +128,17 @@
 
             <!-- Picture and Tear-off -->
             <ion-col col-12 *ngIf="session">
-              
+
               <ion-img src="./assets/img/add/{{session.add}}" routerLink="/app/tabs/home/detail/{{session.id}}">
               </ion-img>
-              
+
               <div class="tear-off">
                 <ion-img src="./assets/img/mylola/Abrissecke_rund.png"
                   routerLink="/app/tabs/home/detail/{{session.id}}"></ion-img>
                 <p class="">{{session.addtext}}</p>
               </div>
             </ion-col>
-            
+
             <!-- 
             <ion-col col-12 *ngIf="session" class="used">
               
@@ -149,7 +153,7 @@
 
             </ion-col>
             -->
-            
+
           </ion-row>
 
           <!-- Third Row -->
