@@ -73,7 +73,6 @@ export class EventsPage {
   addEvents() {
     
     this.apiService.getCouponById(1).subscribe((res: any) => {
-      console.log(res);
       this.startDate = res.startDate;
       this.endDate = res.endDate;
     })
