@@ -10,7 +10,6 @@ import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home';
 import { HomePageRoutingModule } from './home-routing.module';
 import { SharedModule } from '../../directives/shared.module';
-import { HidenavModule } from '../../hidenav/hidenav.module';
 
 @NgModule({
   imports: [
@@ -18,8 +17,7 @@ import { HidenavModule } from '../../hidenav/hidenav.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SharedModule,
-    HidenavModule
+    SharedModule
   ],
   declarations: [
     HomePage,

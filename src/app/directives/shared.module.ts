@@ -4,7 +4,6 @@ import { HideHeaderDirective } from './hide-header.directive';
 import { HasRoleDirective } from './has-role.directive';
 import { TimePipe } from './time-pipe.directive';
 
-
 @NgModule({
     declarations: [
         HasRoleDirective,

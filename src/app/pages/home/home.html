@@ -1,18 +1,5 @@
 <!-- Header -->
-<!--
-<ion-header hidenav-header>
-  <ion-toolbar class="xd">
-      <ion-buttons slot="start">
-          <ion-back-button [routerLink]="'..'"></ion-back-button>
-      </ion-buttons>
-      <ion-title>
-          Ionic Blank
-      </ion-title>
-  </ion-toolbar>
-</ion-header>
--->
-
-<ion-header hidenav-header>
+<ion-header>
   <ion-toolbar>
 
     <!-- Sidemenu -->
@@ -41,8 +28,8 @@
   <!-- Filter -->
   <!-- <app-filter></app-filter> -->
 
-  <ion-toolbar #header class="bg-filter" class="filter">
-   <ion-grid>
+  <ion-toolbar #header class="bg-filter">
+    <ion-grid class="filter">
       <ion-row>
         <ion-col>
           <div>
@@ -80,7 +67,6 @@
       </ion-row>
 
       <ion-row class="filter2">
-     
         <ion-col>
           <div class="button-center">
             <ion-button #fifth color="danger" (click)="btnActivate(fifth, '5')">In der Nähe</ion-button>
@@ -98,7 +84,7 @@
 </ion-header>
 
 <!-- Content -->
-<ion-content fullscreen="true" [scrollEvents]="true" hidenav-content> <!-- [header]="header" -->
+<ion-content fullscreen="true" [scrollEvents]="true" appHideHeader [header]="header">
 
   <!-- Refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="refresh()">
@@ -148,7 +134,8 @@
                 <p class="">{{session.addtext}}</p>
               </div>
             </ion-col>
-            <!--
+            
+            <!-- 
             <ion-col col-12 *ngIf="session" class="used">
               
               <ion-img src="./assets/img/add/{{session.add}}" routerLink="/app/tabs/home/detail/{{session.id}}">

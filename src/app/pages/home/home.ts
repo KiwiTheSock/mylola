@@ -1,9 +1,9 @@
 //Angular
-import { Component, ViewChild, OnInit, Renderer2, Input, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, Renderer2, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 //Ionic
-import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll, Platform, IonContent, IonHeader } from '@ionic/angular';
+import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll, Platform } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 
 //Ionic-Native
@@ -82,36 +82,6 @@ export class HomePage implements OnInit {
   ) {
     this.data = [];
   }
-
-  @ViewChild(IonContent) content: IonContent;
-  @ViewChild(IonContent, {read: ElementRef}) contentElem: ElementRef;
-  @ViewChild(IonHeader, {read: ElementRef}) header: ElementRef;
-
-  scrollTop = 0;
-  lastscroll = 0;
-  direction = '';
-  navheight = 0;
-  tapping = false;
-  scrolling = false;
-
-  private c() {
-    if(this.tapping || this.scrolling)
-        return false;
-    if (this.scrollTop == 0 || this.scrollTop == this.navheight)
-        return false;
-    let content = this.content;
-    let scrollTopTemp = this.scrollTop;
-        if (this.direction == 'down') {
-            if (this.scrollTop < this.navheight) {
-                content.scrollByPoint(0, (this.navheight - scrollTopTemp), (this.navheight - scrollTopTemp) * 6);
-            }
-        } else if (this.direction == 'up') {
-            if (this.scrollTop < this.navheight) {
-                content.scrollByPoint(0, -scrollTopTemp, scrollTopTemp * 6);
-
-            }
-        }
-}
 
   ngOnInit() {
     this.updateSchedule();
