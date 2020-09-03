@@ -2,9 +2,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
-//Ionic
-import { Storage } from '@ionic/storage';
-
 //Others
 import { throwError, from, BehaviorSubject } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -18,12 +15,11 @@ export class ApiService {
   base_path = 'http://srv06-dev.mindq.kunden.openroot.de:8088';
 
   //Token
-  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTkwNzE5OTQsImV4cCI6MTU5OTA3NTU5NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiS2V2aW4ifQ.HsUJrI_fhyVj5bbGauoXCG3XzZKWHScYBL8F5ALSnEBcBN8piQpBr405gxGevSBoilT1giov6fVaNkGcyHS7sW0fzswgeZ33OlC5slsuBuNSSLwnR1gxgfCq_siBkWdbEn_ZTT81KOfjwwawEmGHmSnMi3fR5YkdpHmuTYZTD0h2iScmYFWZE08ZFQ1sFTegK2bBwcFW4C5v4IvhTEYGTk-9OLoHZ41tTEvRC20dbuu18RSrN_McDI4HbsH-26dhXVmFwMiin3sW4wiWfGjBp_gHKB6969XNSaY55dnQns-NH7_RzyvmkfMgOblwyfrjr4SdPGfMPH-5NK4S_vUJ8v6Eko0fzpM-sqxy6YqVBo7tcvT__v4uJwNwqB8xU34q2ubKNBVH--_GgPAmlWflnP1ZeNvCxKFVPqC9H5BnrqFZlV3PQLpTN8yyV-yLVsI9T6ZOsjxf-7-mCMbSAcDI9rMcJALXf_DM-H3Mdao6dKCiDLreM7xhzbG7e8zUWkm4JGu6Ou1MCRuSsmWN_0qecKx6TortrPF_9WpPWNuTaEyFL1Ee2KGEz7YWb81pIv3-aRPXbvWsLZY2HIeIKGOsnz-oaNUDpfZLizFdmtboQY3_ZRd9sc8nYUksa33hQHq93nmcGKx8EyUbMY5HJFMCS2k6NKohVPdBOn5MRQBkIVYeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTkwNzE5OTQsImV4cCI6MTU5OTA3NTU5NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiS2V2aW4ifQ.HsUJrI_fhyVj5bbGauoXCG3XzZKWHScYBL8F5ALSnEBcBN8piQpBr405gxGevSBoilT1giov6fVaNkGcyHS7sW0fzswgeZ33OlC5slsuBuNSSLwnR1gxgfCq_siBkWdbEn_ZTT81KOfjwwawEmGHmSnMi3fR5YkdpHmuTYZTD0h2iScmYFWZE08ZFQ1sFTegK2bBwcFW4C5v4IvhTEYGTk-9OLoHZ41tTEvRC20dbuu18RSrN_McDI4HbsH-26dhXVmFwMiin3sW4wiWfGjBp_gHKB6969XNSaY55dnQns-NH7_RzyvmkfMgOblwyfrjr4SdPGfMPH-5NK4S_vUJ8v6Eko0fzpM-sqxy6YqVBo7tcvT__v4uJwNwqB8xU34q2ubKNBVH--_GgPAmlWflnP1ZeNvCxKFVPqC9H5BnrqFZlV3PQLpTN8yyV-yLVsI9T6ZOsjxf-7-mCMbSAcDI9rMcJALXf_DM-H3Mdao6dKCiDLreM7xhzbG7e8zUWkm4JGu6Ou1MCRuSsmWN_0qecKx6TortrPF_9WpPWNuTaEyFL1Ee2KGEz7YWb81pIv3-aRPXbvWsLZY2HIeIKGOsnz-oaNUDpfZLizFdmtboQY3_ZRd9sc8nYUksa33hQHq93nmcGKx8EyUbMY5HJFMCS2k6NKohVPdBOn5MRQBkIVY';
+  token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTkxMzg3NDksImV4cCI6MTU5OTE0MjM0OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiS2V2aW4ifQ.FsxUX-lF7NbYu_pOCiEM0Ozy4MysFlnPkz7YtpeClsO_digeMrp7Ef_5WKQ5bjWJTQjD_--mmzHtqnPSfRNtMeJCnG82B8Aa4bo52DMfe0Rc6REWcRICjohq6QlarKmGS5lOP-djZg5-Pv_TgTCW2GaT3Tj-JY9VJe6av6pVNfzOxurkuGfGX7VldwE076SQDIA28YCfZIkYTj5OFgpAbZlBavZtTeETc0EJN_LVNFJuZb9hgrWCCwP1Au3hRaIZKqDOd2PDziu8WdKm7fKr_Xer_PAiRywGVZyIJtOIZOQ-Frnf-xcOFCK1eKC87ianaXYpw6FTuGqGSUZ4dhesudmNwaaq51zwDmD0W3URbwWdlbzserlKxwfKcY7l-MFoZNoitbi6E32QdSTbpdkflI-a9Ag_KaX1pT4-QxVB6HDWpVebYhnlMNPRgx209qmigZ1fhJQ39V6mnygusnI5FQ6_O_dN1E2-Zo_bJ15ZYNYt-8FDHe-OrS0m8t6gJpSyHX6YAMECzAIrcMeDLzhIndOGSzGLgX_Dudp0Dp9ioC8SebMOp0HskZiqgA1VOCSxwt99QD2E9y9I5psDeDV6Mu5zXk1hMmSQuL-Grx533ZGdDFUGcdE26UlYjEFVTcpjE4kt5zK7GkrEXx_KcdwWncdPlSS-23xm7PjoXKmsUhc';
   //token: any;
 
   constructor(
-    private httpClient: HttpClient,
-    private storage: Storage,
+    private httpClient: HttpClient
   ) { }
 
   /* Http Options
@@ -51,7 +47,7 @@ export class ApiService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
 
-      //console.error("Error as String: ", JSON.stringify(error));
+      console.error("Error as String: ", JSON.stringify(error));
     }
     // return an observable with a user-facing error message
     return throwError(
@@ -315,7 +311,7 @@ export class ApiService {
   //Params: path = '/api/url', id: number, item: array
   updateURL(id: number, item) {
     return this.httpClient
-      .put(this.base_path + '/api/url' + id, JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/url/' + id, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

@@ -1,62 +1,69 @@
 /* Mylola
  * --------------------------------------------------------
  */
- .mylola{
-    height: 20px;
-    margin: auto;
-    margin-right: 30px;
-  }
+.mylola {
+  height: 20px;
+  margin: auto;
+  margin-right: 30px;
+}
 
 /* Content
  * --------------------------------------------------------
  */
-  .content {
-    padding-top: 50px;
-    max-width: 650px;
-    margin: auto;
-    text-align: center;
-  }
+.content {
+  padding-top: 50px;
+  max-width: 650px;
+  margin: auto;
+  text-align: center;
+}
 
 /* ion-label
  * --------------------------------------------------------
- */  
-  .label {
-    width: 130px; 
-   }
- 
+ */
+.label {
+  width: 130px;
+}
+
 /* ion-input
  * --------------------------------------------------------
  */
-   ion-input {
-     border-radius: 5px !important;
-     border: 1px solid var(--ion-color-medium-shade) !important;
-     max-width: 50vw; 
-     max-height: 10vh;
-     --placeholder-opacity: 1;
-     border-bottom-color: transparent;
-   }
+ion-input {
+  border-radius: 5px !important;
+  border: 1px solid var(--ion-color-medium-shade) !important;
+  max-width: 50vw;
+  max-height: 10vh;
+  --placeholder-opacity: 1;
+  border-bottom-color: transparent;
+}
 
 /* ion-datetime
  * --------------------------------------------------------
  */
-   ion-datetime  {
-     border-radius: 5px !important;
-     margin-left: 20px;
-     border: 1px solid var(--ion-color-medium-shade) !important;
-     width: 75px;
-   }
+ion-datetime {
+  border-radius: 5px !important;
+  margin-left: 20px;
+  border: 1px solid var(--ion-color-medium-shade) !important;
+  width: 75px;
+}
 
 /* p
  * --------------------------------------------------------
  */
-   p {
-     width: 110px;
-   }
- 
+p {
+  width: 110px;
+}
+
 /* Button
  * --------------------------------------------------------
  */
-   .save {
-     margin-top: 20px;
-     margin-bottom: 20px;
-   }
+.save {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Error messages
+ * --------------------------------------------------------
+ */
+.error {
+  color: red;
+}

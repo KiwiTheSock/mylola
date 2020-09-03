@@ -4,124 +4,167 @@
 <!-- Content -->
 <ion-content fullscreen="true">
   <ion-grid class="content">
+    <form [formGroup]="validation_detail" (ngSubmit)="submitForm()">
 
-    <!-- Title Image -->
-    <ion-item-divider>
-      <ion-label>
-        Couponbild
-      </ion-label>
-    </ion-item-divider>
+      <!-- Title Image -->
+      <ion-item-divider>
+        <ion-label>
+          Couponbild
+        </ion-label>
+      </ion-item-divider>
 
-    <ion-row>
-      <ion-col col-12 class="ion-padding-top ion-text-center">
-        <div>
-          <img [src]="croppedImage">
-        </div>
-        <ion-button fill="outline" shape="round" (click)="picture()">
-          Couponbild ändern
-        </ion-button>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col col-12 class="ion-padding-top ion-text-center">
+          <div>
+            <img [src]="croppedImage">
+          </div>
+          <ion-button fill="outline" shape="round" (click)="picture()">
+            Couponbild ändern
+          </ion-button>
+        </ion-col>
+      </ion-row>
 
-    <!-- Name -->
-    <ion-item-divider>
-      <ion-label>
-        Titel
-      </ion-label>
-    </ion-item-divider>
+      <!-- Name -->
+      <ion-item-divider>
+        <ion-label>
+          Kategorie
+        </ion-label>
+      </ion-item-divider>
 
-    <ion-row>
-      <ion-col class="ion-padding-top ion-text-center">
-        <ion-item lines="none">
-          <ion-label class="label"><b>Titel</b></ion-label>
-          <ion-input maxLength="50" [(ngModel)]="title" value="{{title}}" required></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <!-- Category -->
+      <ion-row class="category">
+        <ion-col>
+          <ion-item lines="none">
+            <ion-select formControlName="category" value="{{getCategory()}}" placeholder="{{getCategory()}}" okText="Fertig" cancelText="Abbrechen">
+              <ion-select-option value="Gastro & Nightlife">Gastro & Nightlife</ion-select-option>
+              <ion-select-option value="Shopping">Shopping</ion-select-option>
+              <ion-select-option value="Freizeit & Erleben">Freizeit & Erleben</ion-select-option>
+              <ion-select-option value="Dienstleistungen">Dienstleistungen</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <!-- Text -->
-    <ion-item-divider>
-      <ion-label>
-        Abrisstext
-      </ion-label>
-    </ion-item-divider>
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.category.errors?.required">
+        Kategorie wird benötigt!
+      </span>
 
-    <ion-row>
-      <ion-col class="ion-padding-top ion-text-center">
+      <!-- Name -->
+      <ion-item-divider>
+        <ion-label>
+          Titel
+        </ion-label>
+      </ion-item-divider>
 
-        <ion-item lines="none">
-          <ion-label class="label"><b>Abrisstext</b></ion-label>
-          <ion-input maxLength="50" [(ngModel)]="text" value="{{text}}" required></ion-input>
-        </ion-item>
+      <ion-row>
+        <ion-col class="ion-padding-top ion-text-center">
+          <ion-item lines="none">
+            <ion-input formControlName="titel" value="{{titel}}" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-      </ion-col>
-    </ion-row>
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.titel.errors?.required">
+        Titel wird benötigt.
+      </span>
 
-    <!-- Description -->
-    <ion-item-divider>
-      <ion-label>
-        Beschreibung
-      </ion-label>
-    </ion-item-divider>
+      <!-- Text -->
+      <ion-item-divider>
+        <ion-label>
+          Abrisstext
+        </ion-label>
+      </ion-item-divider>
 
-    <ion-row>
-      <ion-col class="ion-padding-top ion-text-center">
+      <ion-row>
+        <ion-col class="ion-padding-top ion-text-center">
+          <ion-item lines="none">
+            <ion-input formControlName="catcher" value="{{catcher}}" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-        <ion-item lines="none" class="description">
-          <ion-label class="label"><b>Beschreibung</b></ion-label>
-          <textarea maxLength="1000" [(ngModel)]="description" value="{{description}}" required></textarea>
-        </ion-item>
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.catcher.errors?.required">
+        Abrisstext wird benötigt.
+      </span>
 
-      </ion-col>
-    </ion-row>
+      <!-- Description -->
+      <ion-item-divider>
+        <ion-label>
+          Beschreibung
+        </ion-label>
+      </ion-item-divider>
 
-    <!-- Social Media -->
-    <ion-item-divider>
-      <ion-label>
-        Aktions- oder Veranstaltungszeitraum
-      </ion-label>
-    </ion-item-divider>
+      <ion-row>
+        <ion-col class="ion-padding-top ion-text-center">
+          <ion-item lines="none">
+            <ion-textarea autoGrow="true" formControlName="description" value="{{description}}" required>
+            </ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <form [formGroup]="time" (ngSubmit)="submitForm()" >
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.required">
+        Beschreibung wird benötigt.
+      </span>
+
+      <!-- Social Media -->
+      <ion-item-divider>
+        <ion-label>
+          Aktions- oder Veranstaltungszeitraum
+        </ion-label>
+      </ion-item-divider>
+
+
       <ion-row>
         <ion-col>
           <ion-item lines="none">
             <p><b>Startzeit</b></p>
-            <ion-datetime [(ngModel)]="starttime" formControlName="starttime" displayFormat="HH:mm, DD MMMM YYYY"
+            <ion-datetime [value]="startDate" formControlName="startDate" displayFormat="HH:mm, DD MMMM YYYY"
               pickerFormat="DD-MMM-YYYY HH:mm" doneText="Fertig" cancelText="Abbrechen"
               monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
-              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
-              required></ion-datetime>
+              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" max="2120" required>
+            </ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
+
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.startDate.errors?.required">
+        Startzeit wird benötigt.
+      </span>
 
       <ion-row>
         <ion-col>
           <ion-item lines="none">
             <p><b>Endzeit</b></p>
-            <ion-datetime [(ngModel)]="endtime" formControlName="endtime" displayFormat="HH:mm, DD MMMM YYYY"
+            <ion-datetime [value]="endDate" formControlName="endDate" displayFormat="HH:mm, DD MMMM YYYY"
               pickerFormat="DD-MMM-YYYY HH:mm" doneText="Fertig" cancelText="Abbrechen"
               monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
-              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" min="2018" max="2030"
-              required></ion-datetime>
+              monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" max="2120" required>
+            </ion-datetime>
           </ion-item>
-          <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.endtime.errors?.required">
-            Endzeit vor Startzeit!
-          </span>
         </ion-col>
       </ion-row>
+
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.endDate.errors?.required">
+        Endzeit vor Startzeit!
+      </span>
+
+
+      <!-- Buttons -->
+      <ion-row>
+        <ion-col>
+          <ion-button fill="outline" shape="round" type="submit" (click)="editCoupon()">
+            Coupon speichern
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
     </form>
-
-    <!-- Buttons -->
-    <ion-row >
-      <ion-col>
-        <ion-button fill="outline" shape="round" type="submit" (click)="editCoupon()">
-          Coupon speichern
-        </ion-button>
-      </ion-col>
-    </ion-row>
-
   </ion-grid>
 </ion-content>

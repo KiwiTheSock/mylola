@@ -11,89 +11,60 @@ import { Camera } from '@ionic-native/camera/ngx';
 
 //Others
 import { ModalImagePage } from '../modal-image/modal-image.page';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.page.html',
   styleUrls: ['./add.page.scss'],
 })
-export class AddPage implements OnInit {
+export class AddPage {
 
   //Form Validation
-  validations_add: FormGroup;
+  validation_add: FormGroup;
   isSubmitted = false;
-
-  validation_messages = {
-    'titel': [
-      { type: 'required', message: 'Titel wird benötigt.' },
-      { type: 'maxlength', message: 'Titel ist zu lang (max. 35 Zeichen).' }
-    ],
-    'text': [
-      { type: 'required', message: 'Abrisstext wird benötigt.' },
-      { type: 'maxlength', message: 'Abrisstext ist zu lang (max. 20 Zeichen).' }
-    ],
-    'description': [
-      { type: 'required', message: 'Beschreibung wird benötigt.' },
-      { type: 'maxlength', message: 'Beschreibung ist zu lang (max. 2000 Zeichen).' }
-    ],
-    'starttime': [
-      { type: 'required', message: 'Startzeit wird benötigt.' },
-    ],
-    'endtime': [
-      { type: 'required', message: 'Endzeit wird benötigt.' },
-    ]
-  }
 
   //Image
   croppedImage = null;
 
-  //Validation
-  titel: FormControl;
-  text: FormControl;
-  description: FormControl;
-  starttime;
-  endtime;
+  //Data
+  public category: string = null;
+  public titel: string = null;
+  public text: string = null;
+  public description: string = null;
+  public starttime: string = null;
+  public endtime: string = null;
 
   constructor(
     public actionSheetController: ActionSheetController,
+    private apiService: ApiService,
     private camera: Camera,
     public formBuilder: FormBuilder,
     public modalController: ModalController,
     public router: Router,
   ) {
+
     //CroppedImage
     if (this.croppedImage == "" || this.croppedImage == null) {
       this.croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
     }
-  }
 
-  /* Form Validation
-   * --------------------------------------------------------
-   */
-  ngOnInit() {
-
-    this.titel = new FormControl('', Validators.compose([
-      Validators.maxLength(35),
-      Validators.required
-    ]));
-    this.text = new FormControl('', Validators.compose([
-      Validators.maxLength(20),
-      Validators.required
-    ]));
-    this.description = new FormControl('', Validators.compose([
-      Validators.maxLength(2000),
-      Validators.required
-    ]));
-    this.starttime = new FormControl('', Validators.required),
-      this.endtime = new FormControl('', Validators.required),
-
-      this.validations_add = this.formBuilder.group({
-        titel: this.titel,
-        text: this.text,
-        description: this.description,
-        starttime: this.starttime,
-        endtime: this.endtime,
-      });
+    //Validators
+    this.validation_add = this.formBuilder.group({
+      category: ['', Validators.required],
+      titel: ['', Validators.compose([
+        Validators.maxLength(35),
+        Validators.required])],
+      text: ['', Validators.compose([
+        Validators.maxLength(20),
+        Validators.required])],
+      description: ['', Validators.compose([
+        Validators.maxLength(2000),
+        Validators.required
+      ])],
+      starttime: ['', Validators.required],
+      endtime: ['', Validators.required]
+    });
   }
 
   /* Image
@@ -151,33 +122,57 @@ export class AddPage implements OnInit {
  * --------------------------------------------------------
  */
   get errorControl() {
-    return this.validations_add.controls;
+    return this.validation_add.controls;
+  }
+
+  /* Submit
+   * --------------------------------------------------------
+   */
+  submitForm() {
+    this.isSubmitted = true;
+    if (!this.validation_add.valid) {
+      console.log('Please provide all the required values!');
+      return false;
+    } else {
+      console.log(this.validation_add.value);
+      return true;
+    }
   }
 
   /* Create Coupons (API CALL)
   * --------------------------------------------------------
   */
   createCoupon() {
-    this.submitForm();
-    if (new Date(this.starttime.value) > new Date(this.endtime.value)) {
-      this.validations_add.get("endtime").reset();
-    } else if (this.submitForm()) {
-      this.cancel();
-    }
-  }
 
-  submitForm() {
-    this.isSubmitted = true;
-    if (this.validations_add.valid) {
-      return true;
+    let data = {
+      "category": this.validation_add.value.category,
+      "titel": this.validation_add.value.titel,
+      "catcher": this.validation_add.value.text,
+      "description": this.validation_add.value.description,
+      "startDate": this.validation_add.value.starttime,
+      "endDate": this.validation_add.value.endtime,
+      "code": ""
+    }
+
+    //console.log(data);
+
+    if (this.submitForm() && !(this.validation_add.value.starttime > this.validation_add.value.endtime)) {
+
+      this.apiService.addCoupon(1, data).subscribe(response => {
+        console.log(response);
+      })
+      this.router.navigateByUrl('/app/tabs/home');
+
+      setTimeout(() => {
+        this.validation_add.reset();
+       }, 500);
+
     } else {
-      return false;
+      this.validation_add.get("endtime").reset();
     }
-  }
 
-  cancel() {
-    this.router.navigateByUrl('/app/tabs/home');
-    this.validations_add.reset();
-  }
 
+  }
 }
+
+

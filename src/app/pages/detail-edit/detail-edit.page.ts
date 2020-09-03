@@ -4,43 +4,66 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
 import { ModalImagePage } from '../modal-image/modal-image.page';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-detail-edit',
   templateUrl: './detail-edit.page.html',
   styleUrls: ['./detail-edit.page.scss'],
 })
-export class DetailEditPage implements OnInit {
+export class DetailEditPage {
 
+  //Form Validation
+  validation_detail: FormGroup;
+  isSubmitted = false;
+
+  //Image
   croppedImage = "../assets/img/add/halloffame_vinokino.png";
 
   //Data
-  public title: string = "Vino & Kino, Dienstag 11.02 19:30 Uhr";
-  public text: string = "Gratis Popcorn";
-  public description: string = "Gute Weine – besondere Filme – gemütliches Ambiente\n\nEs gibt schöne Dinge im Leben - gute Filme und guter Wein gehören für uns von der Hall of Fame - Kino de Luxe dazu\nund wenn man sie kombiniert, kommen oft unvergleichliche Abende dabei heraus! Und genau diese wollen wir Ihnen mit unserer neuen Veranstaltungsreihe VINO & KINO bieten - in wohltuend entschleunigter Atmosphäre und persönlichem Ambiente! In einem unserer gemütlichen Kinosäle laden wir dienstags um 19:30 Uhr zum Empfang mit guten Weinen zur Einstimmung auf einen besonderen Film, speziell ausgewählt für diese Reihe!\n\n\nExklusiv für mylola-Nutzer: Zeigen Sie folgenden Gutschein, für eine kleine Portion Popcorn gratis, an der Kasse vor.";
-  public starttime = "2020-02-11T19:30:00";
-  public endtime: string = "2020-02-11T23:59:00";
+  public category: string = null;
+  public titel: string = null;
+  public catcher: string = null;
+  public description: string = null;
+  public startDate: string = null;
+  public endDate: string = null;
 
-  //Form Validation
-  time: FormGroup;
-  isSubmitted = false;
 
   constructor(
+    private apiService: ApiService,
     private router: Router,
     public formBuilder: FormBuilder,
     public actionSheetController: ActionSheetController,
     private camera: Camera,
     public modalController: ModalController
-  ) { }
+  ) {
+    //Validators
+    this.validation_detail = this.formBuilder.group({
+      category: ['', Validators.required],
+      titel: ['', Validators.required],
+      catcher: ['', Validators.required],
+      description: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+    });
+  }
 
-  /* Form Validation
+  /* Data
    * --------------------------------------------------------
    */
-  ngOnInit() {
-    this.time = this.formBuilder.group({
-      starttime: ['', Validators.required],
-      endtime: ['', Validators.required],
-    });
+  ionViewWillEnter() {
+    this.apiService.getCouponById(1).subscribe((res: any) => {
+      this.category = res.category.name;
+      this.titel = res.titel;
+      this.catcher = res.catcher;
+      this.description = res.description;
+      this.startDate = res.startDate;
+      this.endDate = res.endDate;
+    })
+  }
+
+  getCategory(){
+    return this.category;
   }
 
   /* Coupon Image
@@ -95,36 +118,55 @@ export class DetailEditPage implements OnInit {
     }
   }
 
-  /* Errors
+  /* Error Messages
    * --------------------------------------------------------
    */
   get errorControl() {
-    return this.time.controls;
+    return this.validation_detail.controls;
+  }
+
+  /* Submit
+   * --------------------------------------------------------
+   */
+  submitForm() {
+    this.isSubmitted = true;
+    if (!this.validation_detail.valid) {
+      console.log('Please provide all the required values!');
+      return false;
+    } else {
+      console.log(this.validation_detail.value);
+      return true;
+    }
   }
 
   /* Coupon Edit
    * --------------------------------------------------------
    */
+
   editCoupon() {
-    this.submitForm();
-    if (new Date(this.starttime) > new Date(this.endtime)) {
-      this.time.get("endtime").reset();
-    } else if (this.submitForm()) {
-      this.cancel();
-    }
-  }
 
-  submitForm() {
-    this.isSubmitted = true;
-    if (!this.time.valid) {
-      return false;
+    let data = {
+      "category": this.validation_detail.value.category,
+      "titel": this.validation_detail.value.titel,
+      "catcher": this.validation_detail.value.catcher,
+      "description": this.validation_detail.value.description,
+      "startDate": this.validation_detail.value.startDate,
+      "endDate": this.validation_detail.value.endDate,
+      "code": ""
+    }
+
+    //console.log(data);
+
+    if (this.submitForm() && !(this.validation_detail.value.starttime >= this.validation_detail.value.endtime)) {
+
+      this.apiService.updateCoupon(1, data).subscribe(response => {
+        console.log(response);
+      })
+      this.router.navigateByUrl("/app/tabs/home/detail/1");
+
     } else {
-      return true;
+      this.validation_detail.get("endtime").reset();
     }
-  }
-
-  cancel() {
-    this.router.navigateByUrl("/app/tabs/home/detail/1");
   }
 
 }

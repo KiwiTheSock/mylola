@@ -17,19 +17,26 @@
       <ion-row>
         <ion-col class="ion-padding-top ion-text-center">
           <ion-item lines="none">
+
             <ion-label class="label"><b>Vorame</b></ion-label>
-            <ion-input formControlName="firstnameProfile" value="{{firstnameProfile}}" type="text" required></ion-input>
+            <ion-input formControlName="firstname" value="{{firstname}}" required></ion-input>
           </ion-item>
 
           <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.firstnameProfile.errors?.required">
-            firstnameProfile is required.
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.required">
+            Vorname wird benötigt.
           </span>
 
           <ion-item lines="none">
             <ion-label class="label"><b>Nachname</b></ion-label>
-            <ion-input formControlName="lastnameProfile" value="{{lastnameProfile}}"></ion-input>
+            <ion-input formControlName="lastname" value="{{lastname}}" required></ion-input>
           </ion-item>
+
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
+            Nachname wird benötigt.
+          </span>
+
         </ion-col>
       </ion-row>
 
@@ -45,23 +52,44 @@
 
           <ion-item lines="none">
             <ion-label class="label"><b>Straße</b></ion-label>
-            <ion-input formControlName="streetProfile" value="{{streetProfile}}"></ion-input>
+            <ion-input formControlName="street" value="{{street}}" required></ion-input>
           </ion-item>
+
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.street.errors?.required">
+            Straße wird benötigt.
+          </span>
 
           <ion-item lines="none">
             <ion-label class="label"><b>Hausnummer</b></ion-label>
-            <ion-input formControlName="housenumberProfile" value="{{housenumberProfile}}" required></ion-input>
+            <ion-input formControlName="housenumber" value="{{housenumber}}" required>
+            </ion-input>
           </ion-item>
+
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.housenumber.errors?.required">
+            Hausnummer wird benötigt.
+          </span>
 
           <ion-item lines="none">
             <ion-label class="label"><b>PLZ</b></ion-label>
-            <ion-input formControlName="postcodeProfile" value="{{postcodeProfile}}" required></ion-input>
+            <ion-input formControlName="postcode" value="{{postcode}}" required></ion-input>
           </ion-item>
+
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.postcode.errors?.pattern">
+            Geben Sie eine gültige Postleitzahl an.
+          </span>
 
           <ion-item lines="none">
             <ion-label class="label"><b>Stadt</b></ion-label>
-            <ion-input formControlName="placeProfile" value="{{placeProfile}}" required></ion-input>
+            <ion-input formControlName="place" value="{{place}}" required></ion-input>
           </ion-item>
+
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.place.errors?.required">
+            Stadt wird benötigt.
+          </span>
 
         </ion-col>
       </ion-row>
@@ -78,13 +106,29 @@
 
           <ion-item lines="none">
             <ion-label class="label"><b>E-Mail</b></ion-label>
-            <ion-input formControlName="emailProfile" value="{{emailProfile}}" required></ion-input>
+            <ion-input formControlName="email" value="{{email}}"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required></ion-input>
           </ion-item>
+
+          <!-- Error messages required -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+            Geben Sie eine gültige E-Mail-Adresse an.
+          </span>
+
+          <!-- Error messages pattern -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+            Geben Sie eine gültige E-Mail-Adresse an.
+          </span>
 
           <ion-item lines="none">
             <ion-label class="label"><b>Telefon</b></ion-label>
-            <ion-input formControlName="telephoneProfile" value="{{telephoneProfile}}" required></ion-input>
+            <ion-input formControlName="telephone" value="{{telephone}}" pattern="^[0-9]+$"></ion-input>
           </ion-item>
+
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.telephone.errors?.pattern">
+            Geben Sie eine gültige Telefonnummer an.
+          </span>
 
         </ion-col>
       </ion-row>

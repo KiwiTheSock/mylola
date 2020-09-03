@@ -1,75 +1,72 @@
-
 /* Content
  * --------------------------------------------------------
  */
-  .content {
-    padding-top: 20px;
-    max-width: 650px;
-    margin: auto;
-    text-align: center;
-  }
+.content {
+  padding-top: 20px;
+  max-width: 650px;
+  margin: auto;
+  text-align: center;
+}
 
 /* Buttons
  * --------------------------------------------------------
  */
-  .buttons {
-    margin-top: 10px;
-    margin-bottom: 70px;
-   }
+.buttons {
+  margin-top: 10px;
+  margin-bottom: 70px;
+}
 
 /* Error
  * --------------------------------------------------------
  */
-   .error {
-     color: red;
-   }
+.error {
+  color: red;
+}
 
 /* ion-label
  * --------------------------------------------------------
  */
-   .label {
-    width: 110px; 
-   }
+.label {
+  width: 110px;
+}
 
 /* ion-input
  * --------------------------------------------------------
- */   
-   ion-input {
-    border-radius: 5px !important;
-    //margin-left: 50px;
-    border: 1px solid var(--ion-color-medium-shade) !important;
-    max-width: 50vw; 
-    max-height: 10vh;
-    --placeholder-opacity: 1;
-    border-bottom-color: transparent;
-  }
+ */
+ion-input {
+  border-radius: 5px !important;
+  border: 1px solid var(--ion-color-medium-shade) !important;
+  padding-left: 10px;
+}
 
 /* ion-datetime
  * --------------------------------------------------------
- */  
-  ion-datetime  {
-    border-radius: 5px !important;
-    margin-left: 20px;
-    border: 1px solid var(--ion-color-medium-shade) !important;
-    width: 220px;
-  }
+ */
+ion-datetime {
+  border-radius: 5px !important;
+  margin-left: 20px;
+  border: 1px solid var(--ion-color-medium-shade) !important;
+  width: 200px;
+}
 
 /* p
  * --------------------------------------------------------
  */
-  p {
-    width: 90px;
-  }
+p {
+  width: 90px;
+}
 
 /* ion-textarea
  * --------------------------------------------------------
  */
-  .description{
-    textarea{
-      border-radius: 5px !important;
-      border: 1px var(--ion-color-medium-shade) solid;
-      height: 200px;
-      width: 490px; 
-      resize: none;
-    }
-  }
+ion-textarea {
+  border-radius: 5px !important;
+  border: 1px var(--ion-color-medium-shade) solid;
+}
+
+/* ion-select
+ * --------------------------------------------------------
+ */
+ion-select {
+  --placeholder-opacity: 1 !important;
+}

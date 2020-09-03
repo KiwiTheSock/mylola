@@ -104,7 +104,7 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   edit() {
-    if (this.authService.getRole().role == "ROLE_COMPANY" && this.router.url === "/app/tabs/home/detail/1") {
+    if (this.authService.getRole() == "ROLE_COMPANY" && this.router.url === "/app/tabs/home/detail/1") {
       this.show = true;
     }
   }

@@ -26,13 +26,9 @@ export class ProfileCustomerPage {
 
   ionViewWillEnter() {
    
-    this.dataProvider.getAbos().subscribe((data: any) => {
-      this.abos = data;
-    })
-
     this.apiService.getCustomerById(1).subscribe((res: any) => {
       this.profile = res;
-      //this.abos = res.abos;
+      this.abos = res.subscribers;
     })
   }
 
@@ -46,6 +42,7 @@ export class ProfileCustomerPage {
   /* Deabo Modal
   * --------------------------------------------------------
   */
+  //id des Abos mitübergeben, im modal-deabo deabo-API Methode ausführen
   async presentModal() {
     const modal = await this.modalController.create({
       component: ModalDeaboPage,

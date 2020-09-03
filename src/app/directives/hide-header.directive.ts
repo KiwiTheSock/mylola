@@ -18,11 +18,12 @@ export class HideHeaderDirective implements OnInit {
     ngOnInit(): void {
         this.header = this.header.el;
         this.domCtrl.write(() => {
-            this.renderer.setStyle(this.header, 'transition', 'margin-top 100ms');
+            this.renderer.setStyle(this.header, 'transition', 'margin-top 700ms');
         });
     }
 
     @HostListener('ionScroll', ['$event']) onContentScroll($event: any) {
+
         if ($event.detail.scrollTop > this.lastY) {
             this.domCtrl.write(() => {
                 this.renderer.setStyle(this.header, 'margin-top', `-${ this.header.clientHeight }px`);
