@@ -5,6 +5,8 @@ import { formatDate } from '@angular/common';
 import { ConferenceData } from '../../services/conference-data';
 import { Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
+import * as moment from 'moment';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'page-events',
@@ -34,12 +36,17 @@ export class EventsPage {
     noEventsLabel: 'Keine Veranstaltungen',
     currentDate: new Date()
   };
+
+  //Data
+  public startDate: string = null;
+  public endDate: string = null;
  
   constructor(
     private alertCtrl: AlertController, 
     @Inject(LOCALE_ID) private locale: string,
     private dataProvider: ConferenceData, 
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
     ) {}  
 
   ionViewWillEnter(){
@@ -68,6 +75,12 @@ export class EventsPage {
    */
   addEvents() {
     
+    this.apiService.getCouponById(1).subscribe((res: any) => {
+      console.log(res);
+      this.startDate = res.startDate;
+      this.endDate = res.endDate;
+    })
+
     let item1 = this.events.find(i => i.id === "1");
     let item2 = this.events.find(i => i.id === "2");
     var counter = 1;
@@ -80,8 +93,8 @@ export class EventsPage {
         id: item.id,
         title: item.title,
         desc: item.desc,
-        startTime: new Date(item.startTime),
-        endTime: new Date(item.endTime) 
+        startTime: new Date(this.startDate),
+        endTime: new Date(this.endDate)
       }
 
       this.eventSource.push(eventCopy);

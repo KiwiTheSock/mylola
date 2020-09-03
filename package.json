@@ -46,6 +46,7 @@
     "ionic2-calendar": "^0.6.4",
     "jetifier": "^1.6.6",
     "jsbarcode": "^3.11.0",
+    "moment": "^2.27.0",
     "ngx-barcode6": "^1.0.12",
     "ngx-image-cropper": "^3.2.1",
     "rxjs": "^6.5.4",
