@@ -24,11 +24,7 @@ export class HideHeaderDirective implements OnInit {
 
     @HostListener('ionScroll', ['$event']) onContentScroll($event: any) {
 
-        console.log($event.detail.scrollTop);
-        console.log($event.detail);
-
-
-        if ($event.detail.startY < $event.detail.currentY) {
+        if ($event.detail.startY < $event.detail.currentY) { //> lastY
             this.domCtrl.write(() => {
                 this.renderer.setStyle(this.header, 'margin-top', `-${ this.header.clientHeight }px`);
             });
