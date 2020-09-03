@@ -28,7 +28,7 @@
   <!-- Filter -->
   <!-- <app-filter></app-filter> -->
 
-  <ion-toolbar>
+  <ion-toolbar #header class="bg-filter">
     <ion-grid class="filter">
       <ion-row>
         <ion-col>
@@ -65,12 +65,8 @@
           </div>
         </ion-col>
       </ion-row>
-    </ion-grid>
-  </ion-toolbar>
 
-  <ion-toolbar class="bg-filter" #header>
-    <ion-grid class="filter2">
-      <ion-row>
+      <ion-row class="filter2">
         <ion-col>
           <div class="button-center">
             <ion-button #fifth color="danger" (click)="btnActivate(fifth, '5')">In der Nähe</ion-button>
@@ -90,11 +86,10 @@
 <!-- Content -->
 <ion-content fullscreen="true" [scrollEvents]="true" appHideHeader [header]="header">
 
-  <!-- Refresher
+  <!-- Refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="refresh()">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-   -->
 
   <!-- List -->
   <ion-list #scheduleList [hidden]="shownSessions === 0" class="list">
