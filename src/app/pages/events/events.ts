@@ -53,7 +53,7 @@ export class EventsPage {
 
       for (let i = 0; i < res.length; i++) {
 
-        //console.log(res[i][0]);
+        console.log(res[i][0]);
 
         this.id = res[i][0].id
         this.titel = res[i][0].titel;

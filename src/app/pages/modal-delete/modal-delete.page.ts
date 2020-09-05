@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-modal-delete',
@@ -9,6 +10,7 @@ import { ModalController } from '@ionic/angular';
 export class ModalDeletePage implements OnInit {
 
   constructor(
+    private apiService: ApiService,
     public modalCtrl : ModalController
   ) { }
 
@@ -16,7 +18,7 @@ export class ModalDeletePage implements OnInit {
   }
 
   deleteCoupon(){ //ToDo
-    console.log("Coupon gelöscht!");
+    this.apiService.deleteCoupon(1);
     this.dismiss();
   }
 

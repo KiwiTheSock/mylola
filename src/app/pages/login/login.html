@@ -4,6 +4,7 @@
 <!-- Content -->
 <ion-content>
   <ion-grid class="content">
+    <form [formGroup]="validation_login" (ngSubmit)="submitForm" novalidate>
 
     <!-- Logo -->
     <ion-row class="login-logo">
@@ -17,7 +18,7 @@
       <ion-col>
         <ion-item lines="none">
           <ion-label position="stacked">Benutzername</ion-label>
-          <ion-input type="text" clearInput placeholder="Benutzername" [(ngModel)]="user.username"></ion-input>
+          <ion-input type="text" clearInput placeholder="Benutzername" formControlName="username" required></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -27,7 +28,7 @@
       <ion-col>
         <ion-item lines="none">
           <ion-label position="stacked">Passwort</ion-label>
-          <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.password"></ion-input>
+          <ion-input type="password" clearInput placeholder="Passwort" formControlName="password" required></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -53,5 +54,6 @@
       </ion-col>
     </ion-row>
 
+    </form>
   </ion-grid>
 </ion-content>

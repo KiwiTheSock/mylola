@@ -15,7 +15,7 @@
     <!-- Username -->
     <ion-row>
       <ion-col>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label position="stacked">Benutzername</ion-label>
           <ion-input type="text" clearInput placeholder="Benutzername" [(ngModel)]="user.username"></ion-input>
         </ion-item>
@@ -25,7 +25,7 @@
     <!-- E-Mail -->
     <ion-row>
       <ion-col>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label position="stacked">E-Mail</ion-label>
           <ion-input type="email" clearInput placeholder="E-Mail" [(ngModel)]="user.email"></ion-input>
         </ion-item>
@@ -35,7 +35,7 @@
     <!-- Password -->
     <ion-row>
       <ion-col>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label position="stacked">Passwort</ion-label>
           <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.password"></ion-input>
         </ion-item>
@@ -44,9 +44,9 @@
 
     <ion-row>
       <ion-col>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label position="stacked">Passwort wiederholen</ion-label>
-          <ion-input type="password" clearInput placeholder="Passwort wiederholen" [(ngModel)]="user.password"></ion-input>
+          <ion-input type="password" clearInput placeholder="Passwort wiederholen" [(ngModel)]="user.password2"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

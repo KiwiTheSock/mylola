@@ -356,6 +356,6 @@ export class ProfileCompanyEditPage {
         this.router.navigateByUrl('/profile-company');
       }, 500);
     }
-
   }
+  
 }

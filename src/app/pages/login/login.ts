@@ -7,7 +7,7 @@ import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { AlertController } from '@ionic/angular';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'page-login',
@@ -17,11 +17,13 @@ import { AlertController } from '@ionic/angular';
 
 export class LoginPage {
 
-  //API Body
-  user = {
-    username: "",
-    password: ""
-  }
+  //Form Validation
+  validation_login: FormGroup;
+  isSubmitted = false;
+
+  //Data
+  public username: string = null;
+  public password: string = null;
 
   constructor(
     private api: ApiService,
@@ -29,31 +31,66 @@ export class LoginPage {
     private alertCtrl: AlertController,
     private router: Router,
     private userData: UserData,
-  ) { }
+    public formBuilder: FormBuilder
+  ) {
+    //Validators
+    this.validation_login = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+  }
+
+  /* Error Messages
+   * --------------------------------------------------------
+   */
+  get errorControl() {
+    return this.validation_login.controls;
+  }
+
+  /* Submit
+    * --------------------------------------------------------
+    */
+  submitForm() {
+    this.isSubmitted = true;
+    if (!this.validation_login.valid) {
+      console.log('Please provide all the required values!')
+      //Leer Meldung: Bitte geben Sie Daten ein
+      return false;
+
+    } else {
+      console.log(this.validation_login.value)
+      return true;
+    }
+  }
 
   /* Login 
    * --------------------------------------------------------
    */
-  login() { 
-    
-    this.auth.login(this.user).subscribe(async res => {
+  login() {
 
-      if (res) {
-        this.userData.login(this.user.username);
-        this.router.navigateByUrl('/app/tabs/home');
-      
-      } else {
-        const alert = await this.alertCtrl.create({
-          header: 'Login Failed',
-          message: 'Wrong credentials.',
-          buttons: ['OK']
-        });
-        await alert.present();
-      }
-    });
-    
-    this.user.username = "";
-    this.user.password = "";
+    let data = {
+      "username": this.validation_login.value.username,
+      "password": this.validation_login.value.password
+    }
+
+    //console.log(data);
+
+    if (this.submitForm()) {
+
+      this.auth.login(data).subscribe(async res => {
+       
+        if (res) {
+          this.userData.login(this.validation_login.value.username);
+          this.router.navigateByUrl('/app/tabs/home');
+
+        }
+      });
+    }
+
+    setTimeout(() => {
+      this.validation_login.reset();
+    }, 500);
+
   }
 
 }

@@ -54,7 +54,7 @@ export class DetailEditPage {
    * --------------------------------------------------------
    */
   ionViewWillEnter() {
-    this.apiService.getCouponById(1).subscribe((res: any) => {
+    this.apiService.getCouponById(61).subscribe((res: any) => {
       this.category = res.category.name;
       this.titel = res.titel;
       this.catcher = res.catcher;
@@ -150,6 +150,20 @@ export class DetailEditPage {
    */
 
   editCoupon() {
+    let base64Image = this.croppedImage;
+    let imageData = this.dataURItoBlob(base64Image);
+    let formData = new FormData();
+    /*
+    formData.append('category', this.validation_detail.value.category);
+    formData.append('titel', this.validation_detail.value.titel);
+    formData.append('catcher', this.validation_detail.value.catcher);
+    formData.append('description', this.validation_detail.value.description);
+    formData.append('startDate', this.validation_detail.value.startDate);
+    formData.append('endDate', this.validation_detail.value.endDate);
+    formData.append('code', this.validation_detail.value.code);
+    */
+    formData.append('bannerFilename', imageData, "filename.png");
+    
 
     let data = {
       "category": this.validation_detail.value.category,
@@ -158,16 +172,25 @@ export class DetailEditPage {
       "description": this.validation_detail.value.description,
       "startDate": this.validation_detail.value.startDate,
       "endDate": this.validation_detail.value.endDate,
-      "code": this.validation_detail.value.code
+      "code": this.validation_detail.value.code,
     }
 
-    console.log(data);
+    //console.log(data);
 
     if (this.submitForm() && !(this.validation_detail.value.starttime >= this.validation_detail.value.endtime)) {
 
-      this.apiService.updateCoupon(1, data).subscribe(response => {
+      /* FUNKTIONIERT NICHT */
+     
+      this.apiService.updateCoupon(formData).subscribe(response => {
         console.log(response);
       })
+
+      /* FUNKTIONIERT */
+       /*
+      this.apiService.addImage(formData).subscribe(response => {
+        console.log(response);
+      })
+      */
 
       setTimeout(() => {
         console.log('Verarbeite Daten');
@@ -177,6 +200,23 @@ export class DetailEditPage {
     } else {
       this.validation_detail.get("endtime").reset();
     }
+  }
+
+  dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
+    else
+      byteString = unescape(dataURI.split(',')[1]);
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], { type: mimeString });
   }
 
 }

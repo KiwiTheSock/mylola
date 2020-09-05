@@ -52,7 +52,7 @@ export class ApiService {
     //HttpOptions
     this.httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',//'application/x-www-form-urlencoded',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + this.token
       })
@@ -377,12 +377,12 @@ export class ApiService {
 
   //Coupons
   //Params: path = '/api/coupons/', id: number, item: array
-  updateCoupon(id: number, item) {
+  updateCoupon(formData) {
 
     this.getToken();
 
     return this.httpClient
-      .put(this.base_path + '/api/coupons/' + id, JSON.stringify(item), this.httpOptions)
+      .post(this.base_path + '/api/coupons/update/61', formData, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -529,6 +529,21 @@ export class ApiService {
     this.loggedIn = false;
 
     this.getToken();
+  }
+
+  /* Image
+     * --------------------------------------------------------
+     */
+  addImage(formData) {
+
+    this.getToken();
+
+    return this.httpClient
+      .post(this.base_path + '/api/coupons/update/61', formData)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
   }
 
 }

@@ -54,12 +54,15 @@ export class ProfileCompanyPage {
 
   ionViewWillEnter() {
     this.apiService.getCompanyById(1).subscribe((res: any) => {
+
+      //console.log(res);
+
       this.profile = res[0];
       this.coupons = res.coupons;
       this.hours = res[1].hours;
       this.url = res[1].url;
 
-      console.log(res[0].bannerfilename)
+      //console.log(res[0].bannerfilename)
 
       //this.bannerfilename = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/" + res[0].bannerfilename;
       //this.logofilename = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logo/" + res[0].logofilename;

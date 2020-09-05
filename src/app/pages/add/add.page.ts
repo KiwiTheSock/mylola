@@ -166,7 +166,6 @@ export class AddPage {
       "startDate": this.time(this.validation_add.value.startDate),
       "endDate": this.time(this.validation_add.value.endDate),
       "code": this.validation_add.value.code,
-      "bannerFilename": formData
     }
 
     //console.log(this.croppedImage);

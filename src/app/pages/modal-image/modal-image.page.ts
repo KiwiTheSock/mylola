@@ -56,7 +56,7 @@ export class ModalImagePage {
     }
     
     this.camera.getPicture(options).then((imageData) => { 
-      this.myImage = 'data:image/jpg;base64,' + imageData;
+      this.myImage = 'data:image/png;base64,' + imageData;
     });
   
   }

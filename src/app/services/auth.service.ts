@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { ApiService } from './api.service';
-import { take, map, switchMap } from 'rxjs/operators';
+import { take, map, switchMap} from 'rxjs/operators';
 
 const helper = new JwtHelperService();
 const TOKEN_KEY = 'jwt-token';
@@ -58,7 +58,6 @@ export class AuthService {
         return res;
       }),
       switchMap((token: string) => {
-
         let token_stringify = JSON.stringify(token);
         let t = token_stringify.split("\"");
         let decoded = helper.decodeToken(t[3]);
@@ -87,7 +86,6 @@ export class AuthService {
     this.storage.remove(TOKEN_KEY).then(() => {
       this.userData.next(null);
       this.storage.clear();
-      this.userData.value.roles = null;
     });
   }
 

@@ -39,15 +39,54 @@ export class DetailPage {
   map: any;
   infoWindows: any = [];
 
+  //Company Coupon Edit
+  show = false;
+
   //Back Button
   defaultHref = '';
   ios: boolean;
 
-  //Company Coupon Edit
-  show = false;
-
   //Data
-  session: any;
+  //Company
+  public bannerFilename_Company: string = null;
+  public email: string = null;
+  public housenumber: string = null;
+  public company_id: string = null;
+  public lat: string = null;
+  public lng: string = null;
+  public logofilename: string = null;
+  public name: string = null;
+  public place: string = null;
+  public postcode: string = null;
+  public street: string = null;
+  public telephone: string = null;
+
+  //URL
+  public website: string = null;
+  public facebook: string = null;
+  public instagram: string = null;
+  public twitter: string = null;
+
+  //Hours
+  public monday: string = null;
+  public tuesday: string = null;
+  public wednesday: string = null;
+  public thursday: string = null;
+  public friday: string = null;
+  public saturday: string = null;
+  public sunday: string = null;
+
+  //Coupon
+  public bannerFilename_Coupon: string = null;
+  public catcher: string = null;
+  public code: string = null;
+  public createdAt: string = null;
+  public description: string = null;
+  public coupon_id: string = null;
+  public titel: string = null;
+
+  //ToDo
+  public fav: boolean = null;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -77,37 +116,21 @@ export class DetailPage {
 
   //ToDo
   ionViewWillEnter() {
-    
-    this.dataProvider.load().subscribe((data: any) => {
-      if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
-        const sessionId = this.route.snapshot.paramMap.get('sessionId');
-        for (const group of data.schedule[0].groups) {
-          if (group && group.sessions) {
-            for (const session of group.sessions) {
-              if (session && session.id === sessionId) {
-                this.session = session;
-                break;
-              }
-            }
-          }
-        }
-      }
-    });
-    
 
     //Data
-    /*
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
     this.apiService.getCouponById(sessionId).subscribe(res => {
-      this.session = res;
-    })
-    */
+
+      console.log(res);
+
+    });
+
 
     //Back BUtton
     this.defaultHref = `/app/tabs/home`;
-    
+
     //Edit
-    //this.edit(sessionId);
+    this.edit();
 
     //Map
     this.showMap();
@@ -117,14 +140,15 @@ export class DetailPage {
   /* Company Coupon Edit (ToDo)
   * --------------------------------------------------------
   */
-  edit(id) {
+  edit() {
 
+    /*
     var company_id = 1;
     this.apiService.getCouponsByCompany(company_id).subscribe(res => {
-
     })
+    */
 
-    if (this.authService.getRole() == "ROLE_COMPANY" && this.router.url === "/app/tabs/home/detail/" + id) {
+    if (this.authService.getRole() == "ROLE_COMPANY" && this.router.url === "/app/tabs/home/detail/1") {
       this.show = true;
     }
   }
@@ -132,7 +156,7 @@ export class DetailPage {
   /* Favorites (ToDo)
   * --------------------------------------------------------
   */
-  toggleFavorite(session: any) {
+  toggleFavorite() {
 
     var customer_id = 1;
     var coupon_id = 1;
@@ -160,14 +184,16 @@ export class DetailPage {
   /* Notification (ToDo)
   * --------------------------------------------------------
   */
-  notification(session: any) {
-    console.log("Abonniert");
-    this.presentToast(session)
+  notification() {
+
+    //this.apiService.addAbo();
+
+    this.presentToast()
   }
 
-  async presentToast(session: any) {
+  async presentToast() {
     const toast = await this.toastController.create({
-      message: session.name + ' abonniert.',
+      //message: session.name + ' abonniert.',
       duration: 2000
     });
     toast.present();
@@ -176,12 +202,12 @@ export class DetailPage {
   /* Modal Coupon
   * --------------------------------------------------------
   */
-  async presentModal(session: any) {
+  async presentModal() {
     const modal = await this.modalController.create({
       component: ModalCouponPage,
       cssClass: 'modal-css',
       swipeToClose: true, //iOS
-      componentProps: { session: session }
+      //componentProps: { session: session }
     });
 
     await modal.present();
@@ -195,33 +221,33 @@ export class DetailPage {
   /* Logged In
   * --------------------------------------------------------
   */
-  isLoggedIn(session: any) {
+  isLoggedIn() {
     if (this.authService.getRole() == null) {
       this.router.navigateByUrl('/login');
     } else {
-      this.presentModal(session)
+      //this.presentModal(session)
     }
   }
 
   /* Facebook
   * --------------------------------------------------------
   */
-  facebook(session: any) {
-    window.open(session.facebook, '_system', 'location=yes');
+  openFacebook() {
+    window.open(this.facebook, '_system', 'location=yes');
   }
 
   /* Instagram
    * --------------------------------------------------------
    */
-  instagram(session: any) {
-    window.open(session.instagram, '_system', 'location=yes');
+  openInstagram() {
+    window.open(this.instagram, '_system', 'location=yes');
   }
 
   /* Twitter
   * --------------------------------------------------------
   */
-  twitter(session: any) {
-    window.open(session.twitter, '_system', 'location=yes');
+  openTwitter() {
+    window.open(this.twitter, '_system', 'location=yes');
   }
 
   /* Browser
@@ -244,33 +270,33 @@ export class DetailPage {
   /* Contact
   * --------------------------------------------------------
   */
-  async openContact(session: any) {
+  async openContact() {
     const mode = this.ios;
 
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Kontaktiere ' + session.name,
+      header: 'Kontaktiere ' + name,
       buttons: [
         {
-          text: `Webseite (${session.website})`,
+          text: `Webseite (${this.website})`,
           icon: !mode ? 'website' : null,
           handler: () => {
             //window.open(session.website); //Browser
-            this.launchBrowser(session.website);
+            this.launchBrowser(this.website);
           }
         },
         {
-          text: `Mail (${session.mail})`,
+          text: `Mail (${this.email})`,
           icon: !mode ? 'mail' : null,
           handler: () => {
             //window.open('mailto:' + session.mail); //Browser
-            this.sendEmail(session.mail);
+            this.sendEmail(this.email);
           }
         },
         {
-          text: `Anrufen (${session.phone})`,
+          text: `Anrufen (${this.telephone})`,
           icon: !mode ? 'call' : null,
           handler: () => {
-            window.open('tel:' + session.phone);
+            window.open('tel:' + this.telephone);
           }
         },
         {
@@ -338,19 +364,16 @@ export class DetailPage {
     }
   }
 
-  //ToDo
   showMap() {
-    this.dataProvider.getMap().subscribe((markers: any) => {
-
-      //Get Data
-      const sessionId = this.route.snapshot.paramMap.get('sessionId');
-      var id: number = +sessionId;
+   
+      //Marker
       var marker: any = {
-        name: markers[id - 1].name,
-        lat: markers[id - 1].lat,
-        lng: markers[id - 1].lng
+        name: this.name,
+        lat: this.lat,
+        lng: this.lng
       }
 
+      //Location
       const location = new google.maps.LatLng(marker.lat, marker.lng);
       let style = [];
       const options = {
@@ -359,13 +382,14 @@ export class DetailPage {
         disableDefaultUI: true,
       }
 
+      //Darkmode
       if (this.darkmode.dark) {
         style = mapStyle;
       }
 
+      //Create Map
       this.map = new google.maps.Map(this.mapRef.nativeElement, { options, styles: style });
       this.addMarkersToMap(marker);
-    });
   }
 }
 

@@ -3,10 +3,11 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 //Ionic
-import { ModalController, IonSlides } from '@ionic/angular'; 
+import { ModalController, IonSlides } from '@ionic/angular';
 
 //Others
 import { ConferenceData } from '../../services/conference-data';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-modal-coupon',
@@ -20,7 +21,7 @@ export class ModalCouponPage {
   slideOptions = {
     loop: true
   };
-  
+
   //ToDo
   session: any;
 
@@ -31,13 +32,15 @@ export class ModalCouponPage {
   used = false;
 
   constructor(
-    public modalCtrl : ModalController,
+    private apiService: ApiService,
+    public modalCtrl: ModalController,
     public dataProvider: ConferenceData,
     private route: ActivatedRoute,
-    
+
   ) { }
-  
+
   ionViewWillEnter() { //ToDo
+
     this.dataProvider.load().subscribe((data: any) => {
       if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
         const sessionId = this.route.snapshot.paramMap.get('sessionId');
@@ -53,9 +56,18 @@ export class ModalCouponPage {
         }
       }
     });
+    
+    this.apiService.getCouponById(1).subscribe(res => {
+      this.session = res;
+    });
   }
 
   dismiss() {
-    this.modalCtrl.dismiss({'dismissed': true});
+
+    var customer_id = 1;
+    var coupon_id = 1;
+    this.apiService.addDevaluation(customer_id, coupon_id);
+
+    this.modalCtrl.dismiss({ 'dismissed': true });
   }
 }
