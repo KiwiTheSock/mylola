@@ -21,7 +21,6 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot) {
-    /*
     const expectedRole = route.data.role;
     return this.auth.user.pipe(
       take(1),
@@ -44,7 +43,6 @@ export class AuthGuard implements CanActivate {
         }
       })
     )
-    */
    return true;
   }
 
