@@ -10,11 +10,11 @@
       <ion-col col-12 class="profile-background">
         <!-- Banner -->
         <div>
-          <ion-img src="{{profile?.bannerfilenameGEHTNICHT}}"></ion-img>
+          <ion-img src="bannerfilename"></ion-img>
         </div>
         <!-- Logo -->
         <ion-avatar>
-          <ion-img src="{{profile?.logofilenameGEHTNICHT}}"></ion-img>
+          <ion-img src="logofilename"></ion-img>
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -29,11 +29,9 @@
     <!-- Button Profile Edit -->
     <ion-row>
       <ion-col>
-
         <ion-button fill="outline" shape="round" (click)="openSettings()">
           Profil bearbeiten
         </ion-button>
-
       </ion-col>
     </ion-row>
 
@@ -47,16 +45,13 @@
     <ion-row>
       <ion-col>
         <ion-list>
-
           <ion-item *ngFor="let item of coupons">
             <ion-label routerLink="/app/tabs/home/detail/{{item.id}}">{{item.title}}</ion-label>
             <ion-button slot="end" (click)="presentModal()">
               <ion-icon name="close"></ion-icon>
             </ion-button>
           </ion-item>
-
         </ion-list>
-
       </ion-col>
     </ion-row>
 
@@ -83,7 +78,7 @@
 
     <ion-row>
       <ion-col class="contact">
-        <p>{{profile?.url.homepage}}</p>
+        <p>{{url?.homepage}}</p>
         <p>{{profile?.email}}</p>
         <p>{{profile?.telephone}}</p>
       </ion-col>
@@ -99,13 +94,13 @@
     <ion-row>
       <ion-col>
         <p>
-          <ion-icon name="logo-facebook" class="media" color="facebook"></ion-icon>{{profile?.url.facebook}}
+          <ion-icon name="logo-facebook" class="media" color="facebook"></ion-icon>{{url?.facebook}}
         </p>
         <p>
-          <ion-icon name="logo-instagram" class="media" color="instagram"></ion-icon>{{profile?.url.instagram}}
+          <ion-icon name="logo-instagram" class="media" color="instagram"></ion-icon>{{url?.instagram}}
         </p>
         <p>
-          <ion-icon name="logo-twitter" class="media" color="twitter"></ion-icon>{{profile?.url.twitter}}
+          <ion-icon name="logo-twitter" class="media" color="twitter"></ion-icon>{{url?.twitter}}
         </p>
       </ion-col>
     </ion-row>
@@ -119,13 +114,13 @@
 
     <ion-row>
       <ion-col col-12 class="opening">
-        <p>Montag: {{profile?.hours.monday}}</p>
-        <p>Dienstag: {{profile?.hours.tuesday}}</p>
-        <p>Mittwoch: {{profile?.hours.wednesday}}</p>
-        <p>Donnerstag: {{profile?.hours.thursday}}</p>
-        <p>Freitag: {{profile?.hours.friday}}</p>
-        <p>Samstag: {{profile?.hours.saturday}}</p>
-        <p>Sonntag: {{profile?.hours.sunday}}</p>
+        <p>Montag: {{mo_start}} - {{mo_end}}</p>
+        <p>Dienstag: {{tu_start}} - {{tu_end}}</p>
+        <p>Mittwoch: {{we_start}} - {{we_end}}</p>
+        <p>Donnerstag: {{th_start}} - {{th_end}}</p>
+        <p>Freitag: {{fr_start}} - {{fr_end}}</p>
+        <p>Samstag: {{sa_start}} - {{sa_end}}</p>
+        <p>Sonntag: {{su_start}} - {{su_end}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>

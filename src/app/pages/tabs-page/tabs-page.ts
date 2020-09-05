@@ -15,15 +15,17 @@ export class TabsPage {
   color1 = "";
   color2 = "";
   color3 = "";
-  red = "primary"; 
+  red = "primary";
   grey = "medium";
 
   constructor(
     private router: Router
   ) { }
 
+  /* Select Tab
+   * --------------------------------------------------------
+   */
   getSelectedTab() {
-
     if (!this.router.url.includes("detail")) {
       if (this.tabs.getSelected() == "home") {
         this.color1 = this.red;
@@ -48,21 +50,33 @@ export class TabsPage {
     }
   }
 
+  /* First Tab
+   * --------------------------------------------------------
+   */
   tab1(icon, label) {
     icon.color = this.color1;
     label.color = this.color1;
   }
 
+  /* Second Tab
+   * --------------------------------------------------------
+   */
   tab2(icon, label) {
     icon.color = this.color2;
     label.color = this.color2;
   }
 
+  /* Third Tab
+   * --------------------------------------------------------
+   */
   tab3(icon, label) {
     icon.color = this.color3;
     label.color = this.color3;
   }
 
+  /* Home Tab
+  * --------------------------------------------------------
+  */
   home() {
     this.tabs.select("home");
     this.getSelectedTab();

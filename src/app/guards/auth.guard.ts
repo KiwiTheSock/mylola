@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot) {
-    
+    /*
     const expectedRole = route.data.role;
     return this.auth.user.pipe(
       take(1),
@@ -32,9 +32,7 @@ export class AuthGuard implements CanActivate {
             return true;
           } else {
             this.showAlert();
-            if (role == 'ROLE_USER') {
-              return this.router.parseUrl('/app/tabs/home');
-            } else if (role == 'ROLE_ADMIN'){
+            if (role == 'ROLE_USER' || role == 'ROLE_ADMIN') {
               return this.router.parseUrl('/app/tabs/home');
             } else {
               return this.router.parseUrl('/login');
@@ -46,6 +44,8 @@ export class AuthGuard implements CanActivate {
         }
       })
     )
+    */
+   return true;
   }
 
   async showAlert() {

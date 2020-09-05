@@ -115,45 +115,45 @@ export class ProfileCompanyEditPage {
    */
   ionViewWillEnter() {
     this.apiService.getCompanyById(1).subscribe((res: any) => {
-      this.name = res.name;
-      this.street = res.street;
-      this.housenumber = res.housenumber;
-      this.postcode = res.postcode;
-      this.place = res.place;
-      this.homepage = res.url.homepage;
-      this.email = res.email;
-      this.telephone = res.telephone;
-      this.facebook = res.url.facebook;
-      this.instagram = res.url.instagram;
-      this.twitter = res.url.twitter;
+      this.name = res[0].name;
+      this.street = res[0].street;
+      this.housenumber = res[0].housenumber;
+      this.postcode = res[0].postcode;
+      this.place = res[0].place;
+      this.homepage = res[1].url.homepage;
+      this.email = res[0].email;
+      this.telephone = res[0].telephone;
+      this.facebook = res[1].url.facebook;
+      this.instagram = res[1].url.instagram;
+      this.twitter = res[1].url.twitter;
 
       //Monday
-      this.mo_starttime = res.hours.monday.split(" - ")[0];
-      this.mo_endtime = res.hours.monday.split(" - ")[1];
+      this.mo_starttime = res[1].hours.monday.split(" - ")[0];
+      this.mo_endtime = res[1].hours.monday.split(" - ")[1];
 
       //Tuesday
-      this.tu_starttime = res.hours.tuesday.split(" - ")[0];
-      this.tu_endtime = res.hours.tuesday.split(" - ")[1];
+      this.tu_starttime = res[1].hours.tuesday.split(" - ")[0];
+      this.tu_endtime = res[1].hours.tuesday.split(" - ")[1];
 
       //Wednesday
-      this.we_starttime = res.hours.wednesday.split(" - ")[0];
-      this.we_endtime = res.hours.wednesday.split(" - ")[1];
+      this.we_starttime = res[1].hours.wednesday.split(" - ")[0];
+      this.we_endtime = res[1].hours.wednesday.split(" - ")[1];
 
       //Thursday
-      this.th_starttime = res.hours.thursday.split(" - ")[0];
-      this.th_endtime = res.hours.thursday.split(" - ")[1];
+      this.th_starttime = res[1].hours.thursday.split(" - ")[0];
+      this.th_endtime = res[1].hours.thursday.split(" - ")[1];
 
       //Friday
-      this.fr_starttime = res.hours.friday.split(" - ")[0];
-      this.fr_endtime = res.hours.friday.split(" - ")[1];
+      this.fr_starttime = res[1].hours.friday.split(" - ")[0];
+      this.fr_endtime = res[1].hours.friday.split(" - ")[1];
 
       //Saturday
-      this.sa_starttime = res.hours.saturday.split(" - ")[0];
-      this.sa_endtime = res.hours.saturday.split(" - ")[1];
+      this.sa_starttime = res[1].hours.saturday.split(" - ")[0];
+      this.sa_endtime = res[1].hours.saturday.split(" - ")[1];
 
       //Sunday
-      this.su_starttime = res.hours.sunday.split(" - ")[0];
-      this.su_endtime = res.hours.sunday.split(" - ")[1];
+      this.su_starttime = res[1].hours.sunday.split(" - ")[0];
+      this.su_endtime = res[1].hours.sunday.split(" - ")[1];
     })
   }
 
@@ -296,10 +296,10 @@ export class ProfileCompanyEditPage {
         this.validation_profileCompany.get("sa_endtime").reset();
       } else if (this.su_starttime > this.su_endtime) {
         this.validation_profileCompany.get("su_endtime").reset();
-      } 
+      }
 
       return false;
-      
+
     } else {
       console.log(this.validation_profileCompany.value)
       return true;
@@ -327,9 +327,9 @@ export class ProfileCompanyEditPage {
       "instagram": this.validation_profileCompany.value.instagram,
       "twitter": this.validation_profileCompany.value.twitter
     }
-
+ 
     let hours = {
-      "monday": this.validation_profileCompany.value.mo_starttime + " - " + this.validation_profileCompany.value.mo_endtime,
+      "monday": this.validation_profileCompany.value.mo_starttime  + " - " + this.validation_profileCompany.value.mo_endtime,
       "tuesday": this.validation_profileCompany.value.tu_starttime + " - " + this.validation_profileCompany.value.tu_endtime,
       "wednesday": this.validation_profileCompany.value.we_starttime + " - " + this.validation_profileCompany.value.we_endtime,
       "thursday": this.validation_profileCompany.value.th_starttime + " - " + this.validation_profileCompany.value.th_endtime,
@@ -338,7 +338,7 @@ export class ProfileCompanyEditPage {
       "sunday": this.validation_profileCompany.value.su_starttime + " - " + this.validation_profileCompany.value.su_endtime
     }
 
-    console.log(data);
+    //console.log(data);
 
     if (this.submitForm()) {
       this.apiService.updateCompany(1, data).subscribe(response => {
@@ -350,12 +350,12 @@ export class ProfileCompanyEditPage {
       this.apiService.updateHours(1, hours).subscribe(response => {
         console.log(response);
       })
-      this.router.navigateByUrl('/profile-company');
+
+      setTimeout(() => {
+        console.log('Verarbeite Daten');
+        this.router.navigateByUrl('/profile-company');
+      }, 500);
     }
 
-    
-    
-
   }
-
 }

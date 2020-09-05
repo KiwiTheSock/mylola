@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 //Ionic
-import { Platform, ActionSheetController, AlertController, ToastController } from '@ionic/angular';
+import { Platform, ActionSheetController, ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
 //Ionic-Native
@@ -22,6 +22,7 @@ import { AuthService } from '../../services/auth.service';
 import { mapStyle } from './mapStyle';
 import { Darkmode } from '../../services/darkmode';
 
+//Map
 declare var google: any;
 
 @Component({
@@ -29,42 +30,40 @@ declare var google: any;
   styleUrls: ['./detail.scss'],
   templateUrl: 'detail.html'
 })
-export class DetailPage {
 
-  ios: boolean;
+export class DetailPage {
 
   //Map
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
   map: any;
   infoWindows: any = [];
 
-  session: any;
-
+  //Back Button
   defaultHref = '';
+  ios: boolean;
 
   //Company Coupon Edit
   show = false;
 
-  //Share Data
-  text: string = 'Mylola';
-  link: string = 'https://www.mylola.de/';
+  //ToDo
+  session: any;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     private dataProvider: ConferenceData,
     private userProvider: UserData,
     private route: ActivatedRoute,
-    public platform: Platform,
-    public actionSheetCtrl: ActionSheetController,
-    public alertController: AlertController,
-    public modalController: ModalController,
+    private platform: Platform,
+    private actionSheetCtrl: ActionSheetController,
+    private modalController: ModalController,
     private socialSharing: SocialSharing,
     private authService: AuthService,
     private router: Router,
-    public toastController: ToastController,
+    private toastController: ToastController,
     private darkmode: Darkmode
   ) { }
 
+  //Back Button
   ngOnInit() {
     if (this.platform.platforms().includes("ios")) {
       this.ios = true;
@@ -74,6 +73,7 @@ export class DetailPage {
     }
   }
 
+  //ToDo
   ionViewWillEnter() {
     this.dataProvider.load().subscribe((data: any) => {
       if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
@@ -91,16 +91,15 @@ export class DetailPage {
       }
     });
 
-    this.edit();
-  }
-
-  ionViewDidEnter() {
     this.defaultHref = `/app/tabs/home`;
+
+    this.edit();
 
     this.showMap();
   }
 
-  /* Company Coupon Edit
+ 
+  /* Company Coupon Edit (ToDo)
   * --------------------------------------------------------
   */
   edit() {
@@ -109,7 +108,7 @@ export class DetailPage {
     }
   }
 
-  /* Favorites (API CALL)
+  /* Favorites (ToDo)
   * --------------------------------------------------------
   */
   toggleFavorite(session: any) {
@@ -122,16 +121,15 @@ export class DetailPage {
     }
   }
 
-  /* Share
+  /* Share (ToDo)
   * --------------------------------------------------------
   */
   shareSession(session: any) {
-    const url = this.link;
     const text = 'Test' + '\n';
     this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
   }
 
-  /* Notification (API CALL)
+  /* Notification (ToDo)
   * --------------------------------------------------------
   */
   notification(session: any) {
@@ -191,6 +189,13 @@ export class DetailPage {
     window.open(session.instagram, '_system', 'location=yes');
   }
 
+  /* Twitter
+  * --------------------------------------------------------
+  */
+  twitter(session: any) {
+    window.open(session.twitter, '_system', 'location=yes');
+  }
+
   /* Browser
   * --------------------------------------------------------
   */
@@ -212,7 +217,7 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   async openContact(session: any) {
-    const mode = this.ios; 
+    const mode = this.ios;
 
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Kontaktiere ' + session.name,
@@ -221,7 +226,7 @@ export class DetailPage {
           text: `Webseite (${session.website})`,
           icon: !mode ? 'website' : null,
           handler: () => {
-            //window.open(session.website);
+            //window.open(session.website); //Browser
             this.launchBrowser(session.website);
           }
         },
@@ -229,7 +234,7 @@ export class DetailPage {
           text: `Mail (${session.mail})`,
           icon: !mode ? 'mail' : null,
           handler: () => {
-            //window.open('mailto:' + session.mail);
+            //window.open('mailto:' + session.mail); //Browser
             this.sendEmail(session.mail);
           }
         },
@@ -246,7 +251,6 @@ export class DetailPage {
         }
       ]
     });
-
     await actionSheet.present();
   }
 
@@ -278,10 +282,10 @@ export class DetailPage {
       //'<h2 id="firstHeading" class="firstHEading">' + marker.title + '</h2>' +
       //'<p>Latitude: ' + marker.latitude + '</p>' +
       //'<p>Longitude: ' + marker.longitude + '</p>' +
-      '<ion-button id="navigate">Navigieren</ion-button>' +
+      '<ion-button fill="clear" id="navigate">Navigieren</ion-button>' +
       '</div>';
     let infoWindow = new google.maps.InfoWindow({
-      content: infoWindowContent
+      content: infoWindowContent,
     });
 
     marker.addListener('click', () => {
@@ -306,8 +310,8 @@ export class DetailPage {
     }
   }
 
+  //ToDo
   showMap() {
-
     this.dataProvider.getMap().subscribe((markers: any) => {
 
       //Get Data

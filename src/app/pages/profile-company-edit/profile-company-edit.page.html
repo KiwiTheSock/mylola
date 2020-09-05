@@ -4,7 +4,6 @@
 <!-- Content -->
 <ion-content fullscreen="true">
   <ion-grid class="content">
-
     <form [formGroup]="validation_profileCompany" (ngSubmit)="submitForm" novalidate>
 
     <!-- Profile Image -->
@@ -166,16 +165,15 @@
         Öffnungszeiten
       </ion-label>
     </ion-item-divider>
-
    
       <ion-row>
         <ion-col>
 
           <ion-item lines="none">
             <p><b>Montag</b></p>
-            <ion-datetime formControlName="mo_starttime" [value]="mo_starttime" displayFormat="HH:mm" pickerFormat="HH:mm"
+            <ion-datetime formControlName="mo_starttime" [value]="mo_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm"
               doneText="Fertig" cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="mo_endtime" [value]="mo_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="mo_endtime" [value]="mo_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
           </ion-item>
 
@@ -186,9 +184,9 @@
 
           <ion-item lines="none">
             <p><b>Dienstag</b></p>
-            <ion-datetime formControlName="tu_starttime" [value]="tu_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="tu_starttime" [value]="tu_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="tu_endtime" [value]="tu_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="tu_endtime" [value]="tu_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
           </ion-item>
 
@@ -199,9 +197,9 @@
 
           <ion-item lines="none">
             <p><b>Mittwoch</b></p>
-            <ion-datetime formControlName="we_starttime" [value]="we_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="we_starttime" [value]="we_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="we_endtime" [value]="we_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="we_endtime" [value]="we_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
           </ion-item>
 
@@ -212,9 +210,9 @@
 
           <ion-item lines="none">
             <p><b>Donnerstag</b></p>
-            <ion-datetime formControlName="th_starttime" [value]="th_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="th_starttime" [value]="th_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="th_endtime" [value]="th_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="th_endtime" [value]="th_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
           </ion-item>
 
@@ -225,9 +223,9 @@
 
           <ion-item lines="none">
             <p><b>Freitag</b></p>
-            <ion-datetime formControlName="fr_starttime" [value]="fr_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="fr_starttime" [value]="fr_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="fr_endtime" [value]="fr_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="fr_endtime" [value]="fr_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
           </ion-item>
 
@@ -238,9 +236,9 @@
 
           <ion-item lines="none">
             <p><b>Samstag</b></p>
-            <ion-datetime formControlName="sa_starttime" [value]="sa_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="sa_starttime" [value]="sa_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="sa_endtime" [value]="sa_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="sa_endtime" [value]="sa_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
           </ion-item>
 
@@ -251,9 +249,9 @@
 
           <ion-item lines="none">
             <p><b>Sonntag</b></p>
-            <ion-datetime formControlName="su_starttime" [value]="su_starttime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="su_starttime" [value]="su_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="su_endtime" [value]="su_endtime" displayFormat="HH:mm" pickerFormat="HH:mm" doneText="Fertig"
+            <ion-datetime formControlName="su_endtime" [value]="su_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
               cancelText="Abbrechen" required></ion-datetime>
           </ion-item>
 

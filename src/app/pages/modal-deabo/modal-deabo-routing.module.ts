@@ -1,6 +1,8 @@
+//Angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+//Others
 import { ModalDeaboPage } from './modal-deabo.page';
 
 const routes: Routes = [

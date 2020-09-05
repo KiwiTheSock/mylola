@@ -1,9 +1,9 @@
-/* Menu
+/* Content
  * --------------------------------------------------------
  */
-.menu{
-  width: 50px; 
-  height: 50px;
+ .content {
+  max-width: 650px;
+  margin: auto;
 }
 
 /* Logo
@@ -18,32 +18,6 @@
 .login-logo img {
   max-width: 250px;
   margin-top: 15%;
-}
-
-
-/* List
- * --------------------------------------------------------
- */
-.list {
-  margin-bottom: 0;
-}
-
-/* Content
- * --------------------------------------------------------
- */
-
-.content {
-  max-width: 650px;
-  margin: auto;
-}
-
-/* Mylola
- * --------------------------------------------------------
- */
- .mylola{
-  height: 20px;
-  margin: auto;
-  margin-right: 30px;
 }
 
 /* Links

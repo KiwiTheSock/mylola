@@ -22,14 +22,13 @@ import { Refresher } from '../../services/refresher';
 })
 export class FavoritesPage implements OnInit {
 
-  // Gets a reference to the list element
+  //ToDo
   @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
 
-  //Filter
+  //Filter (ToDo)
   tracks: { name: string, icon: string, isChecked: boolean }[] = [];
 
-  //Data
-  ios: boolean;
+  //Data (ToDo)
   dayIndex = 0;
   queryText = '';
   segment = 'favorites';
@@ -39,7 +38,7 @@ export class FavoritesPage implements OnInit {
   confDate: string;
   showSearchbar: boolean;
 
-  //Create Coupon
+  //Create Coupon 
   text: string = 'Mylola';
   link: string = 'https://www.mylola.de/';
 
@@ -61,15 +60,13 @@ export class FavoritesPage implements OnInit {
 
   ngOnInit() {
     this.updateSchedule();
-
-    this.ios = this.config.get('mode') === 'ios';
   }
 
   ngDoCheck() {
     this.updateSchedule();
   }
 
-  /* Update Timeline
+  /* Update Timeline (ToDO)
    * --------------------------------------------------------
    */
   updateSchedule() {
@@ -91,7 +88,7 @@ export class FavoritesPage implements OnInit {
     });
   }
 
-  /* Filter
+  /* Filter (ToDo)
    * --------------------------------------------------------
    */
   applyFilter(name) {
@@ -164,7 +161,7 @@ export class FavoritesPage implements OnInit {
     }
   }
 
-  /* Favorites
+  /* Favorites (ToDo)
    * --------------------------------------------------------
    */
   toggleFavorite(session: any) {
@@ -177,16 +174,14 @@ export class FavoritesPage implements OnInit {
     }
   }
 
-  /* Share
+  /* Share (ToDo)
    * --------------------------------------------------------
    */
   shareSession(session: any) {
-    const url = this.link;
-    const text = 'Test' + '\n';
-    this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
+    this.socialSharing.share(session.text, 'MEDIUM', null, session.facebook);
   }
 
-  /* Refresher
+  /* Refresher (ToDo)
    * --------------------------------------------------------
    */
   refresh() {

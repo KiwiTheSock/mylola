@@ -33,6 +33,9 @@ export class AuthService {
 
   }
 
+  /* Loading Users
+   * --------------------------------------------------------
+   */
   loadUser() {
     this.storage.get(TOKEN_KEY).then(data => {
       if (data) {
@@ -44,10 +47,10 @@ export class AuthService {
     })
   }
 
-  //API Call
+  /* Login
+   * --------------------------------------------------------
+   */
   login(login) {
-
-    this.apiService.apiToken(login);
 
     return this.apiService.login(login).pipe(
       take(1),
@@ -58,8 +61,8 @@ export class AuthService {
 
         let token_stringify = JSON.stringify(token);
         let t = token_stringify.split("\"");
-
         let decoded = helper.decodeToken(t[3]);
+
         this.userData.next(decoded);
         let storageObs = from(this.storage.set(TOKEN_KEY, t[3]));
         return storageObs;
@@ -67,21 +70,46 @@ export class AuthService {
     )
   }
 
-  //API Call
+  /* Register
+   * --------------------------------------------------------
+   */
   register(register) {
     return this.apiService.register(register);
   }
 
+  /* Logout
+   * --------------------------------------------------------
+   */
+  logout() {
+
+    this.apiService.logout();
+
+    this.storage.remove(TOKEN_KEY).then(() => {
+      this.userData.next(null);
+      this.storage.clear();
+      this.userData.value.roles = null;
+    });
+  }
+
+  /* Get User Subject
+   * --------------------------------------------------------
+   */
   getUserSubject() {
     return this.userData.asObservable();
   }
 
+  /* Get Role
+   * --------------------------------------------------------
+   */
   getRole() {
     return this.userData.value.roles;
   }
 
+  /* Has Role
+   * --------------------------------------------------------
+   */
   hasRoles(roles: string): boolean {
-
+    
     if (this.userData.value != null) {
       for (const oneRole of roles) {
         if (!this.userData.value.roles || !(this.userData.value.roles.includes(oneRole))) {
@@ -90,14 +118,6 @@ export class AuthService {
       }
       return true;
     }
-  }
-
-  logout() {
-    this.storage.remove(TOKEN_KEY).then(() => {
-      this.userData.next(null);
-      this.storage.clear();
-      this.userData.value.roles = null;
-    });
   }
 
 }

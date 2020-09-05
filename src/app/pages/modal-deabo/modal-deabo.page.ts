@@ -1,4 +1,7 @@
+//Angular
 import { Component, OnInit } from '@angular/core';
+
+//Ionic
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -6,31 +9,18 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './modal-deabo.page.html',
   styleUrls: ['./modal-deabo.page.scss'],
 })
-export class ModalDeaboPage implements OnInit {
+export class ModalDeaboPage {
 
   constructor(
     public modalCtrl : ModalController
   ) { }
 
-  ngOnInit() {
-  }
-
-  deabo(){
+  deabo(){ //ToDo
     console.log("Deabonniert!");
     this.dismiss();
   }
 
-  // Data passed in by componentProps
-  //@Input() users: string;
   dismiss() {
     this.modalCtrl.dismiss({ 'dismissed': true });
   }
-
-  // can "dismiss" itself and optionally pass back data
-  /*
-  selectUser(user: string):void {
-    this.modalCtrl.dismiss(user);
-  }
-  */
-
 }

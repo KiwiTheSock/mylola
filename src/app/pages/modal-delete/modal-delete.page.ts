@@ -15,22 +15,14 @@ export class ModalDeletePage implements OnInit {
   ngOnInit() {
   }
 
-  deleteCoupon(){
+  deleteCoupon(){ //ToDo
     console.log("Coupon gelöscht!");
     this.dismiss();
   }
 
-  // Data passed in by componentProps
-  //@Input() users: string;
+  
   dismiss() {
     this.modalCtrl.dismiss({ 'dismissed': true });
   }
-
-  // can "dismiss" itself and optionally pass back data
-  /*
-  selectUser(user: string):void {
-    this.modalCtrl.dismiss(user);
-  }
-  */
 
 }

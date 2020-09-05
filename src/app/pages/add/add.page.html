@@ -7,7 +7,7 @@
     <form [formGroup]="validation_add" (ngSubmit)="submitForm()">
 
       <!-- Coupon Image -->
-      <ion-row class="picture">
+      <ion-row class="image">
         <ion-col>
           <ion-card>
             <ion-card-content>
@@ -17,7 +17,8 @@
         </ion-col>
       </ion-row>
 
-      <ion-row class="picture-button">
+      <!-- Button Select Coupon Image -->
+      <ion-row class="buttons">
         <ion-col>
           <ion-button fill="outline" shape="round" (click)="selectImage()">
             Foto auswählen
@@ -26,7 +27,7 @@
       </ion-row>
 
       <!-- Category -->
-      <ion-row class="category">
+      <ion-row>
         <ion-col>
           <ion-item lines="none">
             <ion-select formControlName="category" placeholder="Kategorie" okText="Fertig" cancelText="Abbrechen">
@@ -39,7 +40,7 @@
         </ion-col>
       </ion-row>
 
-      <!-- Error messages -->
+      <!-- Error Messages Category -->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.category.errors?.required">
         Kategorie wird benötigt!
       </span>
@@ -51,24 +52,36 @@
         </ion-col>
       </ion-row>
 
-      <!-- Error messages -->
+      <!-- Error Messages Title -->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.titel.errors?.required">
         Titel wird benötigt!
       </span>
 
-      <!-- Text -->
-      <ion-row class="text">
+      <!-- Catcher -->
+      <ion-row class="catcher">
         <ion-col>
-          <ion-input formControlName="text" placeholder="Abrisstext"></ion-input>
+          <ion-input formControlName="catcher" placeholder="Abrisstext"></ion-input>
         </ion-col>
       </ion-row>
 
-      <!-- Error messages -->
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.text.errors?.required">
+      <!-- Error Messages Catcher -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.catcher.errors?.required">
         Abrisstext wird benötigt!
       </span>
 
-      <!-- Beschreibung -->
+      <!-- Code -->
+      <ion-row>
+        <ion-col>
+          <ion-input formControlName="code" placeholder="Couponcode"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <!-- Error Messages Code -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.code.errors?.required">
+        Couponcode wird benötigt!
+      </span>
+
+      <!-- Description -->
       <ion-row class="description">
         <ion-col>
           <ion-item lines="none">
@@ -77,22 +90,23 @@
         </ion-col>
       </ion-row>
 
-      <!-- Error messages -->
+      <!-- Error Messages Description -->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.required">
         Beschreibung wird benötigt!
       </span>
 
-      <!-- Time Span -->
+      <!-- Timespan -->
       <ion-row>
         <ion-col class="time">
           <p>Aktions- oder Veranstaltungszeitraums festlegen</p>
         </ion-col>
       </ion-row>
 
+      <!-- Start Date -->
       <ion-row>
         <ion-col>
           <ion-item lines="none">
-            <ion-datetime formControlName="starttime" displayFormat="HH:mm, DD MMMM YYYY"
+            <ion-datetime formControlName="startDate" displayFormat="HH:mm, DD MMMM YYYY"
               pickerFormat="DD-MMM-YYYY HH:mm" placeholder="Startzeit" doneText="Fertig" cancelText="Abbrechen"
               monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
               monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" max="2120"></ion-datetime>
@@ -100,15 +114,16 @@
         </ion-col>
       </ion-row>
 
-      <!-- Error messages -->
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.starttime.errors?.required">
+      <!-- Error messages Start Date-->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.startDate.errors?.required">
         Startzeit wird benötigt!
       </span>
 
+      <!-- End Date -->
       <ion-row>
         <ion-col>
           <ion-item lines="none">
-            <ion-datetime formControlName="endtime" displayFormat="HH:mm, DD MMMM YYYY" pickerFormat="DD-MMM-YYYY HH:mm"
+            <ion-datetime formControlName="endDate" displayFormat="HH:mm, DD MMMM YYYY" pickerFormat="DD-MMM-YYYY HH:mm"
               placeholder="Endzeit" doneText="Fertig" cancelText="Abbrechen"
               monthNames="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"
               monthShortNames="Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez" max="2120"></ion-datetime>
@@ -117,13 +132,13 @@
       </ion-row>
 
 
-      <!-- Error messages -->
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.endtime.errors?.required">
+      <!-- Error messages End Date -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.endDate.errors?.required">
         Endzeit vor Startzeit!
       </span>
 
-      <!-- Button -->
-      <ion-row class="picture-button">
+      <!-- Button Add Coupon -->
+      <ion-row class="buttons">
         <ion-col>
           <ion-button fill="outline" shape="round" type="submit" (click)="createCoupon()">
             Coupon erstellen

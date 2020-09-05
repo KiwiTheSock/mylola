@@ -18,16 +18,17 @@ export class DetailEditPage {
   isSubmitted = false;
 
   //Image
-  croppedImage = "../assets/img/add/halloffame_vinokino.png";
+  croppedImage: any;
 
   //Data
   public category: string = null;
   public titel: string = null;
   public catcher: string = null;
+  public code: string = null;
   public description: string = null;
   public startDate: string = null;
   public endDate: string = null;
-
+  public bannerFilename: string = null;
 
   constructor(
     private apiService: ApiService,
@@ -42,6 +43,7 @@ export class DetailEditPage {
       category: ['', Validators.required],
       titel: ['', Validators.required],
       catcher: ['', Validators.required],
+      code: ['', Validators.required],
       description: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
@@ -59,7 +61,11 @@ export class DetailEditPage {
       this.description = res.description;
       this.startDate = res.startDate;
       this.endDate = res.endDate;
+      this.code = res.code;
+      this.bannerFilename = res.bannerFilename;
+      this.croppedImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/" + res.bannerFilename;
     })
+
   }
 
   getCategory(){
@@ -152,17 +158,21 @@ export class DetailEditPage {
       "description": this.validation_detail.value.description,
       "startDate": this.validation_detail.value.startDate,
       "endDate": this.validation_detail.value.endDate,
-      "code": ""
+      "code": this.validation_detail.value.code
     }
 
-    //console.log(data);
+    console.log(data);
 
     if (this.submitForm() && !(this.validation_detail.value.starttime >= this.validation_detail.value.endtime)) {
 
       this.apiService.updateCoupon(1, data).subscribe(response => {
         console.log(response);
       })
-      this.router.navigateByUrl("/app/tabs/home/detail/1");
+
+      setTimeout(() => {
+        console.log('Verarbeite Daten');
+        this.router.navigateByUrl("/app/tabs/home/detail/1");
+      }, 500);
 
     } else {
       this.validation_detail.get("endtime").reset();

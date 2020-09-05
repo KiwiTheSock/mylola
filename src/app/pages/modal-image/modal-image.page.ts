@@ -1,6 +1,13 @@
+//Angular
 import { Component, ViewChild } from '@angular/core';
+
+//Ionic
 import { ModalController, Platform, NavParams } from '@ionic/angular';
+
+//Ionic-Native
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+//Others
 import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
@@ -10,12 +17,13 @@ import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
 })
 export class ModalImagePage {
 
+  //Images
   myImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
   croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
+  image;
 
+  //Source Type
   sourceType = this.navParams.get('sourceType');
-
-  aspectRatio: number;
   
   @ViewChild(ImageCropperComponent, { static: false }) angularCropper: ImageCropperComponent;
 
@@ -48,7 +56,7 @@ export class ModalImagePage {
     }
     
     this.camera.getPicture(options).then((imageData) => { 
-      this.myImage = "data:image/jpeg;base64," + imageData;
+      this.myImage = 'data:image/jpg;base64,' + imageData;
     });
   
   }

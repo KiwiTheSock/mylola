@@ -1,8 +1,11 @@
 //Angular
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConferenceData } from '../../services/conference-data';
+
+//Ionic
 import { ModalController } from '@ionic/angular';
+
+//Others
 import { ModalDeletePage } from '../modal-delete/modal-delete.page';
 import { ApiService } from '../../services/api.service';
 
@@ -13,8 +16,35 @@ import { ApiService } from '../../services/api.service';
 })
 export class ProfileCompanyPage {
 
-  profile: any;
-  coupons: any;
+  //Data
+  public profile: any;
+  public coupons: any;
+  public hours: any;
+  public url: any;
+  
+  public bannerfilename: any = null;
+  public logofilename: any = null;
+
+  public mo_start: string = null;
+  public mo_end: string = null;
+
+  public tu_start: string = null;
+  public tu_end: string = null;
+
+  public we_start: string = null;
+  public we_end: string = null;
+
+  public th_start: string = null;
+  public th_end: string = null;
+
+  public fr_start: string = null;
+  public fr_end: string = null; 
+
+  public sa_start: string = null;
+  public sa_end: string = null;
+
+  public su_start: string = null;
+  public su_end: string = null;
 
   constructor(
     private apiService: ApiService,
@@ -24,9 +54,44 @@ export class ProfileCompanyPage {
 
   ionViewWillEnter() {
     this.apiService.getCompanyById(1).subscribe((res: any) => {
-      this.profile = res;
+      this.profile = res[0];
       this.coupons = res.coupons;
+      this.hours = res[1].hours;
+      this.url = res[1].url;
+
+      console.log(res[0].bannerfilename)
+
+      //this.bannerfilename = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/" + res[0].bannerfilename;
+      //this.logofilename = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logo/" + res[0].logofilename;
+
+      this.mo_start = this.time(this.hours.monday.split(" - ")[0]);
+      this.mo_end = this.time(this.hours.monday.split(" - ")[1]);
+
+      this.tu_start = this.time(this.hours.tuesday.split(" - ")[0]);
+      this.tu_end = this.time(this.hours.tuesday.split(" - ")[1]);
+
+      this.we_start = this.time(this.hours.wednesday.split(" - ")[0]);
+      this.we_end = this.time(this.hours.wednesday.split(" - ")[1]);
+
+      this.th_start = this.time(this.hours.thursday.split(" - ")[0]);
+      this.th_end = this.time(this.hours.thursday.split(" - ")[1]);
+
+      this.fr_start = this.time(this.hours.friday.split(" - ")[0]);
+      this.fr_end = this.time(this.hours.friday.split(" - ")[1]);
+
+      this.sa_start = this.time(this.hours.saturday.split(" - ")[0]);
+      this.sa_end = this.time(this.hours.saturday.split(" - ")[1]);
+
+      this.su_start = this.time(this.hours.sunday.split(" - ")[0]);
+      this.su_end = this.time(this.hours.sunday.split(" - ")[1]);
     })
+  }
+
+  /* Get Hours and Minutes
+  * --------------------------------------------------------
+  */
+  time(date: any) {
+    return new Date(date).toLocaleTimeString().slice(0, -3);
   }
 
   /* Settings

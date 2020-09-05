@@ -1,6 +1,6 @@
 //Angular
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 
 //Ionic
@@ -10,14 +10,15 @@ import { ModalController, ActionSheetController } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
 
 //Others
-import { ModalImagePage } from '../modal-image/modal-image.page';
 import { ApiService } from '../../services/api.service';
+import { ModalImagePage } from '../modal-image/modal-image.page';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.page.html',
   styleUrls: ['./add.page.scss'],
 })
+
 export class AddPage {
 
   //Form Validation
@@ -30,10 +31,11 @@ export class AddPage {
   //Data
   public category: string = null;
   public titel: string = null;
-  public text: string = null;
+  public catcher: string = null;
+  public code: string = null;
   public description: string = null;
-  public starttime: string = null;
-  public endtime: string = null;
+  public startDate: string = null;
+  public endDate: string = null;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -55,15 +57,16 @@ export class AddPage {
       titel: ['', Validators.compose([
         Validators.maxLength(35),
         Validators.required])],
-      text: ['', Validators.compose([
+      catcher: ['', Validators.compose([
         Validators.maxLength(20),
         Validators.required])],
+      code: ['', Validators.required],
       description: ['', Validators.compose([
         Validators.maxLength(2000),
         Validators.required
       ])],
-      starttime: ['', Validators.required],
-      endtime: ['', Validators.required]
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required]
     });
   }
 
@@ -118,13 +121,6 @@ export class AddPage {
     }
   }
 
-  /* Error Messages
- * --------------------------------------------------------
- */
-  get errorControl() {
-    return this.validation_add.controls;
-  }
-
   /* Submit
    * --------------------------------------------------------
    */
@@ -139,25 +135,43 @@ export class AddPage {
     }
   }
 
+  /* Error Messages
+   * --------------------------------------------------------
+   */
+  get errorControl() {
+    return this.validation_add.controls;
+  }
+
+  /* Date Format (No Milliseconds)
+   * --------------------------------------------------------
+   */
+  time(date: any) {
+    return new Date(date.split("+")[0]).toISOString().slice(0, -5) + "+" + date.split("+")[1];
+  }
+
   /* Create Coupons (API CALL)
-  * --------------------------------------------------------
-  */
+   * --------------------------------------------------------
+   */
   createCoupon() {
+    let base64Image = this.croppedImage;
+    let imageData = this.dataURItoBlob(base64Image);
+    let formData = new FormData();
+    formData.append('profile', imageData, "filename.jpg");
 
     let data = {
       "category": this.validation_add.value.category,
       "titel": this.validation_add.value.titel,
-      "catcher": this.validation_add.value.text,
+      "catcher": this.validation_add.value.catcher,
       "description": this.validation_add.value.description,
-      "startDate": this.validation_add.value.starttime,
-      "endDate": this.validation_add.value.endtime,
-      "code": ""
+      "startDate": this.time(this.validation_add.value.startDate),
+      "endDate": this.time(this.validation_add.value.endDate),
+      "code": this.validation_add.value.code,
+      "bannerFilename": formData
     }
 
-    //console.log(data);
+    //console.log(this.croppedImage);
 
     if (this.submitForm() && !(this.validation_add.value.starttime > this.validation_add.value.endtime)) {
-
       this.apiService.addCoupon(1, data).subscribe(response => {
         console.log(response);
       })
@@ -165,14 +179,30 @@ export class AddPage {
 
       setTimeout(() => {
         this.validation_add.reset();
-       }, 500);
+      }, 500);
 
     } else {
       this.validation_add.get("endtime").reset();
     }
-
-
   }
+
+  dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
+    else
+      byteString = unescape(dataURI.split(',')[1]);
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], { type: mimeString });
+  }
+
 }
 
 

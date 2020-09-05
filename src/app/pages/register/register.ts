@@ -35,7 +35,7 @@ export class RegisterPage {
     this.defaultHref = `/app/tabs/home`;
   }
 
-/* Register
+/* Register (ToDo)
  * --------------------------------------------------------
  */
   register() {
@@ -43,11 +43,12 @@ export class RegisterPage {
       
       if(res) {
         this.userData.login(this.user.username);
-        this.router.navigateByUrl('/app/tabs/home');
+        console.log(res);
+        this.router.navigateByUrl('/login');
+
       } else {
         const alert = await this.alertCtrl.create({
-          header: 'Register Failed',
-          message: 'Wrong credentials.',
+          header: 'Registrieren fehlgeschlagen',
           buttons: ['OK']
         });
         await alert.present();

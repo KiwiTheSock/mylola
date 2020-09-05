@@ -21,9 +21,10 @@ export class ModalCouponPage {
     loop: true
   };
   
+  //ToDo
   session: any;
 
-  //Data
+  //Data //ToDo
   title = 'app';
   elementType = 'url';
   value = 'https://www.mylola.de/';
@@ -36,7 +37,7 @@ export class ModalCouponPage {
     
   ) { }
   
-  ionViewWillEnter() {
+  ionViewWillEnter() { //ToDo
     this.dataProvider.load().subscribe((data: any) => {
       if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
         const sessionId = this.route.snapshot.paramMap.get('sessionId');
@@ -54,16 +55,7 @@ export class ModalCouponPage {
     });
   }
 
-  // Data passed in by componentProps
-  //@Input() users: string;
   dismiss() {
     this.modalCtrl.dismiss({'dismissed': true});
   }
-
-  // can "dismiss" itself and optionally pass back data
-  /*
-  selectUser(user: string):void {
-    this.modalCtrl.dismiss(user);
-  }
-  */
 }

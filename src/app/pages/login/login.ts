@@ -6,11 +6,8 @@ import { Router } from '@angular/router';
 import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
-import { JwtHelperService } from "@auth0/angular-jwt";
 import { AlertController } from '@ionic/angular';
 
-const helper = new JwtHelperService();
-const TOKEN_KEY = 'jwt-token';
 
 @Component({
   selector: 'page-login',
@@ -26,21 +23,13 @@ export class LoginPage {
     password: ""
   }
 
-  //Back Button
-  defaultHref = '';
-
   constructor(
     private api: ApiService,
     private auth: AuthService,
     private alertCtrl: AlertController,
     private router: Router,
-    private userData: UserData
+    private userData: UserData,
   ) { }
-
-  //Back Button
-  ionViewDidEnter() {
-    this.defaultHref = `/app/tabs/home`;
-  }
 
   /* Login 
    * --------------------------------------------------------
@@ -48,9 +37,11 @@ export class LoginPage {
   login() { 
     
     this.auth.login(this.user).subscribe(async res => {
+
       if (res) {
         this.userData.login(this.user.username);
         this.router.navigateByUrl('/app/tabs/home');
+      
       } else {
         const alert = await this.alertCtrl.create({
           header: 'Login Failed',

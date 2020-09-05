@@ -23,9 +23,10 @@ export class ProfileCustomerPage {
     private modalController: ModalController
   ) { }
 
-
+ /* Data
+  * --------------------------------------------------------
+  */
   ionViewWillEnter() {
-   
     this.apiService.getCustomerById(1).subscribe((res: any) => {
       this.profile = res;
       this.abos = res.subscribers;
@@ -33,8 +34,8 @@ export class ProfileCustomerPage {
   }
 
   /* Settings
-  * --------------------------------------------------------
-  */
+   * --------------------------------------------------------
+   */
   openSettings() {
     this.router.navigateByUrl("/profile-customer-edit");
   }

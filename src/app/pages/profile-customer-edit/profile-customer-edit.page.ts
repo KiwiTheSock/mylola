@@ -107,7 +107,12 @@ export class ProfileCustomerEditPage {
       this.apiService.updateCustomer(1, data).subscribe(response => {
         console.log(response);
       })
-      this.router.navigateByUrl('/profile-customer');
+
+      setTimeout(() => {
+        console.log('Verarbeite Daten');
+        this.router.navigateByUrl('/profile-customer');
+      }, 500);
+      
     }
   }
 

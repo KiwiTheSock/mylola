@@ -53,9 +53,6 @@ export class HomePage implements OnInit {
   lat = null;
   lng = null;
 
-  //API Test
-  data: any;
-
   constructor(
     public alertCtrl: AlertController,
     public confData: ConferenceData,
@@ -79,70 +76,10 @@ export class HomePage implements OnInit {
     public apiService: ApiService,
     private geo: Geolocation
 
-  ) {
-    this.data = [];
-  }
+  ) {}
 
   ngOnInit() {
     this.updateSchedule();
-
-    //API TEST
-    let login = {
-      username: "Kevin",
-      password: "asdf1234"
-    }
-
-    let register = {
-      "username": "Dexter",
-      "password": "asdf1234",
-      "email":"dexter@test.com"
-    }
-
-    var coupon = {
-      "titel": "Ich bin die DREI",
-      "description": "blabasdassadasdasdasasdsadasdaasd asdasd la",
-      "catcher": "blaasd",
-      "code": "1234",
-      "startDate": "2000-14-01",
-      "endDate": "2001-14-01",
-      "category": "Shopping"
-    }
-
-    var hours = {
-      "monday": "14:00 - 18:00",
-      "tuesday": "14:00 - 18:00",
-      "wednesday": "14:00 - 18:00",
-      "thursday": "14:00 - 18:00",
-      "friday": "14:00 - 18:00",
-      "saturday": "14:00 - 18:00",
-      "sunday": "14:00 - 18:00"
-    }
-
-    var url = {
-      "homepage": "www.google2.de",
-      "facebook": "www.google2.de",
-      "instagram": "www.google2.de",
-      "twitter": "www.google2.de"
-    }
-
-    var customer = {
-      "street": "Straße"
-    }
-
-    var company = {
-      "name" : "Markmann(nicht)oderDoch",
-      "street" : "Am Pappelgraben",
-      "housenumber" : "56",
-      "postcode" : "49080",
-      "place" : "Osnabrueck",
-      "telephone" : "01713442859"
-    }
-    
-    this.apiService.login(login).subscribe(response => {
-      console.log(response);
-      this.data = response;
-    })
-    
   }
 
   ngDoCheck() {

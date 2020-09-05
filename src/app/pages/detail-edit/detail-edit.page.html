@@ -6,7 +6,7 @@
   <ion-grid class="content">
     <form [formGroup]="validation_detail" (ngSubmit)="submitForm()">
 
-      <!-- Title Image -->
+      <!-- Image -->
       <ion-item-divider>
         <ion-label>
           Couponbild
@@ -24,18 +24,18 @@
         </ion-col>
       </ion-row>
 
-      <!-- Name -->
+      <!-- Category -->
       <ion-item-divider>
         <ion-label>
           Kategorie
         </ion-label>
       </ion-item-divider>
 
-      <!-- Category -->
       <ion-row class="category">
         <ion-col>
           <ion-item lines="none">
-            <ion-select formControlName="category" value="{{getCategory()}}" placeholder="{{getCategory()}}" okText="Fertig" cancelText="Abbrechen">
+            <ion-select formControlName="category" value="{{getCategory()}}" placeholder="{{getCategory()}}"
+              okText="Fertig" cancelText="Abbrechen">
               <ion-select-option value="Gastro & Nightlife">Gastro & Nightlife</ion-select-option>
               <ion-select-option value="Shopping">Shopping</ion-select-option>
               <ion-select-option value="Freizeit & Erleben">Freizeit & Erleben</ion-select-option>
@@ -50,7 +50,7 @@
         Kategorie wird benötigt!
       </span>
 
-      <!-- Name -->
+      <!-- Title -->
       <ion-item-divider>
         <ion-label>
           Titel
@@ -70,7 +70,7 @@
         Titel wird benötigt.
       </span>
 
-      <!-- Text -->
+      <!-- Catcher -->
       <ion-item-divider>
         <ion-label>
           Abrisstext
@@ -88,6 +88,26 @@
       <!-- Error messages -->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.catcher.errors?.required">
         Abrisstext wird benötigt.
+      </span>
+
+       <!-- Code -->
+       <ion-item-divider>
+        <ion-label>
+          Couponcode
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-row>
+        <ion-col class="ion-padding-top ion-text-center">
+          <ion-item lines="none">
+            <ion-input formControlName="code" value="{{code}}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.code.errors?.required">
+        Couponcode wird benötigt!
       </span>
 
       <!-- Description -->
@@ -111,14 +131,14 @@
         Beschreibung wird benötigt.
       </span>
 
-      <!-- Social Media -->
+      <!-- Timespan -->
       <ion-item-divider>
         <ion-label>
           Aktions- oder Veranstaltungszeitraum
         </ion-label>
       </ion-item-divider>
 
-
+      <!-- Start Date -->
       <ion-row>
         <ion-col>
           <ion-item lines="none">
@@ -137,6 +157,7 @@
         Startzeit wird benötigt.
       </span>
 
+      <!-- End Date -->
       <ion-row>
         <ion-col>
           <ion-item lines="none">
@@ -155,8 +176,7 @@
         Endzeit vor Startzeit!
       </span>
 
-
-      <!-- Buttons -->
+      <!-- Button -->
       <ion-row>
         <ion-col>
           <ion-button fill="outline" shape="round" type="submit" (click)="editCoupon()">

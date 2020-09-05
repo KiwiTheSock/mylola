@@ -8,26 +8,18 @@
   text-align: center;
 }
 
-/* Buttons
+/* ion-select
  * --------------------------------------------------------
  */
-.buttons {
-  margin-top: 10px;
-  margin-bottom: 70px;
-}
+ ion-select {
+  border-radius: 5px !important;
+  border: 1px solid var(--ion-color-medium-shade) !important;
 
-/* Error
- * --------------------------------------------------------
- */
-.error {
-  color: red;
-}
+  --placeholder-opacity: 1 !important;
 
-/* ion-label
- * --------------------------------------------------------
- */
-.label {
-  width: 110px;
+  width: 100%;
+  justify-content: center;
+  max-width: 100% !important
 }
 
 /* ion-input
@@ -36,7 +28,21 @@
 ion-input {
   border-radius: 5px !important;
   border: 1px solid var(--ion-color-medium-shade) !important;
-  padding-left: 10px;
+}
+
+/* ion-textarea
+ * --------------------------------------------------------
+ */
+ ion-textarea {
+  border-radius: 5px !important;
+  border: 1px var(--ion-color-medium-shade) solid;
+}
+
+/* Start And End Date
+ * --------------------------------------------------------
+ */
+ p {
+  width: 90px;
 }
 
 /* ion-datetime
@@ -46,27 +52,12 @@ ion-datetime {
   border-radius: 5px !important;
   margin-left: 20px;
   border: 1px solid var(--ion-color-medium-shade) !important;
-  width: 200px;
+  width: 100%;
 }
 
-/* p
+/* Error
  * --------------------------------------------------------
  */
-p {
-  width: 90px;
-}
-
-/* ion-textarea
- * --------------------------------------------------------
- */
-ion-textarea {
-  border-radius: 5px !important;
-  border: 1px var(--ion-color-medium-shade) solid;
-}
-
-/* ion-select
- * --------------------------------------------------------
- */
-ion-select {
-  --placeholder-opacity: 1 !important;
+ .error {
+  color: red;
 }

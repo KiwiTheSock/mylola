@@ -8,8 +8,8 @@
       <ion-back-button *ngIf="!ios" [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
 
-    <!-- Title -->
-    <ion-title class="title">{{session?.name}}</ion-title>
+    <!-- Name -->
+    <ion-title class="name">{{session?.name}}</ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -18,19 +18,15 @@
 <ion-content fullscreen="true">
   <ion-grid class="content">
 
+    <!-- Banner And Logo -->
     <ion-row>
       <ion-col col-12 class="profile-background" *ngIf="session">
-
-        <!-- Banner -->
         <div>
           <ion-img src="./assets/img/banner/{{session.banner}}"></ion-img>
         </div>
-
-        <!-- Logo -->
         <ion-avatar>
           <ion-img src="./assets/img/logo/{{session.logo}}"></ion-img>
         </ion-avatar>
-
       </ion-col>
     </ion-row>
 
@@ -43,29 +39,23 @@
       </ion-col>
     </ion-row>
 
+    <!-- Icons And Time -->
     <ion-row>
-      <!-- Icons -->
       <ion-col col-6 *ngIf="session" class="icons">
-
         <ion-button (click)="toggleFavorite(session)">
           <ion-icon *ngIf="session.fav" name="bookmark-outline"></ion-icon>
           <ion-icon *ngIf="!session.fav" name="bookmark"></ion-icon>
         </ion-button>
-
         <ion-button (click)="shareSession(session)">
           <ion-icon slot="icon-only" name="share-social"></ion-icon>
         </ion-button>
-
       </ion-col>
-
-      <!-- Time -->
       <ion-col col-6 *ngIf="session">
         <p class="time">{{ session.upload | timePipe}}</p>
       </ion-col>
-
     </ion-row>
 
-    <!-- Text -->
+    <!-- Title and Description -->
     <ion-row>
       <ion-col col-12>
         <div *ngIf="session" class="text">
@@ -75,22 +65,21 @@
       </ion-col>
     </ion-row>
 
-    <!-- Button --> 
-    <ion-row>
-      <ion-col col-12 *ngIf="session" class="buttons" (click)="isLoggedIn(session)">
+    <!-- Coupon Button -->
+    <ion-row class="buttons">
+      <ion-col col-12 *ngIf="session" (click)="isLoggedIn(session)">
         <ion-button><b>{{session.button}}</b></ion-button>
       </ion-col>
     </ion-row>
-    
     <!--
     <ion-row>
-      <ion-col col-12 *ngIf="session" class="buttons">
+      <ion-col col-12 *ngIf="session">
         <ion-button color="dark" disabled="true"><b>{{session.button}}</b></ion-button>
       </ion-col>
     </ion-row>
     -->
 
-    <!-- Pictures -->
+    <!-- Coupon Image -->
     <ion-row>
       <ion-col col-12 *ngIf="session">
         <ion-img src="./assets/img/add/{{session.add}}"></ion-img>
@@ -99,7 +88,7 @@
 
     <!-- Location -->
     <ion-row>
-      <ion-col col-12 *ngIf="session" class="location">
+      <ion-col col-12 *ngIf="session" class="location-contact">
         <h4>Angebotsort</h4>
         <p><b>{{session.name}}</b></p>
         <p>{{session.street}}</p>
@@ -110,13 +99,20 @@
 
     <ion-item-divider></ion-item-divider>
 
+    <!-- Contact -->
     <ion-row>
-      <ion-col col-12 *ngIf="session" class="location">
+      <ion-col col-12 *ngIf="session" class="location-contact">
         <h4>Kontakt</h4>
-        <p class="red">{{session.website}}</p>
-        <p>{{session.mail}}</p>
-        <p class="red">{{session.phone}}</p>
-        <ion-button (click)="openContact(session)">Kontaktiere {{session.name}}</ion-button>    
+        <p class="red">
+          <ion-icon name="globe-outline"></ion-icon> {{session.website}}
+        </p>
+        <p>
+          <ion-icon name="mail-outline"></ion-icon> {{session.mail}}
+        </p>
+        <p class="red">
+          <ion-icon name="call-outline"></ion-icon> {{session.phone}}
+        </p>
+        <ion-button (click)="openContact(session)">Kontaktiere {{session.name}}</ion-button>
       </ion-col>
     </ion-row>
 
@@ -134,7 +130,10 @@
           <ion-icon name="logo-instagram"></ion-icon>
           <ion-label>Instagram</ion-label>
         </ion-chip>
-
+        <ion-chip color="twitter" button (click)="twitter(session)" *ngIf="session.twitter">
+          <ion-icon name="logo-twitter"></ion-icon>
+          <ion-label>Twitter</ion-label>
+        </ion-chip>
       </ion-col>
     </ion-row>
 
@@ -143,8 +142,9 @@
   <!-- Map -->
   <div #map class="map"></div>
 
-  <!-- Opening Hours-->
   <ion-grid class="content">
+
+    <!-- Opening Hours-->
     <ion-row>
       <ion-col col-12 *ngIf="session" class="opening">
         <h4>Öffnungszeiten</h4>
@@ -159,5 +159,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
