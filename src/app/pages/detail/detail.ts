@@ -21,6 +21,7 @@ import { ModalCouponPage } from '../modal-coupon/modal-coupon.page';
 import { AuthService } from '../../services/auth.service';
 import { mapStyle } from './mapStyle';
 import { Darkmode } from '../../services/darkmode';
+import { ApiService } from '../../services/api.service';
 
 //Map
 declare var google: any;
@@ -45,11 +46,12 @@ export class DetailPage {
   //Company Coupon Edit
   show = false;
 
-  //ToDo
+  //Data
   session: any;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
+    private apiService: ApiService,
     private dataProvider: ConferenceData,
     private userProvider: UserData,
     private route: ActivatedRoute,
@@ -75,6 +77,7 @@ export class DetailPage {
 
   //ToDo
   ionViewWillEnter() {
+    
     this.dataProvider.load().subscribe((data: any) => {
       if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
         const sessionId = this.route.snapshot.paramMap.get('sessionId');
@@ -90,20 +93,38 @@ export class DetailPage {
         }
       }
     });
+    
 
+    //Data
+    /*
+    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
+    this.apiService.getCouponById(sessionId).subscribe(res => {
+      this.session = res;
+    })
+    */
+
+    //Back BUtton
     this.defaultHref = `/app/tabs/home`;
+    
+    //Edit
+    //this.edit(sessionId);
 
-    this.edit();
-
+    //Map
     this.showMap();
   }
 
- 
+
   /* Company Coupon Edit (ToDo)
   * --------------------------------------------------------
   */
-  edit() {
-    if (this.authService.getRole() == "ROLE_COMPANY" && this.router.url === "/app/tabs/home/detail/1") {
+  edit(id) {
+
+    var company_id = 1;
+    this.apiService.getCouponsByCompany(company_id).subscribe(res => {
+
+    })
+
+    if (this.authService.getRole() == "ROLE_COMPANY" && this.router.url === "/app/tabs/home/detail/" + id) {
       this.show = true;
     }
   }
@@ -112,6 +133,13 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   toggleFavorite(session: any) {
+
+    var customer_id = 1;
+    var coupon_id = 1;
+
+    this.apiService.addFavorite(customer_id, coupon_id);
+
+    /*
     if (this.userProvider.hasFavorite(session.name)) {
       this.userProvider.removeFavorite(session.name);
       session.fav = true;
@@ -119,14 +147,14 @@ export class DetailPage {
       this.userProvider.addFavorite(session.name);
       session.fav = false;
     }
+    */
   }
 
-  /* Share (ToDo)
+  /* Share
   * --------------------------------------------------------
   */
-  shareSession(session: any) {
-    const text = 'Test' + '\n';
-    this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
+  shareSession() {
+    this.socialSharing.share("https://www.mylola.de") // "/?angebot=" + id
   }
 
   /* Notification (ToDo)

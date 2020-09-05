@@ -211,11 +211,11 @@ export class HomePage implements OnInit {
     }
   }
 
-  //Share
-  shareSession(session: any) {
-    const url = this.link;
-    const text = 'Test' + '\n';
-    this.socialSharing.share(text, 'MEDIUM', null, session.facebook);
+  /* Share
+   * --------------------------------------------------------
+   */
+  shareSession() {
+    this.socialSharing.share("https://www.mylola.de") // "/?angebot=" + id
   }
 
   //Refresh

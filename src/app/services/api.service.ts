@@ -41,7 +41,7 @@ export class ApiService {
     //console.log(this.loggedIn);
 
     //Token
-    if(this.token == null){
+    if (this.token == null) {
       this.storage.get(TOKEN_KEY).then(response => {
         this.token = response;
       })
@@ -224,6 +224,19 @@ export class ApiService {
 
     return this.httpClient
       .get(this.base_path + '/api/mydevaluations/' + id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //ToDo
+  getCouponsByCompany(id) {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

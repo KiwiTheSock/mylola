@@ -174,11 +174,11 @@ export class FavoritesPage implements OnInit {
     }
   }
 
-  /* Share (ToDo)
+  /* Share
    * --------------------------------------------------------
    */
-  shareSession(session: any) {
-    this.socialSharing.share(session.text, 'MEDIUM', null, session.facebook);
+  shareSession() {
+    this.socialSharing.share("https://www.mylola.de") // "/?angebot=" + id
   }
 
   /* Refresher (ToDo)
