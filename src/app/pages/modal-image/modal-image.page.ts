@@ -24,6 +24,9 @@ export class ModalImagePage {
 
   //Source Type
   sourceType = this.navParams.get('sourceType');
+
+  //Aspect Ratio
+  aspectRatio: number;
   
   @ViewChild(ImageCropperComponent, { static: false }) angularCropper: ImageCropperComponent;
 

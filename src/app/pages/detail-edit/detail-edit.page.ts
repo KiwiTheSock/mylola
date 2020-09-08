@@ -119,7 +119,10 @@ export class DetailEditPage {
       component: ModalImagePage,
       cssClass: 'modal-image-css',
       swipeToClose: true, //iOS
-      componentProps: { sourceType: sourceType }
+      componentProps: { 
+        sourceType: sourceType,
+        aspectRatio: 360 / 240
+      }
     });
 
     //Passed back data
@@ -213,7 +216,7 @@ export class DetailEditPage {
 
       setTimeout(() => {
         console.log('Verarbeite Daten');
-        this.router.navigateByUrl("/app/tabs/home/detail/1");
+        this.router.navigateByUrl("/app/tabs/home/detail/65");
       }, 500);
 
     } else {

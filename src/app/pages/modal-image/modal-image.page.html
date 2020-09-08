@@ -5,7 +5,7 @@
     <!-- Image Cropper -->
     <ion-row>
       <ion-col>
-        <image-cropper [imageBase64]="myImage" [maintainAspectRatio]="true" format="jpg"
+        <image-cropper [imageBase64]="myImage" [maintainAspectRatio]="true" [aspectRatio]="aspectRatio" format="jpg"
           (imageCropped)="imageCropped($event)" outputType="base64">
         </image-cropper>
       </ion-col>
