@@ -170,9 +170,10 @@ export class AddPage {
       "code": this.validation_add.value.code,
     }
 
+
     //console.log(this.croppedImage);
 
-    if (this.submitForm() && !(this.validation_add.value.starttime > this.validation_add.value.endtime)) {
+    if (this.submitForm() && !(this.validation_add.value.startDate > this.validation_add.value.endDate)) {
       this.apiService.addCoupon(1, data).subscribe((response:any) => {
         console.log(response.status);
       })
@@ -183,7 +184,7 @@ export class AddPage {
       }, 500);
 
     } else {
-      this.validation_add.get("endtime").reset();
+      this.validation_add.get("endDate").reset();
     }
   }
 

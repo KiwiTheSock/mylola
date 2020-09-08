@@ -57,6 +57,10 @@
         Titel wird benötigt!
       </span>
 
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.titel.errors?.minLength">
+        Titel darf nicht länger als 35 Zeichen sein!
+      </span>
+
       <!-- Catcher -->
       <ion-row class="catcher">
         <ion-col>
