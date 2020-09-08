@@ -53,40 +53,40 @@ export class ProfileCompanyPage {
   ) { }
 
   ionViewWillEnter() {
-    this.apiService.getCompanyById(1).subscribe((res: any) => {
+    this.apiService.getCompanyByIdentifier().subscribe((res: any) => {
 
-      //console.log(res);
+      //console.log(res.body);
 
-      this.profile = res[0];
-      this.coupons = res.coupons;
-      this.hours = res[1].hours;
-      this.url = res[1].url;
+      this.profile = res.body[0];
+      this.coupons = res.body.coupons;
+      this.hours = res.body[1].hours;
+      this.url = res.body[1].url;
 
       //console.log(res[0].bannerfilename)
 
       //this.bannerfilename = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/" + res[0].bannerfilename;
       //this.logofilename = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logo/" + res[0].logofilename;
+      
+      this.mo_start = (this.hours.monday.split(" - ")[0]);
+      this.mo_end = (this.hours.monday.split(" - ")[1]);
 
-      this.mo_start = this.time(this.hours.monday.split(" - ")[0]);
-      this.mo_end = this.time(this.hours.monday.split(" - ")[1]);
+      this.tu_start = (this.hours.tuesday.split(" - ")[0]);
+      this.tu_end = (this.hours.tuesday.split(" - ")[1]);
 
-      this.tu_start = this.time(this.hours.tuesday.split(" - ")[0]);
-      this.tu_end = this.time(this.hours.tuesday.split(" - ")[1]);
+      this.we_start = (this.hours.wednesday.split(" - ")[0]);
+      this.we_end = (this.hours.wednesday.split(" - ")[1]);
 
-      this.we_start = this.time(this.hours.wednesday.split(" - ")[0]);
-      this.we_end = this.time(this.hours.wednesday.split(" - ")[1]);
+      this.th_start = (this.hours.thursday.split(" - ")[0]);
+      this.th_end = (this.hours.thursday.split(" - ")[1]);
 
-      this.th_start = this.time(this.hours.thursday.split(" - ")[0]);
-      this.th_end = this.time(this.hours.thursday.split(" - ")[1]);
+      this.fr_start = (this.hours.friday.split(" - ")[0]);
+      this.fr_end = (this.hours.friday.split(" - ")[1]);
 
-      this.fr_start = this.time(this.hours.friday.split(" - ")[0]);
-      this.fr_end = this.time(this.hours.friday.split(" - ")[1]);
+      this.sa_start = (this.hours.saturday.split(" - ")[0]);
+      this.sa_end = (this.hours.saturday.split(" - ")[1]);
 
-      this.sa_start = this.time(this.hours.saturday.split(" - ")[0]);
-      this.sa_end = this.time(this.hours.saturday.split(" - ")[1]);
-
-      this.su_start = this.time(this.hours.sunday.split(" - ")[0]);
-      this.su_end = this.time(this.hours.sunday.split(" - ")[1]);
+      this.su_start = (this.hours.sunday.split(" - ")[0]);
+      this.su_end = (this.hours.sunday.split(" - ")[1]);
     })
   }
 

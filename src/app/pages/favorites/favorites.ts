@@ -3,17 +3,19 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Ionic
-import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
+import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, IonInfiniteScroll } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 
 //Ionic-Native
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 //Others
 import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
 import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'page-favorites',
@@ -22,25 +24,33 @@ import { Refresher } from '../../services/refresher';
 })
 export class FavoritesPage implements OnInit {
 
-  //ToDo
-  @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
+  //Infinite Scroll
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  page = 0;
+  maximumPages = 5;
 
-  //Filter (ToDo)
+  //Filter
   tracks: { name: string, icon: string, isChecked: boolean }[] = [];
-
-  //Data (ToDo)
-  dayIndex = 0;
-  queryText = '';
-  segment = 'favorites';
   excludeTracks: any = [];
-  shownSessions: any = [];
-  groups: any = [];
-  confDate: string;
+
+  //Old Data
+  //dayIndex = 0;
+  //queryText = '';
+  //segment = 'favorites';
+  //shownSessions: any = [];
+  //groups: any = [];
+  //confDate: string;
+
+  //Search
   showSearchbar: boolean;
 
-  //Create Coupon 
-  text: string = 'Mylola';
-  link: string = 'https://www.mylola.de/';
+  //Data
+  data: any;
+  fav: boolean = false;
+
+  //Position
+  lat = null;
+  lng = null;
 
   constructor(
     public alertCtrl: AlertController,
@@ -55,7 +65,9 @@ export class FavoritesPage implements OnInit {
     public popoverCtrl: PopoverController,
     public darkmode: Darkmode,
     public refresher: Refresher,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    public apiService: ApiService,
+    private geo: Geolocation
   ) { }
 
   ngOnInit() {
@@ -66,17 +78,8 @@ export class FavoritesPage implements OnInit {
     this.updateSchedule();
   }
 
-  /* Update Timeline (ToDO)
-   * --------------------------------------------------------
-   */
-  updateSchedule() {
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-      this.shownSessions = data.shownSessions;
-      this.groups = data.groups;
-    });
-  }
-
   ionViewWillEnter() {
+    //Filter
     this.confData.getTracks().subscribe((tracks: any[]) => {
       tracks.forEach(track => {
         this.tracks.push({
@@ -86,6 +89,14 @@ export class FavoritesPage implements OnInit {
         });
       });
     });
+
+    //Data
+    /*
+    var customer_id;
+    this.apiService.getFavoritesByCustomer(customer_id).subscribe((res: any) => {
+      this.data = res.body;
+    })
+    */
   }
 
   /* Filter (ToDo)
@@ -149,22 +160,46 @@ export class FavoritesPage implements OnInit {
     this.updateSchedule();
   }
 
-  btnActivate(ionicButton, name) {
-    //Design
-    if (ionicButton.color === 'danger') {
-      ionicButton.color = 'medium';
-      this.applyFilter(name);
-    }
-    else {
-      ionicButton.color = 'danger';
-      this.dismissFilter(name);
+  /* Update Timeline (ToDO)
+   * --------------------------------------------------------
+   */
+  updateSchedule() {
+    /*
+    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
+      this.groups = data.groups;
+    });
+    */
+  }
+
+  loadMore(infiniteScroll) {
+    this.page++;
+
+    //insert function here
+
+    console.log('Page: ', this.page);
+
+    if (this.page === this.maximumPages) {
+      this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
     }
   }
 
   /* Favorites (ToDo)
    * --------------------------------------------------------
    */
-  toggleFavorite(session: any) {
+  toggleFavorite(id: number) {
+
+    let customer_id;
+    this.apiService.setFavorite(customer_id, id);
+
+    //getCustomerCouponsById(customer_id)
+    //if id == einer Id aus getCustomerCouponsById,
+    // this.apiService.addFavorite(customer_id ,id);
+    //fav = true
+    //else
+    //deleteFavorite
+    //fav = false
+
+    /*
     if (this.user.hasFavorite(session.name)) {
       this.user.removeFavorite(session.name);
       session.fav = true;
@@ -172,6 +207,7 @@ export class FavoritesPage implements OnInit {
       this.user.addFavorite(session.name);
       session.fav = false;
     }
+    */
   }
 
   /* Share
@@ -186,5 +222,33 @@ export class FavoritesPage implements OnInit {
    */
   refresh() {
     this.refresher.doRefresh(event);
+  }
+
+  btnActivate(ionicButton, name) {
+    //Design
+    if (ionicButton.color === 'danger') {
+      ionicButton.color = 'medium';
+      this.applyFilter(name);
+    }
+    else {
+      ionicButton.color = 'danger';
+      this.dismissFilter(name);
+    }
+  }
+
+  //Get Lng And Lat
+  position() {
+    this.geo.getCurrentPosition({
+      timeout: 10000,
+      enableHighAccuracy: false
+    }).then(res => {
+      this.lat = res.coords.latitude;
+      this.lng = res.coords.longitude;
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    console.log("LNG: ", this.lng);
+    console.log("LAT: ", this.lat);
   }
 }

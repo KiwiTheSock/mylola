@@ -52,15 +52,15 @@ export class ProfileCustomerEditPage {
    * --------------------------------------------------------
    */
   ionViewWillEnter() {
-    this.apiService.getCustomerById(1).subscribe((res: any) => {
-      this.firstname = res.firstname;
-      this.lastname = res.lastname;
-      this.street = res.street;
-      this.housenumber = res.housenumber;
-      this.postcode = res.postcode;
-      this.place = res.place;
-      this.email = res.email;
-      this.telephone = res.telephone;
+    this.apiService.getCustomerByIdentifier().subscribe((res: any) => {
+      this.firstname = res.body.firstname;
+      this.lastname = res.body.lastname;
+      this.street = res.body.street;
+      this.housenumber = res.body.housenumber;
+      this.postcode = res.body.postcode;
+      this.place = res.body.place;
+      this.email = res.body.email;
+      this.telephone = res.body.telephone;
     })
   }
 

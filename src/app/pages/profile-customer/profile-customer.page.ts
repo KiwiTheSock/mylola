@@ -27,10 +27,14 @@ export class ProfileCustomerPage {
   * --------------------------------------------------------
   */
   ionViewWillEnter() {
-    this.apiService.getCustomerById(1).subscribe((res: any) => {
-      this.profile = res;
-      this.abos = res.subscribers;
+    this.apiService.getCustomerByIdentifier().subscribe((res: any) => {
+      this.profile = res.body;
+    });
+    this.apiService.getMySubscribtions().subscribe((res: any) => {
+      console.log(res);
+      this.abos = res.body;
     })
+
   }
 
   /* Settings

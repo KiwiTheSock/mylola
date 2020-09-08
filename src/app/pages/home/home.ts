@@ -25,29 +25,29 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./home.scss'],
 })
 export class HomePage implements OnInit {
-  // Gets a reference to the list element
-  @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
+
+  //Infinite Scroll
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-
-  tracks: { name: string, icon: string, isChecked: boolean }[] = [];
-
-  //Timeline
-  ios: boolean;
-  dayIndex = 0;
-  queryText = '';
-  segment = 'all';
-  excludeTracks: any = [];
-  shownSessions: any = [];
-  groups: any = [];
-  confDate: string;
-  showSearchbar: boolean;
-  lastY = 0;
-
   page = 0;
   maximumPages = 5;
 
-  text: string = 'Mylola ... teilen ... bla bla';
-  link: string = 'https://www.mylola.de/';
+  //Filter
+  tracks: { name: string, icon: string, isChecked: boolean }[] = [];
+  excludeTracks: any = [];
+
+  //Old Data
+  //dayIndex = 0;
+  //segment = 'all';
+  //groups: any = [];
+  //confDate: string;
+
+  //Search
+  showSearchbar: boolean;
+  queryText = '';
+
+  //Data
+  data: any;
+  fav: boolean = false;
 
   //Position
   lat = null;
@@ -75,8 +75,7 @@ export class HomePage implements OnInit {
     private tabs: TabsPage,
     public apiService: ApiService,
     private geo: Geolocation
-
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.updateSchedule();
@@ -86,8 +85,8 @@ export class HomePage implements OnInit {
     this.updateSchedule();
   }
 
-  //Filter
   ionViewWillEnter() {
+    //Filter
     this.confData.getTracks().subscribe((tracks: any[]) => {
       tracks.forEach(track => {
         this.tracks.push({
@@ -98,9 +97,18 @@ export class HomePage implements OnInit {
       });
     });
 
+    //Data
+    this.apiService.getCoupons().subscribe((res: any) => {
+      this.data = res.body;
+    })
+
+    //Home Tab
     this.tabs.home();
   }
 
+  /* Filter (ToDo)
+   * --------------------------------------------------------
+   */
   applyFilter(name) {
 
     if (name == 1) {
@@ -182,10 +190,20 @@ export class HomePage implements OnInit {
 
   //Update timeline
   updateSchedule() {
+    /*
     this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-      this.shownSessions = data.shownSessions;
       this.groups = data.groups;
     });
+    */
+
+  }
+
+  filterItems() {
+    console.log(this.data);
+    return this.data.filter(item => {
+      console.log(item);
+      return item.company[0].name.toLowerCase().indexOf(this.queryText.toLowerCase()) > -1;
+    })
   }
 
   loadMore(infiniteScroll) {
@@ -201,14 +219,30 @@ export class HomePage implements OnInit {
   }
 
   //Favorites
-  toggleFavorite(session: any) {
+  toggleFavorite(coupon_id: number) {
+
+    let customer_id;
+    this.apiService.setFavorite(customer_id, coupon_id);
+
+
+
+
+    //getCustomerCouponsById(customer_id)
+    //if id == einer Id aus getCustomerCouponsById,
+    // this.apiService.addFavorite(customer_id ,id);
+    //fav = true
+    //else
+    //deleteFavorite
+    //fav = false
+
+    /*
     if (this.user.hasFavorite(session.name)) {
       this.user.removeFavorite(session.name);
       session.fav = true;
     } else {
       this.user.addFavorite(session.name);
       session.fav = false;
-    }
+    }*/
   }
 
   /* Share
@@ -236,7 +270,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  //Wont work for browser
+  //Get Lng And Lat
   position() {
     this.geo.getCurrentPosition({
       timeout: 10000,

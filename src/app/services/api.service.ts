@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 //Others
 import { throwError, from, BehaviorSubject } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { ToastController } from '@ionic/angular';
 
 const TOKEN_KEY = 'jwt-token';
 
@@ -21,14 +22,15 @@ export class ApiService {
 
   //Token
   private token = null;
-  private httpOptions: any
+  private httpOptions: any;
 
-  //Login
-  private loggedIn: boolean = false;
+  //Username
+  private username = null;
 
   constructor(
     private httpClient: HttpClient,
     private storage: Storage,
+    private toastController: ToastController
   ) {
     this.getToken();
   }
@@ -38,7 +40,7 @@ export class ApiService {
    */
   getToken() {
 
-    //console.log(this.loggedIn);
+    console.log(this.username);
 
     //Token
     if (this.token == null) {
@@ -55,8 +57,10 @@ export class ApiService {
         'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',//'application/x-www-form-urlencoded',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + this.token
-      })
+      }),
     }
+
+    this.httpOptions["observe"] = 'response';
 
   }
 
@@ -84,7 +88,6 @@ export class ApiService {
   /* GET
    * --------------------------------------------------------
    */
-
   get(path: string) {
 
     this.getToken();
@@ -97,146 +100,15 @@ export class ApiService {
       )
   }
 
-
-  //Companies
-  //Params: path = '/api/companies'
-  getCompanies() {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/companies', this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Coupons
-  //Params: path = '/api/coupons'
-  getCoupons() {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/coupons', this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      );
-  }
-
-  //Customer
-  //Params: path = '/api/customers'
-  getCustomers() {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/customers', this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Devaluations
-  //Params: path = '/api/devaluations'
-  getDevaluations() {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/devaluations', this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
   /* GET (ID)
    * --------------------------------------------------------
    */
-
   getById(path: string, id: number) {
 
     this.getToken();
 
     return this.httpClient
       .get(this.base_path + path + id, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Companies
-  //Params: path = '/api/company/', id: number
-  getCompanyById(id: number) {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/company/' + id, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Coupons
-  //Params: path = '/api/coupons/', id: number
-  getCouponById(id: number) {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/coupons/' + id, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Customer
-  //Params: path = '/api/customer/', id: number
-  getCustomerById(id: number) {
-
-    if (this.token == null) {
-      console.log("HERE");
-    }
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/customer/' + id, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Devaluations
-  //Params: path = /api/mydevaluations', id: number
-  getDevaluationById(id: number) {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/mydevaluations/' + id, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //ToDo
-  getCouponsByCompany(id) {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -258,88 +130,15 @@ export class ApiService {
       )
   }
 
-
-  //Favorite
-  //Params: path = '/api/favorit/', customer_id: number, coupon_id: number
-  addFavorite(customer_id: number, coupon_id: number) {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/favorit/' + customer_id + '/' + coupon_id, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Devaluation 
-  //Params: path = '/api/devaluations/', id1: number, id2: number
-  addDevaluation(customer_id: number, coupon_id: number) {
-
-    this.getToken();
-
-    return this.httpClient
-      .get(this.base_path + '/api/devaluations/' + customer_id + '/' + coupon_id, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
   /* POST
    * --------------------------------------------------------
    */
-
   post(path: string, id: number, item) {
 
     this.getToken();
 
     return this.httpClient
       .post(this.base_path + path + id, JSON.stringify(item), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-
-  //Coupons
-  //Params: path = '/api/coupons/', id: number, item: array
-  addCoupon(company_id: number, item) {
-
-    this.getToken();
-
-    return this.httpClient
-      .post(this.base_path + '/api/coupons/' + company_id, JSON.stringify(item), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Hours 
-  //Params: path = '/api/hours/', id: number, item: array
-  addHours(company_id: number, item) {
-
-    this.getToken();
-
-    return this.httpClient
-      .post(this.base_path + '/api/hours/' + company_id, JSON.stringify(item), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //URL
-  //Params: path = '/api/url/', id: number, item: array
-  addURL(company_id: number, item) {
-
-    this.getToken();
-
-    return this.httpClient
-      .post(this.base_path + '/api/url' + company_id, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -361,76 +160,6 @@ export class ApiService {
       )
   }
 
-  //Company
-  //Params: path = '/api/company/', id: number, item: array
-  updateCompany(id: number, item) {
-
-    this.getToken();
-
-    return this.httpClient
-      .put(this.base_path + '/api/company/' + id, JSON.stringify(item), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Coupons
-  //Params: path = '/api/coupons/', id: number, item: array
-  updateCoupon(formData) {
-
-    this.getToken();
-
-    return this.httpClient
-      .post(this.base_path + '/api/coupons/update/61', formData, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Customer
-  //Params: path = '/api/customer/', id: number, item: array
-  updateCustomer(id: number, item) {
-
-    this.getToken();
-
-    return this.httpClient
-      .put(this.base_path + '/api/customer/' + id, JSON.stringify(item), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //Hours
-  //Params: path = /api/hours/', id: number, item: array
-  updateHours(id: number, item) {
-
-    this.getToken();
-
-    return this.httpClient
-      .put(this.base_path + '/api/hours/' + id, JSON.stringify(item), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  //URL
-  //Params: path = '/api/url', id: number, item: array
-  updateURL(id: number, item) {
-
-    this.getToken();
-
-    return this.httpClient
-      .put(this.base_path + '/api/url/' + id, JSON.stringify(item), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
   /* DELETE
    * --------------------------------------------------------
    */
@@ -446,7 +175,50 @@ export class ApiService {
       )
   }
 
-  //Company
+  /* COMPANY
+   * --------------------------------------------------------
+   */
+
+  //Params: path = '/api/companies'
+  getCompanies() {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/companies', this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+
+  }
+
+  //Params: path = '/api/company/'
+  getCompanyByIdentifier() {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/company/' + this.username, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/company/', id: number, item: array
+  updateCompany(id: number, item) {
+
+    this.getToken();
+
+    return this.httpClient
+      .put(this.base_path + '/api/company/' + id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   //Params: path = '/api/company/', id: number
   deleteCompany(id: number) {
 
@@ -460,7 +232,62 @@ export class ApiService {
       )
   }
 
-  //Coupons
+  /* COUPONS
+   * --------------------------------------------------------
+   */
+
+  //Params: path = '/api/coupons'
+  getCoupons() {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/coupons', this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/coupons/', id: any
+  getCouponById(id: number) {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/coupons/' + id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/coupons/', id: number, item: array
+  addCoupon(company_id: number, item) {
+
+    this.getToken();
+
+    return this.httpClient
+      .post(this.base_path + '/api/coupons/' + company_id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/coupons/', id: number, item: array
+  updateCoupon(id: number, formData) {
+
+    this.getToken();
+
+    return this.httpClient
+      .post(this.base_path + '/api/coupons/update/' + id, formData, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   //Params: path = '/api/coupons/', id: number
   deleteCoupon(id: number) {
 
@@ -474,7 +301,49 @@ export class ApiService {
       )
   }
 
-  //Coupons
+  /* CUSTOMER
+   * --------------------------------------------------------
+   */
+
+  //Params: path = '/api/customers'
+  getCustomers() {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/customers', this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/customer/'
+  getCustomerByIdentifier() {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/customer/' + this.username, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/customer/', id: number, item: array
+  updateCustomer(id: number, item) {
+
+    this.getToken();
+
+    return this.httpClient
+      .put(this.base_path + '/api/customer/' + id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   //Params: path = '/api/customer/', id: number
   deleteCustomer(id: number) {
 
@@ -488,17 +357,174 @@ export class ApiService {
       )
   }
 
+  /* DEVALUATION
+   * --------------------------------------------------------
+   */
+
+  //Params: path = '/api/devaluations'
+  getDevaluations() {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/devaluations', this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = /api/mydevaluations', id: number
+  getDevaluationById(id: number) {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/mydevaluations/' + id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/devaluations/setfavorit/', customer_id: number, coupon_id: number
+  setFavorite(customer_id: number, coupon_id: number) {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/devaluations/setfavorit/' + customer_id + '/' + coupon_id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/devaluations/', id1: number, id2: number
+  addDevaluation(customer_id: number, coupon_id: number) {
+
+    this.getToken();
+
+    return this.httpClient
+      .post(this.base_path + '/api/devaluations/' + customer_id + '/' + coupon_id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  /* HOURS
+   * --------------------------------------------------------
+   */
+
+  //Params: path = '/api/hours/', id: number, item: array
+  addHours(company_id: number, item) {
+
+    this.getToken();
+
+    return this.httpClient
+      .post(this.base_path + '/api/hours/' + company_id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = /api/hours/', id: number, item: array
+  updateHours(id: number, item) {
+
+    this.getToken();
+
+    return this.httpClient
+      .put(this.base_path + '/api/hours/' + id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  /* SUBSCRIBER
+   * --------------------------------------------------------
+   */
+
+  //Params: path = '/api/subscribe/', customer_id: number
+  getMySubscribtions() {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/subscribe/' + this.username, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/subscribe/', company_id: number
+  addSubscriber(company_id: number) {
+
+    this.getToken();
+
+    return this.httpClient
+      .get(this.base_path + '/api/subscribe/' + this.username + '/' + company_id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/subscribe/',company_id: number
+  deleteSubscriber(company_id: number) {
+
+    this.getToken();
+
+    return this.httpClient
+      .delete(this.base_path + '/api/subscribe/' + this.username + '/' + company_id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  /* URL
+   * --------------------------------------------------------
+   */
+
+  //Params: path = '/api/url/', id: number, item: array
+  addURL(company_id: number, item) {
+
+    this.getToken();
+
+    return this.httpClient
+      .post(this.base_path + '/api/url' + company_id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/url', id: number, item: array
+  updateURL(id: number, item) {
+
+    this.getToken();
+
+    return this.httpClient
+      .put(this.base_path + '/api/url/' + id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   /* Register (POST)
    * --------------------------------------------------------
    */
   register(item) {
 
-    this.loggedIn = true;
-
     this.getToken();
 
     return this.httpClient
-      .post(this.base_path + '/registerUser', item)
+      .post(this.base_path + '/registerUser', item, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -510,30 +536,26 @@ export class ApiService {
    */
   login(item) {
 
-    this.loggedIn = true;
-
-    this.getToken();
-
+    this.username = item.username;
+  
     return this.httpClient
       .post(this.base_path + '/api/login_check', item)
       .pipe(
         retry(2),
-        catchError(this.handleError)
-      )
+        catchError(this.handleError),
+      )      
   }
 
   /* Logout
    * --------------------------------------------------------
    */
   logout() {
-    this.loggedIn = false;
-
-    this.getToken();
+    this.username = "";
   }
 
-  /* Image
-     * --------------------------------------------------------
-     */
+  /* Images (POST)
+   * --------------------------------------------------------
+   */
   addImage(formData) {
 
     this.getToken();
@@ -545,5 +567,4 @@ export class ApiService {
         catchError(this.handleError)
       )
   }
-
 }

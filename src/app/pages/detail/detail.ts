@@ -47,6 +47,8 @@ export class DetailPage {
   ios: boolean;
 
   //Data
+  public data: any;
+
   //Company
   public bannerFilename_Company: string = null;
   public email: string = null;
@@ -62,19 +64,26 @@ export class DetailPage {
   public telephone: string = null;
 
   //URL
-  public website: string = null;
+  public homepage: string = null;
   public facebook: string = null;
   public instagram: string = null;
   public twitter: string = null;
 
   //Hours
-  public monday: string = null;
-  public tuesday: string = null;
-  public wednesday: string = null;
-  public thursday: string = null;
-  public friday: string = null;
-  public saturday: string = null;
-  public sunday: string = null;
+  public mo_start: string = null;
+  public mo_end: string = null;
+  public tu_start: string = null;
+  public tu_end: string = null;
+  public we_start: string = null;
+  public we_end: string = null;
+  public th_start: string = null;
+  public th_end: string = null;
+  public fr_start: string = null;
+  public fr_end: string = null;
+  public sa_start: string = null;
+  public sa_end: string = null;
+  public su_start: string = null;
+  public su_end: string = null;
 
   //Coupon
   public bannerFilename_Coupon: string = null;
@@ -121,8 +130,53 @@ export class DetailPage {
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
     this.apiService.getCouponById(sessionId).subscribe(res => {
 
-      console.log(res);
+      let jsonResult = JSON.parse(JSON.stringify(res));
+      this.data = jsonResult;
 
+      //Company
+      this.bannerFilename_Company = jsonResult.body.company[0].bannerFilename;
+      this.email = jsonResult.body.company[0].email;
+      this.housenumber = jsonResult.body.company[0].housenumber;
+      this.company_id = jsonResult.body.company[0].company_id;
+      this.lat = jsonResult.body.company[0].lat;
+      this.lng = jsonResult.body.company[0].lng;
+      this.logofilename = jsonResult.body.company[0].logofilename;
+      this.name = jsonResult.body.company[0].name;
+      this.place = jsonResult.body.company[0].place;
+      this.postcode = jsonResult.body.company[0].postcode;
+      this.street = jsonResult.body.company[0].street;
+      this.telephone = jsonResult.body.company[0].telephone;
+
+      //URL
+      this.homepage = jsonResult.body.company[1].url.homepage;
+      this.facebook = jsonResult.body.company[1].url.facebook;
+      this.instagram = jsonResult.body.company[1].url.instagram;
+      this.twitter = jsonResult.body.company[1].url.twitter;
+
+      //Hours
+      this.mo_start = this.time(jsonResult.body.company[1].hours.monday.split(" - ")[0]);
+      this.mo_end = this.time(jsonResult.body.company[1].hours.monday.split(" - ")[1]);
+      this.tu_start = this.time(jsonResult.body.company[1].hours.tuesday.split(" - ")[0]);
+      this.tu_end = this.time(jsonResult.body.company[1].hours.tuesday.split(" - ")[1]);
+      this.we_start = this.time(jsonResult.body.company[1].hours.wednesday.split(" - ")[0]);
+      this.we_end = this.time(jsonResult.body.company[1].hours.wednesday.split(" - ")[1]);
+      this.th_start = this.time(jsonResult.body.company[1].hours.thursday.split(" - ")[0]);
+      this.th_end = this.time(jsonResult.body.company[1].hours.thursday.split(" - ")[1]);
+      this.fr_start = this.time(jsonResult.body.company[1].hours.friday.split(" - ")[0]);
+      this.fr_end = this.time(jsonResult.body.company[1].hours.friday.split(" - ")[1]);
+      this.sa_start = this.time(jsonResult.body.company[1].hours.saturday.split(" - ")[0]);
+      this.sa_end = this.time(jsonResult.body.company[1].hours.saturday.split(" - ")[1]);
+      this.su_start = this.time(jsonResult.body.company[1].hours.sunday.split(" - ")[0]);
+      this.su_end = this.time(jsonResult.body.company[1].hours.sunday.split(" - ")[1]);
+
+      //Coupon
+      this.bannerFilename_Coupon = jsonResult.body.bannerFilename_Coupon;
+      this.catcher = jsonResult.body.catcher;
+      this.code = jsonResult.body.code;
+      this.createdAt = jsonResult.body.createdAt.date;
+      this.description = jsonResult.body.description;
+      this.coupon_id = jsonResult.body.coupon_id;
+      this.titel = jsonResult.body.titel;
     });
 
 
@@ -136,6 +190,12 @@ export class DetailPage {
     this.showMap();
   }
 
+  /* Get Hours and Minutes
+   * --------------------------------------------------------
+   */
+  time(date: any) {
+    return new Date(date).toLocaleTimeString().slice(0, -3);
+  }
 
   /* Company Coupon Edit (ToDo)
   * --------------------------------------------------------
@@ -144,6 +204,7 @@ export class DetailPage {
 
     /*
     var company_id = 1;
+      const sessionId: number = +this.route.snapshot.paramMap.get('sessionId'); == CouponsByCompanyId
     this.apiService.getCouponsByCompany(company_id).subscribe(res => {
     })
     */
@@ -157,11 +218,11 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   toggleFavorite() {
-
+    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
     var customer_id = 1;
     var coupon_id = 1;
 
-    this.apiService.addFavorite(customer_id, coupon_id);
+    this.apiService.setFavorite(customer_id, coupon_id);
 
     /*
     if (this.userProvider.hasFavorite(session.name)) {
@@ -186,14 +247,16 @@ export class DetailPage {
   */
   notification() {
 
-    //this.apiService.addAbo();
+    let company_id = this.data.body.company[0].id
+
+    this.apiService.addSubscriber(company_id);
 
     this.presentToast()
   }
 
   async presentToast() {
     const toast = await this.toastController.create({
-      //message: session.name + ' abonniert.',
+      message: this.name + ' abonniert.',
       duration: 2000
     });
     toast.present();
@@ -203,11 +266,14 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   async presentModal() {
+
+    const coupon_id: number = +this.route.snapshot.paramMap.get('sessionId');
+  
     const modal = await this.modalController.create({
       component: ModalCouponPage,
       cssClass: 'modal-css',
       swipeToClose: true, //iOS
-      //componentProps: { session: session }
+      componentProps: {coupon_id: coupon_id}
     });
 
     await modal.present();
@@ -225,7 +291,7 @@ export class DetailPage {
     if (this.authService.getRole() == null) {
       this.router.navigateByUrl('/login');
     } else {
-      //this.presentModal(session)
+      this.presentModal()
     }
   }
 
@@ -277,11 +343,11 @@ export class DetailPage {
       header: 'Kontaktiere ' + name,
       buttons: [
         {
-          text: `Webseite (${this.website})`,
+          text: `Webseite (${this.homepage})`,
           icon: !mode ? 'website' : null,
           handler: () => {
-            //window.open(session.website); //Browser
-            this.launchBrowser(this.website);
+            //window.open(session.homepage); //Browser
+            this.launchBrowser(this.homepage);
           }
         },
         {
@@ -312,7 +378,8 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   openSettings() {
-    this.router.navigateByUrl("/detail-edit");
+    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
+    this.router.navigateByUrl("/app/tabs/home/detail/" + sessionId + "/detail-edit");
   }
 
   /* Map
@@ -365,31 +432,31 @@ export class DetailPage {
   }
 
   showMap() {
-   
-      //Marker
-      var marker: any = {
-        name: this.name,
-        lat: this.lat,
-        lng: this.lng
-      }
 
-      //Location
-      const location = new google.maps.LatLng(marker.lat, marker.lng);
-      let style = [];
-      const options = {
-        center: location,
-        zoom: 15,
-        disableDefaultUI: true,
-      }
+    //Marker
+    var marker: any = {
+      name: this.name,
+      lat: this.lat,
+      lng: this.lng
+    }
 
-      //Darkmode
-      if (this.darkmode.dark) {
-        style = mapStyle;
-      }
+    //Location
+    const location = new google.maps.LatLng(marker.lat, marker.lng);
+    let style = [];
+    const options = {
+      center: location,
+      zoom: 15,
+      disableDefaultUI: true,
+    }
 
-      //Create Map
-      this.map = new google.maps.Map(this.mapRef.nativeElement, { options, styles: style });
-      this.addMarkersToMap(marker);
+    //Darkmode
+    if (this.darkmode.dark) {
+      style = mapStyle;
+    }
+
+    //Create Map
+    this.map = new google.maps.Map(this.mapRef.nativeElement, { options, styles: style });
+    this.addMarkersToMap(marker);
   }
 }
 

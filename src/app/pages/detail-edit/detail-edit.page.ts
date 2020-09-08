@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
@@ -36,7 +36,8 @@ export class DetailEditPage {
     public formBuilder: FormBuilder,
     public actionSheetController: ActionSheetController,
     private camera: Camera,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private route: ActivatedRoute
   ) {
     //Validators
     this.validation_detail = this.formBuilder.group({
@@ -54,21 +55,23 @@ export class DetailEditPage {
    * --------------------------------------------------------
    */
   ionViewWillEnter() {
-    this.apiService.getCouponById(61).subscribe((res: any) => {
-      this.category = res.category.name;
-      this.titel = res.titel;
-      this.catcher = res.catcher;
-      this.description = res.description;
-      this.startDate = res.startDate;
-      this.endDate = res.endDate;
-      this.code = res.code;
-      this.bannerFilename = res.bannerFilename;
-      this.croppedImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/" + res.bannerFilename;
+    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
+
+    this.apiService.getCouponById(sessionId).subscribe((res: any) => {
+      this.category = res.body.category.name;
+      this.titel = res.body.titel;
+      this.catcher = res.body.catcher;
+      this.description = res.body.description;
+      this.startDate = res.body.startDate;
+      this.endDate = res.body.endDate;
+      this.code = res.body.code;
+      this.bannerFilename = res.body.bannerFilename;
+      this.croppedImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/" + res.body.bannerFilename;
     })
 
   }
 
-  getCategory(){
+  getCategory() {
     return this.category;
   }
 
@@ -140,7 +143,7 @@ export class DetailEditPage {
       console.log('Please provide all the required values!');
       return false;
     } else {
-      console.log(this.validation_detail.value);
+      //console.log(this.validation_detail.value);
       return true;
     }
   }
@@ -150,10 +153,16 @@ export class DetailEditPage {
    */
 
   editCoupon() {
+
+    //Session ID
+    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
+
+    //Image
     let base64Image = this.croppedImage;
     let imageData = this.dataURItoBlob(base64Image);
     let formData = new FormData();
-    /*
+
+    //FormData
     formData.append('category', this.validation_detail.value.category);
     formData.append('titel', this.validation_detail.value.titel);
     formData.append('catcher', this.validation_detail.value.catcher);
@@ -161,10 +170,9 @@ export class DetailEditPage {
     formData.append('startDate', this.validation_detail.value.startDate);
     formData.append('endDate', this.validation_detail.value.endDate);
     formData.append('code', this.validation_detail.value.code);
-    */
-    formData.append('bannerFilename', imageData, "filename.png");
-    
+    formData.append('bannerFilename', imageData, "bannerFilename.png");
 
+    //Data
     let data = {
       "category": this.validation_detail.value.category,
       "titel": this.validation_detail.value.titel,
@@ -175,22 +183,24 @@ export class DetailEditPage {
       "code": this.validation_detail.value.code,
     }
 
+    //formData.append('data', JSON.stringify(data));
+
     //console.log(data);
 
     if (this.submitForm() && !(this.validation_detail.value.starttime >= this.validation_detail.value.endtime)) {
 
       /* FUNKTIONIERT NICHT */
-     
-      this.apiService.updateCoupon(formData).subscribe(response => {
+ /*
+      this.apiService.updateCoupon(sessionId, data).subscribe(response => {
         console.log(response);
       })
-
+ */
       /* FUNKTIONIERT */
-       /*
-      this.apiService.addImage(formData).subscribe(response => {
-        console.log(response);
+     
+      this.apiService.addImage(formData).subscribe((response:any) => {
+        console.log(response.status);
       })
-      */
+      
 
       setTimeout(() => {
         console.log('Verarbeite Daten');

@@ -10,9 +10,11 @@ import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home';
 import { HomePageRoutingModule } from './home-routing.module';
 import { SharedModule } from '../../directives/shared.module';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule,
     FormsModule,
     IonicModule,

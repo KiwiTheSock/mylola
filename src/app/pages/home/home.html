@@ -14,7 +14,7 @@
 
     <!-- Search Function -->
     <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText"
-      (ionChange)="updateSchedule()" (ionCancel)="showSearchbar = false" placeholder="Suchen"></ion-searchbar>
+      (ionChange)="filterItems()" (ionCancel)="showSearchbar = false" placeholder="Suchen"></ion-searchbar>
 
     <!-- Search Icon -->
     <ion-buttons slot="end">
@@ -88,28 +88,27 @@
   </ion-refresher>
 
   <!-- List -->
-  <ion-list #scheduleList [hidden]="shownSessions === 0" class="list">
-    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+  <ion-list class="list">
+    <ion-item-group *ngFor="let items of data"> <!-- [hidden]="group.hide" FILTER? -->
 
       <!-- Item -->
-      <div *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
-        [hidden]="session.hide" class="item">
+      <div *ngFor="let item of items" class="item"> <!-- [hidden]="session.hide" [attr.track]="session.tracks[0] | lowercase" FILTER? -->
         <ion-grid>
 
           <!-- First Row -->
           <ion-row class="first-row">
 
             <!-- Logo -->
-            <ion-col col-4 class="logo">
-              <ion-avatar *ngIf="session">
-                <ion-img src="./assets/img/logo/{{session.logo}}"></ion-img>
+            <ion-col class="logo">
+              <ion-avatar>
+                <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/{{item.company[0].logofilename}}"></ion-img>
               </ion-avatar>
             </ion-col>
 
             <!-- Name -->
-            <ion-col col-4 class="name">
+            <ion-col class="name">
               <ion-label>
-                <p>{{session.name}}</p>
+                <p> {{item.company[0].name}}</p>
               </ion-label>
             </ion-col>
 
@@ -119,44 +118,44 @@
           <ion-row>
 
             <!-- Picture and Tear-off -->
-            <ion-col col-12 *ngIf="session">
-              
-              <ion-img src="./assets/img/add/{{session.add}}" routerLink="/app/tabs/home/detail/{{session.id}}">
+            <ion-col>
+
+              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/{{item.bannerFilename}}" routerLink="/app/tabs/home/detail/{{item.id}}">
               </ion-img>
-              
+
               <div class="tear-off">
                 <ion-img src="./assets/img/mylola/Abrissecke_rund.png"
-                  routerLink="/app/tabs/home/detail/{{session.id}}"></ion-img>
-                <p class="">{{session.addtext}}</p>
+                  routerLink="/app/tabs/home/detail/{{item.id}}"></ion-img>
+                <p class="">{{item.catcher}}</p>
               </div>
             </ion-col>
-            
+
             <!-- 
-            <ion-col col-12 *ngIf="session" class="used">
+            <ion-col class="used">
               
-              <ion-img src="./assets/img/add/{{session.add}}" routerLink="/app/tabs/home/detail/{{session.id}}">
+              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/{{item.bannerFilename}}" routerLink="/app/tabs/home/detail/{{item.id}}">
               </ion-img>
               
               <div class="tear-off">
                 <ion-img src="./assets/img/mylola/Abrissecke_rund.png"
-                  routerLink="/app/tabs/home/detail/{{session.id}}"></ion-img>
-                <p class="">{{session.addtext}}</p>
+                  routerLink="/app/tabs/home/detail/{{item.id}}"></ion-img>
+                <p class="">{{item.catcher}}</p>
               </div>
 
             </ion-col>
             -->
-            
+
           </ion-row>
 
           <!-- Third Row -->
           <ion-row>
 
             <!-- Icons -->
-            <ion-col col-1 class="icons">
+            <ion-col class="icons">
               <ion-buttons>
-                <ion-button id="button1" (click)="toggleFavorite(session)">
-                  <ion-icon *ngIf="session.fav" slot="icon-only" name="bookmark-outline"></ion-icon>
-                  <ion-icon *ngIf="!session.fav" slot="icon-only" name="bookmark"></ion-icon>
+                <ion-button id="button1" (click)="toggleFavorite(item.id)">
+                  <ion-icon *ngIf="!fav" slot="icon-only" name="bookmark-outline"></ion-icon>
+                  <ion-icon *ngIf="fav" slot="icon-only" name="bookmark"></ion-icon>
                 </ion-button>
                 <ion-button id="button2" (click)="shareSession()">
                   <ion-icon slot="icon-only" name="share-social"></ion-icon>
@@ -165,15 +164,15 @@
             </ion-col>
 
             <!-- Title -->
-            <ion-col col-10 class="title">
+            <ion-col class="title">
               <ion-label>
-                <p>{{session.title}}</p>
+                <p>{{item.titel}}</p>
               </ion-label>
             </ion-col>
 
             <!-- Time -->
-            <ion-col col-1 class="time">
-              <p>{{ session.upload | timePipe}}</p>
+            <ion-col class="time">
+              <p>{{ item.createdAt.date | timePipe}}</p>
             </ion-col>
 
           </ion-row>
@@ -196,7 +195,7 @@
   </ion-list>
 
   <!-- Placeholder -->
-  <ion-list-header [hidden]="shownSessions">
+  <ion-list-header *ngIf="!data">
     <p class="placeholder">Keine Einträge gefunden</p>
   </ion-list-header>
 

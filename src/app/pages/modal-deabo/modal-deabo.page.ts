@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 //Ionic
 import { ModalController } from '@ionic/angular';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-modal-deabo',
@@ -12,11 +13,14 @@ import { ModalController } from '@ionic/angular';
 export class ModalDeaboPage {
 
   constructor(
+    public apiService: ApiService,
     public modalCtrl : ModalController
   ) { }
 
-  deabo(){ //ToDo
-    console.log("Deabonniert!");
+  deabo(){
+  
+    let company_id; //= this.data.body.company[0].id
+    this.apiService.deleteSubscriber(company_id);
     this.dismiss();
   }
 

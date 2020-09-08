@@ -9,7 +9,7 @@
     </ion-buttons>
 
     <!-- Title -->
-    <ion-title class="title">{{name}}</ion-title>
+    <ion-title class="name">{{name}}</ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -22,7 +22,7 @@
     <ion-row>
       <ion-col col-12 class="profile-background" >
         <div>
-          <ion-img src="./assets/img/banner/{{bannerFilename_Company}}"></ion-img>>
+          <ion-img src="./assets/img/banner/{{bannerFilename_Company}}"></ion-img>
         </div>
         <ion-avatar>
           <ion-img src="./assets/img/logo/{{logofilename}}"></ion-img>
@@ -93,7 +93,7 @@
         <p><b>{{name}}</b></p>
         <p>{{street}}</p>
         <p>{{place}}</p>
-        <ion-button (click)="notification()">{{name}} abonnieren</ion-button>
+        <ion-button (click)="notification()" *appHasRole="['ROLE_USER']">{{name}} abonnieren</ion-button >
       </ion-col>
     </ion-row>
 
@@ -103,7 +103,7 @@
       <ion-col col-12  class="location-contact">
         <h4>Kontakt</h4>
         <p class="red">
-          <ion-icon name="globe-outline"></ion-icon> {{website}}
+          <ion-icon name="globe-outline"></ion-icon> {{homepage}}
         </p>
         <p>
           <ion-icon name="mail-outline"></ion-icon> {{email}}
@@ -147,13 +147,13 @@
     <ion-row>
       <ion-col col-12  class="opening">
         <h4>Öffnungszeiten</h4>
-        <p>{{monday}}</p>
-        <p>{{tuesday}}</p>
-        <p>{{wednesday}}</p>
-        <p>{{thursday}}</p>
-        <p>{{friday}}</p>
-        <p>{{saturday}}</p>
-        <p>{{sunday}}</p>
+        <p>Montag: {{mo_start}} - {{mo_end}}</p>
+        <p>Dienstag: {{tu_start}} - {{tu_end}}</p>
+        <p>Mittwoch: {{we_start}} - {{we_end}}</p>
+        <p>Donnerstag: {{th_start}} - {{th_end}}</p>
+        <p>Freitag: {{fr_start}} - {{fr_end}}</p>
+        <p>Samstag: {{sa_start}} - {{sa_end}}</p>
+        <p>Sonntag: {{su_start}} - {{su_end}}</p>
         <br>
       </ion-col>
     </ion-row>

@@ -171,8 +171,8 @@ export class AddPage {
     //console.log(this.croppedImage);
 
     if (this.submitForm() && !(this.validation_add.value.starttime > this.validation_add.value.endtime)) {
-      this.apiService.addCoupon(1, data).subscribe(response => {
-        console.log(response);
+      this.apiService.addCoupon(1, data).subscribe((response:any) => {
+        console.log(response.status);
       })
       this.router.navigateByUrl('/app/tabs/home');
 

@@ -28,6 +28,7 @@ export class ConferenceData {
     return this.data;
   }
 
+  /* RELEVANT FÜR SEARCH
   getTimeline(
     dayIndex: number,
     queryText = '',
@@ -61,6 +62,7 @@ export class ConferenceData {
       })
     );
   }
+  */
 
   filterSession(
     session: any,
@@ -113,6 +115,7 @@ export class ConferenceData {
     );
   }
 
+/*  
   getMap() {
     return this.load().pipe(
       map((data: any) => {
@@ -136,4 +139,5 @@ export class ConferenceData {
       })
     );
   }
+  */
 }

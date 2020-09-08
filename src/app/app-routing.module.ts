@@ -59,10 +59,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
   },
   {
-    path: 'detail-edit',
-    loadChildren: () => import('./pages/detail-edit/detail-edit.module').then(m => m.DetailEditPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
   },

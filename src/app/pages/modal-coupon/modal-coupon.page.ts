@@ -22,51 +22,37 @@ export class ModalCouponPage {
     loop: true
   };
 
-  //ToDo
-  session: any;
-
-  //Data //ToDo
-  title = 'app';
+  //Coupon ID
+  coupon_id: number;
+ 
+  //Coupon
+  catcher: any;
+  value: any;
   elementType = 'url';
-  value = 'https://www.mylola.de/';
-  used = false;
 
   constructor(
     private apiService: ApiService,
     public modalCtrl: ModalController,
     public dataProvider: ConferenceData,
     private route: ActivatedRoute,
-
   ) { }
 
-  ionViewWillEnter() { //ToDo
+  ionViewWillEnter() {
+    this.apiService.getCouponById(this.coupon_id).subscribe(res => {
+     
+      let jsonResult = JSON.parse(JSON.stringify(res));
 
-    this.dataProvider.load().subscribe((data: any) => {
-      if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
-        const sessionId = this.route.snapshot.paramMap.get('sessionId');
-        for (const group of data.schedule[0].groups) {
-          if (group && group.sessions) {
-            for (const session of group.sessions) {
-              if (session && session.id === sessionId) {
-                this.session = session;
-                break;
-              }
-            }
-          }
-        }
-      }
-    });
-    
-    this.apiService.getCouponById(1).subscribe(res => {
-      this.session = res;
+      //console.log(jsonResult);
+
+      this.value = jsonResult.body.code;
+      this.catcher = jsonResult.body.catcher;
     });
   }
 
   dismiss() {
 
     var customer_id = 1;
-    var coupon_id = 1;
-    this.apiService.addDevaluation(customer_id, coupon_id);
+    this.apiService.addDevaluation(customer_id, this.coupon_id);
 
     this.modalCtrl.dismiss({ 'dismissed': true });
   }

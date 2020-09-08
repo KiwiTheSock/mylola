@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Others
 import { TabsPage } from './tabs-page';
+import { AuthGuard } from '../../guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,7 +20,20 @@ const routes: Routes = [
           },
           {
             path: 'detail/:sessionId',
-            loadChildren: () => import('../detail/detail.module').then(m => m.DetailModule)
+            children: [
+              {
+                path: '',
+                loadChildren: () => import('../detail/detail.module').then(m => m.DetailModule)
+              },
+              {
+                path: 'detail-edit',
+                loadChildren: () => import('../detail-edit/detail-edit.module').then(m => m.DetailEditPageModule),
+                canActivate: [AuthGuard],
+                data: {
+                  role: 'ROLE_COMPANY'
+                }
+              }
+            ]
           }
         ]
       },

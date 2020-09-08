@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -26,12 +26,13 @@ export class LoginPage {
   public password: string = null;
 
   constructor(
-    private api: ApiService,
+    private apiService: ApiService,
     private auth: AuthService,
     private alertCtrl: AlertController,
     private router: Router,
     private userData: UserData,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public toastController: ToastController
   ) {
     //Validators
     this.validation_login = this.formBuilder.group({
@@ -53,8 +54,8 @@ export class LoginPage {
   submitForm() {
     this.isSubmitted = true;
     if (!this.validation_login.valid) {
-      console.log('Please provide all the required values!')
-      //Leer Meldung: Bitte geben Sie Daten ein
+      //console.log('Please provide all the required values!')
+      this.presentToast("Bitte geben Sie ihre Daten vollständig an!")
       return false;
 
     } else {
@@ -77,20 +78,33 @@ export class LoginPage {
 
     if (this.submitForm()) {
 
-      this.auth.login(data).subscribe(async res => {
+      this.auth.login(data)
+      .subscribe((result) => {
        
-        if (res) {
+        if(result){
           this.userData.login(this.validation_login.value.username);
           this.router.navigateByUrl('/app/tabs/home');
-
         }
+
+      }, (error) => {
+        //console.log(error);
+        this.presentToast("Falscher Benutzername oder Passwort!");
       });
     }
 
     setTimeout(() => {
       this.validation_login.reset();
-    }, 500);
+    }, 2000);
 
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+    });
+    toast.present();
   }
 
 }
