@@ -43,10 +43,17 @@ export class DetailEditPage {
     //Validators
     this.validation_detail = this.formBuilder.group({
       category: ['', Validators.required],
-      titel: ['', Validators.required],
-      catcher: ['', Validators.required],
+      titel: ['', Validators.compose([
+        Validators.maxLength(35),
+        Validators.required])],
+      catcher: ['', Validators.compose([
+        Validators.maxLength(20),
+        Validators.required])],
       code: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', Validators.compose([
+        Validators.maxLength(2000),
+        Validators.required
+      ])],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       check: ['', ]

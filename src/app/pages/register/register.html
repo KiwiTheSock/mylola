@@ -4,69 +4,95 @@
 <!-- Content -->
 <ion-content>
   <ion-grid class="content">
+    <form [formGroup]="validation_register" (ngSubmit)="submitForm" novalidate>
 
-    <!-- Logo -->
-    <ion-row class="signup-logo">
-      <ion-col>
-        <img src="./assets/img/mylola/mylola_slogan_red.png" alt="Ionic Logo">
-      </ion-col>
-    </ion-row>
+      <!-- Logo -->
+      <ion-row class="signup-logo">
+        <ion-col>
+          <img src="./assets/img/mylola/mylola_slogan_red.png" alt="Ionic Logo">
+        </ion-col>
+      </ion-row>
 
-    <!-- Username -->
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
-          <ion-label position="stacked">Benutzername</ion-label>
-          <ion-input type="text" clearInput placeholder="Benutzername" [(ngModel)]="user.username"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <!-- Username -->
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">Benutzername</ion-label>
+            <ion-input type="text" clearInput placeholder="Benutzername" formControlName="username"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <!-- E-Mail -->
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
-          <ion-label position="stacked">E-Mail</ion-label>
-          <ion-input type="email" clearInput placeholder="E-Mail" [(ngModel)]="user.email"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+       <!-- Error messages -->
+       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.username.errors?.required">
+        Benutzername wird benötigt.
+      </span>
 
-    <!-- Password -->
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
-          <ion-label position="stacked">Passwort</ion-label>
-          <ion-input type="password" clearInput placeholder="Passwort" [(ngModel)]="user.password"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <!-- E-Mail -->
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">E-Mail</ion-label>
+            <ion-input type="email" clearInput placeholder="E-Mail" formControlName="email"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
-          <ion-label position="stacked">Passwort wiederholen</ion-label>
-          <ion-input type="password" clearInput placeholder="Passwort wiederholen" [(ngModel)]="user.password2"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+       <!-- Error messages -->
+       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+        Email wird benötigt.
+      </span>
 
-    <!-- Register -->
-    <ion-row class="ion-padding">
-      <ion-col>
-        <ion-button (click)="register()" type="submit" expand="block">Registrieren</ion-button>
-      </ion-col>
-    </ion-row>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+        Geben Sie eine gültige Email an.
+      </span>
 
-    <!-- Link -->
-    <ion-row>
-      <ion-col>
-        <ion-button fill="clear" routerLink="/login">
-          Zum Login
-        </ion-button>
-      </ion-col>
-    </ion-row>
+      <!-- Password -->
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">Passwort</ion-label>
+            <ion-input type="password" clearInput placeholder="Passwort" formControlName="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
+       <!-- Error messages -->
+       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+        Passwort wird benötigt.
+      </span>
+
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none">
+            <ion-label position="stacked">Passwort wiederholen</ion-label>
+            <ion-input type="password" clearInput placeholder="Passwort wiederholen" formControlName="password2">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+       <!-- Error messages -->
+       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password2.errors?.required">
+        Passwort wiederholen wird benötigt.
+      </span>
+
+      <!-- Register -->
+      <ion-row class="ion-padding">
+        <ion-col>
+          <ion-button (click)="register()" type="submit" expand="block">Registrieren</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <!-- Link -->
+      <ion-row>
+        <ion-col>
+          <ion-button fill="clear" routerLink="/login">
+            Zum Login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </form>
   </ion-grid>
-
 </ion-content>

@@ -22,20 +22,10 @@
             <ion-input formControlName="firstname" value="{{firstname}}" required></ion-input>
           </ion-item>
 
-          <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.required">
-            Vorname wird benötigt.
-          </span>
-
           <ion-item lines="none">
             <ion-label class="label"><b>Nachname</b></ion-label>
             <ion-input formControlName="lastname" value="{{lastname}}" required></ion-input>
           </ion-item>
-
-          <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
-            Nachname wird benötigt.
-          </span>
 
         </ion-col>
       </ion-row>
@@ -55,21 +45,11 @@
             <ion-input formControlName="street" value="{{street}}" required></ion-input>
           </ion-item>
 
-          <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.street.errors?.required">
-            Straße wird benötigt.
-          </span>
-
           <ion-item lines="none">
             <ion-label class="label"><b>Hausnummer</b></ion-label>
             <ion-input formControlName="housenumber" value="{{housenumber}}" required>
             </ion-input>
           </ion-item>
-
-          <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.housenumber.errors?.required">
-            Hausnummer wird benötigt.
-          </span>
 
           <ion-item lines="none">
             <ion-label class="label"><b>PLZ</b></ion-label>
@@ -85,11 +65,6 @@
             <ion-label class="label"><b>Stadt</b></ion-label>
             <ion-input formControlName="place" value="{{place}}" required></ion-input>
           </ion-item>
-
-          <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.place.errors?.required">
-            Stadt wird benötigt.
-          </span>
 
         </ion-col>
       </ion-row>

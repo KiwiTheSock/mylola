@@ -531,7 +531,7 @@ export class ApiService {
     this.getToken();
 
     return this.httpClient
-      .post(this.base_path + '/registerUser', item, this.httpOptions)
+      .post(this.base_path + '/registerUser', item)
       .pipe(
         retry(2),
         catchError(this.handleError)

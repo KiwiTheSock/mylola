@@ -35,12 +35,12 @@ export class ProfileCustomerEditPage {
   ) {
     //Validators
     this.validation_profileCustomer = this.formBuilder.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      street: ['', [Validators.required]],
-      housenumber: ['', [Validators.required]],
+      firstname: ['', []],
+      lastname: ['', []],
+      street: ['', []],
+      housenumber: ['', []],
       postcode: ['', [Validators.pattern('^[0-9]{5}$')]],
-      place: ['', [Validators.required]],
+      place: ['', []],
       email: ['', Validators.compose([
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])],

@@ -57,7 +57,7 @@
         Titel wird benötigt!
       </span>
 
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.titel.errors?.minLength">
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.titel.errors?.maxlength">
         Titel darf nicht länger als 35 Zeichen sein!
       </span>
 
@@ -71,6 +71,10 @@
       <!-- Error Messages Catcher -->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.catcher.errors?.required">
         Abrisstext wird benötigt!
+      </span>
+
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.catcher.errors?.maxlength">
+        Abrisstext darf nicht länger als 20 Zeichen sein!
       </span>
 
       <!-- Code -->
@@ -97,6 +101,10 @@
       <!-- Error Messages Description -->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.required">
         Beschreibung wird benötigt!
+      </span>
+
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.maxlength">
+        Beschreibung darf nicht länger als 2000 Zeichen sein!
       </span>
 
       <ion-row>

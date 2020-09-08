@@ -6,175 +6,216 @@
   <ion-grid class="content">
     <form [formGroup]="validation_profileCompany" (ngSubmit)="submitForm" novalidate>
 
-    <!-- Profile Image -->
-    <ion-item-divider>
-      <ion-label>
-        Profilbild
-      </ion-label>
+      <!-- Profile Image -->
+      <ion-item-divider>
+        <ion-label>
+          Profilbild
+        </ion-label>
 
-      <ion-button slot="end" fill="outline" shape="round" (click)="profilePicture()">
-        Profilbild ändern
-      </ion-button>
+        <ion-button slot="end" fill="outline" shape="round" (click)="profilePicture()">
+          Profilbild ändern
+        </ion-button>
 
-    </ion-item-divider>
+      </ion-item-divider>
 
-    <ion-row>
-      <ion-col class="profile-image">
-        <ion-avatar>
-          <img [src]="croppedProfileImage">
-        </ion-avatar>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col class="profile-image">
+          <ion-avatar>
+            <img [src]="croppedProfileImage">
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
 
-    <!-- Title Image -->
-    <ion-item-divider>
-      <ion-label>
-        Titelbild
-      </ion-label>
+      <!-- Title Image -->
+      <ion-item-divider>
+        <ion-label>
+          Titelbild
+        </ion-label>
 
-      <ion-button slot="end" fill="outline" shape="round" (click)="titlePicture()">
-        Titelbild ändern
-      </ion-button>
+        <ion-button slot="end" fill="outline" shape="round" (click)="titlePicture()">
+          Titelbild ändern
+        </ion-button>
 
-    </ion-item-divider>
+      </ion-item-divider>
 
-    <ion-row>
-      <ion-col col-12 class="ion-padding-top ion-text-center">
-        <div>
-          <img [src]="croppedTitleImage">
-        </div>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col col-12 class="ion-padding-top ion-text-center">
+          <div>
+            <img [src]="croppedTitleImage">
+          </div>
+        </ion-col>
+      </ion-row>
 
-    <!-- Company Name -->
-    <ion-item-divider>
-      <ion-label>
-        Name
-      </ion-label>
-    </ion-item-divider>
+      <!-- Company Name -->
+      <ion-item-divider>
+        <ion-label>
+          Name
+        </ion-label>
+      </ion-item-divider>
 
-    <ion-row>
-      <ion-col class="ion-padding-top ion-text-center">
-        <ion-item lines="none">
-          <ion-label class="label1"><b>Name</b></ion-label>
-          <ion-input formControlName="name" value="{{name}}" required></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col class="ion-padding-top ion-text-center">
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Name</b></ion-label>
+            <ion-input formControlName="name" value="{{name}}" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-     <!-- Error messages -->
-     <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
-      Name wird benötigt.
-    </span>
+      <!-- Error messages -->
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
+        Name wird benötigt.
+      </span>
 
-    <!-- Location -->
-    <ion-item-divider>
-      <ion-label>
-        Addresse
-      </ion-label>
-    </ion-item-divider>
+      <!-- Location -->
+      <ion-item-divider>
+        <ion-label>
+          Addresse
+        </ion-label>
+      </ion-item-divider>
 
-    <ion-row>
-      <ion-col>
+      <ion-row>
+        <ion-col>
 
-        <ion-item lines="none">
-          <ion-label class="label1"><b>Straße</b></ion-label>
-          <ion-input formControlName="street"  value="{{street}}" required></ion-input>
-        </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Straße</b></ion-label>
+            <ion-input formControlName="street" value="{{street}}" required></ion-input>
+          </ion-item>
 
-        <ion-item lines="none">
-          <ion-label class="label1"><b>Hausnummer</b></ion-label>
-          <ion-input formControlName="housenumber" value="{{housenumber}}" required></ion-input>
-        </ion-item>
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.street.errors?.required">
+            Straße wird benötigt.
+          </span>
 
-        <ion-item lines="none">
-          <ion-label class="label1"><b>PLZ</b></ion-label>
-          <ion-input formControlName="postcode" value="{{postcode}}" required></ion-input>
-        </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Hausnummer</b></ion-label>
+            <ion-input formControlName="housenumber" value="{{housenumber}}" required></ion-input>
+          </ion-item>
 
-        <ion-item lines="none">
-          <ion-label class="label1"><b>Stadt</b></ion-label>
-          <ion-input formControlName="place" value="{{place}}" required></ion-input>
-        </ion-item>
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.housenumber.errors?.required">
+            Hausnummer wird benötigt.
+          </span>
 
-      </ion-col>
-    </ion-row>
+          <ion-item lines="none">
+            <ion-label class="label1"><b>PLZ</b></ion-label>
+            <ion-input formControlName="postcode" value="{{postcode}}" required></ion-input>
+          </ion-item>
 
-    <!-- Contact -->
-    <ion-item-divider>
-      <ion-label>
-        Kontakt
-      </ion-label>
-    </ion-item-divider>
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.postcode.errors?.required">
+            Postleitzahl wird benötigt.
+          </span>
 
-    <ion-row>
-      <ion-col>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.postcode.errors?.pattern">
+            Geben Sie eine gültige Postleitzahl an.
+          </span>
 
-        <ion-item lines="none">
-          <ion-label class="label1"><b>Webseite</b></ion-label>
-          <ion-input formControlName="homepage" value="{{homepage}}" required></ion-input>
-        </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Stadt</b></ion-label>
+            <ion-input formControlName="place" value="{{place}}" required></ion-input>
+          </ion-item>
 
-        <ion-item lines="none">
-          <ion-label class="label1"><b>E-Mail</b></ion-label>
-          <ion-input formControlName="email" value="{{email}}" required></ion-input>
-        </ion-item>
+        </ion-col>
+      </ion-row>
 
-        <ion-item lines="none">
-          <ion-label class="label1"><b>Telefon</b></ion-label>
-          <ion-input formControlName="telephone" value="{{telephone}}" required></ion-input>
-        </ion-item>
+      <!-- Contact -->
+      <ion-item-divider>
+        <ion-label>
+          Kontakt
+        </ion-label>
+      </ion-item-divider>
 
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
 
-    <!-- Social Media -->
-    <ion-item-divider>
-      <ion-label>
-        Social Media
-      </ion-label>
-    </ion-item-divider>
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Webseite</b></ion-label>
+            <ion-input formControlName="homepage" value="{{homepage}}" required></ion-input>
+          </ion-item>
 
-    <ion-row>
-      <ion-col>
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.homepage.errors?.required">
+            Webseite wird benötigt.
+          </span>
 
-        <ion-item lines="none">
-          <ion-icon name="logo-facebook" color="facebook" class="media"></ion-icon>
-          <ion-label class="label2"><b>Facebook</b></ion-label>
-          <ion-input formControlName="facebook" value="{{facebook}}" required></ion-input>
-        </ion-item>
+          <ion-item lines="none">
+            <ion-label class="label1"><b>E-Mail</b></ion-label>
+            <ion-input formControlName="email" value="{{email}}" required></ion-input>
+          </ion-item>
 
-        <ion-item lines="none">
-          <ion-icon name="logo-instagram" color="instagram" class="media"></ion-icon>
-          <ion-label class="label2"><b>Instagram</b></ion-label>
-          <ion-input formControlName="instagram" value="{{instagram}}" required></ion-input>
-        </ion-item>
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+            Postleitzahl wird benötigt.
+          </span>
 
-        <ion-item lines="none">
-          <ion-icon name="logo-twitter" color="twitter" class="media"></ion-icon>
-          <ion-label class="label2"><b>Twitter</b></ion-label>
-          <ion-input formControlName="twitter" value="{{twitter}}" required></ion-input>
-        </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+            Postleitzahl wird benötigt.
+          </span>
 
-      </ion-col>
-    </ion-row>
+          <ion-item lines="none">
+            <ion-label class="label1"><b>Telefon</b></ion-label>
+            <ion-input formControlName="telephone" value="{{telephone}}" required></ion-input>
+          </ion-item>
 
-    <!-- Opening times -->
-    <ion-item-divider>
-      <ion-label>
-        Öffnungszeiten
-      </ion-label>
-    </ion-item-divider>
-   
+        </ion-col>
+      </ion-row>
+
+      <!-- Social Media -->
+      <ion-item-divider>
+        <ion-label>
+          Social Media
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-row>
+        <ion-col>
+
+          <ion-item lines="none">
+            <ion-icon name="logo-facebook" color="facebook" class="media"></ion-icon>
+            <ion-label class="label2"><b>Facebook</b></ion-label>
+            <ion-input formControlName="facebook" value="{{facebook}}" required></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-icon name="logo-instagram" color="instagram" class="media"></ion-icon>
+            <ion-label class="label2"><b>Instagram</b></ion-label>
+            <ion-input formControlName="instagram" value="{{instagram}}" required></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-icon name="logo-twitter" color="twitter" class="media"></ion-icon>
+            <ion-label class="label2"><b>Twitter</b></ion-label>
+            <ion-input formControlName="twitter" value="{{twitter}}" required></ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+
+      <!-- Opening times -->
+      <ion-item-divider>
+        <ion-label>
+          Öffnungszeiten
+        </ion-label>
+      </ion-item-divider>
+
       <ion-row>
         <ion-col>
 
           <ion-item lines="none">
             <p><b>Montag</b></p>
-            <ion-datetime formControlName="mo_starttime" [value]="mo_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm"
-              doneText="Fertig" cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="mo_endtime" [value]="mo_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime formControlName="mo_starttime" [value]="mo_starttime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
+
+            <!-- Error messages -->
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mo_starttime.errors?.required">
+              Startzeit wird benötigt.
+            </span>
+
+            <ion-datetime formControlName="mo_endtime" [value]="mo_endtime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
           </ion-item>
 
           <!-- Error messages -->
@@ -184,95 +225,143 @@
 
           <ion-item lines="none">
             <p><b>Dienstag</b></p>
-            <ion-datetime formControlName="tu_starttime" [value]="tu_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="tu_endtime" [value]="tu_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime formControlName="tu_starttime" [value]="tu_starttime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
+
+            <!-- Error messages -->
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.tu_starttime.errors?.required">
+              Startzeit wird benötigt.
+            </span>
+
+            <ion-datetime formControlName="tu_endtime" [value]="tu_endtime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
           </ion-item>
 
-           <!-- Error messages -->
-           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.tu_endtime.errors?.required">
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.tu_endtime.errors?.required">
             Endzeit vor Startzeit!
           </span>
 
           <ion-item lines="none">
             <p><b>Mittwoch</b></p>
-            <ion-datetime formControlName="we_starttime" [value]="we_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="we_endtime" [value]="we_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime formControlName="we_starttime" [value]="we_starttime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
+
+            <!-- Error messages -->
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.we_starttime.errors?.required">
+              Startzeit wird benötigt.
+            </span>
+
+            <ion-datetime formControlName="we_endtime" [value]="we_endtime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
           </ion-item>
 
-           <!-- Error messages -->
-           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.we_endtime.errors?.required">
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.we_endtime.errors?.required">
             Endzeit vor Startzeit!
           </span>
 
           <ion-item lines="none">
             <p><b>Donnerstag</b></p>
-            <ion-datetime formControlName="th_starttime" [value]="th_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="th_endtime" [value]="th_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime formControlName="th_starttime" [value]="th_starttime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
+
+            <!-- Error messages -->
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.th_starttime.errors?.required">
+              Startzeit wird benötigt.
+            </span>
+
+            <ion-datetime formControlName="th_endtime" [value]="th_endtime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
           </ion-item>
 
-           <!-- Error messages -->
-           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.th_endtime.errors?.required">
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.th_endtime.errors?.required">
             Endzeit vor Startzeit!
           </span>
 
           <ion-item lines="none">
             <p><b>Freitag</b></p>
-            <ion-datetime formControlName="fr_starttime" [value]="fr_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="fr_endtime" [value]="fr_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime formControlName="fr_starttime" [value]="fr_starttime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
+
+            <!-- Error messages -->
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fr_starttime.errors?.required">
+              Startzeit wird benötigt.
+            </span>
+
+            <ion-datetime formControlName="fr_endtime" [value]="fr_endtime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
           </ion-item>
 
-           <!-- Error messages -->
-           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fr_endtime.errors?.required">
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fr_endtime.errors?.required">
             Endzeit vor Startzeit!
           </span>
 
           <ion-item lines="none">
             <p><b>Samstag</b></p>
-            <ion-datetime formControlName="sa_starttime" [value]="sa_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="sa_endtime" [value]="sa_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime formControlName="sa_starttime" [value]="sa_starttime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
+
+            <!-- Error messages -->
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sa_starttime.errors?.required">
+              Startzeit wird benötigt.
+            </span>
+
+            <ion-datetime formControlName="sa_endtime" [value]="sa_endtime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
           </ion-item>
 
-           <!-- Error messages -->
-           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sa_endtime.errors?.required">
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.sa_endtime.errors?.required">
             Endzeit vor Startzeit!
           </span>
 
           <ion-item lines="none">
             <p><b>Sonntag</b></p>
-            <ion-datetime formControlName="su_starttime" [value]="su_starttime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
-            <ion-datetime formControlName="su_endtime" [value]="su_endtime" displayFormat="HH:mm" minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig"
-              cancelText="Abbrechen" required></ion-datetime>
+            <ion-datetime formControlName="su_starttime" [value]="su_starttime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
+
+            <!-- Error messages -->
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.su_starttime.errors?.required">
+              Startzeit wird benötigt.
+            </span>
+
+            <ion-datetime formControlName="su_endtime" [value]="su_endtime" displayFormat="HH:mm"
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+            </ion-datetime>
           </ion-item>
 
-           <!-- Error messages -->
-           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.su_endtime.errors?.required">
+          <!-- Error messages -->
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.su_endtime.errors?.required">
             Endzeit vor Startzeit!
           </span>
 
         </ion-col>
       </ion-row>
-    
 
-    <!-- Save Button -->
-    <ion-row>
-      <ion-col class="save">
-        <ion-button fill="outline" shape="round" (click)="edit()">
-          Speichern
-        </ion-button>
-      </ion-col>
-    </ion-row>
 
-  </form>
+      <!-- Save Button -->
+      <ion-row>
+        <ion-col class="save">
+          <ion-button fill="outline" shape="round" (click)="edit()">
+            Speichern
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </form>
   </ion-grid>
 </ion-content>

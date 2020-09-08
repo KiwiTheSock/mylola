@@ -1,7 +1,7 @@
 //Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Ionic
 import { IonicModule } from '@ionic/angular';
@@ -15,6 +15,7 @@ import { ComponentsModule } from '../../components/components.module';
   imports: [
     CommonModule,
     ComponentsModule,
+    ReactiveFormsModule,
     FormsModule,
     IonicModule,
     RegisterPageRoutingModule
