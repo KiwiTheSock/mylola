@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController, Platform } from '@ionic/angular';
 import { Camera } from '@ionic-native/camera/ngx';
 import { ModalImagePage } from '../modal-image/modal-image.page';
 import { ApiService } from '../../services/api.service';
@@ -19,6 +19,9 @@ export class DetailEditPage {
 
   //Image
   croppedImage: any;
+
+  //Plattform
+  ios: boolean;
 
   //Data
   public category: string = null;
@@ -38,7 +41,8 @@ export class DetailEditPage {
     public actionSheetController: ActionSheetController,
     private camera: Camera,
     public modalController: ModalController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private platform: Platform
   ) {
     //Validators
     this.validation_detail = this.formBuilder.group({
@@ -56,8 +60,18 @@ export class DetailEditPage {
       ])],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      check: ['', ]
+      check: ['',]
     });
+  }
+
+  //Get Platform
+  ngOnInit() {
+    if (this.platform.platforms().includes("ios")) {
+      this.ios = true;
+    }
+    else {
+      this.ios = false;
+    }
   }
 
   /* Data
@@ -88,27 +102,32 @@ export class DetailEditPage {
    * --------------------------------------------------------
    */
   async picture() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Bildquelle auswählen",
-      buttons: [{
-        text: 'Aus der Bibliothek laden',
-        handler: () => {
-          this.presentModal(this.camera.PictureSourceType.PHOTOLIBRARY);
+
+    if (this.platform.is("ios")) {
+      this.presentModal(this.camera.PictureSourceType.PHOTOLIBRARY);
+    } else {
+      const actionSheet = await this.actionSheetController.create({
+        header: "Bildquelle auswählen",
+        buttons: [{
+          text: 'Aus der Bibliothek laden',
+          handler: () => {
+            this.presentModal(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Kamera benutzen',
+          handler: () => {
+            this.presentModal(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Abbrechen',
+          role: 'cancel'
         }
-      },
-      {
-        text: 'Kamera benutzen',
-        handler: () => {
-          this.presentModal(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Abbrechen',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
+        ]
+      });
+      await actionSheet.present();
+    } 
   }
 
   /* Modal Coupon Image
@@ -119,7 +138,7 @@ export class DetailEditPage {
       component: ModalImagePage,
       cssClass: 'modal-image-css',
       swipeToClose: true, //iOS
-      componentProps: { 
+      componentProps: {
         sourceType: sourceType,
         aspectRatio: 360 / 240
       }
@@ -202,17 +221,17 @@ export class DetailEditPage {
     if (this.submitForm() && !(this.validation_detail.value.starttime >= this.validation_detail.value.endtime)) {
 
       /* FUNKTIONIERT NICHT */
- /*
-      this.apiService.updateCoupon(sessionId, data).subscribe(response => {
-        console.log(response);
-      })
- */
+      /*
+           this.apiService.updateCoupon(sessionId, data).subscribe(response => {
+             console.log(response);
+           })
+      */
       /* FUNKTIONIERT */
-     
-      this.apiService.addImage(formData).subscribe((response:any) => {
+
+      this.apiService.addImage(formData).subscribe((response: any) => {
         console.log(response.status);
       })
-      
+
 
       setTimeout(() => {
         console.log('Verarbeite Daten');
