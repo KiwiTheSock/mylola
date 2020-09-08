@@ -36,6 +36,7 @@ export class AddPage {
   public description: string = null;
   public startDate: string = null;
   public endDate: string = null;
+  public check: string = null;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -66,7 +67,8 @@ export class AddPage {
         Validators.required
       ])],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      endDate: ['', Validators.required],
+      check: ['false', ]
     });
   }
 

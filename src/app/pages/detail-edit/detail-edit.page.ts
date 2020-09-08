@@ -29,6 +29,7 @@ export class DetailEditPage {
   public startDate: string = null;
   public endDate: string = null;
   public bannerFilename: string = null;
+  public check: string = null;
 
   constructor(
     private apiService: ApiService,
@@ -48,6 +49,7 @@ export class DetailEditPage {
       description: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      check: ['', ]
     });
   }
 

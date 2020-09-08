@@ -94,7 +94,7 @@ export class DetailPage {
   public coupon_id: string = null;
   public titel: string = null;
 
-  //ToDo
+ 
   public fav: boolean = null;
 
   constructor(
@@ -123,7 +123,6 @@ export class DetailPage {
     }
   }
 
-  //ToDo
   ionViewWillEnter() {
 
     //Data
@@ -201,6 +200,8 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   edit() {
+
+   
 
     /*
     var company_id = 1;

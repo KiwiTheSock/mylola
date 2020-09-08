@@ -11,6 +11,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
 
 const TOKEN_KEY = 'jwt-token';
+const USERNAME = 'username';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,12 @@ export class ApiService {
    */
   getToken() {
 
-    console.log(this.username);
+    //Username
+    if (this.username == null) {
+      this.storage.get(USERNAME).then(response => {
+        this.username = response;
+      });
+    }
 
     //Token
     if (this.token == null) {
@@ -329,6 +335,7 @@ export class ApiService {
         retry(2),
         catchError(this.handleError)
       )
+
   }
 
   //Params: path = '/api/customer/', id: number, item: array
@@ -536,21 +543,21 @@ export class ApiService {
    */
   login(item) {
 
-    this.username = item.username;
-  
+    this.storage.set(USERNAME, item.username);
+
     return this.httpClient
       .post(this.base_path + '/api/login_check', item)
       .pipe(
         retry(2),
         catchError(this.handleError),
-      )      
+      )
   }
 
   /* Logout
    * --------------------------------------------------------
    */
   logout() {
-    this.username = "";
+    this.storage.remove(USERNAME);
   }
 
   /* Images (POST)
