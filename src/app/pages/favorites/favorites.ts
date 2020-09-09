@@ -186,10 +186,10 @@ export class FavoritesPage implements OnInit {
   /* Favorites (ToDo)
    * --------------------------------------------------------
    */
-  toggleFavorite(id: number) {
+  toggleFavorite(coupon_id: number) {
 
-    let customer_id;
-    this.apiService.setFavorite(customer_id, id);
+ 
+    this.apiService.setFavorite(coupon_id);
 
     //getCustomerCouponsById(customer_id)
     //if id == einer Id aus getCustomerCouponsById,

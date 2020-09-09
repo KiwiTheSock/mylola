@@ -28,8 +28,8 @@ export class ProfileCompanyEditPage {
   isSubmitted = false;
 
   //CroppedImages
-  croppedProfileImage = "../assets/img/logo/halloffame_logo.png";
-  croppedTitleImage = "../assets/img/banner/banner_halloffame.png";
+  croppedLogoImage = "../assets/img/logo/halloffame_logo.png";
+  croppedBannerImage = "../assets/img/banner/banner_halloffame.png";
 
   //Data
   public name: string = null;
@@ -85,7 +85,7 @@ export class ProfileCompanyEditPage {
       name: ['', Validators.required],
       street: ['', Validators.required],
       housenumber: ['', Validators.required],
-      postcode: ['',  Validators.compose([
+      postcode: ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[0-9]{5}$')])],
       place: ['', Validators.required],
@@ -96,9 +96,9 @@ export class ProfileCompanyEditPage {
       telephone: ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[0-9]+$')])],
-      facebook: ['', ],
-      instagram: ['', ],
-      twitter: ['', ],
+      facebook: ['',],
+      instagram: ['',],
+      twitter: ['',],
       mo_starttime: ['', Validators.required],
       mo_endtime: ['', Validators.required],
       tu_starttime: ['', Validators.required],
@@ -120,10 +120,10 @@ export class ProfileCompanyEditPage {
    * --------------------------------------------------------
    */
   ionViewWillEnter() {
-    this.apiService.getCompanyByIdentifier().subscribe((res: any) => {
-      
+    this.apiService.getCompany().subscribe((res: any) => {
+
       console.log(res);
-      
+
       this.name = res.body[0].name;
       this.street = res.body[0].street;
       this.housenumber = res.body[0].housenumber;
@@ -175,13 +175,13 @@ export class ProfileCompanyEditPage {
       buttons: [{
         text: 'Aus der Bibliothek laden',
         handler: () => {
-          this.presentModalProfile(this.camera.PictureSourceType.PHOTOLIBRARY);
+          this.presentModalLogo(this.camera.PictureSourceType.PHOTOLIBRARY);
         }
       },
       {
         text: 'Kamera benutzen',
         handler: () => {
-          this.presentModalProfile(this.camera.PictureSourceType.CAMERA);
+          this.presentModalLogo(this.camera.PictureSourceType.CAMERA);
         }
       },
       {
@@ -223,7 +223,7 @@ export class ProfileCompanyEditPage {
   /* Modal Profile Image
   * --------------------------------------------------------
   */
-  async presentModalProfile(sourceType) {
+  async presentModalLogo(sourceType) {
     const modal = await this.modalController.create({
       component: ModalImagePage,
       cssClass: 'modal-image-css',
@@ -237,7 +237,7 @@ export class ProfileCompanyEditPage {
     //Passed back data
     modal.onDidDismiss()
       .then((data) => {
-        this.croppedProfileImage = data['data'];
+        this.croppedLogoImage = data['data'];
       });
 
     await modal.present();
@@ -265,7 +265,7 @@ export class ProfileCompanyEditPage {
     //Passed back data
     modal.onDidDismiss()
       .then((data) => {
-        this.croppedTitleImage = data['data'];
+        this.croppedBannerImage = data['data'];
       });
 
     await modal.present();
@@ -336,9 +336,9 @@ export class ProfileCompanyEditPage {
       "instagram": this.validation_profileCompany.value.instagram,
       "twitter": this.validation_profileCompany.value.twitter
     }
- 
+
     let hours = {
-      "monday": this.validation_profileCompany.value.mo_starttime  + " - " + this.validation_profileCompany.value.mo_endtime,
+      "monday": this.validation_profileCompany.value.mo_starttime + " - " + this.validation_profileCompany.value.mo_endtime,
       "tuesday": this.validation_profileCompany.value.tu_starttime + " - " + this.validation_profileCompany.value.tu_endtime,
       "wednesday": this.validation_profileCompany.value.we_starttime + " - " + this.validation_profileCompany.value.we_endtime,
       "thursday": this.validation_profileCompany.value.th_starttime + " - " + this.validation_profileCompany.value.th_endtime,
@@ -346,6 +346,22 @@ export class ProfileCompanyEditPage {
       "saturday": this.validation_profileCompany.value.sa_starttime + " - " + this.validation_profileCompany.value.sa_endtime,
       "sunday": this.validation_profileCompany.value.su_starttime + " - " + this.validation_profileCompany.value.su_endtime
     }
+
+    //Image Banner
+    let base64Image = this.croppedBannerImage;
+    let imageData = this.dataURItoBlob(base64Image);
+    let formData = new FormData();
+
+    //FormData Banner
+    formData.append('bannerFilename', imageData, "bannerFilename.png");
+
+    //Image Logo
+    let base64Image2 = this.croppedLogoImage;
+    let imageData2 = this.dataURItoBlob(base64Image2);
+    let formData2 = new FormData();
+
+    //FormData Logo
+    formData2.append('logoFilename', imageData2, "logoFilename.png");
 
     //console.log(data);
 
@@ -359,6 +375,12 @@ export class ProfileCompanyEditPage {
       this.apiService.updateHours(9, hours).subscribe(response => {
         console.log(response);
       })
+      this.apiService.updateCompanyBanner(formData).subscribe(response => {
+        console.log(response);
+      })
+      this.apiService.updateCompanyLogo(formData2).subscribe(response => {
+        console.log(response);
+      })
 
       setTimeout(() => {
         console.log('Verarbeite Daten');
@@ -366,5 +388,22 @@ export class ProfileCompanyEditPage {
       }, 500);
     }
   }
-  
+
+  dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
+    else
+      byteString = unescape(dataURI.split(',')[1]);
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], { type: mimeString });
+  }
+
 }

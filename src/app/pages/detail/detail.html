@@ -20,12 +20,12 @@
 
     <!-- Banner And Logo -->
     <ion-row>
-      <ion-col col-12 class="profile-background" >
+      <ion-col class="profile-background" >
         <div>
-          <ion-img src="./assets/img/banner/{{bannerFilename_Company}}"></ion-img>
+          <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png"></ion-img>
         </div>
         <ion-avatar>
-          <ion-img src="./assets/img/logo/{{logofilename}}"></ion-img>
+          <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png"></ion-img>
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -33,16 +33,16 @@
     <!-- Settings -->
     <ion-row>
       <ion-col class="settings-button">
-        <ion-button (click)="openSettings()"> <!-- *ngIf="show"> -->
-          <ion-icon style="color: black" name="settings-sharp"></ion-icon>
+        <ion-button style="color: black" (click)="openSettings()" *ngIf="show">
+          <ion-icon name="settings-sharp"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
 
     <!-- Icons And Time -->
     <ion-row>
-      <ion-col col-6  class="icons">
-        <ion-button (click)="toggleFavorite()">
+      <ion-col class="icons">
+        <ion-button (click)="toggleFavorite(id)">
           <ion-icon *ngIf="fav" name="bookmark-outline"></ion-icon>
           <ion-icon *ngIf="!fav" name="bookmark"></ion-icon>
         </ion-button>
@@ -50,7 +50,7 @@
           <ion-icon slot="icon-only" name="share-social"></ion-icon>
         </ion-button>
       </ion-col>
-      <ion-col col-6>
+      <ion-col>
         <p class="time">{{ createdAt | timePipe}}</p>
       </ion-col>
     </ion-row>
@@ -67,13 +67,13 @@
 
     <!-- Coupon Button -->
     <ion-row>
-      <ion-col col-12  class="buttons" (click)="isLoggedIn()">
+      <ion-col class="buttons" (click)="isLoggedIn()">
         <ion-button><b>{{catcher}}</b></ion-button>
       </ion-col>
     </ion-row>
     <!--
     <ion-row>
-      <ion-col col-12 class="buttons">
+      <ion-col class="buttons">
         <ion-button color="dark" disabled="true"><b>{{session.button}}</b></ion-button>
       </ion-col>
     </ion-row>
@@ -81,18 +81,18 @@
 
     <!-- Coupon -->
     <ion-row>
-      <ion-col col-12 >
-        <ion-img src="./assets/img/add/{{bannerFilename_Coupon}}"></ion-img>
+      <ion-col>
+        <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png"></ion-img>
       </ion-col>
     </ion-row>
 
     <!-- Location -->
     <ion-row>
-      <ion-col col-12 class="location-contact">
+      <ion-col class="location-contact">
         <h4>Angebotsort</h4>
         <p><b>{{name}}</b></p>
-        <p>{{street}}</p>
-        <p>{{place}}</p>
+        <p>{{street}} {{housenumber}}</p>
+        <p>{{postcode}} {{place}}</p>
         <ion-button (click)="notification()" *appHasRole="['ROLE_USER']">{{name}} abonnieren</ion-button >
       </ion-col>
     </ion-row>
@@ -100,7 +100,7 @@
     <ion-item-divider></ion-item-divider>
 
     <ion-row>
-      <ion-col col-12  class="location-contact">
+      <ion-col class="location-contact">
         <h4>Kontakt</h4>
         <p class="red">
           <ion-icon name="globe-outline"></ion-icon> {{homepage}}
@@ -119,7 +119,7 @@
 
     <!-- Social Media -->
     <ion-row>
-      <ion-col col-12 class="social-media location" >
+      <ion-col class="social-media location" >
         <h4>Social Media</h4>
         <ion-chip color="facebook" button (click)="openFacebook()" *ngIf="facebook">
           <ion-icon name="logo-facebook"></ion-icon>
@@ -145,7 +145,7 @@
   <!-- Opening Hours-->
   <ion-grid class="content">
     <ion-row>
-      <ion-col col-12  class="opening">
+      <ion-col class="opening">
         <h4>Öffnungszeiten</h4>
         <p>Montag: {{mo_start}} - {{mo_end}}</p>
         <p>Dienstag: {{tu_start}} - {{tu_end}}</p>

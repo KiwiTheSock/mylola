@@ -127,7 +127,7 @@ export class DetailEditPage {
         ]
       });
       await actionSheet.present();
-    } 
+    }
   }
 
   /* Modal Coupon Image
@@ -194,13 +194,6 @@ export class DetailEditPage {
     let formData = new FormData();
 
     //FormData
-    formData.append('category', this.validation_detail.value.category);
-    formData.append('titel', this.validation_detail.value.titel);
-    formData.append('catcher', this.validation_detail.value.catcher);
-    formData.append('description', this.validation_detail.value.description);
-    formData.append('startDate', this.validation_detail.value.startDate);
-    formData.append('endDate', this.validation_detail.value.endDate);
-    formData.append('code', this.validation_detail.value.code);
     formData.append('bannerFilename', imageData, "bannerFilename.png");
 
     //Data
@@ -212,26 +205,17 @@ export class DetailEditPage {
       "startDate": this.validation_detail.value.startDate,
       "endDate": this.validation_detail.value.endDate,
       "code": this.validation_detail.value.code,
-    }
-
-    //formData.append('data', JSON.stringify(data));
-
-    //console.log(data);
+    } 
 
     if (this.submitForm() && !(this.validation_detail.value.starttime >= this.validation_detail.value.endtime)) {
 
-      /* FUNKTIONIERT NICHT */
-      /*
-           this.apiService.updateCoupon(sessionId, data).subscribe(response => {
-             console.log(response);
-           })
-      */
-      /* FUNKTIONIERT */
-
-      this.apiService.addImage(formData).subscribe((response: any) => {
-        console.log(response.status);
+      this.apiService.updateCoupon(sessionId, data).subscribe(response => {
+        console.log(response);
       })
 
+      this.apiService.updateCouponBanner(sessionId, formData).subscribe((response: any) => {
+        console.log(response);
+      })
 
       setTimeout(() => {
         console.log('Verarbeite Daten');

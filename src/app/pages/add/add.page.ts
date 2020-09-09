@@ -49,7 +49,7 @@ export class AddPage {
 
     //CroppedImage
     if (this.croppedImage == "" || this.croppedImage == null) {
-      this.croppedImage = "../../assets/img/add/kein-bild-vorhanden-16-9.png";
+      this.croppedImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
     }
 
     //Validators
@@ -68,7 +68,7 @@ export class AddPage {
       ])],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      check: ['false', ]
+      check: ['false',]
     });
   }
 
@@ -158,7 +158,9 @@ export class AddPage {
     let base64Image = this.croppedImage;
     let imageData = this.dataURItoBlob(base64Image);
     let formData = new FormData();
-    formData.append('profile', imageData, "filename.jpg");
+
+    //FormData
+    formData.append('bannerFilename', imageData, "bannerFilename.png");
 
     let data = {
       "category": this.validation_add.value.category,
@@ -170,13 +172,19 @@ export class AddPage {
       "code": this.validation_add.value.code,
     }
 
-
-    //console.log(this.croppedImage);
-
     if (this.submitForm() && !(this.validation_add.value.startDate > this.validation_add.value.endDate)) {
-      this.apiService.addCoupon(1, data).subscribe((response:any) => {
-        console.log(response.status);
+      
+      let id = null //vll var besser
+
+      this.apiService.addCoupon(data).subscribe((response: any) => {
+        console.log(response);
+        id = response.body.id;
       })
+      
+      this.apiService.updateCouponBanner(id, formData).subscribe((res: any) => {
+        console.log(res);
+      })
+  
       this.router.navigateByUrl('/app/tabs/home');
 
       setTimeout(() => {

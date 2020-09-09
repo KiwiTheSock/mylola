@@ -78,11 +78,8 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.updateSchedule();
-  }
+    //this.updateSchedule();
 
-  ngDoCheck() {
-    this.updateSchedule();
   }
 
   ionViewWillEnter() {
@@ -99,7 +96,12 @@ export class HomePage implements OnInit {
 
     //Data
     this.apiService.getCoupons().subscribe((res: any) => {
-      this.data = res.body;
+      
+
+      let jsonResult = JSON.parse(JSON.stringify(res));
+      this.data = jsonResult.body;
+
+      //console.log(jsonResult);
     })
 
     //Home Tab
@@ -221,11 +223,7 @@ export class HomePage implements OnInit {
   //Favorites
   toggleFavorite(coupon_id: number) {
 
-    let customer_id;
-    this.apiService.setFavorite(customer_id, coupon_id);
-
-
-
+    this.apiService.setFavorite(coupon_id);
 
     //getCustomerCouponsById(customer_id)
     //if id == einer Id aus getCustomerCouponsById,
@@ -253,8 +251,15 @@ export class HomePage implements OnInit {
   }
 
   //Refresh
-  refresh() {
-    this.refresher.doRefresh(event);
+  refresh(event) {
+    console.log('Begin async operation');
+
+    this.ionViewWillEnter();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
   btnActivate(ionicButton, name) {

@@ -51,6 +51,8 @@ export class EventsPage {
   ionViewWillEnter() {
     this.apiService.getCoupons().subscribe((res: any) => {
 
+      console.log(res);
+
       for (let i = 0; i < res.length; i++) {
 
         console.log(res[i][0]);

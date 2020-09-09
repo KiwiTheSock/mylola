@@ -19,11 +19,11 @@ import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
 import { ModalCouponPage } from '../modal-coupon/modal-coupon.page';
 import { AuthService } from '../../services/auth.service';
-import { mapStyle } from './mapStyle';
 import { Darkmode } from '../../services/darkmode';
 import { ApiService } from '../../services/api.service';
 
 //Map
+import { mapStyle } from './mapStyle';
 declare var google: any;
 
 @Component({
@@ -93,8 +93,9 @@ export class DetailPage {
   public description: string = null;
   public coupon_id: string = null;
   public titel: string = null;
+  public id: number = null;
 
- 
+
   public fav: boolean = null;
 
   constructor(
@@ -127,55 +128,57 @@ export class DetailPage {
 
     //Data
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
+
     this.apiService.getCouponById(sessionId).subscribe(res => {
 
       let jsonResult = JSON.parse(JSON.stringify(res));
       this.data = jsonResult;
 
+      //console.log(jsonResult);
+
       //Company
-      this.bannerFilename_Company = jsonResult.body.company[0].bannerFilename;
-      this.email = jsonResult.body.company[0].email;
-      this.housenumber = jsonResult.body.company[0].housenumber;
-      this.company_id = jsonResult.body.company[0].company_id;
-      this.lat = jsonResult.body.company[0].lat;
-      this.lng = jsonResult.body.company[0].lng;
-      this.logofilename = jsonResult.body.company[0].logofilename;
-      this.name = jsonResult.body.company[0].name;
-      this.place = jsonResult.body.company[0].place;
-      this.postcode = jsonResult.body.company[0].postcode;
-      this.street = jsonResult.body.company[0].street;
-      this.telephone = jsonResult.body.company[0].telephone;
-
-      //URL
-      this.homepage = jsonResult.body.company[1].url.homepage;
-      this.facebook = jsonResult.body.company[1].url.facebook;
-      this.instagram = jsonResult.body.company[1].url.instagram;
-      this.twitter = jsonResult.body.company[1].url.twitter;
-
-      //Hours
-      this.mo_start = this.time(jsonResult.body.company[1].hours.monday.split(" - ")[0]);
-      this.mo_end = this.time(jsonResult.body.company[1].hours.monday.split(" - ")[1]);
-      this.tu_start = this.time(jsonResult.body.company[1].hours.tuesday.split(" - ")[0]);
-      this.tu_end = this.time(jsonResult.body.company[1].hours.tuesday.split(" - ")[1]);
-      this.we_start = this.time(jsonResult.body.company[1].hours.wednesday.split(" - ")[0]);
-      this.we_end = this.time(jsonResult.body.company[1].hours.wednesday.split(" - ")[1]);
-      this.th_start = this.time(jsonResult.body.company[1].hours.thursday.split(" - ")[0]);
-      this.th_end = this.time(jsonResult.body.company[1].hours.thursday.split(" - ")[1]);
-      this.fr_start = this.time(jsonResult.body.company[1].hours.friday.split(" - ")[0]);
-      this.fr_end = this.time(jsonResult.body.company[1].hours.friday.split(" - ")[1]);
-      this.sa_start = this.time(jsonResult.body.company[1].hours.saturday.split(" - ")[0]);
-      this.sa_end = this.time(jsonResult.body.company[1].hours.saturday.split(" - ")[1]);
-      this.su_start = this.time(jsonResult.body.company[1].hours.sunday.split(" - ")[0]);
-      this.su_end = this.time(jsonResult.body.company[1].hours.sunday.split(" - ")[1]);
+      this.bannerFilename_Company = jsonResult.body.company.banner_filename;
+      this.email = jsonResult.body.company.email;
+      this.housenumber = jsonResult.body.company.housenumber;
+      this.lat = jsonResult.body.company.lat;
+      this.lng = jsonResult.body.company.lng;
+      this.logofilename = jsonResult.body.company.logo_filename;
+      this.name = jsonResult.body.company.name;
+      this.place = jsonResult.body.company.place;
+      this.postcode = jsonResult.body.company.postcode;
+      this.street = jsonResult.body.company.street;
+      this.telephone = jsonResult.body.company.telephone;
 
       //Coupon
-      this.bannerFilename_Coupon = jsonResult.body.bannerFilename_Coupon;
+      this.bannerFilename_Coupon = jsonResult.body.banner_filename;
       this.catcher = jsonResult.body.catcher;
       this.code = jsonResult.body.code;
-      this.createdAt = jsonResult.body.createdAt.date;
+      this.createdAt = jsonResult.body.createdAt;
       this.description = jsonResult.body.description;
       this.coupon_id = jsonResult.body.coupon_id;
-      this.titel = jsonResult.body.titel;
+      this.titel = jsonResult.body.title;
+
+      //URL
+      this.homepage = jsonResult.body.company.url.homepage;
+      this.facebook = jsonResult.body.company.url.facebook;
+      this.instagram = jsonResult.body.company.url.instagram;
+      this.twitter = jsonResult.body.company.url.twitter;
+
+      //Hours
+      this.mo_start = this.time(jsonResult.body.company.hours.monday.split(" - ")[0]);
+      this.mo_end = this.time(jsonResult.body.company.hours.monday.split(" - ")[1]);
+      this.tu_start = this.time(jsonResult.body.company.hours.tuesday.split(" - ")[0]);
+      this.tu_end = this.time(jsonResult.body.company.hours.tuesday.split(" - ")[1]);
+      this.we_start = this.time(jsonResult.body.company.hours.wednesday.split(" - ")[0]);
+      this.we_end = this.time(jsonResult.body.company.hours.wednesday.split(" - ")[1]);
+      this.th_start = this.time(jsonResult.body.company.hours.thursday.split(" - ")[0]);
+      this.th_end = this.time(jsonResult.body.company.hours.thursday.split(" - ")[1]);
+      this.fr_start = this.time(jsonResult.body.company.hours.friday.split(" - ")[0]);
+      this.fr_end = this.time(jsonResult.body.company.hours.friday.split(" - ")[1]);
+      this.sa_start = this.time(jsonResult.body.company.hours.saturday.split(" - ")[0]);
+      this.sa_end = this.time(jsonResult.body.company.hours.saturday.split(" - ")[1]);
+      this.su_start = this.time(jsonResult.body.company.hours.sunday.split(" - ")[0]);
+      this.su_end = this.time(jsonResult.body.company.hours.sunday.split(" - ")[1]);
     });
 
 
@@ -196,34 +199,54 @@ export class DetailPage {
     return new Date(date).toLocaleTimeString().slice(0, -3);
   }
 
-  /* Company Coupon Edit (ToDo)
+  /* Company Coupon Edit 
   * --------------------------------------------------------
   */
   edit() {
 
-   
+    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
 
-    /*
-    var company_id = 1;
-      const sessionId: number = +this.route.snapshot.paramMap.get('sessionId'); == CouponsByCompanyId
-    this.apiService.getCouponsByCompany(company_id).subscribe(res => {
-    })
-    */
+    if (this.authService.getRole() == "ROLE_COMPANY") {
 
-    if (this.authService.getRole() == "ROLE_COMPANY" && this.router.url === "/app/tabs/home/detail/1") {
-      this.show = true;
+      this.apiService.getCompanyCoupons().subscribe(res => {
+
+        let jsonResult = JSON.parse(JSON.stringify(res));
+
+        for (let i = 0; i < jsonResult.body.length; i++) {
+          if (jsonResult.body[i].id == sessionId) {
+            this.show = true;
+          }
+        }
+      });
     }
   }
 
   /* Favorites (ToDo)
   * --------------------------------------------------------
   */
-  toggleFavorite() {
-    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
-    var customer_id = 1;
-    var coupon_id = 1;
+  toggleFavorite(coupon_id: number) {
 
-    this.apiService.setFavorite(customer_id, coupon_id);
+    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
+
+    this.apiService.setFavorite(sessionId);
+
+    this.apiService.getFavorite().subscribe(res => {
+
+      let jsonResult = JSON.parse(JSON.stringify(res));
+
+      console.log(res);
+
+      for (let i = 0; i < jsonResult.body.length; i++) {
+        if (jsonResult.body[i].id == sessionId) {
+          //this.apiService.
+        }
+        else {
+         
+        }
+      }
+    });
+
+    this.apiService.setFavorite(coupon_id);
 
     /*
     if (this.userProvider.hasFavorite(session.name)) {
@@ -243,12 +266,12 @@ export class DetailPage {
     this.socialSharing.share("https://www.mylola.de") // "/?angebot=" + id
   }
 
-  /* Notification (ToDo)
+  /* Notification
   * --------------------------------------------------------
   */
   notification() {
 
-    let company_id = this.data.body.company[0].id
+    let company_id = this.data.body.company.id
 
     this.apiService.addSubscriber(company_id);
 
@@ -269,12 +292,12 @@ export class DetailPage {
   async presentModal() {
 
     const coupon_id: number = +this.route.snapshot.paramMap.get('sessionId');
-  
+
     const modal = await this.modalController.create({
       component: ModalCouponPage,
       cssClass: 'modal-css',
       swipeToClose: true, //iOS
-      componentProps: {coupon_id: coupon_id}
+      componentProps: { coupon_id: coupon_id }
     });
 
     await modal.present();

@@ -53,7 +53,7 @@ export class ProfileCompanyPage {
   ) { }
 
   ionViewWillEnter() {
-    this.apiService.getCompanyByIdentifier().subscribe((res: any) => {
+    this.apiService.getCompany().subscribe((res: any) => {
 
       //console.log(res.body);
 
