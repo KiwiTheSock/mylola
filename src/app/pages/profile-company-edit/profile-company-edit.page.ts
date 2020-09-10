@@ -28,8 +28,8 @@ export class ProfileCompanyEditPage {
   isSubmitted = false;
 
   //CroppedImages
-  croppedLogoImage = "../assets/img/logo/halloffame_logo.png";
-  croppedBannerImage = "../assets/img/banner/banner_halloffame.png";
+  croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
+  croppedBannerImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
 
   //Data
   public name: string = null;
@@ -43,6 +43,8 @@ export class ProfileCompanyEditPage {
   public facebook: string = null;
   public instagram: string = null;
   public twitter: string = null;
+  public bannerFilename: string = null;
+  public logoFilename: string = null;
 
   //Monday
   public mo_starttime: string = null;
@@ -123,46 +125,49 @@ export class ProfileCompanyEditPage {
     this.apiService.getCompany().subscribe((res: any) => {
 
       console.log(res);
+      let jsonResult = JSON.parse(JSON.stringify(res));
 
-      this.name = res.body[0].name;
-      this.street = res.body[0].street;
-      this.housenumber = res.body[0].housenumber;
-      this.postcode = res.body[0].postcode;
-      this.place = res.body[0].place;
-      this.homepage = res.body[1].url.homepage;
-      this.email = res.body[0].email;
-      this.telephone = res.body[0].telephone;
-      this.facebook = res.body[1].url.facebook;
-      this.instagram = res.body[1].url.instagram;
-      this.twitter = res.body[1].url.twitter;
+      this.name = jsonResult.body.name;
+      this.street = jsonResult.body.street;
+      this.housenumber = jsonResult.body.housenumber;
+      this.postcode = jsonResult.body.postcode;
+      this.place = jsonResult.body.place;
+      this.homepage = jsonResult.body.url.homepage;
+      this.email = jsonResult.body.email;
+      this.telephone = jsonResult.body.telephone;
+      this.facebook = jsonResult.body.url.facebook;
+      this.instagram = jsonResult.body.url.instagram;
+      this.twitter = jsonResult.body.url.twitter;
+      this.croppedBannerImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/" + jsonResult.body.bannerFilename;
+      this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/" + jsonResult.body.logoFilename;
 
       //Monday
-      this.mo_starttime = res.body[1].hours.monday.split(" - ")[0];
-      this.mo_endtime = res.body[1].hours.monday.split(" - ")[1];
+      this.mo_starttime = jsonResult.body.hours.monday.split(" - ")[0];
+      this.mo_endtime = jsonResult.body.hours.monday.split(" - ")[1];
 
       //Tuesday
-      this.tu_starttime = res.body[1].hours.tuesday.split(" - ")[0];
-      this.tu_endtime = res.body[1].hours.tuesday.split(" - ")[1];
+      this.tu_starttime = jsonResult.body.hours.tuesday.split(" - ")[0];
+      this.tu_endtime = jsonResult.body.hours.tuesday.split(" - ")[1];
 
       //Wednesday
-      this.we_starttime = res.body[1].hours.wednesday.split(" - ")[0];
-      this.we_endtime = res.body[1].hours.wednesday.split(" - ")[1];
+      this.we_starttime = jsonResult.body.hours.wednesday.split(" - ")[0];
+      this.we_endtime = jsonResult.body.hours.wednesday.split(" - ")[1];
 
       //Thursday
-      this.th_starttime = res.body[1].hours.thursday.split(" - ")[0];
-      this.th_endtime = res.body[1].hours.thursday.split(" - ")[1];
+      this.th_starttime = jsonResult.body.hours.thursday.split(" - ")[0];
+      this.th_endtime = jsonResult.body.hours.thursday.split(" - ")[1];
 
       //Friday
-      this.fr_starttime = res.body[1].hours.friday.split(" - ")[0];
-      this.fr_endtime = res.body[1].hours.friday.split(" - ")[1];
+      this.fr_starttime = jsonResult.body.hours.friday.split(" - ")[0];
+      this.fr_endtime = jsonResult.body.hours.friday.split(" - ")[1];
 
       //Saturday
-      this.sa_starttime = res.body[1].hours.saturday.split(" - ")[0];
-      this.sa_endtime = res.body[1].hours.saturday.split(" - ")[1];
+      this.sa_starttime = jsonResult.body.hours.saturday.split(" - ")[0];
+      this.sa_endtime = jsonResult.body.hours.saturday.split(" - ")[1];
 
       //Sunday
-      this.su_starttime = res.body[1].hours.sunday.split(" - ")[0];
-      this.su_endtime = res.body[1].hours.sunday.split(" - ")[1];
+      this.su_starttime = jsonResult.body.hours.sunday.split(" - ")[0];
+      this.su_endtime = jsonResult.body.hours.sunday.split(" - ")[1];
     })
   }
 
@@ -366,13 +371,13 @@ export class ProfileCompanyEditPage {
     //console.log(data);
 
     if (this.submitForm()) {
-      this.apiService.updateCompany(9, data).subscribe(response => {
+      this.apiService.updateCompany(data).subscribe(response => {
         console.log(response);
       })
-      this.apiService.updateURL(9, url).subscribe(response => {
+      this.apiService.updateURL(url).subscribe(response => {
         console.log(response);
       })
-      this.apiService.updateHours(9, hours).subscribe(response => {
+      this.apiService.updateHours(hours).subscribe(response => {
         console.log(response);
       })
       this.apiService.updateCompanyBanner(formData).subscribe(response => {

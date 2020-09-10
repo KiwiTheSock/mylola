@@ -55,17 +55,16 @@ export class ProfileCompanyPage {
   ionViewWillEnter() {
     this.apiService.getCompany().subscribe((res: any) => {
 
-      //console.log(res.body);
+      let jsonResult = JSON.parse(JSON.stringify(res));
+      //console.log(res);
 
-      this.profile = res.body[0];
-      this.coupons = res.body.coupons;
-      this.hours = res.body[1].hours;
-      this.url = res.body[1].url;
+      this.profile = jsonResult.body;
+      this.coupons = jsonResult.body.coupons;
+      this.hours = jsonResult.body.hours;
+      this.url = jsonResult.body.url;
 
-      //console.log(res[0].bannerfilename)
-
-      //this.bannerfilename = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/" + res[0].bannerfilename;
-      //this.logofilename = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logo/" + res[0].logofilename;
+      this.bannerfilename = jsonResult.body.banner_filename;
+      this.logofilename = jsonResult.body.logo_filename;
       
       this.mo_start = (this.hours.monday.split(" - ")[0]);
       this.mo_end = (this.hours.monday.split(" - ")[1]);

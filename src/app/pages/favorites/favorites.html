@@ -89,10 +89,12 @@
 
   <!-- List -->
   <ion-list class="list">
-    <ion-item-group *ngFor="let items of data"> <!-- [hidden]="group.hide" FILTER? -->
+    <ion-item-group>
+      <!-- [hidden]="group.hide" FILTER? -->
 
       <!-- Item -->
-      <div *ngFor="let item of items" class="item"> <!-- [hidden]="session.hide" [attr.track]="session.tracks[0] | lowercase" FILTER? -->
+      <div class="item" *ngFor="let item of data">
+        <!-- [hidden]="session.hide" [attr.track]="session.tracks[0] | lowercase" FILTER? -->
         <ion-grid>
 
           <!-- First Row -->
@@ -101,14 +103,16 @@
             <!-- Logo -->
             <ion-col class="logo">
               <ion-avatar>
-                <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/{{item.company[0].logofilename}}"></ion-img>
+                <ion-img
+                  src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png">
+                </ion-img>
               </ion-avatar>
             </ion-col>
 
             <!-- Name -->
             <ion-col class="name">
               <ion-label>
-                <p> {{item.company[0].name}}</p>
+                <p> {{item.company.name}}</p>
               </ion-label>
             </ion-col>
 
@@ -120,12 +124,13 @@
             <!-- Picture and Tear-off -->
             <ion-col>
 
-              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/{{item.bannerFilename}}" routerLink="/app/tabs/home/detail/{{item.id}}">
+              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png">
+                routerLink="/app/tabs/home/detail/{{item.id}}">
               </ion-img>
 
               <div class="tear-off">
-                <ion-img src="./assets/img/mylola/Abrissecke_rund.png"
-                  routerLink="/app/tabs/home/detail/{{item.id}}"></ion-img>
+                <ion-img src="./assets/img/mylola/Abrissecke_rund.png" routerLink="/app/tabs/home/detail/{{item.id}}">
+                </ion-img>
                 <p class="">{{item.catcher}}</p>
               </div>
             </ion-col>
@@ -166,13 +171,13 @@
             <!-- Title -->
             <ion-col class="title">
               <ion-label>
-                <p>{{item.titel}}</p>
+                <p>{{item.title}}</p>
               </ion-label>
             </ion-col>
 
             <!-- Time -->
             <ion-col class="time">
-              <p>{{ item.createdAt.date | timePipe}}</p>
+              <p>{{ item.createdAt | timePipe}}</p>
             </ion-col>
 
           </ion-row>

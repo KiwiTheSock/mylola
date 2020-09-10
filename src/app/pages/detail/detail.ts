@@ -137,12 +137,12 @@ export class DetailPage {
       //console.log(jsonResult);
 
       //Company
-      this.bannerFilename_Company = jsonResult.body.company.banner_filename;
+      this.bannerFilename_Company = jsonResult.body.company.bannerFilename;
       this.email = jsonResult.body.company.email;
       this.housenumber = jsonResult.body.company.housenumber;
       this.lat = jsonResult.body.company.lat;
       this.lng = jsonResult.body.company.lng;
-      this.logofilename = jsonResult.body.company.logo_filename;
+      this.logofilename = jsonResult.body.company.logoFilename;
       this.name = jsonResult.body.company.name;
       this.place = jsonResult.body.company.place;
       this.postcode = jsonResult.body.company.postcode;
@@ -150,7 +150,7 @@ export class DetailPage {
       this.telephone = jsonResult.body.company.telephone;
 
       //Coupon
-      this.bannerFilename_Coupon = jsonResult.body.banner_filename;
+      this.bannerFilename_Coupon = jsonResult.body.bannerFilename;
       this.catcher = jsonResult.body.catcher;
       this.code = jsonResult.body.code;
       this.createdAt = jsonResult.body.createdAt;

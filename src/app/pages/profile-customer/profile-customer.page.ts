@@ -28,13 +28,16 @@ export class ProfileCustomerPage {
   */
   ionViewWillEnter() {
     this.apiService.getCustomerByIdentifier().subscribe((res: any) => {
-      this.profile = res.body;
+      let jsonResult = JSON.parse(JSON.stringify(res));
+      this.profile = jsonResult.body;
     });
+    
     this.apiService.getMySubscribtions().subscribe((res: any) => {
+      let jsonResult = JSON.parse(JSON.stringify(res));
       console.log(res);
-      this.abos = res.body;
+      this.abos = jsonResult.body;
     })
-
+    
   }
 
   /* Settings

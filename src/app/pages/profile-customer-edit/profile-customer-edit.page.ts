@@ -104,7 +104,7 @@ export class ProfileCustomerEditPage {
     //console.log(data);
 
     if (this.submitForm()) {
-      this.apiService.updateCustomer(1, data).subscribe(response => {
+      this.apiService.updateCustomer(data).subscribe(response => {
         console.log(response);
       })
 

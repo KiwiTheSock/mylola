@@ -227,12 +227,12 @@ export class ApiService {
 
 
   //Params: path = '/api/company/', identifier: any, item: array
-  updateCompany(identifier: any, item) {
+  updateCompany(item) {
 
     this.getToken();
 
     return this.httpClient
-      .put(this.base_path + '/api/company/' + identifier, JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/company/' + this.username, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -392,12 +392,12 @@ export class ApiService {
   }
 
   //Params: path = '/api/customer/', id: number, item: array
-  updateCustomer(id: number, item) {
+  updateCustomer(item) {
 
     this.getToken();
 
     return this.httpClient
-      .put(this.base_path + '/api/customer/' + id, JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/customer/' + this.username, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -504,12 +504,12 @@ export class ApiService {
   }
 
   //Params: path = /api/hours/', id: number, item: array
-  updateHours(id: number, item) {
+  updateHours(item) {
 
     this.getToken();
 
     return this.httpClient
-      .put(this.base_path + '/api/hours/' + id, JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/hours/' + this.username, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -577,12 +577,12 @@ export class ApiService {
   }
 
   //Params: path = '/api/url', id: number, item: array
-  updateURL(id: number, item) {
+  updateURL(item) {
 
     this.getToken();
 
     return this.httpClient
-      .put(this.base_path + '/api/url/' + id, JSON.stringify(item), this.httpOptions)
+      .put(this.base_path + '/api/url/' + this.username, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

@@ -91,12 +91,11 @@ export class FavoritesPage implements OnInit {
     });
 
     //Data
-    /*
-    var customer_id;
-    this.apiService.getFavoritesByCustomer(customer_id).subscribe((res: any) => {
-      this.data = res.body;
+    this.apiService.getFavorite().subscribe((res: any) => {
+      let jsonResult = JSON.parse(JSON.stringify(res));
+      this.data = jsonResult.body;
+      //console.log(jsonResult);
     })
-    */
   }
 
   /* Filter (ToDo)
@@ -189,7 +188,7 @@ export class FavoritesPage implements OnInit {
   toggleFavorite(coupon_id: number) {
 
  
-    this.apiService.setFavorite(coupon_id);
+    //this.apiService.setFavorite(coupon_id);
 
     //getCustomerCouponsById(customer_id)
     //if id == einer Id aus getCustomerCouponsById,

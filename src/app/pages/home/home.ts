@@ -96,12 +96,10 @@ export class HomePage implements OnInit {
 
     //Data
     this.apiService.getCoupons().subscribe((res: any) => {
-      
-
       let jsonResult = JSON.parse(JSON.stringify(res));
       this.data = jsonResult.body;
 
-      //console.log(jsonResult);
+      console.log(jsonResult);
     })
 
     //Home Tab

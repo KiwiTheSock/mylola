@@ -36,7 +36,7 @@ export class EventsPage {
 
   //Data
   public id: string = null;
-  public titel: string = null;
+  public title: string = null;
   public startDate: Date = null;
   public endDate: Date = null;
 
@@ -51,20 +51,22 @@ export class EventsPage {
   ionViewWillEnter() {
     this.apiService.getCoupons().subscribe((res: any) => {
 
-      console.log(res);
+      let jsonResult = JSON.parse(JSON.stringify(res));
 
-      for (let i = 0; i < res.length; i++) {
+      //console.log(jsonResult.body);
 
-        console.log(res[i][0]);
+      for (let i = 0; i < jsonResult.body.length; i++) {
 
-        this.id = res[i][0].id
-        this.titel = res[i][0].titel;
-        this.startDate = new Date(res[i][0].startDate);
-        this.endDate = new Date(res[i][0].endDate);
+        console.log(jsonResult.body[i]);
+
+        this.id = jsonResult.body[i].id
+        this.title = jsonResult.body[i].title;
+        this.startDate = new Date(jsonResult.body[i].startDate);
+        this.endDate = new Date(jsonResult.body[i].endDate);
 
         let eventCopy = {
           id: this.id,
-          title: this.titel,
+          title: this.title,
           startTime: this.startDate,
           endTime: this.endDate
         }
