@@ -48,6 +48,8 @@ export class ApiService {
       });
     }
 
+    console.log(this.username);
+
     //Token
     if (this.token == null) {
       this.storage.get(TOKEN_KEY).then(response => {
@@ -55,7 +57,7 @@ export class ApiService {
       })
     }
 
-    console.log(this.token);
+    //console.log(this.token);
 
     //HttpOptions
     this.httpOptions = {
@@ -473,13 +475,26 @@ export class ApiService {
       )
   }
 
-  //Params: path = '/api/devaluations/', id1: number, id2: number
-  addDevaluation(customer_id: number, coupon_id: number) {
+  //Params: path = '/api/devaluations/setfavorit/', customer_id: number, coupon_id: number
+  deFavorite(coupon_id: number) {
 
     this.getToken();
 
     return this.httpClient
-      .post(this.base_path + '/api/devaluations/' + customer_id + '/' + coupon_id, this.httpOptions)
+      .get(this.base_path + '/api/devaluations/defavorit/' + this.username + '/' + coupon_id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  //Params: path = '/api/devaluations/', id1: number, id2: number
+  addDevaluation(coupon_id: number) {
+
+    this.getToken();
+
+    return this.httpClient
+      .post(this.base_path + '/api/devaluations/' + this.username + '/' + coupon_id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -626,15 +641,16 @@ export class ApiService {
     this.storage.remove(USERNAME);
   }
 
-  /* Images (POST)
+  /* Search (GET)
    * --------------------------------------------------------
    */
-  addImage(formData) {
+  search(title) {
 
     this.getToken();
 
+    // /search/coupon/searchtitle/{title}
     return this.httpClient
-      .post(this.base_path + '/api/coupons/update/65', formData)
+      .get(this.base_path + '/api/coupon/search/title/' + title, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

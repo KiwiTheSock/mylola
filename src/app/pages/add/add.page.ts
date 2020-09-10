@@ -36,7 +36,7 @@ export class AddPage {
   public description: string = null;
   public startDate: string = null;
   public endDate: string = null;
-  public check: string = null;
+  public isEvent: string = null;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -68,7 +68,7 @@ export class AddPage {
       ])],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      check: ['false',]
+      isEvent: ['false',]
     });
   }
 
@@ -164,27 +164,26 @@ export class AddPage {
 
     let data = {
       "category": this.validation_add.value.category,
-      "titel": this.validation_add.value.titel,
+      "title": this.validation_add.value.titel,
       "catcher": this.validation_add.value.catcher,
       "description": this.validation_add.value.description,
       "startDate": this.time(this.validation_add.value.startDate),
       "endDate": this.time(this.validation_add.value.endDate),
       "code": this.validation_add.value.code,
+      "isEvent": this.validation_add.value.isEvent
     }
 
     if (this.submitForm() && !(this.validation_add.value.startDate > this.validation_add.value.endDate)) {
-      
-      let id = null //vll var besser
 
       this.apiService.addCoupon(data).subscribe((response: any) => {
-        console.log(response);
-        id = response.body.id;
+        console.log(response.body.id);
+        /*
+        this.apiService.updateCouponBanner(response.body.id, formData).subscribe((res: any) => {
+          console.log(res);
+        })
+        */
       })
-      
-      this.apiService.updateCouponBanner(id, formData).subscribe((res: any) => {
-        console.log(res);
-      })
-  
+
       this.router.navigateByUrl('/app/tabs/home');
 
       setTimeout(() => {

@@ -35,12 +35,12 @@ export class ProfileCustomerEditPage {
   ) {
     //Validators
     this.validation_profileCustomer = this.formBuilder.group({
-      firstname: ['', []],
-      lastname: ['', []],
-      street: ['', []],
-      housenumber: ['', []],
+      firstname: ['', [Validators.maxLength(50)]],
+      lastname: ['', [Validators.maxLength(50)]],
+      street: ['', [Validators.maxLength(50)]],
+      housenumber: ['', [Validators.maxLength(50)]],
       postcode: ['', [Validators.pattern('^[0-9]{5}$')]],
-      place: ['', []],
+      place: ['', [Validators.maxLength(50)]],
       email: ['', Validators.compose([
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])],
@@ -104,7 +104,7 @@ export class ProfileCustomerEditPage {
     //console.log(data);
 
     if (this.submitForm()) {
-      this.apiService.updateCustomer(data).subscribe(response => {
+      this.apiService.updateCustomer(data).subscribe((response: any) => {
         console.log(response);
       })
 

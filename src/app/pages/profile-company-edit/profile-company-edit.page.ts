@@ -28,8 +28,8 @@ export class ProfileCompanyEditPage {
   isSubmitted = false;
 
   //CroppedImages
-  croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
-  croppedBannerImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
+  croppedLogoImage;
+  croppedBannerImage;
 
   //Data
   public name: string = null;
@@ -116,6 +116,14 @@ export class ProfileCompanyEditPage {
       su_starttime: ['', Validators.required],
       su_endtime: ['', Validators.required],
     });
+
+    if(this.croppedLogoImage == null || this.croppedLogoImage == ""){
+      this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
+    }
+
+    if(this.croppedBannerImage == null || this.croppedBannerImage == ""){
+      this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
+    }
   }
 
   /* Data
@@ -138,8 +146,8 @@ export class ProfileCompanyEditPage {
       this.facebook = jsonResult.body.url.facebook;
       this.instagram = jsonResult.body.url.instagram;
       this.twitter = jsonResult.body.url.twitter;
-      this.croppedBannerImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/" + jsonResult.body.bannerFilename;
-      this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/" + jsonResult.body.logoFilename;
+      this.croppedBannerImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/" + jsonResult.body.banner_filename;
+      this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/" + jsonResult.body.logo_filename;
 
       //Monday
       this.mo_starttime = jsonResult.body.hours.monday.split(" - ")[0];
@@ -295,25 +303,7 @@ export class ProfileCompanyEditPage {
     this.isSubmitted = true;
     if (!this.validation_profileCompany.valid) {
       console.log('Please provide all the required values!')
-
-      if (this.mo_starttime > this.mo_endtime) {
-        this.validation_profileCompany.get("mo_endtime").reset();
-      } else if (this.tu_starttime > this.tu_endtime) {
-        this.validation_profileCompany.get("tu_endtime").reset();
-      } else if (this.we_starttime > this.we_endtime) {
-        this.validation_profileCompany.get("we_endtime").reset();
-      } else if (this.th_starttime > this.th_endtime) {
-        this.validation_profileCompany.get("th_endtime").reset();
-      } else if (this.fr_starttime > this.fr_endtime) {
-        this.validation_profileCompany.get("fr_endtime").reset();
-      } else if (this.sa_starttime > this.sa_endtime) {
-        this.validation_profileCompany.get("sa_endtime").reset();
-      } else if (this.su_starttime > this.su_endtime) {
-        this.validation_profileCompany.get("su_endtime").reset();
-      }
-
       return false;
-
     } else {
       console.log(this.validation_profileCompany.value)
       return true;

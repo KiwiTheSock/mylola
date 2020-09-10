@@ -34,7 +34,7 @@
 
           <ion-item *ngFor="let item of abos">
             <ion-label>{{item.name}}</ion-label>
-            <ion-button slot="end" (click)="presentModal()">
+            <ion-button slot="end" (click)="presentModal(item.id)">
               <ion-icon name="close"></ion-icon>
             </ion-button>
           </ion-item>

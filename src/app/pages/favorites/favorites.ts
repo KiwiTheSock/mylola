@@ -187,26 +187,10 @@ export class FavoritesPage implements OnInit {
    */
   toggleFavorite(coupon_id: number) {
 
- 
-    //this.apiService.setFavorite(coupon_id);
+    this.apiService.deFavorite(coupon_id).subscribe( res => {
+      console.log(res);
+    })
 
-    //getCustomerCouponsById(customer_id)
-    //if id == einer Id aus getCustomerCouponsById,
-    // this.apiService.addFavorite(customer_id ,id);
-    //fav = true
-    //else
-    //deleteFavorite
-    //fav = false
-
-    /*
-    if (this.user.hasFavorite(session.name)) {
-      this.user.removeFavorite(session.name);
-      session.fav = true;
-    } else {
-      this.user.addFavorite(session.name);
-      session.fav = false;
-    }
-    */
   }
 
   /* Share

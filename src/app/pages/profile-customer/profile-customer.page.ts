@@ -23,21 +23,23 @@ export class ProfileCustomerPage {
     private modalController: ModalController
   ) { }
 
- /* Data
-  * --------------------------------------------------------
-  */
+  /* Data
+   * --------------------------------------------------------
+   */
   ionViewWillEnter() {
     this.apiService.getCustomerByIdentifier().subscribe((res: any) => {
       let jsonResult = JSON.parse(JSON.stringify(res));
       this.profile = jsonResult.body;
     });
-    
+
     this.apiService.getMySubscribtions().subscribe((res: any) => {
       let jsonResult = JSON.parse(JSON.stringify(res));
-      console.log(res);
-      this.abos = jsonResult.body;
+      if (res) {
+        this.abos = jsonResult.body;
+      }
     })
-    
+
+
   }
 
   /* Settings
@@ -51,12 +53,12 @@ export class ProfileCustomerPage {
   * --------------------------------------------------------
   */
   //id des Abos mitübergeben, im modal-deabo deabo-API Methode ausführen
-  async presentModal() {
+  async presentModal(company_id) {
     const modal = await this.modalController.create({
       component: ModalDeaboPage,
       cssClass: 'modal-deabo-css',
       swipeToClose: true, //iOS
-      componentProps: {}
+      componentProps: { company_id: company_id }
     });
 
     await modal.present();
@@ -66,7 +68,5 @@ export class ProfileCustomerPage {
       history.pushState(modalState, null);
     }
   }
-
-
 
 }

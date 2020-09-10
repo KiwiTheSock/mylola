@@ -12,15 +12,19 @@ import { ApiService } from '../../services/api.service';
 })
 export class ModalDeaboPage {
 
+  //Company ID
+  company_id: number;
+
   constructor(
     public apiService: ApiService,
-    public modalCtrl : ModalController
+    public modalCtrl: ModalController
   ) { }
 
-  deabo(){
-  
-    let company_id; //= this.data.body.company[0].id
-    this.apiService.deleteSubscriber(company_id);
+  deabo() {
+
+    this.apiService.deleteSubscriber(this.company_id).subscribe(res => {
+      console.log(res);
+    })
     this.dismiss();
   }
 

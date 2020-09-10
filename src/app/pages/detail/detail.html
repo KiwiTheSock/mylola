@@ -22,10 +22,10 @@
     <ion-row>
       <ion-col class="profile-background" >
         <div>
-          <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/{{logofilename}}"></ion-img>
+          <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{bannerFilename_Company}}"></ion-img>
         </div>
         <ion-avatar>
-          <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{bannerFilename_Company}}"></ion-img>
+          <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/{{logofilename}}"></ion-img>
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -33,7 +33,7 @@
     <!-- Settings -->
     <ion-row>
       <ion-col class="settings-button">
-        <ion-button style="color: black" (click)="openSettings()" *ngIf="show">
+        <ion-button (click)="openSettings()" *ngIf="show">
           <ion-icon name="settings-sharp"></ion-icon>
         </ion-button>
       </ion-col>
@@ -43,8 +43,8 @@
     <ion-row>
       <ion-col class="icons">
         <ion-button (click)="toggleFavorite(id)">
-          <ion-icon *ngIf="fav" name="bookmark-outline"></ion-icon>
-          <ion-icon *ngIf="!fav" name="bookmark"></ion-icon>
+          <ion-icon *ngIf="!fav" name="bookmark-outline"></ion-icon>
+          <ion-icon *ngIf="fav" name="bookmark"></ion-icon>
         </ion-button>
         <ion-button (click)="shareSession()">
           <ion-icon slot="icon-only" name="share-social"></ion-icon>

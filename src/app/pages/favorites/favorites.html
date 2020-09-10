@@ -104,7 +104,7 @@
             <ion-col class="logo">
               <ion-avatar>
                 <ion-img
-                  src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png">
+                  src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/{{item.company.logoFilename}}">
                 </ion-img>
               </ion-avatar>
             </ion-col>
@@ -124,7 +124,7 @@
             <!-- Picture and Tear-off -->
             <ion-col>
 
-              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png">
+              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{item.bannerFilename}}"
                 routerLink="/app/tabs/home/detail/{{item.id}}">
               </ion-img>
 
@@ -159,8 +159,7 @@
             <ion-col class="icons">
               <ion-buttons>
                 <ion-button id="button1" (click)="toggleFavorite(item.id)">
-                  <ion-icon *ngIf="!fav" slot="icon-only" name="bookmark-outline"></ion-icon>
-                  <ion-icon *ngIf="fav" slot="icon-only" name="bookmark"></ion-icon>
+                  <ion-icon slot="icon-only" name="bookmark"></ion-icon>
                 </ion-button>
                 <ion-button id="button2" (click)="shareSession()">
                   <ion-icon slot="icon-only" name="share-social"></ion-icon>

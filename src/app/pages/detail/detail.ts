@@ -95,8 +95,7 @@ export class DetailPage {
   public titel: string = null;
   public id: number = null;
 
-
-  public fav: boolean = null;
+  public fav: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -159,26 +158,39 @@ export class DetailPage {
       this.titel = jsonResult.body.title;
 
       //URL
-      this.homepage = jsonResult.body.company.url.homepage;
-      this.facebook = jsonResult.body.company.url.facebook;
-      this.instagram = jsonResult.body.company.url.instagram;
-      this.twitter = jsonResult.body.company.url.twitter;
+      this.homepage = jsonResult.body.company.urls.homepage;
+      this.facebook = jsonResult.body.company.urls.facebook;
+      this.instagram = jsonResult.body.company.urls.instagram;
+      this.twitter = jsonResult.body.company.urls.twitter;
 
       //Hours
-      this.mo_start = this.time(jsonResult.body.company.hours.monday.split(" - ")[0]);
-      this.mo_end = this.time(jsonResult.body.company.hours.monday.split(" - ")[1]);
-      this.tu_start = this.time(jsonResult.body.company.hours.tuesday.split(" - ")[0]);
-      this.tu_end = this.time(jsonResult.body.company.hours.tuesday.split(" - ")[1]);
-      this.we_start = this.time(jsonResult.body.company.hours.wednesday.split(" - ")[0]);
-      this.we_end = this.time(jsonResult.body.company.hours.wednesday.split(" - ")[1]);
-      this.th_start = this.time(jsonResult.body.company.hours.thursday.split(" - ")[0]);
-      this.th_end = this.time(jsonResult.body.company.hours.thursday.split(" - ")[1]);
-      this.fr_start = this.time(jsonResult.body.company.hours.friday.split(" - ")[0]);
-      this.fr_end = this.time(jsonResult.body.company.hours.friday.split(" - ")[1]);
-      this.sa_start = this.time(jsonResult.body.company.hours.saturday.split(" - ")[0]);
-      this.sa_end = this.time(jsonResult.body.company.hours.saturday.split(" - ")[1]);
-      this.su_start = this.time(jsonResult.body.company.hours.sunday.split(" - ")[0]);
-      this.su_end = this.time(jsonResult.body.company.hours.sunday.split(" - ")[1]);
+      this.mo_start = (jsonResult.body.company.hours.monday.split(" - ")[0]);
+      this.mo_end = (jsonResult.body.company.hours.monday.split(" - ")[1]);
+      this.tu_start = (jsonResult.body.company.hours.tuesday.split(" - ")[0]);
+      this.tu_end = (jsonResult.body.company.hours.tuesday.split(" - ")[1]);
+      this.we_start = (jsonResult.body.company.hours.wednesday.split(" - ")[0]);
+      this.we_end = (jsonResult.body.company.hours.wednesday.split(" - ")[1]);
+      this.th_start = (jsonResult.body.company.hours.thursday.split(" - ")[0]);
+      this.th_end = (jsonResult.body.company.hours.thursday.split(" - ")[1]);
+      this.fr_start = (jsonResult.body.company.hours.friday.split(" - ")[0]);
+      this.fr_end = (jsonResult.body.company.hours.friday.split(" - ")[1]);
+      this.sa_start = (jsonResult.body.company.hours.saturday.split(" - ")[0]);
+      this.sa_end = (jsonResult.body.company.hours.saturday.split(" - ")[1]);
+      this.su_start = (jsonResult.body.company.hours.sunday.split(" - ")[0]);
+      this.su_end = (jsonResult.body.company.hours.sunday.split(" - ")[1]);
+    });
+
+    //Check Favorites
+    this.apiService.getFavorite().subscribe(res => {
+
+      let jsonResult = JSON.parse(JSON.stringify(res));
+
+      for (let i = 0; i < jsonResult.body.length; i++) {
+
+        if (jsonResult.body[i].id == sessionId) {
+          this.fav = true;
+        }
+      }
     });
 
 
@@ -227,36 +239,16 @@ export class DetailPage {
   toggleFavorite(coupon_id: number) {
 
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
-
-    this.apiService.setFavorite(sessionId);
-
-    this.apiService.getFavorite().subscribe(res => {
-
-      let jsonResult = JSON.parse(JSON.stringify(res));
-
-      console.log(res);
-
-      for (let i = 0; i < jsonResult.body.length; i++) {
-        if (jsonResult.body[i].id == sessionId) {
-          //this.apiService.
-        }
-        else {
-         
-        }
-      }
-    });
-
-    this.apiService.setFavorite(coupon_id);
-
-    /*
-    if (this.userProvider.hasFavorite(session.name)) {
-      this.userProvider.removeFavorite(session.name);
-      session.fav = true;
+  
+    if(this.fav == true) {
+      this.apiService.deFavorite(sessionId).subscribe(res => {
+        console.log(res);
+      })
     } else {
-      this.userProvider.addFavorite(session.name);
-      session.fav = false;
+      this.apiService.setFavorite(sessionId).subscribe(res => {
+        console.log(res);
+      })
     }
-    */
   }
 
   /* Share
@@ -368,7 +360,7 @@ export class DetailPage {
       buttons: [
         {
           text: `Webseite (${this.homepage})`,
-          icon: !mode ? 'website' : null,
+          icon: !mode ? 'globe' : null,
           handler: () => {
             //window.open(session.homepage); //Browser
             this.launchBrowser(this.homepage);

@@ -51,8 +51,9 @@ export class ModalCouponPage {
 
   dismiss() {
 
-    var customer_id = 1;
-    this.apiService.addDevaluation(customer_id, this.coupon_id);
+    this.apiService.addDevaluation(this.coupon_id).subscribe(res => {
+      console.log(res);
+    })
 
     this.modalCtrl.dismiss({ 'dismissed': true });
   }

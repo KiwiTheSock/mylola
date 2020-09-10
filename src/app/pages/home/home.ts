@@ -46,8 +46,8 @@ export class HomePage implements OnInit {
   queryText = '';
 
   //Data
-  data: any;
-  fav: boolean = false;
+  public data: any;
+  public fav: boolean = false;
 
   //Position
   lat = null;
@@ -96,11 +96,9 @@ export class HomePage implements OnInit {
 
     //Data
     this.apiService.getCoupons().subscribe((res: any) => {
-      let jsonResult = JSON.parse(JSON.stringify(res));
+      var jsonResult = JSON.parse(JSON.stringify(res));
       this.data = jsonResult.body;
-
-      console.log(jsonResult);
-    })
+    });
 
     //Home Tab
     this.tabs.home();
@@ -128,14 +126,14 @@ export class HomePage implements OnInit {
     }
 
     if (name == 5) {
-      console.log("Button 5 Apply");
       this.position();
     }
 
     if (name == 6) {
-      console.log("Button 6 Apply");
+      this.ending();
     }
-    this.updateSchedule();
+    //this.updateSchedule();
+    this.updateFilter();
   }
 
   dismissFilter(name) {
@@ -185,7 +183,30 @@ export class HomePage implements OnInit {
       console.log("Button 6 Dismiss");
     }
 
-    this.updateSchedule();
+    //this.updateSchedule();
+    this.updateFilter();
+  }
+
+  updateFilter() {
+    console.log(this.excludeTracks);
+  }
+
+  filterItems() {
+    //console.log(this.queryText);
+
+    if (this.queryText == "") {
+      this.apiService.getCoupons().subscribe((res: any) => {
+        var jsonResult = JSON.parse(JSON.stringify(res));
+        this.data = jsonResult.body;
+      });
+    } else {
+      this.apiService.search(this.queryText).subscribe((result: any) => {
+        var jsonResult = JSON.parse(JSON.stringify(result));
+        this.data = jsonResult.body;
+      }, (error: any) => {
+        this.data = null;
+      });
+    }
   }
 
   //Update timeline
@@ -195,15 +216,6 @@ export class HomePage implements OnInit {
       this.groups = data.groups;
     });
     */
-
-  }
-
-  filterItems() {
-    console.log(this.data);
-    return this.data.filter(item => {
-      console.log(item);
-      return item.company[0].name.toLowerCase().indexOf(this.queryText.toLowerCase()) > -1;
-    })
   }
 
   loadMore(infiniteScroll) {
@@ -221,24 +233,15 @@ export class HomePage implements OnInit {
   //Favorites
   toggleFavorite(coupon_id: number) {
 
-    this.apiService.setFavorite(coupon_id);
-
-    //getCustomerCouponsById(customer_id)
-    //if id == einer Id aus getCustomerCouponsById,
-    // this.apiService.addFavorite(customer_id ,id);
-    //fav = true
-    //else
-    //deleteFavorite
-    //fav = false
-
-    /*
-    if (this.user.hasFavorite(session.name)) {
-      this.user.removeFavorite(session.name);
-      session.fav = true;
+    if (this.fav == true) {
+      this.apiService.deFavorite(coupon_id).subscribe(res => {
+        console.log(res);
+      })
     } else {
-      this.user.addFavorite(session.name);
-      session.fav = false;
-    }*/
+      this.apiService.setFavorite(coupon_id).subscribe(res => {
+        console.log(res);
+      })
+    }
   }
 
   /* Share
@@ -288,6 +291,12 @@ export class HomePage implements OnInit {
     console.log("LNG: ", this.lng);
     console.log("LAT: ", this.lat);
 
+    //API CALL
+
+  }
+
+  ending() {
+    //API CALL
   }
 
 }

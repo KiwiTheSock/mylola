@@ -57,21 +57,24 @@ export class EventsPage {
 
       for (let i = 0; i < jsonResult.body.length; i++) {
 
-        console.log(jsonResult.body[i]);
+        if (jsonResult.body[i].isEvent) {
 
-        this.id = jsonResult.body[i].id
-        this.title = jsonResult.body[i].title;
-        this.startDate = new Date(jsonResult.body[i].startDate);
-        this.endDate = new Date(jsonResult.body[i].endDate);
+          console.log(jsonResult.body[i]);
 
-        let eventCopy = {
-          id: this.id,
-          title: this.title,
-          startTime: this.startDate,
-          endTime: this.endDate
+          this.id = jsonResult.body[i].id
+          this.title = jsonResult.body[i].title;
+          this.startDate = new Date(jsonResult.body[i].startDate);
+          this.endDate = new Date(jsonResult.body[i].endDate);
+
+          let eventCopy = {
+            id: this.id,
+            title: this.title,
+            startTime: this.startDate,
+            endTime: this.endDate
+          }
+
+          this.eventSource.push(eventCopy);
         }
-
-        this.eventSource.push(eventCopy);
 
       }
     })
