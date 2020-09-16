@@ -21,10 +21,20 @@ export class ProfileCompanyPage {
   public coupons: any;
   public hours: any;
   public url: any;
-  
+
+  //Images
   public bannerfilename: any = null;
   public logofilename: any = null;
 
+  //Hours
+  public monday: string = null;
+  public tuesday: string = null;
+  public wednesday: string = null;
+  public thursday: string = null;
+  public friday: string = null;
+  public saturday: string = null;
+  public sunday: string = null;
+  /*
   public mo_start: string = null;
   public mo_end: string = null;
 
@@ -45,6 +55,7 @@ export class ProfileCompanyPage {
 
   public su_start: string = null;
   public su_end: string = null;
+  */
 
   constructor(
     private apiService: ApiService,
@@ -58,14 +69,25 @@ export class ProfileCompanyPage {
       let jsonResult = JSON.parse(JSON.stringify(res));
       //console.log(res);
 
+      //Data
       this.profile = jsonResult.body;
       this.coupons = jsonResult.body.coupons;
       this.hours = jsonResult.body.hours;
       this.url = jsonResult.body.url;
 
+      //Images
       this.bannerfilename = jsonResult.body.banner_filename;
       this.logofilename = jsonResult.body.logo_filename;
-      
+
+      //Hours
+      this.monday = jsonResult.body.hours.monday;
+      this.tuesday = jsonResult.body.hours.tuesday;
+      this.wednesday = jsonResult.body.hours.wednesday;
+      this.thursday = jsonResult.body.hours.thursday;
+      this.friday = jsonResult.body.hours.friday;
+      this.saturday = jsonResult.body.hours.saturday;
+      this.sunday = jsonResult.body.hours.sunday;
+      /*
       this.mo_start = (this.hours.monday.split(" - ")[0]);
       this.mo_end = (this.hours.monday.split(" - ")[1]);
 
@@ -86,6 +108,7 @@ export class ProfileCompanyPage {
 
       this.su_start = (this.hours.sunday.split(" - ")[0]);
       this.su_end = (this.hours.sunday.split(" - ")[1]);
+      */
     })
   }
 

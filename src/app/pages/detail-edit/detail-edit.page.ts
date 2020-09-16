@@ -82,14 +82,14 @@ export class DetailEditPage {
 
     this.apiService.getCouponById(sessionId).subscribe((res: any) => {
       this.category = res.body.category.name;
-      this.titel = res.body.titel;
+      this.titel = res.body.title;
       this.catcher = res.body.catcher;
       this.description = res.body.description;
       this.startDate = res.body.startDate;
       this.endDate = res.body.endDate;
       this.code = res.body.code;
       this.bannerFilename = res.body.bannerFilename;
-      this.croppedImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/" + res.body.bannerFilename;
+      this.croppedImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/" + res.body.bannerFilename;
     })
 
   }

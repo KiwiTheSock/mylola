@@ -301,6 +301,7 @@ export class ProfileCompanyEditPage {
    */
   submitForm() {
     this.isSubmitted = true;
+    //console.log(this.validation_profileCompany);
     if (!this.validation_profileCompany.valid) {
       console.log('Please provide all the required values!')
       return false;

@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Storage } from '@ionic/storage';
 
 //Others
-import { throwError, from, BehaviorSubject } from 'rxjs';
+import { throwError, from, BehaviorSubject, Observable } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
 
@@ -48,7 +48,7 @@ export class ApiService {
       });
     }
 
-    console.log(this.username);
+    //console.log(this.username);
 
     //Token
     if (this.token == null) {
@@ -437,12 +437,12 @@ export class ApiService {
   }
 
   //Params: path = /api/mydevaluations', id: number
-  getDevaluationById(id: number) {
+  getDevaluationByIdentifier() {
 
     this.getToken();
 
     return this.httpClient
-      .get(this.base_path + '/api/mydevaluations/' + id, this.httpOptions)
+      .get(this.base_path + '/api/mydevaluations/' + this.username, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -450,7 +450,7 @@ export class ApiService {
   }
 
   //Params: path = '/api/myfavorits/'
-  getFavorite() {
+  getFavorite(){
 
     this.getToken();
 

@@ -76,6 +76,7 @@ export class ProfileCustomerEditPage {
    */
   submitForm() {
     this.isSubmitted = true;
+    console.log(this.validation_profileCustomer);
     if (!this.validation_profileCustomer.valid) {
       console.log('Please provide all the required values!');
       return false;

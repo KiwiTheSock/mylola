@@ -27,9 +27,7 @@ import { ApiService } from '../../services/api.service';
 export class HomePage implements OnInit {
 
   //Infinite Scroll
-  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  page = 0;
-  maximumPages = 5;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll; //Notwendig?
 
   //Filter
   tracks: { name: string, icon: string, isChecked: boolean }[] = [];
@@ -46,7 +44,8 @@ export class HomePage implements OnInit {
   queryText = '';
 
   //Data
-  public data: any;
+  public data: any = [];
+  public counter: number = 0;
   public fav: boolean = false;
 
   //Position
@@ -78,11 +77,15 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.updateSchedule();
-
+    this.getData();
   }
 
   ionViewWillEnter() {
+    //Home Tab
+    this.tabs.home();
+  }
+
+  getData() {
     //Filter
     this.confData.getTracks().subscribe((tracks: any[]) => {
       tracks.forEach(track => {
@@ -97,11 +100,25 @@ export class HomePage implements OnInit {
     //Data
     this.apiService.getCoupons().subscribe((res: any) => {
       var jsonResult = JSON.parse(JSON.stringify(res));
-      this.data = jsonResult.body;
+
+      //200 is an empty body
+      if (jsonResult.body.status == 200) {
+        this.data = "";
+      }
+      else {
+        var tmp = this.counter + 5;
+
+        for (this.counter; this.counter < tmp; this.counter++) {
+
+          //console.log(jsonResult.body[this.counter]);
+
+          if (jsonResult.body[this.counter]) {
+            this.data.push(jsonResult.body[this.counter]);
+          }
+        }
+      }
     });
 
-    //Home Tab
-    this.tabs.home();
   }
 
   /* Filter (ToDo)
@@ -218,30 +235,36 @@ export class HomePage implements OnInit {
     */
   }
 
-  loadMore(infiniteScroll) {
-    this.page++;
+  loadData(event) {
 
-    //insert function here
+    setTimeout(() => {
+      console.log("Done");
+      this.getData(); //oder ngOnInit()
+      event.target.complete();
+    }, 2000);
 
-    console.log('Page: ', this.page);
-
-    if (this.page === this.maximumPages) {
-      this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
-    }
   }
 
   //Favorites
   toggleFavorite(coupon_id: number) {
 
+    this.apiService.setFavorite(coupon_id).subscribe(res => {
+      console.log(res);
+    })
+
+    /*
     if (this.fav == true) {
       this.apiService.deFavorite(coupon_id).subscribe(res => {
         console.log(res);
+        this.fav = false;
       })
     } else {
       this.apiService.setFavorite(coupon_id).subscribe(res => {
         console.log(res);
+        this.fav = true;
       })
     }
+    */
   }
 
   /* Share
@@ -254,8 +277,6 @@ export class HomePage implements OnInit {
   //Refresh
   refresh(event) {
     console.log('Begin async operation');
-
-    this.ionViewWillEnter();
 
     setTimeout(() => {
       console.log('Async operation has ended');

@@ -1,5 +1,5 @@
 //Angular
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Ionic
@@ -46,7 +46,8 @@ export class FavoritesPage implements OnInit {
 
   //Data
   data: any;
-  fav: boolean = false;
+  devaluations: any;
+  isUsed: boolean = false;
 
   //Position
   lat = null;
@@ -67,18 +68,15 @@ export class FavoritesPage implements OnInit {
     public refresher: Refresher,
     private socialSharing: SocialSharing,
     public apiService: ApiService,
-    private geo: Geolocation
+    private geo: Geolocation,
+    private changeRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.updateSchedule();
+    this.getData();
   }
 
-  ngDoCheck() {
-    this.updateSchedule();
-  }
-
-  ionViewWillEnter() {
+  getData() {
     //Filter
     this.confData.getTracks().subscribe((tracks: any[]) => {
       tracks.forEach(track => {
@@ -93,8 +91,21 @@ export class FavoritesPage implements OnInit {
     //Data
     this.apiService.getFavorite().subscribe((res: any) => {
       let jsonResult = JSON.parse(JSON.stringify(res));
-      this.data = jsonResult.body;
       //console.log(jsonResult);
+
+      //200 is an empty body
+      if (jsonResult.body.status == 200) {
+        this.data = "";
+      }
+      else {
+        this.data = jsonResult.body;
+      }
+    })
+
+    this.apiService.getDevaluationByIdentifier().subscribe((res: any) => {
+      let jsonResult = JSON.parse(JSON.stringify(res));
+      //console.log(jsonResult.body);
+      this.devaluations = jsonResult.body;
     })
   }
 
@@ -182,15 +193,15 @@ export class FavoritesPage implements OnInit {
     }
   }
 
-  /* Favorites (ToDo)
+  /* Favorites
    * --------------------------------------------------------
    */
   toggleFavorite(coupon_id: number) {
 
-    this.apiService.deFavorite(coupon_id).subscribe( res => {
+    this.apiService.deFavorite(coupon_id).subscribe(res => {
       console.log(res);
+      this.ngOnInit();
     })
-
   }
 
   /* Share
@@ -200,11 +211,16 @@ export class FavoritesPage implements OnInit {
     this.socialSharing.share("https://www.mylola.de") // "/?angebot=" + id
   }
 
-  /* Refresher (ToDo)
-   * --------------------------------------------------------
-   */
-  refresh() {
-    this.refresher.doRefresh(event);
+  //Refresh
+  refresh(event) {
+    console.log('Begin async operation');
+
+    this.ngOnInit();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
   btnActivate(ionicButton, name) {

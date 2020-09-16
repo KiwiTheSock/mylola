@@ -88,7 +88,7 @@
   </ion-refresher>
 
   <!-- List -->
-  <ion-list class="list">
+  <ion-list class="list" *ngIf="data">
     <ion-item-group>
       <!-- [hidden]="group.hide" FILTER? -->
 
@@ -212,7 +212,7 @@
   </ion-fab>
 
   <!-- Infinite Scroll -->
-  <ion-infinite-scroll threshold="50px" (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="data">
     <ion-infinite-scroll-content>
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>

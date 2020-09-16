@@ -20,9 +20,10 @@
 
     <!-- Banner And Logo -->
     <ion-row>
-      <ion-col class="profile-background" >
+      <ion-col class="profile-background">
         <div>
-          <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{bannerFilename_Company}}"></ion-img>
+          <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{bannerFilename_Company}}">
+          </ion-img>
         </div>
         <ion-avatar>
           <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/{{logofilename}}"></ion-img>
@@ -58,7 +59,7 @@
     <!-- Title and Description -->
     <ion-row>
       <ion-col col-12>
-        <div  class="text">
+        <div class="text">
           <h5>{{titel}}</h5>
           <p>{{description}}</p>
         </div>
@@ -66,23 +67,25 @@
     </ion-row>
 
     <!-- Coupon Button -->
-    <ion-row>
-      <ion-col class="buttons" (click)="isLoggedIn()">
-        <ion-button><b>{{catcher}}</b></ion-button>
-      </ion-col>
-    </ion-row>
-    <!--
-    <ion-row>
-      <ion-col class="buttons">
-        <ion-button color="dark" disabled="true"><b>{{session.button}}</b></ion-button>
-      </ion-col>
-    </ion-row>
-    -->
+    <div *appHasRole="['ROLE_USER']">
+      <ion-row *ngIf="!used">
+        <ion-col class="buttons" (click)="isLoggedIn()">
+          <ion-button><b>{{catcher}}</b></ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="used">
+        <ion-col class="buttons">
+          <ion-button color="dark" disabled="true"><b>Bereits eingelöst</b></ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
 
     <!-- Coupon -->
     <ion-row>
       <ion-col>
-        <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{bannerFilename_Coupon}}"></ion-img>
+        <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{bannerFilename_Coupon}}">
+        </ion-img>
       </ion-col>
     </ion-row>
 
@@ -93,7 +96,7 @@
         <p><b>{{name}}</b></p>
         <p>{{street}} {{housenumber}}</p>
         <p>{{postcode}} {{place}}</p>
-        <ion-button (click)="notification()" *appHasRole="['ROLE_USER']">{{name}} abonnieren</ion-button >
+        <ion-button (click)="notification()" *appHasRole="['ROLE_USER']">{{name}} abonnieren</ion-button>
       </ion-col>
     </ion-row>
 
@@ -119,7 +122,7 @@
 
     <!-- Social Media -->
     <ion-row>
-      <ion-col class="social-media location" >
+      <ion-col class="social-media location">
         <h4>Social Media</h4>
         <ion-chip color="facebook" button (click)="openFacebook()" *ngIf="facebook">
           <ion-icon name="logo-facebook"></ion-icon>
@@ -147,6 +150,14 @@
     <ion-row>
       <ion-col class="opening">
         <h4>Öffnungszeiten</h4>
+        <p>Montag: {{monday}}</p>
+        <p>Dienstag: {{tuesday}}</p>
+        <p>Mittwoch: {{wednesday}}</p>
+        <p>Donnerstag: {{thursday}}</p>
+        <p>Freitag: {{friday}}</p>
+        <p>Samstag: {{saturday}}</p>
+        <p>Sonntag: {{sunday}}</p>
+        <!--
         <p>Montag: {{mo_start}} - {{mo_end}}</p>
         <p>Dienstag: {{tu_start}} - {{tu_end}}</p>
         <p>Mittwoch: {{we_start}} - {{we_end}}</p>
@@ -154,6 +165,7 @@
         <p>Freitag: {{fr_start}} - {{fr_end}}</p>
         <p>Samstag: {{sa_start}} - {{sa_end}}</p>
         <p>Sonntag: {{su_start}} - {{su_end}}</p>
+        -->
         <br>
       </ion-col>
     </ion-row>

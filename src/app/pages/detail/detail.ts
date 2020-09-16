@@ -70,6 +70,14 @@ export class DetailPage {
   public twitter: string = null;
 
   //Hours
+  public monday: string = null;
+  public tuesday: string = null;
+  public wednesday: string = null;
+  public thursday: string = null;
+  public friday: string = null;
+  public saturday: string = null;
+  public sunday: string = null;
+  /*
   public mo_start: string = null;
   public mo_end: string = null;
   public tu_start: string = null;
@@ -84,6 +92,7 @@ export class DetailPage {
   public sa_end: string = null;
   public su_start: string = null;
   public su_end: string = null;
+  */
 
   //Coupon
   public bannerFilename_Coupon: string = null;
@@ -96,6 +105,7 @@ export class DetailPage {
   public id: number = null;
 
   public fav: boolean = false;
+  public used: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -111,10 +121,8 @@ export class DetailPage {
     private router: Router,
     private toastController: ToastController,
     private darkmode: Darkmode
-  ) { }
-
-  //Back Button
-  ngOnInit() {
+  ) {
+    //Back Button
     if (this.platform.platforms().includes("ios")) {
       this.ios = true;
     }
@@ -123,8 +131,24 @@ export class DetailPage {
     }
   }
 
+  //Data
+  ngOnInit() {
+    this.getData();
+  }
+
   ionViewWillEnter() {
 
+    //Back BUtton
+    this.defaultHref = `/app/tabs/home`;
+
+    //Edit
+    this.edit();
+
+    //Map
+    this.showMap();
+  }
+
+  getData() {
     //Data
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
 
@@ -164,6 +188,14 @@ export class DetailPage {
       this.twitter = jsonResult.body.company.urls.twitter;
 
       //Hours
+      this.monday = jsonResult.body.company.hours.monday;
+      this.tuesday = jsonResult.body.company.hours.tuesday;
+      this.wednesday = jsonResult.body.company.hours.wednesday;
+      this.thursday = jsonResult.body.company.hours.thursday;
+      this.friday = jsonResult.body.company.hours.friday;
+      this.saturday = jsonResult.body.company.hours.saturday;
+      this.sunday = jsonResult.body.company.hours.sunday;
+      /*
       this.mo_start = (jsonResult.body.company.hours.monday.split(" - ")[0]);
       this.mo_end = (jsonResult.body.company.hours.monday.split(" - ")[1]);
       this.tu_start = (jsonResult.body.company.hours.tuesday.split(" - ")[0]);
@@ -178,6 +210,7 @@ export class DetailPage {
       this.sa_end = (jsonResult.body.company.hours.saturday.split(" - ")[1]);
       this.su_start = (jsonResult.body.company.hours.sunday.split(" - ")[0]);
       this.su_end = (jsonResult.body.company.hours.sunday.split(" - ")[1]);
+      */
     });
 
     //Check Favorites
@@ -193,15 +226,19 @@ export class DetailPage {
       }
     });
 
+    //Check Devaluations
+    if (this.authService.getRole() == "ROLE_USER") {
+      this.apiService.getDevaluationByIdentifier().subscribe(res => {
+        let jsonResult = JSON.parse(JSON.stringify(res));
 
-    //Back BUtton
-    this.defaultHref = `/app/tabs/home`;
+        for (let i = 0; i < jsonResult.body.length; i++) {
 
-    //Edit
-    this.edit();
-
-    //Map
-    this.showMap();
+          if (jsonResult.body[i].id == sessionId) {
+            this.used = true;
+          }
+        }
+      })
+    }
   }
 
   /* Get Hours and Minutes
@@ -239,16 +276,22 @@ export class DetailPage {
   toggleFavorite(coupon_id: number) {
 
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
-  
-    if(this.fav == true) {
+
+    console.log(this.fav);
+
+    if (this.fav == true) {
       this.apiService.deFavorite(sessionId).subscribe(res => {
         console.log(res);
+        this.fav = false;
       })
     } else {
       this.apiService.setFavorite(sessionId).subscribe(res => {
         console.log(res);
+        this.fav = true;
       })
     }
+
+    this.ngOnInit();
   }
 
   /* Share

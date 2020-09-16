@@ -83,12 +83,12 @@
 <ion-content fullscreen="true" [scrollEvents]="true" appHideHeader [header]="header">
 
   <!-- Refresher -->
-  <ion-refresher slot="fixed" (ionRefresh)="refresh()">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <!-- List -->
-  <ion-list class="list">
+  <ion-list class="list" *ngIf="data">
     <ion-item-group>
       <!-- [hidden]="group.hide" FILTER? -->
 
@@ -122,23 +122,23 @@
           <ion-row>
 
             <!-- Picture and Tear-off -->
-            <ion-col>
-
-              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{item.bannerFilename}}"
-                routerLink="/app/tabs/home/detail/{{item.id}}">
-              </ion-img>
-
-              <div class="tear-off">
-                <ion-img src="./assets/img/mylola/Abrissecke_rund.png" routerLink="/app/tabs/home/detail/{{item.id}}">
+            <ion-col *ngIf="!devaluations.isUsed">
+              
+                <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{item.bannerFilename}}"
+                  routerLink="/app/tabs/home/detail/{{item.id}}">
                 </ion-img>
-                <p class="">{{item.catcher}}</p>
-              </div>
+
+                <div class="tear-off">
+                  <ion-img src="./assets/img/mylola/Abrissecke_rund.png" routerLink="/app/tabs/home/detail/{{item.id}}">
+                  </ion-img>
+                  <p class="">{{item.catcher}}</p>
+                </div>
+      
             </ion-col>
 
-            <!-- 
-            <ion-col class="used">
+            <ion-col class="used" *ngIf="devaluations.isUsed">
               
-              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/{{item.bannerFilename}}" routerLink="/app/tabs/home/detail/{{item.id}}">
+              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{item.bannerFilename}}" routerLink="/app/tabs/home/detail/{{item.id}}">
               </ion-img>
               
               <div class="tear-off">
@@ -148,7 +148,6 @@
               </div>
 
             </ion-col>
-            -->
 
           </ion-row>
 
@@ -204,7 +203,7 @@
   </ion-list-header>
 
   <!-- Infinite Scroll -->
-  <ion-infinite-scroll threshold="50px" (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll threshold="50px" (ionInfinite)="loadMore($event)" *ngIf="data">
     <ion-infinite-scroll-content>
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>

@@ -28,7 +28,7 @@ export class ModalCouponPage {
   //Coupon
   catcher: any;
   value: any;
-  elementType = 'url';
+  elementType = '';
 
   constructor(
     private apiService: ApiService,
