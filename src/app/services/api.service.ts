@@ -24,6 +24,7 @@ export class ApiService {
   //Token
   private token = null;
   private httpOptions: any;
+  private httpOptionsImages: any;
 
   //Username
   private username = null;
@@ -62,13 +63,23 @@ export class ApiService {
     //HttpOptions
     this.httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',//'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json', //'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',//'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + this.token
+      }),
+    }
+
+    //HttpOptions
+    this.httpOptionsImages = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + this.token
       }),
     }
 
     this.httpOptions["observe"] = 'response';
+    this.httpOptionsImages["observe"] = 'response';
 
   }
 
@@ -247,7 +258,7 @@ export class ApiService {
     this.getToken();
 
     return this.httpClient
-      .post(this.base_path + '/api/company/updatebanner/' + this.username, formData)
+      .post(this.base_path + '/api/updatebanner/' + this.username, formData)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -260,7 +271,7 @@ export class ApiService {
     this.getToken();
 
     return this.httpClient
-      .post(this.base_path + '/api/company/updatelogo/' + this.username, formData)
+      .post(this.base_path + '/api/updatelogo/' + this.username, formData)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -289,12 +300,23 @@ export class ApiService {
 
     this.getToken();
 
-    return this.httpClient
-      .get(this.base_path + '/api/coupons', this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
+    //console.log(this.username);
+
+    if (this.username == null) {
+      return this.httpClient
+        .get(this.base_path + '/api/coupons', this.httpOptions)
+        .pipe(
+          retry(2),
+          catchError(this.handleError)
+        )
+    } else {
+      return this.httpClient
+        .get(this.base_path + '/api/coupons', this.httpOptions)
+        .pipe(
+          retry(2),
+          catchError(this.handleError)
+        )
+    }
   }
 
   //Params: path = '/api/coupons/', id: any
@@ -450,7 +472,7 @@ export class ApiService {
   }
 
   //Params: path = '/api/myfavorits/'
-  getFavorite(){
+  getFavorite() {
 
     this.getToken();
 
@@ -494,7 +516,7 @@ export class ApiService {
     this.getToken();
 
     return this.httpClient
-      .post(this.base_path + '/api/devaluations/' + this.username + '/' + coupon_id, this.httpOptions)
+      .get(this.base_path + '/api/devaluations/' + this.username + '/' + coupon_id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -639,6 +661,8 @@ export class ApiService {
    */
   logout() {
     this.storage.remove(USERNAME);
+    this.username = null;
+    this.token = null;
   }
 
   /* Search (GET)
@@ -648,12 +672,74 @@ export class ApiService {
 
     this.getToken();
 
-    // /search/coupon/searchtitle/{title}
     return this.httpClient
       .get(this.base_path + '/api/coupon/search/title/' + title, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
+  }
+
+  /* Filter Category (POST)
+  * --------------------------------------------------------
+  */
+  filterByCategory(categories) {
+
+    this.getToken();
+
+    let data = {
+      "categories": categories
+    }
+
+    //console.log(JSON.stringify(data));
+
+    return this.httpClient
+      .post(this.base_path + '/api/coupon/search/category', JSON.stringify(data), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+
+  }
+
+  /* Filter Ending (POST)
+   * --------------------------------------------------------
+   */
+  filterByEnding() {
+
+    this.getToken();
+
+    //console.log(JSON.stringify(data));
+
+    return this.httpClient
+      .get(this.base_path + '/api/coupon/search/nextending', this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+
+  }
+
+  /* Filter NearBy (POST)
+   * --------------------------------------------------------
+   */
+  filterByNearBy(latitude, longitude) {
+
+    this.getToken();
+
+    let data = {
+      "lat": latitude,
+      "lng": longitude
+    }
+
+    //console.log(JSON.stringify(data));
+
+    return this.httpClient
+      .post(this.base_path + '/api/coupon/search/byposition', JSON.stringify(data), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+
   }
 }

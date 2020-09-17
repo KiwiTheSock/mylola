@@ -16,6 +16,7 @@ import { UserData } from '../../services/user-data';
 import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'page-favorites',
@@ -43,10 +44,12 @@ export class FavoritesPage implements OnInit {
 
   //Search
   showSearchbar: boolean;
+  queryText = '';
 
   //Data
   data: any;
   devaluations: any;
+  public counter: number = 0;
   isUsed: boolean = false;
 
   //Position
@@ -69,139 +72,232 @@ export class FavoritesPage implements OnInit {
     private socialSharing: SocialSharing,
     public apiService: ApiService,
     private geo: Geolocation,
-    private changeRef: ChangeDetectorRef
+    private changeRef: ChangeDetectorRef,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
+    console.log("ngOnInit")
+    this.getData();
+  }
+
+  ionViewWillEnter() {
+    console.log("ionViewWillEnter")
     this.getData();
   }
 
   getData() {
-    //Filter
-    this.confData.getTracks().subscribe((tracks: any[]) => {
-      tracks.forEach(track => {
-        this.tracks.push({
-          name: track.name,
-          icon: track.icon,
-          isChecked: (this.excludeTracks.indexOf(track.name) === -1)
-        });
-      });
-    });
 
     //Data
-    this.apiService.getFavorite().subscribe((res: any) => {
-      let jsonResult = JSON.parse(JSON.stringify(res));
-      //console.log(jsonResult);
 
-      //200 is an empty body
-      if (jsonResult.body.status == 200) {
-        this.data = "";
-      }
-      else {
-        this.data = jsonResult.body;
-      }
-    })
+    if (this.authService.getRole() == "ROLE_COMPANY") {
+      this.apiService.getCompanyCoupons().subscribe((res: any) => {
+        let jsonResult = JSON.parse(JSON.stringify(res));
 
+        console.log(jsonResult);
+
+        //200 is an empty body
+        if (jsonResult.body.status == 200) {
+          this.data = "";
+        }
+        else {
+
+          this.data = jsonResult.body;
+          /*
+          var tmp = this.counter + 50;
+
+          for (this.counter; this.counter < tmp; this.counter++) {
+
+            //console.log(jsonResult.body[this.counter]);
+
+            if (jsonResult.body[this.counter]) {
+              this.data.push(jsonResult.body[this.counter]);
+            }
+          }
+          */
+        }
+      })
+    }
+
+    if (this.authService.getRole() == "ROLE_USER") {
+      this.apiService.getFavorite().subscribe((res: any) => {
+        let jsonResult = JSON.parse(JSON.stringify(res));
+        console.log(jsonResult);
+
+        //200 is an empty body
+        if (jsonResult.body.status == 200) {
+          this.data = "";
+        }
+        else {
+
+          this.data = jsonResult.body;
+          /*
+          var tmp = this.counter + 50;
+
+          for (this.counter; this.counter < tmp; this.counter++) {
+
+            console.log(this.counter);
+            console.log(jsonResult.body[this.counter]);
+
+            if (jsonResult.body[this.counter]) {
+              this.data.push(jsonResult.body[this.counter]);
+            }
+          }
+          */
+        }
+      })
+    }
+
+    /*
     this.apiService.getDevaluationByIdentifier().subscribe((res: any) => {
       let jsonResult = JSON.parse(JSON.stringify(res));
       //console.log(jsonResult.body);
       this.devaluations = jsonResult.body;
     })
+    */
   }
 
-  /* Filter (ToDo)
+  /* Filter 
    * --------------------------------------------------------
    */
   applyFilter(name) {
 
     if (name == 1) {
       this.excludeTracks.push("Gastro & Nightlife");
+      this.updateFilter();
     }
 
     if (name == 2) {
       this.excludeTracks.push("Shopping");
+      this.updateFilter();
     }
 
     if (name == 3) {
       this.excludeTracks.push("Freizeit & Erleben");
+      this.updateFilter();
     }
 
     if (name == 4) {
       this.excludeTracks.push("Dienstleistungen");
+      this.updateFilter();
     }
 
     if (name == 5) {
-      console.log("Button 5 Apply");
+      this.position();
     }
 
     if (name == 6) {
-      console.log("Button 6 Apply");
+      this.ending();
     }
 
-    this.updateSchedule();
+    this.updateFilter();
   }
 
   dismissFilter(name) {
 
     if (name == 1) {
-      this.excludeTracks.pop("Gastro & Nightlife");
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Gastro & Nightlife") {
+          this.excludeTracks.splice(index, 1);
+        }
+      });
+      this.updateFilter();
     }
 
     if (name == 2) {
-      this.excludeTracks.pop("Shopping");
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Shopping") {
+          this.excludeTracks.splice(index, 1);
+        }
+      });
+      this.updateFilter();
     }
 
     if (name == 3) {
-      this.excludeTracks.pop("Freizeit & Erleben");
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Freizeit & Erleben") {
+          this.excludeTracks.splice(index, 1);
+        }
+      });
+      this.updateFilter();
     }
 
     if (name == 4) {
-      this.excludeTracks.pop("Dienstleistungen");
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Dienstleistungen") {
+          this.excludeTracks.splice(index, 1);
+        }
+      });
+      this.updateFilter();
     }
 
     if (name == 5) {
-      console.log("Button 5 Dismiss");
+      this.ngOnInit();
     }
 
     if (name == 6) {
-      console.log("Button 6 Dismiss");
+      this.ngOnInit();
     }
-
-    this.updateSchedule();
   }
 
-  /* Update Timeline (ToDO)
-   * --------------------------------------------------------
-   */
-  updateSchedule() {
-    /*
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-      this.groups = data.groups;
-    });
-    */
+  updateFilter() {
+    this.counter = 0;
+    if (this.excludeTracks != "") {
+      this.apiService.filterByCategory(this.excludeTracks).subscribe((res: any) => {
+        let count = this.data.length;
+        for (let i = 0; i < count; i++) {
+          this.data.pop()
+        }
+        var jsonResult = JSON.parse(JSON.stringify(res));
+        this.data = jsonResult.body;
+      })
+    }
+    else {
+      let count = this.data.length;
+      for (let i = 0; i < count; i++) {
+        this.data.pop()
+      }
+      this.ngOnInit();
+    }
   }
 
-  loadMore(infiniteScroll) {
-    this.page++;
-
-    //insert function here
-
-    console.log('Page: ', this.page);
-
-    if (this.page === this.maximumPages) {
-      this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  //Search
+  filterItems() {
+    if (this.queryText == "") {
+      this.apiService.getCoupons().subscribe((res: any) => {
+        var jsonResult = JSON.parse(JSON.stringify(res));
+        this.data = jsonResult.body;
+      });
+    } else {
+      this.apiService.search(this.queryText).subscribe((result: any) => {
+        var jsonResult = JSON.parse(JSON.stringify(result));
+        this.data = jsonResult.body;
+      }, (error: any) => {
+        this.data = null;
+      });
     }
+  }
+
+  loadData(event) {
+
+    setTimeout(() => {
+      console.log("Done");
+      //this.ngOnInit()
+      event.target.complete();
+    }, 2000);
+
   }
 
   /* Favorites
    * --------------------------------------------------------
    */
   toggleFavorite(coupon_id: number) {
-
-    this.apiService.deFavorite(coupon_id).subscribe(res => {
-      console.log(res);
-      this.ngOnInit();
-    })
+    if (this.authService.getRole() == "ROLE_USER") {
+      this.apiService.deFavorite(coupon_id).subscribe(res => {
+        console.log(res);
+        this.ngOnInit();
+      })
+    }
   }
 
   /* Share
@@ -249,5 +345,17 @@ export class FavoritesPage implements OnInit {
 
     console.log("LNG: ", this.lng);
     console.log("LAT: ", this.lat);
+  }
+
+  ending() {
+    this.apiService.filterByEnding().subscribe(res => {
+      
+      this.data = null;
+      
+      var jsonResult = JSON.parse(JSON.stringify(res));
+      console.log(jsonResult.body);
+      this.data = jsonResult.body;
+    
+    })
   }
 }

@@ -19,6 +19,7 @@ export class DetailEditPage {
 
   //Image
   croppedImage: any;
+  newCroppedImage: any;
 
   //Plattform
   ios: boolean;
@@ -62,10 +63,8 @@ export class DetailEditPage {
       endDate: ['', Validators.required],
       check: ['',]
     });
-  }
 
-  //Get Platform
-  ngOnInit() {
+    //Get Platform
     if (this.platform.platforms().includes("ios")) {
       this.ios = true;
     }
@@ -77,7 +76,15 @@ export class DetailEditPage {
   /* Data
    * --------------------------------------------------------
    */
+  ngOnInit() {
+    this.getData();
+  }
+
   ionViewWillEnter() {
+    this.getData();
+  }
+
+  getData() {
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
 
     this.apiService.getCouponById(sessionId).subscribe((res: any) => {
@@ -91,7 +98,6 @@ export class DetailEditPage {
       this.bannerFilename = res.body.bannerFilename;
       this.croppedImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/" + res.body.bannerFilename;
     })
-
   }
 
   getCategory() {
@@ -188,24 +194,25 @@ export class DetailEditPage {
     //Session ID
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
 
-    //Image
-    let base64Image = this.croppedImage;
-    let imageData = this.dataURItoBlob(base64Image);
+    let base64Image, imageData;
     let formData = new FormData();
 
-    //FormData
-    formData.append('bannerFilename', imageData, "bannerFilename.png");
+    if (this.croppedImage.includes("data")) {
+      base64Image = this.croppedImage;
+      imageData = this.dataURItoBlob(base64Image);
+      formData.append('bannerFilename', imageData, "bannerFilename.png");
+    }
 
     //Data
     let data = {
       "category": this.validation_detail.value.category,
-      "titel": this.validation_detail.value.titel,
+      "title": this.validation_detail.value.titel,
       "catcher": this.validation_detail.value.catcher,
       "description": this.validation_detail.value.description,
       "startDate": this.validation_detail.value.startDate,
       "endDate": this.validation_detail.value.endDate,
       "code": this.validation_detail.value.code,
-    } 
+    }
 
     if (this.submitForm() && !(this.validation_detail.value.starttime >= this.validation_detail.value.endtime)) {
 
@@ -213,13 +220,15 @@ export class DetailEditPage {
         console.log(response);
       })
 
-      this.apiService.updateCouponBanner(sessionId, formData).subscribe((response: any) => {
-        console.log(response);
-      })
+      if (this.croppedImage.includes("data")) {
+        this.apiService.updateCouponBanner(sessionId, formData).subscribe((response: any) => {
+          console.log(response);
+        })
+      }
 
       setTimeout(() => {
         console.log('Verarbeite Daten');
-        this.router.navigateByUrl("/app/tabs/home/detail/65");
+        this.router.navigateByUrl("/app/tabs/home/detail/" + sessionId);
       }, 500);
 
     } else {

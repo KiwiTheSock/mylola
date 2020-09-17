@@ -61,7 +61,9 @@ export class AddPage {
       catcher: ['', Validators.compose([
         Validators.maxLength(20),
         Validators.required])],
-      code: ['', Validators.required],
+      code: ['', Validators.compose([
+        Validators.maxLength(10),
+        Validators.required])],
       description: ['', Validators.compose([
         Validators.maxLength(2000),
         Validators.required
@@ -176,12 +178,13 @@ export class AddPage {
     if (this.submitForm() && !(this.validation_add.value.startDate > this.validation_add.value.endDate)) {
 
       this.apiService.addCoupon(data).subscribe((response: any) => {
-        console.log(response.body.id);
-        /*
-        this.apiService.updateCouponBanner(response.body.id, formData).subscribe((res: any) => {
-          console.log(res);
-        })
-        */
+        console.log(response.body.coupon_data.id);
+
+        setTimeout(() => {
+          this.apiService.updateCouponBanner(response.body.coupon_data.id, formData).subscribe((res: any) => {
+            console.log(res);
+          })
+        }, 2000);
       })
 
       this.router.navigateByUrl('/app/tabs/home');

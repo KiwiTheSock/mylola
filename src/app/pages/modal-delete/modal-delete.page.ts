@@ -9,6 +9,9 @@ import { ApiService } from '../../services/api.service';
 })
 export class ModalDeletePage implements OnInit {
 
+  //Coupon ID
+  coupon_id: number;
+
   constructor(
     private apiService: ApiService,
     public modalCtrl : ModalController
@@ -17,12 +20,13 @@ export class ModalDeletePage implements OnInit {
   ngOnInit() {
   }
 
-  deleteCoupon(){ //ToDo
-    this.apiService.deleteCoupon(1);
+  deleteCoupon(){
+    this.apiService.deleteCoupon(this.coupon_id).subscribe(res => {
+      console.log(res);
+    })
     this.dismiss();
   }
 
-  
   dismiss() {
     this.modalCtrl.dismiss({ 'dismissed': true });
   }

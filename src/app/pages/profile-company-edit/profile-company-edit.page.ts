@@ -49,30 +49,37 @@ export class ProfileCompanyEditPage {
   //Monday
   public mo_starttime: string = null;
   public mo_endtime: string = null;
+  public mo_check: boolean = false;
 
   //Tuesday
   public tu_starttime: string = null;
   public tu_endtime: string = null;
+  public tu_check: boolean = false;
 
   //Wednesday
   public we_starttime: string = null;
   public we_endtime: string = null;
+  public we_check: boolean = false;
 
   //Thursday
   public th_starttime: string = null;
   public th_endtime: string = null;
+  public th_check: boolean = false;
 
   //Friday
   public fr_starttime: string = null;
   public fr_endtime: string = null;
+  public fr_check: boolean = false;
 
   //Saturday
   public sa_starttime: string = null;
   public sa_endtime: string = null;
+  public sa_check: boolean = false;
 
   //Sunday
   public su_starttime: string = null;
   public su_endtime: string = null;
+  public su_check: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -98,9 +105,9 @@ export class ProfileCompanyEditPage {
       telephone: ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[0-9]+$')])],
-      facebook: ['',],
-      instagram: ['',],
-      twitter: ['',],
+      facebook: ['', []],
+      instagram: ['', []],
+      twitter: ['', []],
       mo_starttime: ['', Validators.required],
       mo_endtime: ['', Validators.required],
       tu_starttime: ['', Validators.required],
@@ -115,13 +122,14 @@ export class ProfileCompanyEditPage {
       sa_endtime: ['', Validators.required],
       su_starttime: ['', Validators.required],
       su_endtime: ['', Validators.required],
+
     });
 
-    if(this.croppedLogoImage == null || this.croppedLogoImage == ""){
+    if (this.croppedLogoImage == null || this.croppedLogoImage == "") {
       this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
     }
 
-    if(this.croppedBannerImage == null || this.croppedBannerImage == ""){
+    if (this.croppedBannerImage == null || this.croppedBannerImage == "") {
       this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/kein_bild_vorhanden.png";
     }
   }
@@ -132,50 +140,93 @@ export class ProfileCompanyEditPage {
   ionViewWillEnter() {
     this.apiService.getCompany().subscribe((res: any) => {
 
-      console.log(res);
       let jsonResult = JSON.parse(JSON.stringify(res));
+      console.log(jsonResult);
 
       this.name = jsonResult.body.name;
       this.street = jsonResult.body.street;
       this.housenumber = jsonResult.body.housenumber;
       this.postcode = jsonResult.body.postcode;
       this.place = jsonResult.body.place;
-      this.homepage = jsonResult.body.url.homepage;
+      this.homepage = jsonResult.body.urls.homepage;
       this.email = jsonResult.body.email;
       this.telephone = jsonResult.body.telephone;
-      this.facebook = jsonResult.body.url.facebook;
-      this.instagram = jsonResult.body.url.instagram;
-      this.twitter = jsonResult.body.url.twitter;
-      this.croppedBannerImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/" + jsonResult.body.banner_filename;
-      this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/" + jsonResult.body.logo_filename;
+      this.facebook = jsonResult.body.urls.facebook;
+      this.instagram = jsonResult.body.urls.instagram;
+      this.twitter = jsonResult.body.urls.twitter;
+      this.croppedBannerImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/" + jsonResult.body.bannerFilename;
+      this.croppedLogoImage = "http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/logos/" + jsonResult.body.logoFilename;
+
 
       //Monday
-      this.mo_starttime = jsonResult.body.hours.monday.split(" - ")[0];
-      this.mo_endtime = jsonResult.body.hours.monday.split(" - ")[1];
+      if (jsonResult.body.hours.monday == "Geschlossen") {
+        console.log("true");
+        this.mo_starttime = "00:00";
+        this.mo_endtime = "00:00";
+      } else {
+        this.mo_starttime = jsonResult.body.hours.monday.split(" - ")[0];
+        this.mo_endtime = jsonResult.body.hours.monday.split(" - ")[1];
+      }
 
       //Tuesday
-      this.tu_starttime = jsonResult.body.hours.tuesday.split(" - ")[0];
-      this.tu_endtime = jsonResult.body.hours.tuesday.split(" - ")[1];
+      if (jsonResult.body.hours.tuesday == "Geschlossen") {
+        console.log("true");
+        this.tu_starttime = "00:00";
+        this.tu_endtime = "00:00";
+      } else {
+        this.tu_starttime = jsonResult.body.hours.tuesday.split(" - ")[0];
+        this.tu_endtime = jsonResult.body.hours.tuesday.split(" - ")[1];
+      }
 
       //Wednesday
-      this.we_starttime = jsonResult.body.hours.wednesday.split(" - ")[0];
-      this.we_endtime = jsonResult.body.hours.wednesday.split(" - ")[1];
+      if (jsonResult.body.hours.wednesday == "Geschlossen") {
+        console.log("true");
+        this.we_starttime = "00:00";
+        this.we_endtime = "00:00";
+      } else {
+        this.we_starttime = jsonResult.body.hours.wednesday.split(" - ")[0];
+        this.we_endtime = jsonResult.body.hours.wednesday.split(" - ")[1];
+      }
 
       //Thursday
-      this.th_starttime = jsonResult.body.hours.thursday.split(" - ")[0];
-      this.th_endtime = jsonResult.body.hours.thursday.split(" - ")[1];
+      if (jsonResult.body.hours.thursday == "Geschlossen") {
+        console.log("true");
+        this.th_starttime = "00:00";
+        this.th_endtime = "00:00";
+      } else {
+        this.th_starttime = jsonResult.body.hours.thursday.split(" - ")[0];
+        this.th_endtime = jsonResult.body.hours.thursday.split(" - ")[1];
+      }
 
       //Friday
-      this.fr_starttime = jsonResult.body.hours.friday.split(" - ")[0];
-      this.fr_endtime = jsonResult.body.hours.friday.split(" - ")[1];
+      if (jsonResult.body.hours.friday == "Geschlossen") {
+        console.log("true");
+        this.fr_starttime = "00:00";
+        this.fr_endtime = "00:00";
+      } else {
+        this.fr_starttime = jsonResult.body.hours.friday.split(" - ")[0];
+        this.fr_endtime = jsonResult.body.hours.friday.split(" - ")[1];
+      }
 
       //Saturday
-      this.sa_starttime = jsonResult.body.hours.saturday.split(" - ")[0];
-      this.sa_endtime = jsonResult.body.hours.saturday.split(" - ")[1];
+      if (jsonResult.body.hours.saturday == "Geschlossen") {
+        console.log("true");
+        this.sa_starttime = "00:00";
+        this.sa_endtime = "00:00";
+      } else {
+        this.sa_starttime = jsonResult.body.hours.saturday.split(" - ")[0];
+        this.sa_endtime = jsonResult.body.hours.saturday.split(" - ")[1];
+      }
 
       //Sunday
-      this.su_starttime = jsonResult.body.hours.sunday.split(" - ")[0];
-      this.su_endtime = jsonResult.body.hours.sunday.split(" - ")[1];
+      if (jsonResult.body.hours.sunday == "Geschlossen") {
+        console.log("true");
+        this.su_starttime = "00:00";
+        this.su_endtime = "00:00";
+      } else {
+        this.su_starttime = jsonResult.body.hours.sunday.split(" - ")[0];
+        this.su_endtime = jsonResult.body.hours.sunday.split(" - ")[1];
+      }
     })
   }
 
@@ -333,31 +384,80 @@ export class ProfileCompanyEditPage {
       "twitter": this.validation_profileCompany.value.twitter
     }
 
-    let hours = {
-      "monday": this.validation_profileCompany.value.mo_starttime + " - " + this.validation_profileCompany.value.mo_endtime,
-      "tuesday": this.validation_profileCompany.value.tu_starttime + " - " + this.validation_profileCompany.value.tu_endtime,
-      "wednesday": this.validation_profileCompany.value.we_starttime + " - " + this.validation_profileCompany.value.we_endtime,
-      "thursday": this.validation_profileCompany.value.th_starttime + " - " + this.validation_profileCompany.value.th_endtime,
-      "friday": this.validation_profileCompany.value.fr_starttime + " - " + this.validation_profileCompany.value.fr_endtime,
-      "saturday": this.validation_profileCompany.value.sa_starttime + " - " + this.validation_profileCompany.value.sa_endtime,
-      "sunday": this.validation_profileCompany.value.su_starttime + " - " + this.validation_profileCompany.value.su_endtime
+    let monday;
+    if (this.validation_profileCompany.value.mo_starttime == '00:00' && this.validation_profileCompany.value.mo_endtime == '00:00') {
+      monday = "Geschlossen";
+    } else {
+      monday = this.validation_profileCompany.value.mo_starttime + " - " + this.validation_profileCompany.value.mo_endtime;
+    }
+    let tuesday;
+    if (this.validation_profileCompany.value.tu_starttime == '00:00' && this.validation_profileCompany.value.tu_endtime == '00:00') {
+      tuesday = "Geschlossen";
+    } else {
+      tuesday = this.validation_profileCompany.value.tu_starttime + " - " + this.validation_profileCompany.value.tu_endtime;
+    }
+    let wednesday;
+    if (this.validation_profileCompany.value.we_starttime == '00:00' && this.validation_profileCompany.value.we_endtime == '00:00') {
+      wednesday = "Geschlossen";
+    } else {
+      wednesday = this.validation_profileCompany.value.we_starttime + " - " + this.validation_profileCompany.value.we_endtime
+    }
+    let thursday;
+    if (this.validation_profileCompany.value.th_starttime == '00:00' && this.validation_profileCompany.value.th_endtime == '00:00') {
+      thursday = "Geschlossen";
+    } else {
+      thursday = this.validation_profileCompany.value.th_starttime + " - " + this.validation_profileCompany.value.th_endtime
+    }
+    let friday;
+    if (this.validation_profileCompany.value.fr_starttime == '00:00' && this.validation_profileCompany.value.fr_endtime == '00:00') {
+      friday = "Geschlossen";
+    } else {
+      friday = this.validation_profileCompany.value.fr_starttime + " - " + this.validation_profileCompany.value.fr_endtime
+    }
+    let saturday
+    if (this.validation_profileCompany.value.sa_starttime == '00:00' && this.validation_profileCompany.value.sa_endtime == '00:00') {
+      saturday = "Geschlossen";
+    } else {
+      saturday = this.validation_profileCompany.value.sa_starttime + " - " + this.validation_profileCompany.value.sa_endtime
+    }
+    let sunday;
+    if (this.validation_profileCompany.value.su_starttime == '00:00' && this.validation_profileCompany.value.su_endtime == '00:00') {
+      sunday = "Geschlossen";
+    } else {
+      sunday = this.validation_profileCompany.value.su_starttime + " - " + this.validation_profileCompany.value.su_endtime
     }
 
+    let hours = {
+      "monday": monday,
+      "tuesday": tuesday,
+      "wednesday": wednesday,
+      "thursday": thursday,
+      "friday": friday,
+      "saturday": saturday,
+      "sunday": sunday
+    }
+
+    //console.log(hours);
+
     //Image Banner
-    let base64Image = this.croppedBannerImage;
-    let imageData = this.dataURItoBlob(base64Image);
+    let base64Image, imageData;
     let formData = new FormData();
 
-    //FormData Banner
-    formData.append('bannerFilename', imageData, "bannerFilename.png");
+    if (this.croppedBannerImage.includes("data")) {
+      base64Image = this.croppedBannerImage;
+      imageData = this.dataURItoBlob(base64Image);
+      formData.append('bannerFilename', imageData, "bannerFilename.png");
+    }
 
     //Image Logo
-    let base64Image2 = this.croppedLogoImage;
-    let imageData2 = this.dataURItoBlob(base64Image2);
+    let base64Image2, imageData2;
     let formData2 = new FormData();
 
-    //FormData Logo
-    formData2.append('logoFilename', imageData2, "logoFilename.png");
+    if (this.croppedLogoImage.includes("data")) {
+      base64Image2 = this.croppedLogoImage;
+      imageData2 = this.dataURItoBlob(base64Image2);
+      formData2.append('logoFilename', imageData2, "logoFilename.png");
+    }
 
     //console.log(data);
 
@@ -371,12 +471,16 @@ export class ProfileCompanyEditPage {
       this.apiService.updateHours(hours).subscribe(response => {
         console.log(response);
       })
-      this.apiService.updateCompanyBanner(formData).subscribe(response => {
-        console.log(response);
-      })
-      this.apiService.updateCompanyLogo(formData2).subscribe(response => {
-        console.log(response);
-      })
+      if (this.croppedBannerImage.includes("data")) {
+        this.apiService.updateCompanyBanner(formData).subscribe(response => {
+          console.log(response);
+        })
+      }
+      if (this.croppedLogoImage.includes("data")) {
+        this.apiService.updateCompanyLogo(formData2).subscribe(response => {
+          console.log(response);
+        })
+      }
 
       setTimeout(() => {
         console.log('Verarbeite Daten');

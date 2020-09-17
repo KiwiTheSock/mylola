@@ -57,7 +57,7 @@
         <ion-col class="ion-padding-top ion-text-center">
           <ion-item lines="none">
             <ion-label class="label1"><b>Name</b></ion-label>
-            <ion-input formControlName="name" value="{{name}}" required></ion-input>
+            <ion-input formControlName="name" value="{{name}}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -79,7 +79,7 @@
 
           <ion-item lines="none">
             <ion-label class="label1"><b>Straße</b></ion-label>
-            <ion-input formControlName="street" value="{{street}}" required></ion-input>
+            <ion-input formControlName="street" value="{{street}}"></ion-input>
           </ion-item>
 
           <!-- Error messages -->
@@ -89,7 +89,7 @@
 
           <ion-item lines="none">
             <ion-label class="label1"><b>Hausnummer</b></ion-label>
-            <ion-input formControlName="housenumber" value="{{housenumber}}" required></ion-input>
+            <ion-input formControlName="housenumber" value="{{housenumber}}"></ion-input>
           </ion-item>
 
           <!-- Error messages -->
@@ -99,7 +99,7 @@
 
           <ion-item lines="none">
             <ion-label class="label1"><b>PLZ</b></ion-label>
-            <ion-input formControlName="postcode" value="{{postcode}}" required></ion-input>
+            <ion-input formControlName="postcode" value="{{postcode}}"></ion-input>
           </ion-item>
 
           <!-- Error messages -->
@@ -113,7 +113,7 @@
 
           <ion-item lines="none">
             <ion-label class="label1"><b>Stadt</b></ion-label>
-            <ion-input formControlName="place" value="{{place}}" required></ion-input>
+            <ion-input formControlName="place" value="{{place}}"></ion-input>
           </ion-item>
 
         </ion-col>
@@ -131,7 +131,7 @@
 
           <ion-item lines="none">
             <ion-label class="label1"><b>Webseite</b></ion-label>
-            <ion-input formControlName="homepage" value="{{homepage}}" required></ion-input>
+            <ion-input formControlName="homepage" value="{{homepage}}"></ion-input>
           </ion-item>
 
           <!-- Error messages -->
@@ -141,7 +141,7 @@
 
           <ion-item lines="none">
             <ion-label class="label1"><b>E-Mail</b></ion-label>
-            <ion-input formControlName="email" value="{{email}}" required></ion-input>
+            <ion-input formControlName="email" value="{{email}}"></ion-input>
           </ion-item>
 
           <!-- Error messages -->
@@ -155,7 +155,7 @@
 
           <ion-item lines="none">
             <ion-label class="label1"><b>Telefon</b></ion-label>
-            <ion-input formControlName="telephone" value="{{telephone}}" required></ion-input>
+            <ion-input formControlName="telephone" value="{{telephone}}"></ion-input>
           </ion-item>
 
         </ion-col>
@@ -203,9 +203,13 @@
         <ion-col>
 
           <ion-item lines="none">
+            <ion-label>Öffnungszeiten auf 00:00-00:00 setzen, damit Geschlossen angezeigt wird</ion-label>
+          </ion-item>
+
+          <ion-item lines="none">
             <p><b>Montag</b></p>
             <ion-datetime formControlName="mo_starttime" [value]="mo_starttime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
 
             <!-- Error messages -->
@@ -214,8 +218,9 @@
             </span>
 
             <ion-datetime formControlName="mo_endtime" [value]="mo_endtime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
+
           </ion-item>
 
           <!-- Error messages -->
@@ -226,7 +231,7 @@
           <ion-item lines="none">
             <p><b>Dienstag</b></p>
             <ion-datetime formControlName="tu_starttime" [value]="tu_starttime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
 
             <!-- Error messages -->
@@ -235,8 +240,9 @@
             </span>
 
             <ion-datetime formControlName="tu_endtime" [value]="tu_endtime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
+
           </ion-item>
 
           <!-- Error messages -->
@@ -247,7 +253,7 @@
           <ion-item lines="none">
             <p><b>Mittwoch</b></p>
             <ion-datetime formControlName="we_starttime" [value]="we_starttime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
 
             <!-- Error messages -->
@@ -256,8 +262,9 @@
             </span>
 
             <ion-datetime formControlName="we_endtime" [value]="we_endtime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
+
           </ion-item>
 
           <!-- Error messages -->
@@ -268,7 +275,7 @@
           <ion-item lines="none">
             <p><b>Donnerstag</b></p>
             <ion-datetime formControlName="th_starttime" [value]="th_starttime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
 
             <!-- Error messages -->
@@ -277,8 +284,9 @@
             </span>
 
             <ion-datetime formControlName="th_endtime" [value]="th_endtime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
+
           </ion-item>
 
           <!-- Error messages -->
@@ -289,7 +297,7 @@
           <ion-item lines="none">
             <p><b>Freitag</b></p>
             <ion-datetime formControlName="fr_starttime" [value]="fr_starttime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
 
             <!-- Error messages -->
@@ -298,8 +306,9 @@
             </span>
 
             <ion-datetime formControlName="fr_endtime" [value]="fr_endtime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
+
           </ion-item>
 
           <!-- Error messages -->
@@ -310,7 +319,7 @@
           <ion-item lines="none">
             <p><b>Samstag</b></p>
             <ion-datetime formControlName="sa_starttime" [value]="sa_starttime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
 
             <!-- Error messages -->
@@ -319,8 +328,9 @@
             </span>
 
             <ion-datetime formControlName="sa_endtime" [value]="sa_endtime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
+
           </ion-item>
 
           <!-- Error messages -->
@@ -331,7 +341,7 @@
           <ion-item lines="none">
             <p><b>Sonntag</b></p>
             <ion-datetime formControlName="su_starttime" [value]="su_starttime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
 
             <!-- Error messages -->
@@ -340,8 +350,9 @@
             </span>
 
             <ion-datetime formControlName="su_endtime" [value]="su_endtime" displayFormat="HH:mm"
-              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen" required>
+              minuteValues="0,15,30,45" pickerFormat="HH:mm" doneText="Fertig" cancelText="Abbrechen">
             </ion-datetime>
+
           </ion-item>
 
           <!-- Error messages -->

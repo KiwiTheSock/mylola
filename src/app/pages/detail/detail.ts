@@ -54,8 +54,6 @@ export class DetailPage {
   public email: string = null;
   public housenumber: string = null;
   public company_id: string = null;
-  public lat: string = null;
-  public lng: string = null;
   public logofilename: string = null;
   public name: string = null;
   public place: string = null;
@@ -77,6 +75,7 @@ export class DetailPage {
   public friday: string = null;
   public saturday: string = null;
   public sunday: string = null;
+
   /*
   public mo_start: string = null;
   public mo_end: string = null;
@@ -106,6 +105,7 @@ export class DetailPage {
 
   public fav: boolean = false;
   public used: boolean = false;
+  public abos: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
@@ -138,6 +138,9 @@ export class DetailPage {
 
   ionViewWillEnter() {
 
+    //Data
+    this.getData();
+
     //Back BUtton
     this.defaultHref = `/app/tabs/home`;
 
@@ -157,20 +160,19 @@ export class DetailPage {
       let jsonResult = JSON.parse(JSON.stringify(res));
       this.data = jsonResult;
 
-      //console.log(jsonResult);
+      console.log(jsonResult);
 
       //Company
       this.bannerFilename_Company = jsonResult.body.company.bannerFilename;
       this.email = jsonResult.body.company.email;
       this.housenumber = jsonResult.body.company.housenumber;
-      this.lat = jsonResult.body.company.lat;
-      this.lng = jsonResult.body.company.lng;
       this.logofilename = jsonResult.body.company.logoFilename;
       this.name = jsonResult.body.company.name;
       this.place = jsonResult.body.company.place;
       this.postcode = jsonResult.body.company.postcode;
       this.street = jsonResult.body.company.street;
       this.telephone = jsonResult.body.company.telephone;
+      this.company_id = jsonResult.body.company.id;
 
       //Coupon
       this.bannerFilename_Coupon = jsonResult.body.bannerFilename;
@@ -232,13 +234,28 @@ export class DetailPage {
         let jsonResult = JSON.parse(JSON.stringify(res));
 
         for (let i = 0; i < jsonResult.body.length; i++) {
-
-          if (jsonResult.body[i].id == sessionId) {
-            this.used = true;
+          if (jsonResult.body[i].isUsed) {
+            if (jsonResult.body[i].coupon.id == sessionId) {
+              this.used = true;
+            }
           }
         }
       })
     }
+
+    //Check Subscriptions
+    if (this.authService.getRole() == "ROLE_USER") {
+      this.apiService.getMySubscribtions().subscribe(res => {
+        let jsonResult = JSON.parse(JSON.stringify(res));
+
+        for (let i = 0; i < jsonResult.body.length; i++) {
+          if (jsonResult.body[i].id == this.company_id) {
+            this.abos = true;
+          }
+        }
+      })
+    }
+
   }
 
   /* Get Hours and Minutes
@@ -270,7 +287,7 @@ export class DetailPage {
     }
   }
 
-  /* Favorites (ToDo)
+  /* Favorites
   * --------------------------------------------------------
   */
   toggleFavorite(coupon_id: number) {
@@ -308,9 +325,12 @@ export class DetailPage {
 
     let company_id = this.data.body.company.id
 
-    this.apiService.addSubscriber(company_id);
+    this.apiService.addSubscriber(company_id).subscribe(res => {
+      console.log(res);
+    })
 
-    this.presentToast()
+    this.presentToast();
+
   }
 
   async presentToast() {
@@ -319,6 +339,7 @@ export class DetailPage {
       duration: 2000
     });
     toast.present();
+    this.ngOnInit();
   }
 
   /* Modal Coupon
@@ -335,12 +356,18 @@ export class DetailPage {
       componentProps: { coupon_id: coupon_id }
     });
 
+    modal.onDidDismiss().then(() => {
+      this.ngOnInit();
+    });
+
     await modal.present();
 
     if (!window.history.state.modal) {
       const modalState = { modal: true };
       history.pushState(modalState, null);
     }
+
+
   }
 
   /* Logged In
@@ -350,7 +377,9 @@ export class DetailPage {
     if (this.authService.getRole() == null) {
       this.router.navigateByUrl('/login');
     } else {
-      this.presentModal()
+      this.presentModal().then(() => {
+        this.ngOnInit();
+      })
     }
   }
 
@@ -491,31 +520,41 @@ export class DetailPage {
   }
 
   showMap() {
+    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
 
-    //Marker
-    var marker: any = {
-      name: this.name,
-      lat: this.lat,
-      lng: this.lng
-    }
+    this.apiService.getCouponById(sessionId).subscribe(res => {
 
-    //Location
-    const location = new google.maps.LatLng(marker.lat, marker.lng);
-    let style = [];
-    const options = {
-      center: location,
-      zoom: 15,
-      disableDefaultUI: true,
-    }
+      let jsonResult = JSON.parse(JSON.stringify(res));
 
-    //Darkmode
-    if (this.darkmode.dark) {
-      style = mapStyle;
-    }
+      var lat = jsonResult.body.company.latitude;
+      var lng = jsonResult.body.company.longitude;
 
-    //Create Map
-    this.map = new google.maps.Map(this.mapRef.nativeElement, { options, styles: style });
-    this.addMarkersToMap(marker);
+      //console.log("LAT/LNG: ", lat, lng)
+
+      var marker: any = {
+        name: this.name,
+        lat: lat,
+        lng: lng
+      }
+
+      //Location
+      const location = new google.maps.LatLng(marker.lat, marker.lng);
+      let style = [];
+      const options = {
+        center: location,
+        zoom: 15,
+        disableDefaultUI: true,
+      }
+
+      //Darkmode
+      if (this.darkmode.dark) {
+        style = mapStyle;
+      }
+
+      //Create Map
+      this.map = new google.maps.Map(this.mapRef.nativeElement, { options, styles: style });
+      this.addMarkersToMap(marker);
+    })
   }
 }
 

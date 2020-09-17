@@ -89,6 +89,10 @@
         Couponcode wird benötigt!
       </span>
 
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.code.errors?.maxlength">
+        Couponcode darf nicht länger als 10 Zeichen sein!
+      </span>
+
       <!-- Description -->
       <ion-row class="description">
         <ion-col>

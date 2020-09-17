@@ -26,7 +26,15 @@ export class ProfileCustomerPage {
   /* Data
    * --------------------------------------------------------
    */
+  ngOnInit(){
+    this.getData();
+  }
+
   ionViewWillEnter() {
+    this.getData();
+  }
+
+  getData(){
     this.apiService.getCustomerByIdentifier().subscribe((res: any) => {
       let jsonResult = JSON.parse(JSON.stringify(res));
       this.profile = jsonResult.body;
@@ -34,12 +42,15 @@ export class ProfileCustomerPage {
 
     this.apiService.getMySubscribtions().subscribe((res: any) => {
       let jsonResult = JSON.parse(JSON.stringify(res));
-      if (res) {
+
+      //console.log(jsonResult.body);
+
+      if (!(jsonResult.body.status == 404)) {
         this.abos = jsonResult.body;
+      } else {
+        this.abos = null;
       }
     })
-
-
   }
 
   /* Settings
@@ -59,6 +70,10 @@ export class ProfileCustomerPage {
       cssClass: 'modal-deabo-css',
       swipeToClose: true, //iOS
       componentProps: { company_id: company_id }
+    });
+
+    modal.onDidDismiss().then(() => {
+      this.ngOnInit();
     });
 
     await modal.present();

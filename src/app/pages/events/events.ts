@@ -48,7 +48,15 @@ export class EventsPage {
     private apiService: ApiService
   ) { }
 
+  ngOnInit() {
+    this.getData();
+  }
+
   ionViewWillEnter() {
+    this.getData();
+  }
+
+  getData() {
     this.apiService.getCoupons().subscribe((res: any) => {
 
       let jsonResult = JSON.parse(JSON.stringify(res));

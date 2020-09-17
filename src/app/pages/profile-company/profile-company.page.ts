@@ -63,21 +63,28 @@ export class ProfileCompanyPage {
     private modalController: ModalController
   ) { }
 
+  ngOnInit(){
+    this.getData();
+  }
+
   ionViewWillEnter() {
+    this.getData();
+  }
+
+  getData(){
     this.apiService.getCompany().subscribe((res: any) => {
 
       let jsonResult = JSON.parse(JSON.stringify(res));
-      //console.log(res);
+      //console.log(jsonResult);
 
       //Data
       this.profile = jsonResult.body;
-      this.coupons = jsonResult.body.coupons;
       this.hours = jsonResult.body.hours;
       this.url = jsonResult.body.url;
 
       //Images
-      this.bannerfilename = jsonResult.body.banner_filename;
-      this.logofilename = jsonResult.body.logo_filename;
+      this.bannerfilename = jsonResult.body.bannerFilename;
+      this.logofilename = jsonResult.body.logoFilename;
 
       //Hours
       this.monday = jsonResult.body.hours.monday;
@@ -110,6 +117,14 @@ export class ProfileCompanyPage {
       this.su_end = (this.hours.sunday.split(" - ")[1]);
       */
     })
+
+    this.apiService.getCompanyCoupons().subscribe((res:any) => {
+
+      let jsonResult = JSON.parse(JSON.stringify(res));
+      console.log(jsonResult);
+
+      this.coupons = jsonResult.body
+    })
   }
 
   /* Get Hours and Minutes
@@ -129,12 +144,16 @@ export class ProfileCompanyPage {
   /* Delete Modal
   * --------------------------------------------------------
   */
-  async presentModal() {
+  async presentModal(coupon_id) {
     const modal = await this.modalController.create({
       component: ModalDeletePage,
       cssClass: 'modal-delete-css',
       swipeToClose: true, //iOS
-      componentProps: {}
+      componentProps: { coupon_id: coupon_id }
+    });
+
+    modal.onDidDismiss().then(() => {
+      this.ngOnInit();
     });
 
     await modal.present();

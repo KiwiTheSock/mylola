@@ -47,7 +47,7 @@
         <ion-list>
           <ion-item *ngFor="let item of coupons">
             <ion-label routerLink="/app/tabs/home/detail/{{item.id}}">{{item.title}}</ion-label>
-            <ion-button slot="end" (click)="presentModal()">
+            <ion-button slot="end" (click)="presentModal(item.id)">
               <ion-icon name="close"></ion-icon>
             </ion-button>
           </ion-item>

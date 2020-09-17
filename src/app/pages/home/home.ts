@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 //Ionic
 import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll, Platform } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 //Ionic-Native
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
@@ -18,6 +19,7 @@ import { Refresher } from '../../services/refresher';
 import { AuthService } from '../../services/auth.service';
 import { TabsPage } from '../tabs-page/tabs-page';
 import { ApiService } from '../../services/api.service';
+
 
 @Component({
   selector: 'page-home',
@@ -44,13 +46,14 @@ export class HomePage implements OnInit {
   queryText = '';
 
   //Data
-  public data: any = [];
+  public data;
+  public filterdData;
   public counter: number = 0;
   public fav: boolean = false;
 
   //Position
-  lat = null;
-  lng = null;
+  lat;
+  lng;
 
   constructor(
     public alertCtrl: AlertController,
@@ -73,7 +76,8 @@ export class HomePage implements OnInit {
     private platform: Platform,
     private tabs: TabsPage,
     public apiService: ApiService,
-    private geo: Geolocation
+    private geo: Geolocation,
+    private storage: Storage,
   ) { }
 
   ngOnInit() {
@@ -86,27 +90,22 @@ export class HomePage implements OnInit {
   }
 
   getData() {
-    //Filter
-    this.confData.getTracks().subscribe((tracks: any[]) => {
-      tracks.forEach(track => {
-        this.tracks.push({
-          name: track.name,
-          icon: track.icon,
-          isChecked: (this.excludeTracks.indexOf(track.name) === -1)
-        });
-      });
-    });
 
     //Data
     this.apiService.getCoupons().subscribe((res: any) => {
       var jsonResult = JSON.parse(JSON.stringify(res));
+
+      //console.log(jsonResult.body);
 
       //200 is an empty body
       if (jsonResult.body.status == 200) {
         this.data = "";
       }
       else {
-        var tmp = this.counter + 5;
+
+        this.data = jsonResult.body;
+        /*
+        var tmp = this.counter + 50;
 
         for (this.counter; this.counter < tmp; this.counter++) {
 
@@ -116,30 +115,55 @@ export class HomePage implements OnInit {
             this.data.push(jsonResult.body[this.counter]);
           }
         }
+        */
       }
-    });
 
+      /*
+      //Favorites
+      this.apiService.getFavorite().subscribe((res: any) => {
+
+        var jsonResult = JSON.parse(JSON.stringify(res));
+
+        console.log(jsonResult);
+
+        for (let i = 0; i < this.data.length; i++) {
+          for (let j = 0; j < jsonResult.body.length; j++) {
+
+            if(this.data[i].id == jsonResult.body[j].id){
+              this.fav = true;
+            }
+          
+          }
+        }
+
+      })
+      */
+    });
   }
 
-  /* Filter (ToDo)
+  /* Filter
    * --------------------------------------------------------
    */
   applyFilter(name) {
 
     if (name == 1) {
       this.excludeTracks.push("Gastro & Nightlife");
+      this.updateFilter();
     }
 
     if (name == 2) {
       this.excludeTracks.push("Shopping");
+      this.updateFilter();
     }
 
     if (name == 3) {
       this.excludeTracks.push("Freizeit & Erleben");
+      this.updateFilter();
     }
 
     if (name == 4) {
       this.excludeTracks.push("Dienstleistungen");
+      this.updateFilter();
     }
 
     if (name == 5) {
@@ -149,8 +173,8 @@ export class HomePage implements OnInit {
     if (name == 6) {
       this.ending();
     }
-    //this.updateSchedule();
-    this.updateFilter();
+
+   
   }
 
   dismissFilter(name) {
@@ -162,6 +186,7 @@ export class HomePage implements OnInit {
           this.excludeTracks.splice(index, 1);
         }
       });
+      this.updateFilter();
     }
 
     if (name == 2) {
@@ -171,6 +196,7 @@ export class HomePage implements OnInit {
           this.excludeTracks.splice(index, 1);
         }
       });
+      this.updateFilter();
     }
 
     if (name == 3) {
@@ -180,6 +206,7 @@ export class HomePage implements OnInit {
           this.excludeTracks.splice(index, 1);
         }
       });
+      this.updateFilter();
     }
 
 
@@ -190,27 +217,92 @@ export class HomePage implements OnInit {
           this.excludeTracks.splice(index, 1);
         }
       });
+      this.updateFilter();
     }
 
     if (name == 5) {
-      console.log("Button 5 Dismiss");
+      this.ngOnInit();
     }
 
     if (name == 6) {
-      console.log("Button 6 Dismiss");
+      this.ngOnInit();
     }
-
-    //this.updateSchedule();
-    this.updateFilter();
   }
 
   updateFilter() {
-    console.log(this.excludeTracks);
+    this.counter = 0;
+    if (this.excludeTracks != "") {
+      this.apiService.filterByCategory(this.excludeTracks).subscribe((res: any) => {
+        let count = this.data.length;
+        console.log(count);
+        for (let i = 0; i < count; i++) {
+          this.data.pop()
+        }
+        var jsonResult = JSON.parse(JSON.stringify(res));
+        this.data = jsonResult.body;
+      })
+    }
+    else {
+      let count = this.data.length;
+      for (let i = 0; i < count; i++) {
+        this.data.pop()
+      }
+      this.ngOnInit();
+    }
   }
 
-  filterItems() {
-    //console.log(this.queryText);
+  //Get Lng And Lat
+  async position() {
 
+
+    this.geo.getCurrentPosition({
+      timeout: 10000,
+      enableHighAccuracy: false
+    }).then(res => {
+      this.lat = res.coords.latitude;
+      this.lng = res.coords.longitude;
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    console.log("LNG: ", this.lng);
+    console.log("LAT: ", this.lat);
+
+    //API CALL
+    if (this.lat != undefined || this.lng != undefined) {
+      this.apiService.filterByNearBy(this.lat, this.lng).subscribe(res => {
+        var jsonResult = JSON.parse(JSON.stringify(res));
+        //console.log(jsonResult.body);
+
+        this.data = null;
+
+        //RESPONSE IST EINFACH NUR KACKE!!!
+        //WAS SOLL ICH MIT DER LNG UND LAT???
+        //ICH BRAUCHE NUR DIE COUPONS!!!
+        for(let i = 0; i < jsonResult.body.length; i++){
+          console.log(jsonResult.body[i].coupon);
+          this.data.push(jsonResult.body[i].coupon);
+        }
+
+        console.log(this.data);
+      })
+    }
+  }
+
+  ending() {
+    this.apiService.filterByEnding().subscribe(res => {
+      
+      this.data = null;
+      
+      var jsonResult = JSON.parse(JSON.stringify(res));
+      console.log(jsonResult.body);
+      this.data = jsonResult.body;
+    
+    })
+  }
+
+  //Search
+  filterItems() {
     if (this.queryText == "") {
       this.apiService.getCoupons().subscribe((res: any) => {
         var jsonResult = JSON.parse(JSON.stringify(res));
@@ -226,20 +318,11 @@ export class HomePage implements OnInit {
     }
   }
 
-  //Update timeline
-  updateSchedule() {
-    /*
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-      this.groups = data.groups;
-    });
-    */
-  }
-
   loadData(event) {
 
     setTimeout(() => {
       console.log("Done");
-      this.getData(); //oder ngOnInit()
+      //this.ngOnInit()
       event.target.complete();
     }, 2000);
 
@@ -248,23 +331,28 @@ export class HomePage implements OnInit {
   //Favorites
   toggleFavorite(coupon_id: number) {
 
-    this.apiService.setFavorite(coupon_id).subscribe(res => {
-      console.log(res);
-    })
+    if (this.authService.getRole() == "ROLE_USER") {
 
-    /*
-    if (this.fav == true) {
-      this.apiService.deFavorite(coupon_id).subscribe(res => {
-        console.log(res);
-        this.fav = false;
-      })
-    } else {
       this.apiService.setFavorite(coupon_id).subscribe(res => {
         console.log(res);
-        this.fav = true;
       })
+
+      /*
+      if (this.fav == true) {
+        this.apiService.deFavorite(coupon_id).subscribe(res => {
+          console.log(res);
+          this.fav = false;
+        })
+      } else {
+        this.apiService.setFavorite(coupon_id).subscribe(res => {
+          console.log(res);
+          this.fav = true;
+        })
+      }
+      */
     }
-    */
+
+    this.ngOnInit();
   }
 
   /* Share
@@ -278,6 +366,8 @@ export class HomePage implements OnInit {
   refresh(event) {
     console.log('Begin async operation');
 
+    this.ngOnInit();
+
     setTimeout(() => {
       console.log('Async operation has ended');
       event.target.complete();
@@ -287,38 +377,14 @@ export class HomePage implements OnInit {
   btnActivate(ionicButton, name) {
 
     //Design
-    if (ionicButton.color === 'danger') {
-      ionicButton.color = 'medium';
+    if (ionicButton.color === 'medium') {
+      ionicButton.color = 'danger';
       this.applyFilter(name);
     }
     else {
-      ionicButton.color = 'danger';
+      ionicButton.color = 'medium';
       this.dismissFilter(name);
     }
   }
-
-  //Get Lng And Lat
-  position() {
-    this.geo.getCurrentPosition({
-      timeout: 10000,
-      enableHighAccuracy: false
-    }).then(res => {
-      this.lat = res.coords.latitude;
-      this.lng = res.coords.longitude;
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-
-    console.log("LNG: ", this.lng);
-    console.log("LAT: ", this.lat);
-
-    //API CALL
-
-  }
-
-  ending() {
-    //API CALL
-  }
-
 }
 

@@ -96,7 +96,10 @@
         <p><b>{{name}}</b></p>
         <p>{{street}} {{housenumber}}</p>
         <p>{{postcode}} {{place}}</p>
-        <ion-button (click)="notification()" *appHasRole="['ROLE_USER']">{{name}} abonnieren</ion-button>
+        <div *appHasRole="['ROLE_USER']">
+          <ion-button (click)="notification()" *ngIf="!abos">{{name}} abonnieren</ion-button>
+          <ion-button color="dark" disabled="true" *ngIf="abos">{{name}} bereits abonniert</ion-button>
+        </div>
       </ion-col>
     </ion-row>
 
