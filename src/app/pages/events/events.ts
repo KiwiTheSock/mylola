@@ -46,10 +46,12 @@ export class EventsPage {
 
     private router: Router,
     private apiService: ApiService
-  ) { }
+  ) { 
+  
+  }
 
   ngOnInit() {
-    this.getData();
+    //this.getData();
   }
 
   ionViewWillEnter() {

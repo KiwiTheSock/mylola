@@ -174,7 +174,7 @@ export class HomePage implements OnInit {
       this.ending();
     }
 
-   
+
   }
 
   dismissFilter(name) {
@@ -261,43 +261,34 @@ export class HomePage implements OnInit {
     }).then(res => {
       this.lat = res.coords.latitude;
       this.lng = res.coords.longitude;
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-
-    console.log("LNG: ", this.lng);
-    console.log("LAT: ", this.lat);
-
-    //API CALL
-    if (this.lat != undefined || this.lng != undefined) {
+      console.log("LNG: ", this.lng);
+      console.log("LAT: ", this.lat);
       this.apiService.filterByNearBy(this.lat, this.lng).subscribe(res => {
         var jsonResult = JSON.parse(JSON.stringify(res));
         //console.log(jsonResult.body);
 
         this.data = null;
 
-        //RESPONSE IST EINFACH NUR KACKE!!!
-        //WAS SOLL ICH MIT DER LNG UND LAT???
-        //ICH BRAUCHE NUR DIE COUPONS!!!
-        for(let i = 0; i < jsonResult.body.length; i++){
-          console.log(jsonResult.body[i].coupon);
-          this.data.push(jsonResult.body[i].coupon);
-        }
+        var jsonResult = JSON.parse(JSON.stringify(res));
+        console.log(jsonResult.body);
+        this.data = jsonResult.body;
 
-        console.log(this.data);
       })
-    }
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
   }
 
   ending() {
     this.apiService.filterByEnding().subscribe(res => {
-      
+
       this.data = null;
-      
+
       var jsonResult = JSON.parse(JSON.stringify(res));
       console.log(jsonResult.body);
       this.data = jsonResult.body;
-    
+
     })
   }
 
