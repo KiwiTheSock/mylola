@@ -75,7 +75,13 @@
  * --------------------------------------------------------
  */
 .monthview-primary-with-event {
-  background-color: var(--ion-color-primary) !important;
+  background-color: var(--ion-color-light-tint) !important;
+  color: var(--ion-color-dark);
+}
+
+.monthview-selected {
+  background-color: var(--ion-color-light-tint) !important;
+  color: var(--ion-color-dark) !important;
 }
 
 /* Orange Border
