@@ -38,7 +38,6 @@ export class ProfileCompanyEditPage {
   public postcode: string = null;
   public place: string = null;
   public homepage: string = null;
-  public email: string = null;
   public telephone: string = null;
   public facebook: string = null;
   public instagram: string = null;
@@ -99,9 +98,6 @@ export class ProfileCompanyEditPage {
         Validators.pattern('^[0-9]{5}$')])],
       place: ['', Validators.required],
       homepage: ['', Validators.required],
-      email: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])],
       telephone: ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[0-9]+$')])],
@@ -149,7 +145,6 @@ export class ProfileCompanyEditPage {
       this.postcode = jsonResult.body.postcode;
       this.place = jsonResult.body.place;
       this.homepage = jsonResult.body.urls.homepage;
-      this.email = jsonResult.body.email;
       this.telephone = jsonResult.body.telephone;
       this.facebook = jsonResult.body.urls.facebook;
       this.instagram = jsonResult.body.urls.instagram;
@@ -373,7 +368,6 @@ export class ProfileCompanyEditPage {
       "housenumber": this.validation_profileCompany.value.housenumber,
       "postcode": this.validation_profileCompany.value.postcode,
       "place": this.validation_profileCompany.value.place,
-      "email": this.validation_profileCompany.value.email,
       "telephone": this.validation_profileCompany.value.telephone
     }
 

@@ -140,23 +140,18 @@
           </span>
 
           <ion-item lines="none">
-            <ion-label class="label1"><b>E-Mail</b></ion-label>
-            <ion-input formControlName="email" value="{{email}}"></ion-input>
-          </ion-item>
-
-          <!-- Error messages -->
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
-            Postleitzahl wird benötigt.
-          </span>
-
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
-            Postleitzahl wird benötigt.
-          </span>
-
-          <ion-item lines="none">
             <ion-label class="label1"><b>Telefon</b></ion-label>
             <ion-input formControlName="telephone" value="{{telephone}}"></ion-input>
           </ion-item>
+
+           <!-- Error messages -->
+           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.telephone.errors?.required">
+            Telefonummer wird benötigt.
+          </span>
+
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.telephone.errors?.pattern">
+            Geben Sie eine gültige Telefonummer an.
+          </span>
 
         </ion-col>
       </ion-row>

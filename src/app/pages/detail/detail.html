@@ -67,7 +67,7 @@
     </ion-row>
 
     <!-- Coupon Button -->
-    <div *appHasRole="['ROLE_USER']">
+    <div *ngIf="!comp">
       <ion-row *ngIf="!used">
         <ion-col class="buttons" (click)="isLoggedIn()">
           <ion-button><b>{{catcher}}</b></ion-button>
@@ -96,7 +96,7 @@
         <p><b>{{name}}</b></p>
         <p>{{street}} {{housenumber}}</p>
         <p>{{postcode}} {{place}}</p>
-        <div *appHasRole="['ROLE_USER']">
+        <div *ngIf="!comp">
           <ion-button (click)="notification()" *ngIf="!abos">{{name}} abonnieren</ion-button>
           <ion-button color="dark" disabled="true" *ngIf="abos">{{name}} bereits abonniert</ion-button>
         </div>

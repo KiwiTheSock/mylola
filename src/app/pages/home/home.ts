@@ -105,9 +105,6 @@ export class HomePage implements OnInit {
 
         var tmp = this.counter + 5;
         for (this.counter; this.counter < tmp; this.counter++) {
-
-          //console.log(jsonResult.body[this.counter]);
-
           if (jsonResult.body[this.counter]) {
             this.data.push(jsonResult.body[this.counter]);
           }
@@ -183,7 +180,6 @@ export class HomePage implements OnInit {
       this.updateFilter();
     }
 
-
     if (name == 4) {
       this.excludeTracks.forEach((value, index) => {
         if (value == "Dienstleistungen") {
@@ -200,6 +196,10 @@ export class HomePage implements OnInit {
           this.excludeTracks.splice(index, 1);
         }
       });
+      let count = this.data.length;
+      for (let i = 0; i < count; i++) {
+        this.data.pop()
+      }
       this.ngOnInit();
     }
 
@@ -210,6 +210,10 @@ export class HomePage implements OnInit {
           this.excludeTracks.splice(index, 1);
         }
       });
+      let count = this.data.length;
+      for (let i = 0; i < count; i++) {
+        this.data.pop()
+      }
       this.ngOnInit();
     }
   }
@@ -219,7 +223,6 @@ export class HomePage implements OnInit {
     if (this.excludeTracks != "") {
       this.apiService.filterByCategory(this.excludeTracks).subscribe((res: any) => {
         let count = this.data.length;
-        console.log(count);
         for (let i = 0; i < count; i++) {
           this.data.pop()
         }
@@ -247,13 +250,9 @@ export class HomePage implements OnInit {
       //console.log("LNG: ", this.lng);
       //console.log("LAT: ", this.lat);
       this.apiService.filterByNearBy(this.lat, this.lng).subscribe(res => {
-        var jsonResult = JSON.parse(JSON.stringify(res));
-        //console.log(jsonResult.body);
 
         this.data = null;
-
         var jsonResult = JSON.parse(JSON.stringify(res));
-        //console.log(jsonResult.body);
         this.data = jsonResult.body;
 
       })
@@ -264,15 +263,14 @@ export class HomePage implements OnInit {
   }
 
   ending() {
-    this.apiService.filterByEnding().subscribe(res => {
-
+    this.apiService.filterByEnding().subscribe((res: any) => {
       this.data = null;
-
       var jsonResult = JSON.parse(JSON.stringify(res));
-      console.log(jsonResult.body);
       this.data = jsonResult.body;
-
-    })
+    },
+      error => {
+        this.data = [];
+      })
   }
 
   //Search
@@ -323,7 +321,9 @@ export class HomePage implements OnInit {
    */
   toggleFavorite(coupon_id: number) {
 
-    if (this.authService.getRole() == "ROLE_USER") {
+    if (this.authService.getRole() == null) {
+      this.router.navigateByUrl('/login');
+    } else if (this.authService.getRole() == "ROLE_USER") {
 
       this.apiService.setFavorite(coupon_id).subscribe(res => {
         console.log(res);
@@ -372,7 +372,6 @@ export class HomePage implements OnInit {
       }, 2000);
     }
     else {
-      this.counter = 0;
       console.log('Begin async operation');
       this.ngOnInit();
       setTimeout(() => {

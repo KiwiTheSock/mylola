@@ -42,6 +42,9 @@ export class DetailPage {
   //Company Coupon Edit
   show = false;
 
+  //Company
+  comp = false;
+
   //Back Button
   defaultHref = '';
   ios: boolean;
@@ -146,6 +149,9 @@ export class DetailPage {
 
     //Edit
     this.edit();
+
+    //Compnay
+    this.company();
 
     //Map
     this.showMap();
@@ -287,28 +293,38 @@ export class DetailPage {
     }
   }
 
+  company(){
+    if (this.authService.getRole() == "ROLE_COMPANY") {
+      this.comp = true;
+    }
+  }
+
   /* Favorites
   * --------------------------------------------------------
   */
   toggleFavorite(coupon_id: number) {
 
-    const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
-
-    console.log(this.fav);
-
-    if (this.fav == true) {
-      this.apiService.deFavorite(sessionId).subscribe(res => {
-        console.log(res);
-        this.fav = false;
-      })
+    if (this.authService.getRole() == null) {
+      this.router.navigateByUrl('/login');
     } else {
-      this.apiService.setFavorite(sessionId).subscribe(res => {
-        console.log(res);
-        this.fav = true;
-      })
-    }
+      const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
 
-    this.ngOnInit();
+      console.log(this.fav);
+
+      if (this.fav == true) {
+        this.apiService.deFavorite(sessionId).subscribe(res => {
+          console.log(res);
+          this.fav = false;
+        })
+      } else {
+        this.apiService.setFavorite(sessionId).subscribe(res => {
+          console.log(res);
+          this.fav = true;
+        })
+      }
+
+      this.ngOnInit();
+    }
   }
 
   /* Share
@@ -322,15 +338,17 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   notification() {
+    if (this.authService.getRole() == null) {
+      this.router.navigateByUrl('/login');
+    } else {
+      let company_id = this.data.body.company.id
 
-    let company_id = this.data.body.company.id
+      this.apiService.addSubscriber(company_id).subscribe(res => {
+        console.log(res);
+      })
 
-    this.apiService.addSubscriber(company_id).subscribe(res => {
-      console.log(res);
-    })
-
-    this.presentToast();
-
+      this.presentToast();
+    }
   }
 
   async presentToast() {

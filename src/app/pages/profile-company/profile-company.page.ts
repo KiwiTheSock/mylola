@@ -80,7 +80,9 @@ export class ProfileCompanyPage {
       //Data
       this.profile = jsonResult.body;
       this.hours = jsonResult.body.hours;
-      this.url = jsonResult.body.url;
+      this.url = jsonResult.body.urls;
+
+      console.log(jsonResult.body);
 
       //Images
       this.bannerfilename = jsonResult.body.bannerFilename;

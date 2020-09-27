@@ -47,7 +47,7 @@ export class FavoritesPage implements OnInit {
   queryText = '';
 
   //Data
-  data: any;
+  public data;
   devaluations: any;
   public counter: number = 0;
   isUsed: boolean = false;
@@ -77,12 +77,10 @@ export class FavoritesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("ngOnInit")
     this.getData();
   }
 
   ionViewWillEnter() {
-    console.log("ionViewWillEnter")
     this.getData();
   }
 
@@ -102,13 +100,6 @@ export class FavoritesPage implements OnInit {
         }
         else {
           this.data = jsonResult.body;
-          var tmp = this.counter + 5;
-
-          for (this.counter; this.counter < tmp; this.counter++) {
-            if (jsonResult.body[this.counter]) {
-              this.data.push(jsonResult.body[this.counter]);
-            }
-          } 
         }
       })
     }
@@ -125,13 +116,6 @@ export class FavoritesPage implements OnInit {
         }
         else {
           this.data = jsonResult.body;
-          var tmp = this.counter + 5;
-
-          for (this.counter; this.counter < tmp; this.counter++) {
-            if (jsonResult.body[this.counter]) {
-              this.data.push(jsonResult.body[this.counter]);
-            }
-          }
         }
       })
     }
@@ -174,7 +158,7 @@ export class FavoritesPage implements OnInit {
   loadData(event) {
     setTimeout(() => {
       console.log("Done");
-      this.ngOnInit()
+      //this.ngOnInit()
       event.target.complete();
     }, 2000);
   }
