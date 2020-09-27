@@ -97,8 +97,8 @@
         <p>{{street}} {{housenumber}}</p>
         <p>{{postcode}} {{place}}</p>
         <div *ngIf="!comp">
-          <ion-button (click)="notification()" *ngIf="!abos">{{name}} abonnieren</ion-button>
-          <ion-button color="dark" disabled="true" *ngIf="abos">{{name}} bereits abonniert</ion-button>
+          <ion-button class="abo-con-button" (click)="notification()" *ngIf="!abos">{{name}} abonnieren</ion-button>
+          <ion-button class="abo-con-button" color="dark" disabled="true" *ngIf="abos">{{name}} bereits abonniert</ion-button>
         </div>
       </ion-col>
     </ion-row>
@@ -117,7 +117,7 @@
         <p class="red">
           <ion-icon name="call-outline"></ion-icon> {{telephone}}
         </p>
-        <ion-button (click)="openContact()">Kontaktiere {{name}}</ion-button>
+        <ion-button class="abo-con-button" (click)="openContact()">Kontaktiere {{name}}</ion-button>
       </ion-col>
     </ion-row>
 

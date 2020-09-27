@@ -108,7 +108,7 @@ export class AddPage {
       swipeToClose: true, //iOS
       componentProps: {
         sourceType: sourceType,
-        aspectRatio: 16 / 9
+        aspectRatio: 360 / 240
       }
     });
 

@@ -372,6 +372,11 @@ export class HomePage implements OnInit {
       }, 2000);
     }
     else {
+      this.counter = 0;
+      let count = this.data.length;
+      for (let i = 0; i < count; i++) {
+        this.data.pop()
+      }
       console.log('Begin async operation');
       this.ngOnInit();
       setTimeout(() => {

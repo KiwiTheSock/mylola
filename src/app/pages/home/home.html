@@ -14,7 +14,7 @@
 
     <!-- Search Function -->
     <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionChange)="filterItems()"
-      (ionCancel)="showSearchbar = false" placeholder="Suchen"></ion-searchbar>
+      (ionCancel)="showSearchbar = false | queryText = null " placeholder="Suchen"></ion-searchbar>
 
     <!-- Search Icon -->
     <ion-buttons slot="end">
@@ -135,20 +135,7 @@
               </div>
             </ion-col>
 
-            <!-- 
-            <ion-col class="used">
-              
-              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banner/{{item.bannerFilename}}" routerLink="/app/tabs/home/detail/{{item.id}}">
-              </ion-img>
-              
-              <div class="tear-off">
-                <ion-img src="./assets/img/mylola/Abrissecke_rund.png"
-                  routerLink="/app/tabs/home/detail/{{item.id}}"></ion-img>
-                <p class="">{{item.catcher}}</p>
-              </div>
-
-            </ion-col>
-            -->
+            
 
           </ion-row>
 
