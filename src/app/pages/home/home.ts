@@ -29,7 +29,7 @@ import { ApiService } from '../../services/api.service';
 export class HomePage implements OnInit {
 
   //Infinite Scroll
-  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll; //Notwendig?
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   //Filter
   tracks: { name: string, icon: string, isChecked: boolean }[] = [];
@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
   queryText = '';
 
   //Data
-  public data;
+  public data = [];
   public filterdData;
   public counter: number = 0;
   public fav: boolean = false;
@@ -99,14 +99,11 @@ export class HomePage implements OnInit {
 
       //200 is an empty body
       if (jsonResult.body.status == 200) {
-        this.data = "";
+        //this.data = "";
       }
       else {
 
-        this.data = jsonResult.body;
-        /*
-        var tmp = this.counter + 50;
-
+        var tmp = this.counter + 5;
         for (this.counter; this.counter < tmp; this.counter++) {
 
           //console.log(jsonResult.body[this.counter]);
@@ -115,29 +112,8 @@ export class HomePage implements OnInit {
             this.data.push(jsonResult.body[this.counter]);
           }
         }
-        */
+
       }
-
-      /*
-      //Favorites
-      this.apiService.getFavorite().subscribe((res: any) => {
-
-        var jsonResult = JSON.parse(JSON.stringify(res));
-
-        console.log(jsonResult);
-
-        for (let i = 0; i < this.data.length; i++) {
-          for (let j = 0; j < jsonResult.body.length; j++) {
-
-            if(this.data[i].id == jsonResult.body[j].id){
-              this.fav = true;
-            }
-          
-          }
-        }
-
-      })
-      */
     });
   }
 
@@ -167,20 +143,20 @@ export class HomePage implements OnInit {
     }
 
     if (name == 5) {
+      this.excludeTracks.push("Position");
       this.position();
     }
 
     if (name == 6) {
+      this.excludeTracks.push("Ending");
       this.ending();
     }
-
 
   }
 
   dismissFilter(name) {
 
     if (name == 1) {
-      //this.excludeTracks.pop("Gastro & Nightlife");
       this.excludeTracks.forEach((value, index) => {
         if (value == "Gastro & Nightlife") {
           this.excludeTracks.splice(index, 1);
@@ -190,7 +166,6 @@ export class HomePage implements OnInit {
     }
 
     if (name == 2) {
-      //this.excludeTracks.pop("Shopping");
       this.excludeTracks.forEach((value, index) => {
         if (value == "Shopping") {
           this.excludeTracks.splice(index, 1);
@@ -200,7 +175,6 @@ export class HomePage implements OnInit {
     }
 
     if (name == 3) {
-      //this.excludeTracks.pop("Freizeit & Erleben");
       this.excludeTracks.forEach((value, index) => {
         if (value == "Freizeit & Erleben") {
           this.excludeTracks.splice(index, 1);
@@ -211,7 +185,6 @@ export class HomePage implements OnInit {
 
 
     if (name == 4) {
-      //this.excludeTracks.pop("Dienstleistungen");
       this.excludeTracks.forEach((value, index) => {
         if (value == "Dienstleistungen") {
           this.excludeTracks.splice(index, 1);
@@ -221,10 +194,22 @@ export class HomePage implements OnInit {
     }
 
     if (name == 5) {
+      this.counter = 0;
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Position") {
+          this.excludeTracks.splice(index, 1);
+        }
+      });
       this.ngOnInit();
     }
 
     if (name == 6) {
+      this.counter = 0;
+      this.excludeTracks.forEach((value, index) => {
+        if (value == "Ending") {
+          this.excludeTracks.splice(index, 1);
+        }
+      });
       this.ngOnInit();
     }
   }
@@ -253,16 +238,14 @@ export class HomePage implements OnInit {
 
   //Get Lng And Lat
   async position() {
-
-
     this.geo.getCurrentPosition({
       timeout: 10000,
       enableHighAccuracy: false
     }).then(res => {
       this.lat = res.coords.latitude;
       this.lng = res.coords.longitude;
-      console.log("LNG: ", this.lng);
-      console.log("LAT: ", this.lat);
+      //console.log("LNG: ", this.lng);
+      //console.log("LAT: ", this.lat);
       this.apiService.filterByNearBy(this.lat, this.lng).subscribe(res => {
         var jsonResult = JSON.parse(JSON.stringify(res));
         //console.log(jsonResult.body);
@@ -270,7 +253,7 @@ export class HomePage implements OnInit {
         this.data = null;
 
         var jsonResult = JSON.parse(JSON.stringify(res));
-        console.log(jsonResult.body);
+        //console.log(jsonResult.body);
         this.data = jsonResult.body;
 
       })
@@ -309,17 +292,35 @@ export class HomePage implements OnInit {
     }
   }
 
+  /* Infinite Scrolling
+   * --------------------------------------------------------
+   */
   loadData(event) {
 
-    setTimeout(() => {
-      console.log("Done");
-      //this.ngOnInit()
+    if (this.queryText != "") {
       event.target.complete();
-    }, 2000);
-
+    }
+    else if (this.excludeTracks.includes("Gastro & Nightlife") || this.excludeTracks.includes("Shopping") || this.excludeTracks.includes("Freizeit & Erleben") || this.excludeTracks.includes("Dienstleistungen")) {
+      event.target.complete();
+    }
+    else if (this.excludeTracks.includes("Position")) {
+      event.target.complete();
+    }
+    else if (this.excludeTracks.includes("Ending")) {
+      event.target.complete();
+    }
+    else {
+      setTimeout(() => {
+        console.log("Done");
+        this.ngOnInit()
+        event.target.complete();
+      }, 2000);
+    }
   }
 
-  //Favorites
+  /* Favorites
+   * --------------------------------------------------------
+   */
   toggleFavorite(coupon_id: number) {
 
     if (this.authService.getRole() == "ROLE_USER") {
@@ -327,23 +328,7 @@ export class HomePage implements OnInit {
       this.apiService.setFavorite(coupon_id).subscribe(res => {
         console.log(res);
       })
-
-      /*
-      if (this.fav == true) {
-        this.apiService.deFavorite(coupon_id).subscribe(res => {
-          console.log(res);
-          this.fav = false;
-        })
-      } else {
-        this.apiService.setFavorite(coupon_id).subscribe(res => {
-          console.log(res);
-          this.fav = true;
-        })
-      }
-      */
     }
-
-    this.ngOnInit();
   }
 
   /* Share
@@ -353,18 +338,53 @@ export class HomePage implements OnInit {
     this.socialSharing.share("https://www.mylola.de") // "/?angebot=" + id
   }
 
-  //Refresh
+  /* Refresher
+   * --------------------------------------------------------
+   */
   refresh(event) {
-    console.log('Begin async operation');
 
-    this.ngOnInit();
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+    //Search is not empty
+    if (this.queryText != "") {
+      this.filterItems();
+      setTimeout(() => {
+        event.target.complete();
+      }, 2000);
+    }
+    //Category is not empty
+    else if (this.excludeTracks.includes("Gastro & Nightlife") || this.excludeTracks.includes("Shopping") || this.excludeTracks.includes("Freizeit & Erleben") || this.excludeTracks.includes("Dienstleistungen")) {
+      this.updateFilter();
+      setTimeout(() => {
+        event.target.complete();
+      }, 2000);
+    }
+    //Position is not empty
+    else if (this.excludeTracks.includes("Position")) {
+      setTimeout(() => {
+        this.position();
+        event.target.complete();
+      }, 2000);
+    }
+    //Ending is not empty
+    else if (this.excludeTracks.includes("Ending")) {
+      setTimeout(() => {
+        this.ending();
+        event.target.complete();
+      }, 2000);
+    }
+    else {
+      this.counter = 0;
+      console.log('Begin async operation');
+      this.ngOnInit();
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        event.target.complete();
+      }, 2000);
+    }
   }
 
+  /* Change Button Color
+   * --------------------------------------------------------
+   */
   btnActivate(ionicButton, name) {
 
     //Design
