@@ -1,7 +1,6 @@
 //Angular
-import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
 
 //Ionic
 import { Platform, ActionSheetController, ToastController } from '@ionic/angular';
@@ -15,8 +14,6 @@ import { Plugins } from '@capacitor/core';
 const { App } = Plugins;
 
 //Others
-import { ConferenceData } from '../../services/conference-data';
-import { UserData } from '../../services/user-data';
 import { ModalCouponPage } from '../modal-coupon/modal-coupon.page';
 import { AuthService } from '../../services/auth.service';
 import { Darkmode } from '../../services/darkmode';
@@ -79,23 +76,6 @@ export class DetailPage {
   public saturday: string = null;
   public sunday: string = null;
 
-  /*
-  public mo_start: string = null;
-  public mo_end: string = null;
-  public tu_start: string = null;
-  public tu_end: string = null;
-  public we_start: string = null;
-  public we_end: string = null;
-  public th_start: string = null;
-  public th_end: string = null;
-  public fr_start: string = null;
-  public fr_end: string = null;
-  public sa_start: string = null;
-  public sa_end: string = null;
-  public su_start: string = null;
-  public su_end: string = null;
-  */
-
   //Coupon
   public bannerFilename_Coupon: string = null;
   public catcher: string = null;
@@ -111,10 +91,7 @@ export class DetailPage {
   public abos: boolean = false;
 
   constructor(
-    @Inject(DOCUMENT) private doc: Document,
     private apiService: ApiService,
-    private dataProvider: ConferenceData,
-    private userProvider: UserData,
     private route: ActivatedRoute,
     private platform: Platform,
     private actionSheetCtrl: ActionSheetController,
@@ -203,22 +180,6 @@ export class DetailPage {
       this.friday = jsonResult.body.company.hours.friday;
       this.saturday = jsonResult.body.company.hours.saturday;
       this.sunday = jsonResult.body.company.hours.sunday;
-      /*
-      this.mo_start = (jsonResult.body.company.hours.monday.split(" - ")[0]);
-      this.mo_end = (jsonResult.body.company.hours.monday.split(" - ")[1]);
-      this.tu_start = (jsonResult.body.company.hours.tuesday.split(" - ")[0]);
-      this.tu_end = (jsonResult.body.company.hours.tuesday.split(" - ")[1]);
-      this.we_start = (jsonResult.body.company.hours.wednesday.split(" - ")[0]);
-      this.we_end = (jsonResult.body.company.hours.wednesday.split(" - ")[1]);
-      this.th_start = (jsonResult.body.company.hours.thursday.split(" - ")[0]);
-      this.th_end = (jsonResult.body.company.hours.thursday.split(" - ")[1]);
-      this.fr_start = (jsonResult.body.company.hours.friday.split(" - ")[0]);
-      this.fr_end = (jsonResult.body.company.hours.friday.split(" - ")[1]);
-      this.sa_start = (jsonResult.body.company.hours.saturday.split(" - ")[0]);
-      this.sa_end = (jsonResult.body.company.hours.saturday.split(" - ")[1]);
-      this.su_start = (jsonResult.body.company.hours.sunday.split(" - ")[0]);
-      this.su_end = (jsonResult.body.company.hours.sunday.split(" - ")[1]);
-      */
     });
 
     //Check Favorites
@@ -384,8 +345,6 @@ export class DetailPage {
       const modalState = { modal: true };
       history.pushState(modalState, null);
     }
-
-
   }
 
   /* Logged In

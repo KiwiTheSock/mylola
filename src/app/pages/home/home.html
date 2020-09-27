@@ -14,7 +14,7 @@
 
     <!-- Search Function -->
     <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionChange)="filterItems()"
-      (ionCancel)="showSearchbar = false | queryText = null " placeholder="Suchen"></ion-searchbar>
+      (ionCancel)="showSearchbar = false" placeholder="Suchen"></ion-searchbar>
 
     <!-- Search Icon -->
     <ion-buttons slot="end">

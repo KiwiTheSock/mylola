@@ -1,7 +1,6 @@
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { Component, ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { ConferenceData } from '../../services/conference-data';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 
@@ -48,10 +47,6 @@ export class EventsPage {
     private apiService: ApiService
   ) { 
   
-  }
-
-  ngOnInit() {
-    //this.getData();
   }
 
   ionViewWillEnter() {

@@ -12,7 +12,6 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 //Others
-import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
 import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
@@ -57,7 +56,6 @@ export class HomePage implements OnInit {
 
   constructor(
     public alertCtrl: AlertController,
-    public confData: ConferenceData,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public router: Router,

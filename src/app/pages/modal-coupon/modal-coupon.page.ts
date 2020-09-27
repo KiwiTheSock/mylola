@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController, IonSlides } from '@ionic/angular';
 
 //Others
-import { ConferenceData } from '../../services/conference-data';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -33,7 +32,6 @@ export class ModalCouponPage {
   constructor(
     private apiService: ApiService,
     public modalCtrl: ModalController,
-    public dataProvider: ConferenceData,
     private route: ActivatedRoute,
   ) { }
 

@@ -3,7 +3,7 @@ import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Ionic
-import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, IonInfiniteScroll } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, IonInfiniteScroll } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 
 //Ionic-Native
@@ -11,7 +11,6 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 //Others
-import { ConferenceData } from '../../services/conference-data';
 import { UserData } from '../../services/user-data';
 import { Darkmode } from '../../services/darkmode';
 import { Refresher } from '../../services/refresher';
@@ -34,14 +33,6 @@ export class FavoritesPage implements OnInit {
   tracks: { name: string, icon: string, isChecked: boolean }[] = [];
   excludeTracks: any = [];
 
-  //Old Data
-  //dayIndex = 0;
-  //queryText = '';
-  //segment = 'favorites';
-  //shownSessions: any = [];
-  //groups: any = [];
-  //confDate: string;
-
   //Search
   showSearchbar: boolean;
   queryText = '';
@@ -58,7 +49,6 @@ export class FavoritesPage implements OnInit {
 
   constructor(
     public alertCtrl: AlertController,
-    public confData: ConferenceData,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public router: Router,

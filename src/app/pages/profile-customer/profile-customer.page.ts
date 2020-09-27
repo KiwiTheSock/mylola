@@ -1,7 +1,7 @@
 //Angular
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConferenceData } from '../../services/conference-data';
+//import { ConferenceData } from '../../services/conference-data';
 import { ModalDeaboPage } from '../modal-deabo/modal-deabo.page';
 import { ModalController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
@@ -19,7 +19,7 @@ export class ProfileCustomerPage {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private dataProvider: ConferenceData,
+    //private dataProvider: ConferenceData,
     private modalController: ModalController
   ) { }
 
