@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 
 //Ionic
-import { ModalController, ActionSheetController } from '@ionic/angular';
+import { ModalController, ActionSheetController, Platform } from '@ionic/angular';
 
 //Ionic-Native
 import { Camera } from '@ionic-native/camera/ngx';
@@ -45,6 +45,7 @@ export class AddPage {
     public formBuilder: FormBuilder,
     public modalController: ModalController,
     public router: Router,
+    private platform: Platform
   ) {
 
     //CroppedImage
@@ -78,27 +79,31 @@ export class AddPage {
    * --------------------------------------------------------
    */
   async selectImage() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Bildquelle auswählen",
-      buttons: [{
-        text: 'Aus der Bibliothek laden',
-        handler: () => {
-          this.presentModal(this.camera.PictureSourceType.PHOTOLIBRARY);
+    if (this.platform.is("ios")) {
+      this.presentModal(this.camera.PictureSourceType.PHOTOLIBRARY);
+    } else {
+      const actionSheet = await this.actionSheetController.create({
+        header: "Bildquelle auswählen",
+        buttons: [{
+          text: 'Aus der Bibliothek laden',
+          handler: () => {
+            this.presentModal(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Kamera benutzen',
+          handler: () => {
+            this.presentModal(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Abbrechen',
+          role: 'cancel'
         }
-      },
-      {
-        text: 'Kamera benutzen',
-        handler: () => {
-          this.presentModal(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Abbrechen',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
+        ]
+      });
+      await actionSheet.present();
+    }
   }
 
   async presentModal(sourceType) {

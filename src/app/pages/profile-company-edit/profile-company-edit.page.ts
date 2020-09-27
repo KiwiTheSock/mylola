@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 //Ionic
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController, Platform } from '@ionic/angular';
 
 //Ionic-Native
 import { Camera } from '@ionic-native/camera/ngx';
@@ -86,7 +86,8 @@ export class ProfileCompanyEditPage {
     public actionSheetController: ActionSheetController,
     private camera: Camera,
     public modalController: ModalController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private platform: Platform
   ) {
     //Validators
     this.validation_profileCompany = this.formBuilder.group({
@@ -229,54 +230,62 @@ export class ProfileCompanyEditPage {
   * --------------------------------------------------------
   */
   async profilePicture() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Bildquelle auswählen",
-      buttons: [{
-        text: 'Aus der Bibliothek laden',
-        handler: () => {
-          this.presentModalLogo(this.camera.PictureSourceType.PHOTOLIBRARY);
+    if (this.platform.is("ios")) {
+      this.presentModalLogo(this.camera.PictureSourceType.PHOTOLIBRARY);
+    } else {
+      const actionSheet = await this.actionSheetController.create({
+        header: "Bildquelle auswählen",
+        buttons: [{
+          text: 'Aus der Bibliothek laden',
+          handler: () => {
+            this.presentModalLogo(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Kamera benutzen',
+          handler: () => {
+            this.presentModalLogo(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Abbrechen',
+          role: 'cancel'
         }
-      },
-      {
-        text: 'Kamera benutzen',
-        handler: () => {
-          this.presentModalLogo(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Abbrechen',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
+        ]
+      });
+      await actionSheet.present();
+    }
   }
 
   /* Title Image
   * --------------------------------------------------------
   */
   async titlePicture() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Bildquelle auswählen",
-      buttons: [{
-        text: 'Aus der Bibliothek laden',
-        handler: () => {
-          this.presentModalTitle(this.camera.PictureSourceType.PHOTOLIBRARY);
+    if (this.platform.is("ios")) {
+      this.presentModalLogo(this.camera.PictureSourceType.PHOTOLIBRARY);
+    } else {
+      const actionSheet = await this.actionSheetController.create({
+        header: "Bildquelle auswählen",
+        buttons: [{
+          text: 'Aus der Bibliothek laden',
+          handler: () => {
+            this.presentModalTitle(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Kamera benutzen',
+          handler: () => {
+            this.presentModalTitle(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Abbrechen',
+          role: 'cancel'
         }
-      },
-      {
-        text: 'Kamera benutzen',
-        handler: () => {
-          this.presentModalTitle(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Abbrechen',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
+        ]
+      });
+      await actionSheet.present();
+    }
   }
 
   /* Modal Profile Image
