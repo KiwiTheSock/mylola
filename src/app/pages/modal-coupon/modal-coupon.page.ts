@@ -23,7 +23,7 @@ export class ModalCouponPage {
 
   //Coupon ID
   coupon_id: number;
- 
+
   //Coupon
   catcher: any;
   value: any;
@@ -37,16 +37,16 @@ export class ModalCouponPage {
 
   ionViewWillEnter() {
     this.apiService.getCouponById(this.coupon_id).subscribe(res => {
-     
+
       let jsonResult = JSON.parse(JSON.stringify(res));
-
-      //console.log(jsonResult);
-
       this.value = jsonResult.body.code;
       this.catcher = jsonResult.body.catcher;
     });
   }
 
+  /* Dismiss modal 
+   * --------------------------------------------------------
+   */
   dismiss() {
 
     this.apiService.addDevaluation(this.coupon_id).subscribe(res => {

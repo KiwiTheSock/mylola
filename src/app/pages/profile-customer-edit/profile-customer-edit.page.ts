@@ -102,8 +102,6 @@ export class ProfileCustomerEditPage {
       "telephone": this.validation_profileCustomer.value.telephone
     }
 
-    //console.log(data);
-
     if (this.submitForm()) {
       this.apiService.updateCustomer(data).subscribe((response: any) => {
         console.log(response);
@@ -113,7 +111,7 @@ export class ProfileCustomerEditPage {
         console.log('Verarbeite Daten');
         this.router.navigateByUrl('/profile-customer');
       }, 500);
-      
+
     }
   }
 

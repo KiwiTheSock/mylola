@@ -1,5 +1,5 @@
 //Angular
-import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Ionic
@@ -13,7 +13,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 //Others
 import { UserData } from '../../services/user-data';
 import { Darkmode } from '../../services/darkmode';
-import { Refresher } from '../../services/refresher';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -49,21 +48,19 @@ export class FavoritesPage implements OnInit {
 
   constructor(
     public alertCtrl: AlertController,
+    public apiService: ApiService,
+    private authService: AuthService,
+    public config: Config,
+    public darkmode: Darkmode,
+    private geo: Geolocation,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
+    public popoverCtrl: PopoverController,
     public router: Router,
     public routerOutlet: IonRouterOutlet,
+    private socialSharing: SocialSharing,
     public toastCtrl: ToastController,
     public user: UserData,
-    public config: Config,
-    public popoverCtrl: PopoverController,
-    public darkmode: Darkmode,
-    public refresher: Refresher,
-    private socialSharing: SocialSharing,
-    public apiService: ApiService,
-    private geo: Geolocation,
-    private changeRef: ChangeDetectorRef,
-    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -74,7 +71,7 @@ export class FavoritesPage implements OnInit {
     this.getData();
   }
 
-  /* Favorites
+  /* Get Data
    * --------------------------------------------------------
    */
   getData() {
@@ -130,7 +127,9 @@ export class FavoritesPage implements OnInit {
     this.socialSharing.share("https://www.mylola.de") // "/?angebot=" + id
   }
 
-  //Refresh
+  /* Refresher
+   * --------------------------------------------------------
+   */
   refresh(event) {
     console.log('Begin async operation');
 

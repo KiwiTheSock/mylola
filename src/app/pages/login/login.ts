@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 //Others
 import { UserData } from '../../services/user-data';
 import { AuthService } from '../../services/auth.service';
-import { ApiService } from '../../services/api.service';
-import { AlertController, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -26,9 +25,7 @@ export class LoginPage {
   public password: string = null;
 
   constructor(
-    private apiService: ApiService,
     private auth: AuthService,
-    private alertCtrl: AlertController,
     private router: Router,
     private userData: UserData,
     public formBuilder: FormBuilder,
@@ -74,8 +71,6 @@ export class LoginPage {
       "password": this.validation_login.value.password
     }
 
-    //console.log(data);
-
     if (this.submitForm()) {
 
       this.auth.login(data)
@@ -87,7 +82,6 @@ export class LoginPage {
         }
 
       }, (error) => {
-        //console.log(error);
         this.presentToast("Falscher Benutzername oder Passwort!");
       });
     }

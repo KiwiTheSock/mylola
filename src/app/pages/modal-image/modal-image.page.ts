@@ -28,6 +28,7 @@ export class ModalImagePage {
   //Aspect Ratio
   aspectRatio: number;
   
+  //Cropper
   @ViewChild(ImageCropperComponent, { static: false }) angularCropper: ImageCropperComponent;
 
   constructor(
@@ -40,6 +41,9 @@ export class ModalImagePage {
     this.backButtonEvent();
   }
 
+  /* Capture Image
+   * --------------------------------------------------------
+   */
   captureImage() {
 
     if(this.sourceType == this.camera.PictureSourceType.PHOTOLIBRARY){
@@ -72,10 +76,16 @@ export class ModalImagePage {
     this.modalController.dismiss(this.croppedImage);
   }
 
+  /* Dismiss modal
+   * --------------------------------------------------------
+   */
   dismiss() {
     this.modalController.dismiss({ 'dismissed' : true });
   }
 
+  /* Handle Back Button 
+   * --------------------------------------------------------
+   */
   backButtonEvent(){
     this.platform.backButton.subscribe(() => {
       this.modalController.dismiss("../../assets/img/add/kein-bild-vorhanden-16-9.png");

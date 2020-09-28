@@ -13,11 +13,11 @@ import { HeaderBackComponent } from './header-back/header-back.component';
 @NgModule({
   declarations: [
     HeaderBackComponent,
-    HeaderMenuComponent,
+    HeaderMenuComponent
   ],
   exports: [
     HeaderBackComponent,
-    HeaderMenuComponent,
+    HeaderMenuComponent
   ],
   imports: [
     CommonModule, 

@@ -20,14 +20,19 @@ export class ModalDeaboPage {
     public modalCtrl: ModalController
   ) { }
 
+  /* Deabo 
+   * --------------------------------------------------------
+   */
   deabo() {
-
     this.apiService.deleteSubscriber(this.company_id).subscribe(res => {
       console.log(res);
     })
     this.dismiss();
   }
 
+  /* Dismiss modal 
+   * --------------------------------------------------------
+   */
   dismiss() {
     this.modalCtrl.dismiss({ 'dismissed': true });
   }

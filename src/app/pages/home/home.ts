@@ -1,11 +1,10 @@
 //Angular
-import { Component, ViewChild, OnInit, Renderer2, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, ViewChild, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 
 //Ionic
-import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll, Platform } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, LoadingController, ModalController, ToastController, Config, NavParams, IonInfiniteScroll } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
 
 //Ionic-Native
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
@@ -14,7 +13,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 //Others
 import { UserData } from '../../services/user-data';
 import { Darkmode } from '../../services/darkmode';
-import { Refresher } from '../../services/refresher';
 import { AuthService } from '../../services/auth.service';
 import { TabsPage } from '../tabs-page/tabs-page';
 import { ApiService } from '../../services/api.service';
@@ -34,12 +32,6 @@ export class HomePage implements OnInit {
   tracks: { name: string, icon: string, isChecked: boolean }[] = [];
   excludeTracks: any = [];
 
-  //Old Data
-  //dayIndex = 0;
-  //segment = 'all';
-  //groups: any = [];
-  //confDate: string;
-
   //Search
   showSearchbar: boolean;
   queryText = '';
@@ -55,27 +47,22 @@ export class HomePage implements OnInit {
   lng;
 
   constructor(
+    public apiService: ApiService,
     public alertCtrl: AlertController,
+    private authService: AuthService,
+    public config: Config,
+    public darkmode: Darkmode,
+    private geo: Geolocation,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
+    public navParams: NavParams,
+    public popoverCtrl: PopoverController,
     public router: Router,
     public routerOutlet: IonRouterOutlet,
+    private socialSharing: SocialSharing,
+    private tabs: TabsPage,
     public toastCtrl: ToastController,
     public user: UserData,
-    public config: Config,
-    public popoverCtrl: PopoverController,
-    private route: ActivatedRoute,
-    public darkmode: Darkmode,
-    public refresher: Refresher,
-    private renderer: Renderer2,
-    public navParams: NavParams,
-    private authService: AuthService,
-    private socialSharing: SocialSharing,
-    private platform: Platform,
-    private tabs: TabsPage,
-    public apiService: ApiService,
-    private geo: Geolocation,
-    private storage: Storage,
   ) { }
 
   ngOnInit() {
@@ -87,27 +74,24 @@ export class HomePage implements OnInit {
     this.tabs.home();
   }
 
+  /* getData
+   * --------------------------------------------------------
+   */
   getData() {
-
-    //Data
     this.apiService.getCoupons().subscribe((res: any) => {
       var jsonResult = JSON.parse(JSON.stringify(res));
-
-      //console.log(jsonResult.body);
 
       //200 is an empty body
       if (jsonResult.body.status == 200) {
         //this.data = "";
       }
       else {
-
         var tmp = this.counter + 5;
         for (this.counter; this.counter < tmp; this.counter++) {
           if (jsonResult.body[this.counter]) {
             this.data.push(jsonResult.body[this.counter]);
           }
         }
-
       }
     });
   }
@@ -146,7 +130,6 @@ export class HomePage implements OnInit {
       this.excludeTracks.push("Ending");
       this.ending();
     }
-
   }
 
   dismissFilter(name) {
@@ -248,16 +231,13 @@ export class HomePage implements OnInit {
       //console.log("LNG: ", this.lng);
       //console.log("LAT: ", this.lat);
       this.apiService.filterByNearBy(this.lat, this.lng).subscribe(res => {
-
         this.data = null;
         var jsonResult = JSON.parse(JSON.stringify(res));
         this.data = jsonResult.body;
-
       })
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-
   }
 
   ending() {

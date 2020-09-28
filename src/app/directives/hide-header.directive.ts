@@ -46,9 +46,3 @@ export class HideHeaderDirective implements OnInit {
     }
 
 }
-
-
-
-
-
-

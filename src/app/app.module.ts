@@ -30,8 +30,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Darkmode } from './services/darkmode';
 import { ModalCouponPageModule } from './pages/modal-coupon/modal-coupon.module';
-import { NgCalendarModule } from 'ionic2-calendar'; 
-import { Refresher } from './services/refresher';
+import { NgCalendarModule } from 'ionic2-calendar';
 import { SharedModule } from './directives/shared.module';
 
 @NgModule({
@@ -56,7 +55,6 @@ import { SharedModule } from './directives/shared.module';
     FilePath,
     Geolocation,
     NavParams, 
-    Refresher, 
     SocialSharing, 
     SplashScreen, 
     StatusBar, 

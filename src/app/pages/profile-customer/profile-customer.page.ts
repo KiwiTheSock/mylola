@@ -1,7 +1,6 @@
 //Angular
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-//import { ConferenceData } from '../../services/conference-data';
 import { ModalDeaboPage } from '../modal-deabo/modal-deabo.page';
 import { ModalController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
@@ -19,7 +18,6 @@ export class ProfileCustomerPage {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    //private dataProvider: ConferenceData,
     private modalController: ModalController
   ) { }
 
@@ -43,8 +41,6 @@ export class ProfileCustomerPage {
     this.apiService.getMySubscribtions().subscribe((res: any) => {
       let jsonResult = JSON.parse(JSON.stringify(res));
 
-      //console.log(jsonResult.body);
-
       if (!(jsonResult.body.status == 404)) {
         this.abos = jsonResult.body;
       } else {
@@ -63,7 +59,6 @@ export class ProfileCustomerPage {
   /* Deabo Modal
   * --------------------------------------------------------
   */
-  //id des Abos mitübergeben, im modal-deabo deabo-API Methode ausführen
   async presentModal(company_id) {
     const modal = await this.modalController.create({
       component: ModalDeaboPage,

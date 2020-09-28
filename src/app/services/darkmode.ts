@@ -5,9 +5,7 @@ export class Darkmode {
 
     dark = true;
 
-	constructor() {
-
-	}
+	constructor() {}
 
     darkmode(){
         if(this.dark == true)
@@ -19,7 +17,3 @@ export class Darkmode {
         }
     }
 }
-
-//import { Darkmode } from './providers/darkmode';
-//providers: [ Darkmode,],
-//public darkmode: Darkmode,

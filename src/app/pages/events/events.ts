@@ -1,7 +1,9 @@
-import { CalendarComponent } from 'ionic2-calendar/calendar';
+//Angular
 import { Component, ViewChild, Inject, LOCALE_ID } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
+//Others
+import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -11,8 +13,8 @@ import { ApiService } from '../../services/api.service';
 })
 export class EventsPage {
 
+  //Calendar
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
-
   events: { title: string, desc: string, startTime: string, endTime: string, id: string }[] = [];
 
   event = {
@@ -40,31 +42,24 @@ export class EventsPage {
   public endDate: Date = null;
 
   constructor(
-    private alertCtrl: AlertController,
     @Inject(LOCALE_ID) private locale: string,
-
     private router: Router,
     private apiService: ApiService
-  ) { 
-  
-  }
+  ) { }
 
   ionViewWillEnter() {
     this.getData();
   }
 
+  /* Get Data
+   * --------------------------------------------------------
+   */
   getData() {
     this.apiService.getCoupons().subscribe((res: any) => {
-
       let jsonResult = JSON.parse(JSON.stringify(res));
 
-      //console.log(jsonResult.body);
-
       for (let i = 0; i < jsonResult.body.length; i++) {
-
         if (jsonResult.body[i].isEvent) {
-
-          console.log(jsonResult.body[i]);
 
           this.id = jsonResult.body[i].id
           this.title = jsonResult.body[i].title;

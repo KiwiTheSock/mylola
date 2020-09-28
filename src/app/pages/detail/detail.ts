@@ -134,8 +134,11 @@ export class DetailPage {
     this.showMap();
   }
 
+  /* Get Data
+   * --------------------------------------------------------
+   */
   getData() {
-    //Data
+
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
 
     this.apiService.getCouponById(sessionId).subscribe(res => {
@@ -188,7 +191,6 @@ export class DetailPage {
       let jsonResult = JSON.parse(JSON.stringify(res));
 
       for (let i = 0; i < jsonResult.body.length; i++) {
-
         if (jsonResult.body[i].id == sessionId) {
           this.fav = true;
         }
@@ -236,15 +238,11 @@ export class DetailPage {
   * --------------------------------------------------------
   */
   edit() {
-
     const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
 
     if (this.authService.getRole() == "ROLE_COMPANY") {
-
       this.apiService.getCompanyCoupons().subscribe(res => {
-
         let jsonResult = JSON.parse(JSON.stringify(res));
-
         for (let i = 0; i < jsonResult.body.length; i++) {
           if (jsonResult.body[i].id == sessionId) {
             this.show = true;
@@ -254,7 +252,7 @@ export class DetailPage {
     }
   }
 
-  company(){
+  company() {
     if (this.authService.getRole() == "ROLE_COMPANY") {
       this.comp = true;
     }
@@ -269,8 +267,6 @@ export class DetailPage {
       this.router.navigateByUrl('/login');
     } else {
       const sessionId: number = +this.route.snapshot.paramMap.get('sessionId');
-
-      console.log(this.fav);
 
       if (this.fav == true) {
         this.apiService.deFavorite(sessionId).subscribe(res => {

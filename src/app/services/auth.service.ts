@@ -15,10 +15,11 @@ const TOKEN_KEY = 'jwt-token';
 })
 export class AuthService {
 
+  //User
   public user: Observable<any>;
   private userData = new BehaviorSubject(null);
 
-  //API
+  //Data
   data: any;
 
   constructor(
@@ -30,7 +31,6 @@ export class AuthService {
     this.user = this.userData.asObservable().pipe(
       filter(response => response)
     );
-
   }
 
   /* Loading Users

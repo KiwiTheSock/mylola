@@ -100,6 +100,9 @@ export class DetailEditPage {
     })
   }
 
+  /* Get Category
+   * --------------------------------------------------------
+   */
   getCategory() {
     return this.category;
   }
@@ -188,7 +191,6 @@ export class DetailEditPage {
   /* Coupon Edit
    * --------------------------------------------------------
    */
-
   editCoupon() {
 
     //Session ID

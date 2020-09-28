@@ -20,6 +20,9 @@ export class ModalDeletePage implements OnInit {
   ngOnInit() {
   }
 
+  /* Delete Coupon 
+   * --------------------------------------------------------
+   */
   deleteCoupon(){
     this.apiService.deleteCoupon(this.coupon_id).subscribe(res => {
       console.log(res);
@@ -27,6 +30,9 @@ export class ModalDeletePage implements OnInit {
     this.dismiss();
   }
 
+  /* Dismiss modal 
+   * --------------------------------------------------------
+   */
   dismiss() {
     this.modalCtrl.dismiss({ 'dismissed': true });
   }

@@ -11,11 +11,9 @@
   <!-- List -->
   <ion-list class="list" *ngIf="data">
     <ion-item-group>
-      <!-- [hidden]="group.hide" FILTER? -->
-
+  
       <!-- Item -->
       <div class="item" *ngFor="let item of data">
-        <!-- [hidden]="session.hide" [attr.track]="session.tracks[0] | lowercase" FILTER? -->
         <ion-grid>
 
           <!-- First Row -->
@@ -56,21 +54,6 @@
               </div>
 
             </ion-col>
-
-            <!--
-            <ion-col class="used" *ngIf="devaluations.isUsed">
-              
-              <ion-img src="http://srv06-dev.mindq.kunden.openroot.de:8088/uploads/banners/{{item.bannerFilename}}" routerLink="/app/tabs/home/detail/{{item.id}}">
-              </ion-img>
-              
-              <div class="tear-off">
-                <ion-img src="./assets/img/mylola/Abrissecke_rund.png"
-                  routerLink="/app/tabs/home/detail/{{item.id}}"></ion-img>
-                <p class="">{{item.catcher}}</p>
-              </div>
-
-            </ion-col>
-            -->
 
           </ion-row>
 
